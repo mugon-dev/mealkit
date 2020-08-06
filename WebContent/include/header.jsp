@@ -80,7 +80,7 @@
                       <a href="blogForm.do">Blog</a>
                       <ul class="submenu">
                         <li><a href="blogForm.do">Blog</a></li>
-                        <li><a href="blog-details.html">Blog Details</a></li>
+                        <li><a href="blogDetailForm.do">Blog Details</a></li>
                       </ul>
                     </li>
                     <li>
