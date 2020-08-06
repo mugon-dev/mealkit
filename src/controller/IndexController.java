@@ -3,6 +3,7 @@ package controller;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -143,6 +144,29 @@ public class IndexController extends HttpServlet {
 				out.print("<script>alert('새 글 추가 실패했습니다.'); location.href='blogForm.do';</script>");
 			}
     		
+    	}else if(action.equals("/search.do")) {
+    		String type1=request.getParameter("type1");
+    		String type2=request.getParameter("type2");
+    		String type3=request.getParameter("type3");
+    		List<Dish> list=new ArrayList<Dish>();
+    		list=DishDao.getInstance().select(type1, type2, type3);
+    		request.setAttribute("type1", type1);
+    		request.setAttribute("type2", type2);
+    		request.setAttribute("type3", type3);
+    		
+    		request.setAttribute("list", list);
+
+    		request.getRequestDispatcher("main/search.jsp").forward(request, response);
+    	}else if(action.equals("/product.do")) {
+    		String name=request.getParameter("name");
+    		System.out.println(name);
+    		Dish dish=DishDao.getInstance().selectOne(name);
+    		request.setAttribute("dish", dish);
+    		request.getRequestDispatcher("main/product.jsp").forward(request, response);
+    	}else if(action.equals("/cart.do")) {
+    		String mat1=request.getParameter("mat1");
+    		String mat2=request.getParameter("mat2");
+    		System.out.println(mat1+mat2);
     	}	
     	
 	}

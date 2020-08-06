@@ -48,7 +48,7 @@
 								</div>
 								<div class="popular-caption">
 									<h3>
-										<a href="product_details.html">${dish.name }</a>
+										<a href="product.do?name=${dish.name }">${dish.name }</a>
 									</h3>
 									<span>${dish.like }</span>
 								</div>

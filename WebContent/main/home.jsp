@@ -5,7 +5,7 @@
 <main>
       <!--? slider Area Start -->
 	<div class="s010">
-		<form>
+		<form action="search.do" method="post">
 			<div class="inner-form">
 				<div class="basic-search">
 					<div class="input-field">
@@ -60,7 +60,7 @@
 							</div>
 							<div class="group-btn">
 								<button class="btn-delete" id="delete">RESET</button>
-								<button class="btn-search">SEARCH</button>
+								<button type="submit" class="btn-search">SEARCH</button>
 							</div>
 						</div>
 					</div>
