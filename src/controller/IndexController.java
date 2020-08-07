@@ -105,13 +105,10 @@ public class IndexController extends HttpServlet {
     		}
     		request.getRequestDispatcher("main/blog.jsp").forward(request, response);
     		
-    	}else if(action.equals("/logout.do")) {
+    	}else if(action.equals("/logout.do")) { //로그아웃 header의 ajax 스크립트
         		HttpSession session = request.getSession();
         		session.removeAttribute("session_id");
-//        		이 페이지에 있는 세션 전부 무효화
-//        		session.invalidate();
-        		out.print("success");
-//        		response.sendRedirect("loginForm.do");   		
+        		out.print("success");		
     	}else if(action.equals("/blog.do")) { //========================================================//
     		String strPage = request.getParameter("pageNum");
     		String idx = request.getParameter("idx");
