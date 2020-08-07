@@ -459,8 +459,8 @@
 
           var els = {};
 
-          els.dec = el.prev();
-          els.inc = el.next();
+          el.dec = el.prev();
+          el.inc = el.next();
 
           el.each(function() {
             init($(this));
@@ -468,8 +468,8 @@
 
           function init(el) {
 
-            els.dec.on('click', decrement);
-            els.inc.on('click', increment);
+            el.dec.on('click', decrement);
+            el.inc.on('click', increment);
 
             function decrement() {
               var value = el[0].value;

@@ -106,7 +106,14 @@
                     </div>
                   </li>
                   <li>
+                  	<c:choose>
+                  	<c:when test="${empty session_id }">
                     <a href="loginForm.do"><span class="flaticon-user"></span></a>
+                    </c:when>
+                    <c:otherwise>
+                    <a href="#"><span class="flaticon-user">(${session_id}) </span></a>
+                    </c:otherwise>
+                    </c:choose>
                   </li>
                   <li>
                     <a href="cart.html"

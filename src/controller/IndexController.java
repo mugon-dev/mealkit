@@ -67,8 +67,9 @@ public class IndexController extends HttpServlet {
     			out.print("password error");
     		}else {
     			out.print("id error");
-    		}
-    		
+    		}//myPageForm.do
+    	}else if(action.equals("/myPageForm.do")) { //myPage 이동
+    		request.getRequestDispatcher("main/myPage.jsp").forward(request, response);	
     	}else if(action.equals("/registerForm.do")) {
     		request.getRequestDispatcher("main/register.jsp").forward(request, response);
     	}else if(action.equals("/register.do")) { //회원가입
