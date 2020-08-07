@@ -105,7 +105,13 @@ public class IndexController extends HttpServlet {
     		}
     		request.getRequestDispatcher("main/blog.jsp").forward(request, response);
     		
-    		
+    	}else if(action.equals("/logout.do")) {
+        		HttpSession session = request.getSession();
+        		session.removeAttribute("session_id");
+//        		이 페이지에 있는 세션 전부 무효화
+//        		session.invalidate();
+        		out.print("success");
+//        		response.sendRedirect("loginForm.do");   		
     	}else if(action.equals("/blog.do")) { //========================================================//
     		String strPage = request.getParameter("pageNum");
     		String idx = request.getParameter("idx");
