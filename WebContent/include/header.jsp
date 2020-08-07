@@ -3,7 +3,6 @@
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
     <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
     
-    
 <!DOCTYPE html>
 <head>
     <meta charset="utf-8" />
@@ -111,6 +110,7 @@
                     <a href="loginForm.do"><span class="flaticon-user"></span></a>
                     </c:when>
                     <c:otherwise>
+                    <!-- 드랍다운 메뉴 찾기 -->
                     <a href="#"><span class="flaticon-user">(${session_id}) </span></a>
                     </c:otherwise>
                     </c:choose>
