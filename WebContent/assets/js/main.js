@@ -465,7 +465,7 @@
           el.each(function() {
             init($(this));
           });
-
+			
           function init(el) {
 
             els.dec.on('click', decrement);
