@@ -31,17 +31,18 @@
                         <div class="product_count_area text-center">
                             <p>메인 재료 || 돼지고기<!-- 메인재료 이름 --></p>
                             <div class="product_count d-inline-block">
-                                <span class="product_count_item inumber-decrement"> <i class="ti-minus"></i></span>
-                                <input name="mat1" class="product_count_item input-number" type="text" value="1" min="0" max="10">
-                                <span class="product_count_item number-increment"> <i class="ti-plus"></i></span>
+                                <span id="decrement" class="product_count_item inumber-decrement"> <i class="ti-minus"></i></span>
+                                <input id="mat1" class="product_count_item input-number" type="text" value="1" min="0" max="10">
+                                <span id="increment" class="product_count_item number-increment"> <i class="ti-plus"></i></span>
                             </div>
                         </div>
                         <div class="product_count_area text-center">
                             <p>메인 재료 || 서브재료<!-- 메인재료 이름 --></p>
                             <div class="product_count d-inline-block">
-                                <span class="product_count_item inumber-decrement"> <i class="ti-minus"></i></span>
-                                <input name="mat2" class="product_count_item input-number" type="text" value="2" min="0" max="10">
-                                <span class="product_count_item number-increment"> <i class="ti-plus"></i></span>
+                                <span id="decrement2" class="product_count_item inumber-decrement"> <i class="ti-minus"></i></span>
+                                <input id="mat2" class="product_count_item input-number" type="text" value="2" min="0" max="10">
+                                
+                                <span id="increment2" class="product_count_item"> <i class="ti-plus"></i></span>
                             </div>
                         </div>
                         
@@ -75,5 +76,57 @@
         </section>
         <!-- subscribe part end -->
     </main>
+<script type="text/javascript">
+$('#increment').on('click',function(){
+	var value=$('#mat1').val();
+	var min=0;
+	var max=10;
+	parseInt(value);
+	value++;
+	if(value<=max){
+		$('#mat1').val(value);
+	}else{
+		alert("최대수량 초과");
+	}
+	
+}); 
+$('#decrement').on('click',function(){
+	var value=$('#mat1').val();
+	var min=0;
+	var max=10;
+	parseInt(value);
+	value--;
+	if(value>=min){
+		$('#mat1').val(value);
+	}else{
+		alert("최소값입니다.");
+	}
+}); 
+$('#increment2').on('click',function(){
+	var value=$('#mat2').val();
+	var min=0;
+	var max=10;
+	parseInt(value);
+	value++;
+	if(value<=max){
+		$('#mat2').val(value);
+	}else{
+		alert("최대수량 초과");
+	}
+}); 
+$('#decrement2').on('click',function(){
+	var value=$('#mat2').val();
+	var min=0;
+	var max=10;
+	parseInt(value);
+	value--;
+	if(value>=min){
+		$('#mat2').val(value);
+	}else{
+		alert("최소값입니다.");
+	}
+});
+
+</script>
 
 <%@ include file="../include/footer.jsp"%>
