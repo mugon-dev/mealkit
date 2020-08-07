@@ -20,8 +20,10 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import dao.BlogDao;
+import dao.DishDao;
 import dao.MemberDao;
 import vo.Blog;
+import vo.Dish;
 import vo.Member;
 import vo.PageMaker;
 
@@ -149,7 +151,7 @@ public class IndexController extends HttpServlet {
     		String type2=request.getParameter("type2");
     		String type3=request.getParameter("type3");
     		List<Dish> list=new ArrayList<Dish>();
-    		list=DishDao.getInstance().select(type1, type2, type3);
+    		list=DishDao.getInstance().selectSearch(type1, type2, type3);
     		request.setAttribute("type1", type1);
     		request.setAttribute("type2", type2);
     		request.setAttribute("type3", type3);
@@ -161,6 +163,7 @@ public class IndexController extends HttpServlet {
     		String name=request.getParameter("name");
     		System.out.println(name);
     		Dish dish=DishDao.getInstance().selectOne(name);
+    		System.out.println(dish);
     		request.setAttribute("dish", dish);
     		request.getRequestDispatcher("main/product.jsp").forward(request, response);
     	}else if(action.equals("/cart.do")) {
