@@ -3,42 +3,52 @@
 <%@ include file="../include/header.jsp"%>
 <section class="popular-items latest-padding">
 	<div class="container">
-			<div class="row product-btn ">
-				<div class="properties__button justify-content-between mb-40 col-lg-5">
-					<!--Nav Button  -->
-					<nav>
-						<div class="nav nav-tabs" id="nav-tab" role="tablist">
-							<a class="nav-item nav-link active" id="nav-whole-tab"
-								data-toggle="tab" href="#nav-whole" role="tab"
-								aria-controls="nav-whole" aria-selected="true">전체</a>
-							<a class="nav-item nav-link" id="nav-korean-tab"
-								data-toggle="tab" href="#nav-korean" role="tab"
-								aria-controls="nav-korean" aria-selected="false">한식</a> 
-							<a class="nav-item nav-link" id="nav-chinese-tab" data-toggle="tab"
-								href="#nav-chinese" role="tab" aria-controls="nav-chinese"
-								aria-selected="false">중식</a> 
-							<a class="nav-item nav-link" id="nav-japanese-tab" data-toggle="tab" 
-								href="#nav-japanese" role="tab" aria-controls="nav-japanese" 
-								aria-selected="false">일식</a>
-							<a class="nav-item nav-link" id="nav-last-tab" data-toggle="tab"
-								href="#nav-western" role="tab" aria-controls="nav-western"
-								aria-selected="false">양식</a>
-						</div>
-					</nav>
-				</div>
-				<div class="col-lg-4"></div>
-				<!-- Header Right -->
-				<div class="col-lg-3">
-					<div class="dropdown show" style="color: black;">
-						<div class="dropdown-toggle" data-toggle="dropdown"
-							aria-haspopup="true" aria-expanded="false">관리자 메뉴</div>
-						<div class="dropdown-menu">
-							<a class="dropdown-item" href="MyPageForm.do">Mealkit 등록</a> <a
-								class="dropdown-item" href="#" id="logout">재료 등록</a>
-						</div>
+		<div class="row product-btn ">
+			<div
+				class="properties__button justify-content-between mb-40 col-lg-5">
+				<!--Nav Button  -->
+				<nav>
+					<div class="nav nav-tabs" id="nav-tab" role="tablist">
+						<a class="nav-item nav-link active" id="nav-whole-tab"
+							data-toggle="tab" href="#nav-whole" role="tab"
+							aria-controls="nav-whole" aria-selected="true">전체</a> <a
+							class="nav-item nav-link" id="nav-korean-tab" data-toggle="tab"
+							href="#nav-korean" role="tab" aria-controls="nav-korean"
+							aria-selected="false">한식</a> <a class="nav-item nav-link"
+							id="nav-chinese-tab" data-toggle="tab" href="#nav-chinese"
+							role="tab" aria-controls="nav-chinese" aria-selected="false">중식</a>
+						<a class="nav-item nav-link" id="nav-japanese-tab"
+							data-toggle="tab" href="#nav-japanese" role="tab"
+							aria-controls="nav-japanese" aria-selected="false">일식</a> <a
+							class="nav-item nav-link" id="nav-last-tab" data-toggle="tab"
+							href="#nav-western" role="tab" aria-controls="nav-western"
+							aria-selected="false">양식</a>
+					</div>
+				</nav>
+			</div>
+			<div class="col-lg-4"></div>
+			<!-- Header Right -->
+			<div class="col-lg-3">
+				<%-- <c:choose>
+					<c:when test="${session_id == 'admin' }"> --%>
+				<div class="dropdown show" style="color: black;">
+					<div class="dropdown-toggle" data-toggle="dropdown"
+						aria-haspopup="true" aria-expanded="false">관리자 메뉴</div>
+					<div class="dropdown-menu">
+						<a class="dropdown-item" href="MyPageForm.do">Mealkit 등록</a> <a
+							class="dropdown-item" href="igdForm.do"
+							id="btnAddIngredients">재료 등록</a>
 					</div>
 				</div>
-			
+				<div id="theModal" class="modal fade text-center">
+					<div class="modal-dialog">
+						<div class="modal-content"></div>
+					</div>
+				</div>
+				<%-- </c:when>
+					</c:choose> --%>
+			</div>
+
 			<!--End Nav Button  -->
 		</div>
 		<!-- Grid and List view -->
@@ -243,7 +253,6 @@
 			</nav>
 		</div>
 	</div>
-	</div>
 
 	<!-- End Nav Card -->
 </section>
@@ -280,4 +289,14 @@
 	</div>
 </div>
 <!-- Shop Method End-->
+<script type="text/javascript">
+	$("#btnAddIngredients").on(
+			'click',
+			function(e) {
+				e.preventDefault();
+				$("#theModal").modal('show').find('.modal-content').load($(this).attr('href'));
+			});
+</script>
+
+
 <%@ include file="../include/footer.jsp"%>
