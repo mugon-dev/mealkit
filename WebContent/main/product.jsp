@@ -26,7 +26,7 @@
                     <p>
                         Seamlessly empower fully researched growth strategies and interoperable internal or “organic” sources. Credibly innovate granular internal or “organic” sources whereas high standards in web-readiness. Credibly innovate granular internal or organic sources whereas high standards in web-readiness. Energistically scale future-proof core competencies vis-a-vis impactful experiences. Dramatically synthesize integrated schemas. with optimal networks.
                     </p>
-                    <form action="cart.do" method="post">
+                    <form action="cartForm.do" method="post">
                     <div class="card_area">
                         <div class="product_count_area text-center">
                             <p>메인 재료 || 돼지고기<!-- 메인재료 이름 --></p>

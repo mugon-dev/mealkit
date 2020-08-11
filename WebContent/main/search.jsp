@@ -72,7 +72,7 @@
 							</div>
 							<div class="popular-caption">
 								<h3>
-									<a href="product_details.html">Thermo Ball Etip Gloves</a>
+									<a href="product.do">Thermo Ball Etip Gloves</a>
 								</h3>
 								<span>$ 45,743</span>
 							</div>
