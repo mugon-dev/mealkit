@@ -35,16 +35,13 @@
 					<div class="dropdown-toggle" data-toggle="dropdown"
 						aria-haspopup="true" aria-expanded="false">관리자 메뉴</div>
 					<div class="dropdown-menu">
-						<a class="dropdown-item" href="MyPageForm.do">Mealkit 등록</a> <a
-							class="dropdown-item" href="igdForm.do"
-							id="btnAddIngredients">재료 등록</a>
+						<a class="dropdown-item" href="MyPageForm.do">Mealkit 등록</a> 
+						<a class="dropdown-item" data-toggle="modal" data-target="#igdMoal" data-whatever="@mdo">재료 등록</a>
+						
 					</div>
+					
 				</div>
-				<div id="theModal" class="modal fade text-center">
-					<div class="modal-dialog">
-						<div class="modal-content"></div>
-					</div>
-				</div>
+	
 				<%-- </c:when>
 					</c:choose> --%>
 			</div>
@@ -289,14 +286,42 @@
 	</div>
 </div>
 <!-- Shop Method End-->
-<script type="text/javascript">
-	$("#btnAddIngredients").on(
-			'click',
-			function(e) {
-				e.preventDefault();
-				$("#theModal").modal('show').find('.modal-content').load($(this).attr('href'));
-			});
-</script>
+<div class="modal fade" id="igdMoal" tabindex="-1" aria-labelledby="igdMoalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="igdMoalLabel">재료 등록</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="#" method="post" enctype="multipart/form-data">
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">재료명</label>
+            <input type="text" class="form-control" id="recipient-name">
+          </div>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">단위</label>
+            <input type="text" class="form-control" id="recipient-name">
+          </div>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">가격</label>
+            <input type="text" class="form-control" id="recipient-name">
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="col-form-label">사진등록</label>
+            <input type=file id="filename" name="filename" class="form-control">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn_3" data-dismiss="modal" style="padding:10px;">닫기</button>
+        <button type="button" class="btn_3" style="padding:10px;">등록</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 <%@ include file="../include/footer.jsp"%>
