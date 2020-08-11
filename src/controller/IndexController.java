@@ -170,10 +170,7 @@ public class IndexController extends HttpServlet {
     		System.out.println(dish);
     		request.setAttribute("dish", dish);
     		request.getRequestDispatcher("main/product.jsp").forward(request, response);
-    	}else if(action.equals("/cart.do")) {
-    		String mat1=request.getParameter("mat1");
-    		String mat2=request.getParameter("mat2");
-    		System.out.println(mat1+mat2);
+    	}else if(action.equals("/cartForm.do")) {
     		request.getRequestDispatcher("main/cart.jsp").forward(request, response);
     	}	
     	

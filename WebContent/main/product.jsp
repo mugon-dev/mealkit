@@ -45,6 +45,7 @@
                                 <span id="increment2" class="product_count_item"> <i class="ti-plus"></i></span>
                             </div>
                         </div>
+                     
                         
                     <div class="add_to_cart">
                         <button type="submit" value="add to cart" class="btn_3">add to cart</button>
