@@ -7,16 +7,16 @@
         <div class="product_image_area">
             <div class="container">
             <div class="row justify-content-center">
-                <div class="col-lg-12">
+                <div class="col-lg-8">
                 <div class="product_img_slide owl-carousel">
                     <div class="single_product_img">
-                        <img src="assets/img/gallery/gallery1.png" alt="#" class="img-fluid">
+                        <img src="assets/img/gallery/aaa.jpg" alt="#" class="img-fluid">
                     </div>
                     <div class="single_product_img">
-                        <img src="assets/img/gallery/gallery01.png" alt="#" class="img-fluid">
+                        <img src="assets/img/gallery/bbb.jpg" alt="#" class="img-fluid">
                     </div>
                     <div class="single_product_img">
-                        <img src="assets/img/gallery/gallery1.png" alt="#" class="img-fluid">
+                        <img src="assets/img/gallery/ccc.jpg" alt="#" class="img-fluid">
                     </div>
                 </div>
                 </div>
@@ -47,7 +47,7 @@
                         </div>
                         
                     <div class="add_to_cart">
-                        <button type="submit" value="add to cart" class="btn_3"></button>
+                        <button type="submit" value="add to cart" class="btn_3">add to cart</button>
                     </div>
                     </div>
                     </form>
