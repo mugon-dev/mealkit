@@ -132,6 +132,7 @@ cursor: pointer !important;
 		</div>
 		<!-- Header End -->
 	</header>
+
 	<script type="text/javascript">
 	$('#logout').on('click',function(event){
 		event.stopPropagation();

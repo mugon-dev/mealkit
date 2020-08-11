@@ -35,16 +35,11 @@
 					<div class="dropdown-toggle" data-toggle="dropdown"
 						aria-haspopup="true" aria-expanded="false">관리자 메뉴</div>
 					<div class="dropdown-menu">
-						<a class="dropdown-item" href="MyPageForm.do">Mealkit 등록</a> <a
-							class="dropdown-item" href="igdForm.do"
-							id="btnAddIngredients">재료 등록</a>
+						<a class="dropdown-item" href="MyPageForm.do">Mealkit 등록</a> 
+						<a class="dropdown-item" href="#" id="igdMoal">재료 등록</a>
 					</div>
 				</div>
-				<div id="theModal" class="modal fade text-center">
-					<div class="modal-dialog">
-						<div class="modal-content"></div>
-					</div>
-				</div>
+	
 				<%-- </c:when>
 					</c:choose> --%>
 			</div>
@@ -289,14 +284,7 @@
 	</div>
 </div>
 <!-- Shop Method End-->
-<script type="text/javascript">
-	$("#btnAddIngredients").on(
-			'click',
-			function(e) {
-				e.preventDefault();
-				$("#theModal").modal('show').find('.modal-content').load($(this).attr('href'));
-			});
-</script>
+
 
 
 <%@ include file="../include/footer.jsp"%>
