@@ -296,7 +296,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form>
+        <form action="#" method="post" enctype="multipart/form-data">
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">재료명</label>
             <input type="text" class="form-control" id="recipient-name">
@@ -310,14 +310,14 @@
             <input type="text" class="form-control" id="recipient-name">
           </div>
           <div class="form-group">
-            <label for="message-text" class="col-form-label">Message:</label>
-            <textarea class="form-control" id="message-text"></textarea>
+            <label for="message-text" class="col-form-label">사진등록</label>
+            <input type=file id="filename" name="filename" class="form-control">
           </div>
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-        <button type="button" class="btn btn-primary">등록</button>
+        <button type="button" class="btn_3" data-dismiss="modal" style="padding:10px;">닫기</button>
+        <button type="button" class="btn_3" style="padding:10px;">등록</button>
       </div>
     </div>
   </div>
