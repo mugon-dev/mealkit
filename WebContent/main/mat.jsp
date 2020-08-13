@@ -14,15 +14,12 @@
 							aria-controls="nav-whole" aria-selected="true">전체</a> <a
 							class="nav-item nav-link" id="nav-korean-tab" data-toggle="tab"
 							href="#nav-korean" role="tab" aria-controls="nav-korean"
-							aria-selected="false">한식</a> <a class="nav-item nav-link"
+							aria-selected="false">육류</a> <a class="nav-item nav-link"
 							id="nav-chinese-tab" data-toggle="tab" href="#nav-chinese"
-							role="tab" aria-controls="nav-chinese" aria-selected="false">중식</a>
+							role="tab" aria-controls="nav-chinese" aria-selected="false">채소</a>
 						<a class="nav-item nav-link" id="nav-japanese-tab"
 							data-toggle="tab" href="#nav-japanese" role="tab"
-							aria-controls="nav-japanese" aria-selected="false">일식</a> <a
-							class="nav-item nav-link" id="nav-last-tab" data-toggle="tab"
-							href="#nav-western" role="tab" aria-controls="nav-western"
-							aria-selected="false">양식</a>
+							aria-controls="nav-japanese" aria-selected="false">소스</a> 
 					</div>
 				</nav>
 			</div>
@@ -34,8 +31,8 @@
 				<div class="dropdown show" style="color: black;">
 					<div class="dropdown-toggle" data-toggle="dropdown"
 						aria-haspopup="true" aria-expanded="false">관리자 메뉴</div>
-					<div class="dropdown-menu">
-						<a class="dropdown-item" href="MyPageForm.do">Mealkit 등록</a> 						
+					<div class="dropdown-menu">	
+						<a class="dropdown-item" data-toggle="modal" data-target="#igdMoal" data-whatever="@mdo">재료 등록</a>						
 					</div>
 					
 				</div>

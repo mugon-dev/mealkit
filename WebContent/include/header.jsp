@@ -67,7 +67,12 @@ cursor: pointer !important;
 							<nav>
 								<ul id="navigation">
 									<li><a href="main.do">Home</a></li>
-									<li><a href="shopForm.do">shop</a></li>
+									<li><a href="shopForm.do">shop</a>
+									<ul class="submenu">
+											<li><a href="shopForm.do"> Mealkit list</a></li>
+											<li><a href="matForm.do"> Material Details</a>
+											</li>
+										</ul></li>
 									<li><a href="about.html">about</a></li>
 									<li class="hot"><a href="#">Latest</a>
 										<ul class="submenu">

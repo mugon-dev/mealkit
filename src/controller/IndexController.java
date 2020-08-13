@@ -98,6 +98,8 @@ public class IndexController extends HttpServlet {
     		request.getRequestDispatcher("main/shop.jsp").forward(request, response);
     	}else if(action.equals("/shop.do")) {
     		
+    	}else if(action.equals("/matForm.do")) {
+    		request.getRequestDispatcher("main/mat.jsp").forward(request, response);
     	}else if(action.equals("/blogForm.do")) {
     		BlogDao blogDao = BlogDao.getInstance();
     		List<Blog> list = blogDao.selectAll();
