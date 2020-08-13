@@ -34,7 +34,7 @@
 				<h4>MD추천</h4>
 
 				<div class="row">
-					<c:forEach var="dish" items="${list }">
+					<c:forEach var="recipe" items="${list }">
 						<div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
 							<div class="single-popular-items mb-50 text-center">
 								<div class="popular-img">
@@ -48,9 +48,9 @@
 								</div>
 								<div class="popular-caption">
 									<h3>
-										<a href="product.do?name=${dish.name }">${dish.name }</a>
+										<a href="product.do?no=${recipe.mil_no }">${recipe.title }</a>
 									</h3>
-									<span>${dish.like }</span>
+									<span>${recipe.rgst_dt }</span>
 								</div>
 							</div>
 						</div>

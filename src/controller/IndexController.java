@@ -22,10 +22,12 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import dao.BlogDao;
 import dao.DishDao;
 import dao.MemberDao;
+import dao.RecipeDao;
 import vo.Blog;
 import vo.Dish;
 import vo.Member;
 import vo.PageMaker;
+import vo.Recipe;
 
 /**
  * Servlet implementation class IndexController
@@ -154,21 +156,27 @@ public class IndexController extends HttpServlet {
     		String type1=request.getParameter("type1");
     		String type2=request.getParameter("type2");
     		String type3=request.getParameter("type3");
-    		List<Dish> list=new ArrayList<Dish>();
-    		list=DishDao.getInstance().selectSearch(type1, type2, type3);
+    		//List<Dish> list=new ArrayList<Dish>();
+    		//list=DishDao.getInstance().selectSearch(type1, type2, type3);
     		request.setAttribute("type1", type1);
     		request.setAttribute("type2", type2);
     		request.setAttribute("type3", type3);
+    		List<Recipe> list1=new ArrayList<Recipe>();
+    		list1=RecipeDao.getInstance().selectAll();
+    		request.setAttribute("list", list1);
     		
-    		request.setAttribute("list", list);
+    		//request.setAttribute("list", list);
 
     		request.getRequestDispatcher("main/search.jsp").forward(request, response);
     	}else if(action.equals("/product.do")) {
-    		String name=request.getParameter("name");
-    		System.out.println(name);
-    		Dish dish=DishDao.getInstance().selectOne(name);
-    		System.out.println(dish);
-    		request.setAttribute("dish", dish);
+    		int no=Integer.parseInt(request.getParameter("no"));
+    		System.out.println(no);
+    		Recipe recipe=RecipeDao.getInstance().selectOne(no);
+    		request.setAttribute("recipe", recipe);
+    		System.out.println(recipe);
+    		//Dish dish=DishDao.getInstance().selectOne(name);
+    		//System.out.println(dish);
+    		//request.setAttribute("dish", dish);
     		request.getRequestDispatcher("main/product.jsp").forward(request, response);
     	}else if(action.equals("/cartForm.do")) {
     		request.getRequestDispatcher("main/cart.jsp").forward(request, response);

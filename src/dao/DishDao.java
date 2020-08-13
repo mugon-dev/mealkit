@@ -36,7 +36,7 @@ public class DishDao {
 				dish.setName(rs.getString("name"));
 				dish.setLike(rs.getInt("like"));
 				list.add(dish);
-				System.out.println(dish);
+				//System.out.println(dish);
 			}
 			
 		}catch(Exception e) {

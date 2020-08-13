@@ -21,7 +21,7 @@
         <div class="container">
           <div class="cart_inner">
             <div class="table-responsive">
-              <table class="table">
+              <table class="table" >
                 <thead>
                   <tr>
                     <th scope="col">Product</th>
@@ -156,6 +156,7 @@
               </div>
             </div>
           </div>
+         </div>
       </section>
       <!--================End Cart Area =================-->
   </main>>

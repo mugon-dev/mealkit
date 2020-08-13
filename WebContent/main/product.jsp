@@ -22,35 +22,49 @@
                 </div>
                 <div class="col-lg-12">
                 <div class="single_product_text text-center">
-                    <h3>${dish.name } </h3>
+                    <h3>${recipe.title } </h3>
                     <p>
-                        Seamlessly empower fully researched growth strategies and interoperable internal or “organic” sources. Credibly innovate granular internal or “organic” sources whereas high standards in web-readiness. Credibly innovate granular internal or organic sources whereas high standards in web-readiness. Energistically scale future-proof core competencies vis-a-vis impactful experiences. Dramatically synthesize integrated schemas. with optimal networks.
+                       ${recipe.content }
                     </p>
                     <form action="cartForm.do" method="post">
-                    <div class="card_area">
-                        <div class="product_count_area text-center">
-                            <p>메인 재료 || 돼지고기<!-- 메인재료 이름 --></p>
-                            <div class="product_count d-inline-block">
-                                <span id="decrement" class="product_count_item inumber-decrement"> <i class="ti-minus"></i></span>
-                                <input id="mat1" class="product_count_item input-number" type="text" value="1" min="0" max="10">
-                                <span id="increment" class="product_count_item number-increment"> <i class="ti-plus"></i></span>
-                            </div>
-                        </div>
-                        <div class="product_count_area text-center">
-                            <p>메인 재료 || 서브재료<!-- 메인재료 이름 --></p>
-                            <div class="product_count d-inline-block">
-                                <span id="decrement2" class="product_count_item inumber-decrement"> <i class="ti-minus"></i></span>
-                                <input id="mat2" class="product_count_item input-number" type="text" value="2" min="0" max="10">
-                                
-                                <span id="increment2" class="product_count_item"> <i class="ti-plus"></i></span>
-                            </div>
-                        </div>
-                     
-                        
-                    <div class="add_to_cart">
-                        <button type="submit" value="add to cart" class="btn_3">add to cart</button>
-                    </div>
-                    </div>
+	                    <div class="card_area">
+	                    	
+	                        <div class="product_count_area text-center">
+	                            <p>메인 재료 || ${recipe.mat_no1}<!-- 메인재료 이름 --></p>
+	                            <div class="product_count d-inline-block">
+	                                <span id="decrement" class="product_count_item inumber-decrement"> <i class="ti-minus"></i></span>
+	                                <input id="mat1" class="product_count_item input-number" type="text" value=${recipe.mat_qty1 } min="0" max="10">
+	                                <span id="increment" class="product_count_item number-increment"> <i class="ti-plus"></i></span>
+	                            </div>
+	                        </div>
+	                        <c:if test="${null ne recipe.mat_no2 }">
+		                        <div class="product_count_area text-center">
+		                            <p>서브재료 || ${recipe.mat_no2}<!-- 메인재료 이름 --></p>
+		                            <div class="product_count d-inline-block">
+		                                <span id="decrement2" class="product_count_item inumber-decrement"> <i class="ti-minus"></i></span>
+		                                <input id="mat2" class="product_count_item input-number" type="text" value=${recipe.mat_qty2 } min="0" max="10">
+		                                
+		                                <span id="increment2" class="product_count_item"> <i class="ti-plus"></i></span>
+		                            </div>
+		                        </div>
+	                        </c:if>
+	                        <c:if test="${null ne recipe.mat_no3 }">
+		                        <div class="product_count_area text-center">
+		                            <p>메인 재료 || ${recipe.mat_no3}<!-- 메인재료 이름 --></p>
+		                            <div class="product_count d-inline-block">
+		                                <span id="decrement3" class="product_count_item inumber-decrement"> <i class="ti-minus"></i></span>
+		                                <input id="mat3" class="product_count_item input-number" type="text" value=${recipe.mat_qty3 } min="0" max="10">
+		                                
+		                                <span id="increment3" class="product_count_item"> <i class="ti-plus"></i></span>
+		                            </div>
+		                        </div>
+	                        </c:if>
+	                     
+	                        
+	                    	<div class="add_to_cart">
+	                       		<button type="submit" value="add to cart" class="btn_3">add to cart</button>
+	                    	</div>
+	                    </div>
                     </form>
                 </div>
                 </div>
@@ -123,6 +137,30 @@ $('#decrement2').on('click',function(){
 	value--;
 	if(value>=min){
 		$('#mat2').val(value);
+	}else{
+		alert("최소값입니다.");
+	}
+});
+$('#increment3').on('click',function(){
+	var value=$('#mat3').val();
+	var min=0;
+	var max=10;
+	parseInt(value);
+	value++;
+	if(value<=max){
+		$('#mat3').val(value);
+	}else{
+		alert("최대수량 초과");
+	}
+}); 
+$('#decrement3').on('click',function(){
+	var value=$('#mat3').val();
+	var min=0;
+	var max=10;
+	parseInt(value);
+	value--;
+	if(value>=min){
+		$('#mat3').val(value);
 	}else{
 		alert("최소값입니다.");
 	}
