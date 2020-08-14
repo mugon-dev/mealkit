@@ -1,10 +1,22 @@
 package dao;
 
+import java.io.File;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import vo.Material;
 
@@ -172,6 +184,45 @@ public class MaterialDao {
 		}
 		return flag;
 	}
+	// 파일 업로드 
+	  	public Map<String, String> upload(HttpServletRequest request, HttpServletResponse response,String FILE_REPO) throws ServletException, IOException {
+	  		Map<String, String> matetrialMap = new HashMap<String, String>();
+	  		String encoding = "UTF-8";
+	  		File currentDirPath = new File(FILE_REPO);
+	  		DiskFileItemFactory factory = new DiskFileItemFactory();
+	  		factory.setRepository(currentDirPath);
+	  		factory.setSizeThreshold(1024*1024*5); //5GB
+	  		factory.setDefaultCharset(encoding); //파일올라올때 인코딩
+	  		ServletFileUpload upload = new ServletFileUpload(factory);
+	  		try {
+	  			List<FileItem> items = upload.parseRequest(request);
+	  			for(int i = 0 ; i < items.size() ; i++) {
+	  				FileItem item = (FileItem)items.get(i);
+	  				if(item.isFormField()) {
+	  					System.out.println(item.getFieldName() + ":" + item.getString());
+	  					matetrialMap.put(item.getFieldName(), item.getString());
+	  				} else {
+	  					System.out.println("파라미터명: " + item.getFieldName());
+	  					System.out.println("파일명: " + item.getName());
+	  					System.out.println("파일의 크기: " + item.getSize());
+	  					
+	  					if(item.getSize() > 0) {
+	  						int idx = item.getName().lastIndexOf("\\"); //윈도우시스템
+	  						if(idx == -1) {
+	  							idx = item.getName().lastIndexOf("/"); //리눅스시스템 파일 마지막 부분 
+	  						}
+	  						String fileName = item.getName().substring(idx + 1);
+	  						File uploadFile = new File(currentDirPath + "\\" + fileName);
+	  						matetrialMap.put(item.getFieldName(), fileName);
+	  						item.write(uploadFile);
+	  					}
+	  				}
+	  			}
+	  		} catch (Exception e) {
+	  			e.printStackTrace();
+	  		}
+	  		return matetrialMap;
+	  	}
 	
 	
 	
