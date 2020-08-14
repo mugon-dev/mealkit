@@ -20,11 +20,11 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import dao.BlogDao;
-import dao.DishDao;
+import dao.MaterialDao;
 import dao.MemberDao;
 import dao.RecipeDao;
 import vo.Blog;
-import vo.Dish;
+import vo.Material;
 import vo.Member;
 import vo.PageMaker;
 import vo.Recipe;
@@ -171,14 +171,25 @@ public class IndexController extends HttpServlet {
 
     		request.getRequestDispatcher("main/search.jsp").forward(request, response);
     	}else if(action.equals("/product.do")) {
+    		List<Material> matList=new ArrayList<Material>();
     		int no=Integer.parseInt(request.getParameter("no"));
-    		System.out.println(no);
     		Recipe recipe=RecipeDao.getInstance().selectOne(no);
+    		
+    		Material mat=MaterialDao.getInstance().selectOne(recipe.getMat_no1());
+    		matList.add(mat);
+    		if(!recipe.getMat_no2().equals("0")) {
+    			mat=MaterialDao.getInstance().selectOne(recipe.getMat_no2());
+        		matList.add(mat);
+    		}
+    		if(!recipe.getMat_no3().equals("0")) {
+    			mat=MaterialDao.getInstance().selectOne(recipe.getMat_no3());
+        		matList.add(mat);
+    		}
+    		for(int i=0;i<matList.size();i++) {
+    			System.out.println(matList.get(i));
+    		}
+    		request.setAttribute("matList", matList);
     		request.setAttribute("recipe", recipe);
-    		System.out.println(recipe);
-    		//Dish dish=DishDao.getInstance().selectOne(name);
-    		//System.out.println(dish);
-    		//request.setAttribute("dish", dish);
     		request.getRequestDispatcher("main/product.jsp").forward(request, response);
     	}else if(action.equals("/cartForm.do")) {
     		request.getRequestDispatcher("main/cart.jsp").forward(request, response);
