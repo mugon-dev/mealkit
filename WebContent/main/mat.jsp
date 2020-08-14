@@ -291,7 +291,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action="#" method="post" enctype="multipart/form-data">
+        <form action="mat.do" method="post" enctype="multipart/form-data">
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">재료명</label>
             <input type="text" class="form-control" id="recipient-name">
