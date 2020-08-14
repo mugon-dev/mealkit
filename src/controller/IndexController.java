@@ -171,8 +171,7 @@ public class IndexController extends HttpServlet {
 			} else {
 				out.print("<script>alert('새 글 추가 실패했습니다.'); location.href='blogForm.do';</script>");
 			}
-<<<<<<< HEAD
-<<<<<<< HEAD
+
     		
     	}else if(action.equals("/search.do")) {
     		String type1=request.getParameter("type1");
@@ -205,6 +204,7 @@ public class IndexController extends HttpServlet {
     			mat=MaterialDao.getInstance().selectOne(recipe.getMat_no3());
         		matList.add(mat);
     		}
+    		
     		for(int i=0;i<matList.size();i++) {
     			System.out.println(matList.get(i));
     		}
@@ -213,55 +213,7 @@ public class IndexController extends HttpServlet {
     		request.getRequestDispatcher("main/product.jsp").forward(request, response);
     	}else if(action.equals("/cartForm.do")) {
     		request.getRequestDispatcher("main/cart.jsp").forward(request, response);
-    	}	
-    	
-=======
-=======
->>>>>>> 85a7f366b8c96b486e97d872b745046c64b0a30a
-
-		} else if (action.equals("/search.do")) {
-			String type1 = request.getParameter("type1");
-			String type2 = request.getParameter("type2");
-			String type3 = request.getParameter("type3");
-			// List<Dish> list=new ArrayList<Dish>();
-			// list=DishDao.getInstance().selectSearch(type1, type2, type3);
-			request.setAttribute("type1", type1);
-			request.setAttribute("type2", type2);
-			request.setAttribute("type3", type3);
-			List<Recipe> list1 = new ArrayList<Recipe>();
-			list1 = RecipeDao.getInstance().selectAll();
-			request.setAttribute("list", list1);
-
-			// request.setAttribute("list", list);
-
-			request.getRequestDispatcher("main/search.jsp").forward(request, response);
-		} else if (action.equals("/product.do")) {
-			List<Material> matList = new ArrayList<Material>();
-			int no = Integer.parseInt(request.getParameter("no"));
-			Recipe recipe = RecipeDao.getInstance().selectOne(no);
-
-			Material mat = MaterialDao.getInstance().selectOne(recipe.getMat_no1());
-			matList.add(mat);
-			if (!recipe.getMat_no2().equals("0")) {
-				mat = MaterialDao.getInstance().selectOne(recipe.getMat_no2());
-				matList.add(mat);
-			}
-			if (!recipe.getMat_no3().equals("0")) {
-				mat = MaterialDao.getInstance().selectOne(recipe.getMat_no3());
-				matList.add(mat);
-			}
-			for (int i = 0; i < matList.size(); i++) {
-				System.out.println(matList.get(i));
-			}
-			request.setAttribute("matList", matList);
-			request.setAttribute("recipe", recipe);
-			request.getRequestDispatcher("main/product.jsp").forward(request, response);
-		} else if (action.equals("/cartForm.do")) {
-			request.getRequestDispatcher("main/cart.jsp").forward(request, response);
-		}
-
-<<<<<<< HEAD
->>>>>>> 85a7f366b8c96b486e97d872b745046c64b0a30a
+    	}
 	}
 
 	// 파일 업로드
@@ -305,51 +257,6 @@ public class IndexController extends HttpServlet {
 		return recipeMap;
 	}
 
-=======
-	}
-
-	// 파일 업로드
-	private Map<String, String> upload(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		Map<String, String> recipeMap = new HashMap<String, String>();
-		String encoding = "UTF-8";
-		File currentDirPath = new File(FILE_REPO);
-		DiskFileItemFactory factory = new DiskFileItemFactory();
-		factory.setRepository(currentDirPath);
-		factory.setSizeThreshold(1024 * 1024 * 5); // 5GB
-		factory.setDefaultCharset(encoding); // 파일올라올때 인코딩
-		ServletFileUpload upload = new ServletFileUpload(factory);
-		try {
-			List<FileItem> items = upload.parseRequest(request);
-			for (int i = 0; i < items.size(); i++) {
-				FileItem item = (FileItem) items.get(i);
-				if (item.isFormField()) {
-					System.out.println(item.getFieldName() + ":" + item.getString());
-					recipeMap.put(item.getFieldName(), item.getString());
-				} else {
-					System.out.println("파라미터명: " + item.getFieldName());
-					System.out.println("파일명: " + item.getName());
-					System.out.println("파일의 크기: " + item.getSize());
-
-					if (item.getSize() > 0) {
-						int idx = item.getName().lastIndexOf("\\"); // 윈도우시스템
-						if (idx == -1) {
-							idx = item.getName().lastIndexOf("/"); // 리눅스시스템 파일 마지막 부분
-						}
-						String fileName = item.getName().substring(idx + 1);
-						File uploadFile = new File(currentDirPath + "\\" + fileName);
-						recipeMap.put(item.getFieldName(), fileName);
-						item.write(uploadFile);
-					}
-				}
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return recipeMap;
-	}
-
->>>>>>> 85a7f366b8c96b486e97d872b745046c64b0a30a
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
