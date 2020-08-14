@@ -28,6 +28,13 @@
 							<div class="card_area">
 								<div class="container" style="width:800px">
 									<table class="table">
+										<thead>
+										<tr>
+											<td align="right"><b>재료명</b></td>
+											<td><b>수량</b></td>
+											<td align="left"><b>단위</b></td>
+										</thead>
+										<tbody>
 										<tr>
 											<td align="right" width=30%>돼지고기</td>
 											<td align="center" width=40%>
@@ -68,6 +75,7 @@
 												</div>
 											</td>
 										</tr>
+										</tbody>
 									</table>
 								</div>
 							</div>
