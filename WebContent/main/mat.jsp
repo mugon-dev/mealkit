@@ -294,15 +294,15 @@
         <form action="mat.do" method="post" enctype="multipart/form-data">
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">재료명</label>
-            <input type="text" class="form-control" id="recipient-name" name="recipient-name">
+            <input type="text" class="form-control" id="mat_nm" name="mat_nm">
           </div>
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">단위</label>
-            <input type="text" class="form-control" id="recipient-name" name="recipient-name">
+            <input type="text" class="form-control" id="mat_unit" name="mat_unit">
           </div>
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">가격</label>
-            <input type="text" class="form-control" id="recipient-name" name="recipient-name">
+            <input type="text" class="form-control" id="mat_price" name="mat_price">
           </div>
           <div class="form-group">
             <label for="message-text" class="col-form-label">사진등록</label>
