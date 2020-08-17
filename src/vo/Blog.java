@@ -3,48 +3,61 @@ package vo;
 import java.util.Date;
 
 public class Blog {
-	private int milNo;
-	private String division, title, content, image;
-	private int readCount, replyCount;
-	private String cookIndex, cookType, main, sub, sauce;
-	private int no;
+	private int milNo, readCount, replyCount, matQty1, matQty2, matQty3, no;
+	private String recIdx, title, content, image, cookIdx, cookType, matNo1, matNo2, matNo3, matEtc,  plate, hour, level;
 	private Date rgstDt;
 	
 	public Blog() {
 		super();
 	}
 
-	public Blog(String division, String title, String content, String image, String cookIndex, String cookType,
-			String main, String sub, String sauce, int no) {
+	public Blog(int matQty1, int matQty2, int matQty3, int no, String recIdx, String title, String content, String image, 
+				String cookIdx, String cookType, String matNo1, String matNo2, String matNo3, String matEtc, String plate, 
+				String hour, String level) {
 		super();
-		this.division = division;
+		this.matQty1 = matQty1;
+		this.matQty2 = matQty2;
+		this.matQty3 = matQty3;
+		this.no = no;
+		this.recIdx = recIdx;
 		this.title = title;
 		this.content = content;
 		this.image = image;
-		this.cookIndex = cookIndex;
+		this.cookIdx = cookIdx;
 		this.cookType = cookType;
-		this.main = main;
-		this.sub = sub;
-		this.sauce = sauce;
-		this.no = no;
+		this.matNo1 = matNo1;
+		this.matNo2 = matNo2;
+		this.matNo3 = matNo3;
+		this.matEtc = matEtc;
+		this.plate = plate;
+		this.hour = hour;
+		this.level = level;
 	}
 
-	public Blog(int milNo, String division, String title, String content, String image, int readCount, int replyCount,
-			String cookIndex, String cookType, String main, String sub, String sauce, int no, Date rgstDt) {
+	public Blog(int milNo, int readCount, int replyCount, int matQty1, int matQty2, int matQty3, int no, String recIdx,
+			String title, String content, String image, String cookIdx, String cookType, String matNo1, String matNo2,
+			String matNo3, String matEtc, String plate, String hour, String level, Date rgstDt) {
 		super();
 		this.milNo = milNo;
-		this.division = division;
+		this.readCount = readCount;
+		this.replyCount = replyCount;
+		this.matQty1 = matQty1;
+		this.matQty2 = matQty2;
+		this.matQty3 = matQty3;
+		this.no = no;
+		this.recIdx = recIdx;
 		this.title = title;
 		this.content = content;
 		this.image = image;
-		this.readCount = readCount;
-		this.replyCount = replyCount;
-		this.cookIndex = cookIndex;
+		this.cookIdx = cookIdx;
 		this.cookType = cookType;
-		this.main = main;
-		this.sub = sub;
-		this.sauce = sauce;
-		this.no = no;
+		this.matNo1 = matNo1;
+		this.matNo2 = matNo2;
+		this.matNo3 = matNo3;
+		this.matEtc = matEtc;
+		this.plate = plate;
+		this.hour = hour;
+		this.level = level;
 		this.rgstDt = rgstDt;
 	}
 
@@ -56,12 +69,60 @@ public class Blog {
 		this.milNo = milNo;
 	}
 
-	public String getDivision() {
-		return division;
+	public int getReadCount() {
+		return readCount;
 	}
 
-	public void setDivision(String division) {
-		this.division = division;
+	public void setReadCount(int readCount) {
+		this.readCount = readCount;
+	}
+
+	public int getReplyCount() {
+		return replyCount;
+	}
+
+	public void setReplyCount(int replyCount) {
+		this.replyCount = replyCount;
+	}
+
+	public int getMatQty1() {
+		return matQty1;
+	}
+
+	public void setMatQty1(int matQty1) {
+		this.matQty1 = matQty1;
+	}
+
+	public int getMatQty2() {
+		return matQty2;
+	}
+
+	public void setMatQty2(int matQty2) {
+		this.matQty2 = matQty2;
+	}
+
+	public int getMatQty3() {
+		return matQty3;
+	}
+
+	public void setMatQty3(int matQty3) {
+		this.matQty3 = matQty3;
+	}
+
+	public int getNo() {
+		return no;
+	}
+
+	public void setNo(int no) {
+		this.no = no;
+	}
+
+	public String getRecIdx() {
+		return recIdx;
+	}
+
+	public void setRecIdx(String recIdx) {
+		this.recIdx = recIdx;
 	}
 
 	public String getTitle() {
@@ -88,28 +149,12 @@ public class Blog {
 		this.image = image;
 	}
 
-	public int getReadCount() {
-		return readCount;
+	public String getCookIdx() {
+		return cookIdx;
 	}
 
-	public void setReadCount(int readCount) {
-		this.readCount = readCount;
-	}
-
-	public int getReplyCount() {
-		return replyCount;
-	}
-
-	public void setReplyCount(int replyCount) {
-		this.replyCount = replyCount;
-	}
-
-	public String getCookIndex() {
-		return cookIndex;
-	}
-
-	public void setCookIndex(String cookIndex) {
-		this.cookIndex = cookIndex;
+	public void setCookIdx(String cookIdx) {
+		this.cookIdx = cookIdx;
 	}
 
 	public String getCookType() {
@@ -120,36 +165,60 @@ public class Blog {
 		this.cookType = cookType;
 	}
 
-	public String getMain() {
-		return main;
+	public String getMatNo1() {
+		return matNo1;
 	}
 
-	public void setMain(String main) {
-		this.main = main;
+	public void setMatNo1(String matNo1) {
+		this.matNo1 = matNo1;
 	}
 
-	public String getSub() {
-		return sub;
+	public String getMatNo2() {
+		return matNo2;
 	}
 
-	public void setSub(String sub) {
-		this.sub = sub;
+	public void setMatNo2(String matNo2) {
+		this.matNo2 = matNo2;
 	}
 
-	public String getSauce() {
-		return sauce;
+	public String getMatNo3() {
+		return matNo3;
 	}
 
-	public void setSauce(String sauce) {
-		this.sauce = sauce;
+	public void setMatNo3(String matNo3) {
+		this.matNo3 = matNo3;
 	}
 
-	public int getNo() {
-		return no;
+	public String getMatEtc() {
+		return matEtc;
 	}
 
-	public void setNo(int no) {
-		this.no = no;
+	public void setMatEtc(String matEtc) {
+		this.matEtc = matEtc;
+	}
+
+	public String getPlate() {
+		return plate;
+	}
+
+	public void setPlate(String plate) {
+		this.plate = plate;
+	}
+
+	public String getHour() {
+		return hour;
+	}
+
+	public void setHour(String hour) {
+		this.hour = hour;
+	}
+
+	public String getLevel() {
+		return level;
+	}
+
+	public void setLevel(String level) {
+		this.level = level;
 	}
 
 	public Date getRgstDt() {
@@ -162,9 +231,21 @@ public class Blog {
 
 	@Override
 	public String toString() {
-		return "Bolg [milNo=" + milNo + ", division=" + division + ", title=" + title + ", content=" + content
-				+ ", image=" + image + ", readCount=" + readCount + ", replyCount=" + replyCount + ", cookIndex="
-				+ cookIndex + ", cookType=" + cookType + ", main=" + main + ", sub=" + sub + ", sauce=" + sauce
-				+ ", no=" + no + ", rgstDt=" + rgstDt + "]";
+		return "Blog [milNo=" + milNo + ", readCount=" + readCount + ", replyCount=" + replyCount + ", matQty1="
+				+ matQty1 + ", matQty2=" + matQty2 + ", matQty3=" + matQty3 + ", no=" + no + ", recIdx=" + recIdx
+				+ ", title=" + title + ", content=" + content + ", image=" + image + ", cookIdx=" + cookIdx
+				+ ", cookType=" + cookType + ", matNo1=" + matNo1 + ", matNo2=" + matNo2 + ", matNo3=" + matNo3
+				+ ", matEtc=" + matEtc + ", plate=" + plate + ", hour=" + hour + ", level=" + level + ", rgstDt="
+				+ rgstDt + ", getMilNo()=" + getMilNo() + ", getReadCount()=" + getReadCount() + ", getReplyCount()="
+				+ getReplyCount() + ", getMatQty1()=" + getMatQty1() + ", getMatQty2()=" + getMatQty2()
+				+ ", getMatQty3()=" + getMatQty3() + ", getNo()=" + getNo() + ", getRecIdx()=" + getRecIdx()
+				+ ", getTitle()=" + getTitle() + ", getContent()=" + getContent() + ", getImage()=" + getImage()
+				+ ", getCookIdx()=" + getCookIdx() + ", getCookType()=" + getCookType() + ", getMatNo1()=" + getMatNo1()
+				+ ", getMatNo2()=" + getMatNo2() + ", getMatNo3()=" + getMatNo3() + ", getMatEtc()=" + getMatEtc()
+				+ ", getPlate()=" + getPlate() + ", getHour()=" + getHour() + ", getLevel()=" + getLevel()
+				+ ", getRgstDt()=" + getRgstDt() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
+				+ ", toString()=" + super.toString() + "]";
 	}
+	
+
 }

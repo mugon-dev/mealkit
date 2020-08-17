@@ -28,7 +28,7 @@ public class MaterialDao {
 			rs=ps.executeQuery();
 			while(rs.next()) {
 				Material material=new Material();
-				material.setMat_idx();
+				//material.setMat_idx();
 				list.add(material);
 				
 			}

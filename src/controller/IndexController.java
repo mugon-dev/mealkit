@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,11 +24,13 @@ import dao.BlogDao;
 import dao.DishDao;
 import dao.MemberDao;
 import dao.RecipeDao;
+import dao.ReplyDao;
 import vo.Blog;
 import vo.Dish;
 import vo.Member;
 import vo.PageMaker;
 import vo.Recipe;
+import vo.Reply;
 
 /**
  * Servlet implementation class IndexController
@@ -102,7 +105,27 @@ public class IndexController extends HttpServlet {
     		request.getRequestDispatcher("main/mat.jsp").forward(request, response);
     	}else if(action.equals("/blogForm.do")) {
     		BlogDao blogDao = BlogDao.getInstance();
-    		List<Blog> list = blogDao.selectAll();
+    		String strPage = request.getParameter("pageNum");
+    		String idx = request.getParameter("idx");
+    		int no = 1;
+    		/*if(request.getParameter("no") == null) {
+    			System.out.println("로그인 하지 않은 사용자 블로그 접근");
+    			no = 1;
+    			//out.print("<script>alert('로그인한 사용자만 이용가능합니다. '); location.href='login.do';</script>"); // 왜 안됨? 
+    		} else {
+    			no = Integer.parseInt(request.getParameter("no"));
+    			System.out.println("로그인한 회원번호: " + no);
+    		}*/
+    		
+			int pageNum = 1;
+			if(strPage != null) {
+				pageNum = Integer.parseInt(strPage);
+			}
+			int totalCount = blogDao.getBlogCount();
+			PageMaker pageM = new PageMaker(pageNum, totalCount);
+			
+			List<Blog> list = blogDao.selectAll(pageM.getStart(), pageM.getEnd());
+			
     		request.setAttribute("list", list);
     		for(int i=0;i<list.size();i++) {
     			System.out.println(list.get(i));
@@ -115,8 +138,6 @@ public class IndexController extends HttpServlet {
         		out.print("success");		
     	}else if(action.equals("/blog.do")) { //========================================================//
     		String strPage = request.getParameter("pageNum");
-    		String idx = request.getParameter("idx");
-    		int no = Integer.parseInt(request.getParameter("no"));
 			int pageNum = 1;
 			if(strPage != null) {
 				pageNum = Integer.parseInt(strPage);
@@ -125,35 +146,26 @@ public class IndexController extends HttpServlet {
 			int totalCount = blogDao.getBlogCount();
 			PageMaker pageM = new PageMaker(pageNum, totalCount);
 			
-			List<Blog> list = blogDao.selectAll(pageM.getStart(), pageM.getEnd(), idx, no);
+			List<Blog> list = blogDao.selectAll(pageM.getStart(), pageM.getEnd());
 			request.setAttribute("pageM", pageM);
 			request.setAttribute("list", list);
+			System.out.println("pageM.getStart(): " + pageM.getStart() + ", pageM.getEnd(): " + pageM.getEnd());
 			request.getRequestDispatcher("main/blog.jsp").forward(request, response);
 			
     	}else if(action.equals("/blogDetailForm.do")) {
     		request.getRequestDispatcher("main/blogDetail.jsp").forward(request, response);
-    	}else if(action.equals("/blogDetail.do")) { //레시피 등록 
-    		Map<String, String> recipeMap = upload(request, response);
-    		
-    		String division = recipeMap.get("division");
-			String title = recipeMap.get("title");
-			String content = recipeMap.get("content");
-			String image = recipeMap.get("image");
-			String cookIndex = recipeMap.get("cook_index");
-			String cookType = recipeMap.get("cook_type");
-			String main = recipeMap.get("main");
-			String sub = recipeMap.get("sub");
-			String sauce = recipeMap.get("sauce");
-			int no = Integer.parseInt(recipeMap.get("no"));
-			
-			boolean flag = BlogDao.getInstance().insert(new Blog(division, title, content, 
-							image, cookIndex, cookType, main, sub, sauce, no));
-			if(flag) {
-				out.print("<script>alert('새 글을 추가했습니다.'); location.href='blog.do';</script>");
+    	}else if(action.equals("/blogDetail.do")) { // 블로그 상세
+    		int milNo = Integer.parseInt(request.getParameter("mil_no"));
+			boolean flag = BlogDao.getInstance().updateReadCount(milNo);
+			Blog blog = BlogDao.getInstance().selectOne(milNo);
+			List<Reply> replyList = ReplyDao.getInstance().selectReply(milNo);
+			if(blog != null && flag == true) {
+				request.setAttribute("replyList", replyList);
+				request.setAttribute("blog", blog);
+				request.getRequestDispatcher("main/blogDetail.jsp").forward(request, response);
 			} else {
-				out.print("<script>alert('새 글 추가 실패했습니다.'); location.href='blogForm.do';</script>");
+				out.print("<script>alert('게시글 조회 실패.'); location.href='blog.do';</script>");
 			}
-    		
     	}else if(action.equals("/search.do")) {
     		String type1=request.getParameter("type1");
     		String type2=request.getParameter("type2");

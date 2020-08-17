@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../include/header.jsp"%>
 	
 	<section class="blog_area section-padding">
@@ -13,17 +12,16 @@
 	 						<c:forEach items="${list }" var="blog" > 
 								<article class="blog_item">
 									<div class="blog_item_img">
-										<img class="card-img rounded-0" src="assets/img/blog/single_blog_5.png" alt="">
+										<img class="card-img rounded-0" src="images/${blog.image }" >
 									</div>
 				
 									<div class="blog_details">
 										<a class="d-inline-block" href="blogDetailForm.do">
-											<h2>${blog.title }</h2>
-										</a><br>${blog.content }</p>
-<%-- 											<p>${blog.content }</p> --%>
+											<h2> No.${blog.milNo } ${blog.title } </h2>
+										</a><br> ${blog.content } </p>
 										<ul class="blog-info-link">
-											<li><a href="#"><i class="fa fa-user"></i>${blog.cookIndex}</a></li>
-											<li><a href="#"><i class="fa fa-comments"></i>${blog.readCount }</a></li>
+											<li><a href="#"><i class="fa fa-user"></i>${blog.no }</a></li> 
+											<li><a href="#"><i class="fa fa-comments"></i>${blog.replyCount }</a></li>
 										</ul>
 									</div>
 								</article>

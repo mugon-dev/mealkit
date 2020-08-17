@@ -24,6 +24,7 @@ public class Recipe {
 	private String plate;
 	private String hour;
 	private String level;
+	
 	public int getMil_no() {
 		return mil_no;
 	}

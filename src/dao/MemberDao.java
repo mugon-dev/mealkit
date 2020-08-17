@@ -19,7 +19,7 @@ public class MemberDao {
 		boolean flag=false;
 		Connection conn=null;
 		PreparedStatement ps=null;
-		String sql="insert into member(id,pw,name,addr,tel) values(?,?,?,?,?)";
+		String sql="insert into member(title, content, image, cookIdx, cookType, matNo1, matQty1, matNo2, matQty2, matNo3, matQty3, matEtc, plate, hour, level, no) values(?,?,?,?,?)";
 		try {
 			conn=DBConn.getConn();
 			ps=conn.prepareStatement(sql);

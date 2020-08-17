@@ -17,8 +17,9 @@ public class BlogDao {
 	public static BlogDao getInstance() {
 		return instance;
 	}
-	public List<Blog> selectAll(){
-		String sql = " SELECT * FROM RECIPE ORDER BY MIL_NO ";
+	
+	public List<Blog> selectAll(int start, int end){
+		String sql = " SELECT * FROM RECIPE ORDER BY MIL_NO DESC LIMIT ?, ? ";
 		
 		List<Blog> list = new ArrayList<Blog>();
 		Connection conn = null;
@@ -27,78 +28,37 @@ public class BlogDao {
 		try {
 			conn = DBConn.getConn();
 			ps = conn.prepareStatement(sql);
-			System.out.println(sql);
+			ps.setInt(1, start);
+			ps.setInt(2, end);
 			rs = ps.executeQuery();
+			System.out.println(sql);
+			
 			while (rs.next()) {
 				Blog blog = new Blog();
+				
 				blog.setMilNo(rs.getInt("mil_no"));
-				blog.setDivision(rs.getString("division"));
+				blog.setRecIdx(rs.getString("rec_idx"));
 				blog.setTitle(rs.getString("title"));
 				blog.setContent(rs.getString("content"));
 				blog.setImage(rs.getString("image"));
 				blog.setReadCount(rs.getInt("read_count"));
 				blog.setReplyCount(rs.getInt("reply_count"));
-				blog.setCookIndex(rs.getString("cook_index"));
+				blog.setCookIdx(rs.getString("cook_idx"));
 				blog.setCookType(rs.getString("cook_type"));
-				blog.setMain(rs.getString("main"));
-				blog.setSub(rs.getString("sub"));
-				blog.setSauce(rs.getString("sauce"));
+				blog.setMatNo1(rs.getString("mat_no1"));
+				blog.setMatQty1(rs.getInt("mat_qty1"));
+				blog.setMatNo2(rs.getString("mat_no2"));
+				blog.setMatQty2(rs.getInt("mat_qty2"));
+				blog.setMatNo3(rs.getString("mat_no3"));
+				blog.setMatQty3(rs.getInt("mat_qty3"));
+				blog.setMatEtc(rs.getString("mat_etc"));
 				blog.setNo(rs.getInt("no"));
-				blog.setRgstDt(rs.getTimestamp("rgst_dt"));
+				blog.setRgstDt(rs.getDate("rgst_dt"));
+				blog.setPlate(rs.getString("plate"));
+				blog.setHour(rs.getNString("hour"));
+				blog.setLevel(rs.getNString("level"));
+				
 				System.out.println(blog);
-				list.add(blog);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			DBConn.close(conn, ps, rs);
-		}
-		return list;
-	}
-	public List<Blog> selectAll(int start, int end, String idx, int no){
-		String sql = " SELECT * FROM RECIPE ";
-		
-		if(idx.equals("1")) { //한식
-			sql += " WHERE COOK_INDEX = '1' ";
-		} else if(idx.equals("2")) { //중식
-			sql += " WHERE COOK_INDEX = '2' ";
-		} else if(idx.equals("3")) { //양식
-			sql += " WHERE COOK_INDEX = '3' ";
-		} else if(idx.equals("4")) { //일식
-			sql += " WHERE COOK_INDEX = '4' ";
-		} else if(idx.equals("5")) { // 내글보기
-			sql += " WHERE NO = " + no + " ";
-		}
-		
-		sql += " ORDER BY NUM DESC LIMIT ?, ? ";
-		
-		List<Blog> list = new ArrayList<Blog>();
-		Connection conn = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-		try {
-			conn = DBConn.getConn();
-			ps = conn.prepareStatement(sql);
-			ps.setInt(1, end);
-			ps.setInt(2, start);
-			System.out.println(sql);
-			rs = ps.executeQuery();
-			while (rs.next()) {
-				Blog blog = new Blog();
-				blog.setMilNo(rs.getInt("mil_no"));
-				blog.setDivision(rs.getString("division"));
-				blog.setTitle(rs.getString("title"));
-				blog.setContent(rs.getString("content"));
-				blog.setImage(rs.getString("image"));
-				blog.setReadCount(rs.getInt("read_count"));
-				blog.setReplyCount(rs.getInt("reply_count"));
-				blog.setCookIndex(rs.getString("cook_index"));
-				blog.setCookType(rs.getString("cook_type"));
-				blog.setMain(rs.getString("main"));
-				blog.setSub(rs.getString("sub"));
-				blog.setSauce(rs.getString("sauce"));
-				blog.setNo(rs.getInt("no"));
-				blog.setRgstDt(rs.getTimestamp("rgst_dt"));
 				
 				list.add(blog);
 			}
@@ -115,22 +75,36 @@ public class BlogDao {
 		boolean flag = false;
 		Connection conn = null;
 		PreparedStatement ps = null;
-		String sql = " INSERT INTO RECIPE(DIVISION, TITLE, CONTENT, IMAGE, COOK_INDEX, COOK_TYPE, MAIN, SUB, SAUCE, NO) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ";
+		String sql = " INSERT INTO RECIPE(MAT_QTY1, MAT_QTY2, MAT_QTY3, NO, REC_IDX, TITLE, CONTENT, " 
+				+ " IMAGE, COOK_IDX, COOK_TYPE, MAT_NO1, MAT_NO2, MAT_NO3, MAT_ETC, PLATE, HOUR, LEVEL) " 
+				+ " VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ";
+		
 		try {
 			conn = DBConn.getConn();
 			ps = conn.prepareStatement(sql);
-			ps.setString(1, blog.getDivision());
-			ps.setString(2, blog.getTitle());
-			ps.setString(3, blog.getContent());
-			ps.setString(4, blog.getImage());
-			ps.setString(5, blog.getCookIndex());
-			ps.setString(6, blog.getCookType());
-			ps.setString(7, blog.getMain());
-			ps.setString(8, blog.getSub());
-			ps.setString(9, blog.getSauce());
-			ps.setInt(10, blog.getNo());
+			System.out.println(sql);
+			
+			ps.setInt(1, blog.getMatQty1());
+			ps.setInt(2, blog.getMatQty2());
+			ps.setInt(3, blog.getMatQty3());
+			ps.setInt(4,  blog.getNo());
+			ps.setNString(5, blog.getRecIdx());
+			ps.setNString(6, blog.getTitle());
+			ps.setNString(7, blog.getContent());
+			ps.setNString(8, blog.getImage());
+			ps.setNString(9, blog.getCookIdx());
+			ps.setNString(10, blog.getCookType());
+			ps.setNString(11, blog.getMatNo1());
+			ps.setNString(12, blog.getMatNo2());
+			ps.setNString(13, blog.getMatNo3());
+			ps.setNString(14, blog.getMatEtc());
+			ps.setNString(15, blog.getPlate());
+			ps.setNString(16, blog.getHour());
+			ps.setNString(17, blog.getLevel());
+			
 			System.out.println(sql);
 			int n = ps.executeUpdate();
+			
 			if(n == 1) {
 				flag = true;
 				System.out.println("글 작성 성공");
@@ -162,19 +136,29 @@ public class BlogDao {
 			if(rs.next()) {
 				blog = new Blog();
 				blog.setMilNo(rs.getInt("mil_no"));
-				blog.setDivision(rs.getString("division"));
+				blog.setRecIdx(rs.getString("rec_idx"));
 				blog.setTitle(rs.getString("title"));
 				blog.setContent(rs.getString("content"));
 				blog.setImage(rs.getString("image"));
 				blog.setReadCount(rs.getInt("read_count"));
 				blog.setReplyCount(rs.getInt("reply_count"));
-				blog.setCookIndex(rs.getString("cook_index"));
+				blog.setCookIdx(rs.getString("cook_idx"));
 				blog.setCookType(rs.getString("cook_type"));
-				blog.setMain(rs.getString("main"));
-				blog.setSub(rs.getString("sub"));
-				blog.setSauce(rs.getString("sauce"));
+				blog.setMatNo1(rs.getString("mat_no1"));
+				blog.setMatQty1(rs.getInt("mat_qty1"));
+				blog.setMatNo2(rs.getString("mat_no2"));
+				blog.setMatQty2(rs.getInt("mat_qty2"));
+				blog.setMatNo3(rs.getString("mat_no3"));
+				blog.setMatQty3(rs.getInt("mat_qty3"));
+				blog.setMatEtc(rs.getString("mat_etc"));
 				blog.setNo(rs.getInt("no"));
-				blog.setRgstDt(rs.getTimestamp("rgst_dt"));
+				blog.setRgstDt(rs.getDate("rgst_dt"));
+				blog.setPlate(rs.getString("plate"));
+				blog.setHour(rs.getNString("hour"));
+				blog.setLevel(rs.getNString("level"));
+				
+				System.out.println(blog);
+				
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -186,21 +170,32 @@ public class BlogDao {
 	// 글 수정
 	public boolean update(Blog blog) {
 		boolean flag=false;
-		String sql = " UPDATE RECIPE SET DIVISION=?, TITLE=?, CONTENT=?, IMAGE=?, COOK_INDEX=?, COOK_TYPE=?, MAIN=?, SUB=?, SAUCE=? WHERE MIL_NO = ? ";
+		String sql = " UPDATE RECIPE SET MAT_QTY1=?, MAT_QTY2=?, MAT_QTY3=?, NO=?, REC_IDX=?, TITLE=?, CONTENT=?, "
+				+ " IMAGE=?, COOK_IDX=?, COOK_TYPE=?, MAT_NO1=?, MAT_NO2=?, MAT_NO3=?, MAT_ETC=?, PLATE=?, HOUR=?, LEVEL=? "
+				+ " WHERE MIL_NO = ? ";
 		Connection conn = null;
 		PreparedStatement ps = null;
 		try {
 			conn = DBConn.getConn();
 			ps = conn.prepareStatement(sql);
-			ps.setString(1, blog.getDivision());
-			ps.setString(2, blog.getTitle());
-			ps.setString(3, blog.getContent());
-			ps.setString(4, blog.getImage());
-			ps.setString(5, blog.getCookIndex());
-			ps.setString(6, blog.getCookType());
-			ps.setString(7, blog.getMain());
-			ps.setString(8, blog.getSub());
-			ps.setString(9, blog.getSauce());
+			
+			ps.setInt(1, blog.getMatQty1());
+			ps.setInt(2, blog.getMatQty2());
+			ps.setInt(3, blog.getMatQty3());
+			ps.setInt(4,  blog.getNo());
+			ps.setNString(5, blog.getRecIdx());
+			ps.setNString(6, blog.getTitle());
+			ps.setNString(7, blog.getContent());
+			ps.setNString(8, blog.getImage());
+			ps.setNString(9, blog.getCookIdx());
+			ps.setNString(10, blog.getCookType());
+			ps.setNString(11, blog.getMatNo1());
+			ps.setNString(12, blog.getMatNo2());
+			ps.setNString(13, blog.getMatNo3());
+			ps.setNString(14, blog.getMatEtc());
+			ps.setNString(15, blog.getPlate());
+			ps.setNString(16, blog.getHour());
+			ps.setNString(17, blog.getLevel());
 			
 			System.out.println(sql);
 			int n=ps.executeUpdate();
@@ -247,7 +242,7 @@ public class BlogDao {
 	// 조회수
 	public boolean updateReadCount(int milNo) {
 		boolean flag=false;
-		String sql = " UPDATE RECIPE SET READCOUNT = READCOUNT+1 WHERE MIL_NO = ? ";
+		String sql = " UPDATE RECIPE SET READ_COUNT = READ_COUNT+1 WHERE MIL_NO = ? ";
 		Connection conn = null;
 		PreparedStatement ps = null;
 		try {
