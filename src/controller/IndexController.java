@@ -113,8 +113,7 @@ public class IndexController extends HttpServlet {
 			int mat_unit = Integer.parseInt(materialMap.get("mat_unit"));
 			String mat_image = materialMap.get("filename");
 			System.out.println(materialMap.toString());
-			boolean flag = MaterialDao.getInstance()
-					.insert(new Material(mat_no, mat_idx, mat_nm, mat_price, mat_unit, mat_image));
+			boolean flag = MaterialDao.getInstance().insert(new Material(mat_no, mat_idx, mat_nm, mat_price, mat_unit, mat_image));
 			if (flag) {
 				out.print("<script>alert('새 글을 추가했습니다.'); location.href='matForm.do';</script>");
 			} else {

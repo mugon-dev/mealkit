@@ -292,6 +292,14 @@
       </div>
       <div class="modal-body">
         <form action="mat.do" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="recipient-name" class="col-form-label">mat_no</label>
+            <input type="text" class="form-control" id="mat_no" name="mat_no">
+          </div>
+        <div class="form-group">
+            <label for="recipient-name" class="col-form-label">mat_idx</label>
+            <input type="text" class="form-control" id="mat_idx" name="mat_idx">
+          </div>
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">재료명</label>
             <input type="text" class="form-control" id="mat_nm" name="mat_nm">
