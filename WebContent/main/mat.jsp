@@ -294,25 +294,25 @@
         <form action="mat.do" method="post" enctype="multipart/form-data">
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">재료명</label>
-            <input type="text" class="form-control" id="recipient-name">
+            <input type="text" class="form-control" id="recipient-name" name="recipient-name">
           </div>
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">단위</label>
-            <input type="text" class="form-control" id="recipient-name">
+            <input type="text" class="form-control" id="recipient-name" name="recipient-name">
           </div>
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">가격</label>
-            <input type="text" class="form-control" id="recipient-name">
+            <input type="text" class="form-control" id="recipient-name" name="recipient-name">
           </div>
           <div class="form-group">
             <label for="message-text" class="col-form-label">사진등록</label>
             <input type=file id="filename" name="filename" class="form-control">
           </div>
-        </form>
-      </div>
-      <div class="modal-footer">
+          <div class="modal-footer">
         <button type="button" class="btn_3" data-dismiss="modal" style="padding:10px;">닫기</button>
-        <button type="button" class="btn_3" style="padding:10px;">등록</button>
+        <button type="submit" class="btn_3" style="padding:10px;">등록</button>
+      </div>
+        </form>
       </div>
     </div>
   </div>
