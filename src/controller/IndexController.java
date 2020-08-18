@@ -60,10 +60,13 @@ public class IndexController extends HttpServlet {
 		if (action.equals("/main.do")) {
 			request.getRequestDispatcher("main/home.jsp").forward(request, response);
 		} else if (action.equals("/loginForm.do")) {
+			String mil_no= request.getParameter("no");
+			request.setAttribute("mil_no", mil_no);
 			request.getRequestDispatcher("main/login.jsp").forward(request, response);
 		} else if (action.equals("/login.do")) { // 로그인
 			String id = request.getParameter("id");
-			String pw = request.getParameter("pw");		
+			String pw = request.getParameter("pw");	
+			String mil_no = request.getParameter("mil_no");
 			int n = MemberDao.getInstance().login(id, pw);
 			int no = MemberDao.getInstance().getMemberNo(id);
 			if (n == 1) {
@@ -71,7 +74,15 @@ public class IndexController extends HttpServlet {
 				HttpSession session = request.getSession();
 				session.setAttribute("session_id", id);
 				session.setAttribute("session_no", no);
-				out.print("<script>alert('로그인성공');location.href='main.do';</script>");
+				System.out.println(mil_no);
+				System.out.println("sdlkjsldf");
+				
+				if(mil_no!="") {
+					out.print("<script>alert('로그인성공');location.href='product.do?no="+mil_no+"';</script>");
+				}else {
+					out.print("<script>alert('로그인성공');location.href='main.do';</script>");
+				}
+				
 			} else if (n == 0) {
 				out.print("password error");
 			} else {
@@ -109,6 +120,7 @@ public class IndexController extends HttpServlet {
 			List<Material> list = MaterialDao.getInstance().selectAll();
 			request.setAttribute("list", list);
 			String idx = request.getParameter("mat_idx");
+			System.out.println(idx);
 			List<Material> select = MaterialDao.getInstance().selectList(idx);
 			request.setAttribute("select", select);
 			request.getRequestDispatcher("main/mat.jsp").forward(request, response);
@@ -225,6 +237,8 @@ public class IndexController extends HttpServlet {
     		request.getRequestDispatcher("main/product.jsp").forward(request, response);
     	} else if(action.equals("/cartForm.do")) {
     		int test=Integer.parseInt(request.getParameter("count"));
+    		String id=request.getParameter("session_id");
+    		int no=MemberDao.getInstance().getMemberNo(id);
     		int[] mat=new int[test];
     		for(int i=0;i<test;i++) {
     			int temp=i+1;
