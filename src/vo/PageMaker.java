@@ -18,16 +18,15 @@ public class PageMaker {
 		
 		start = (currentPage - 1) * pageSize;
 		end = start + (pageSize - 1); 
-		endPage = (int)(Math.ceil(currentPage/(double)pageSize)) * pageSize;
+		endPage = (int)(Math.ceil(currentPage / (double)pageSize)) * pageSize;
 		startPage = (endPage - pageSize) + 1;
-		
-		System.out.println("start: " + start + " || end: " + end + " || startPage: " + startPage + " || endPage: " + endPage);
-		
 		int totalPage = (int)(Math.ceil(totalCount / (double)pageSize));
 		if(endPage > totalPage) {
 			endPage = totalPage; 
 		}
-		System.out.println("totalPage: " + totalPage);
+		
+		System.out.println("start: " + start + " || end: " + end + " || startPage: " + startPage  
+							+ " || endPage: " + endPage + " || totalPage: " + totalPage);
 		
 		prev = startPage == 1 ? false : true; 
 		next = endPage == totalPage ? false : true;

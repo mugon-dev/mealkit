@@ -16,8 +16,22 @@ public class BlogDao {
 		return instance;
 	}
 	
-	public List<Blog> selectAll(int start, int end){
-		String sql = " SELECT * FROM RECIPE ORDER BY MIL_NO DESC LIMIT ?, ? ";
+	public List<Blog> selectAll(int start, int end, String idx, String no){
+		String sql = " SELECT * FROM RECIPE ";
+		if(idx.equals("1")) { // 한식
+			sql += " WHERE COOK_IDX = " + idx + " ";
+		} else if(idx.equals("2")) { // 중식
+			sql += " WHERE COOK_IDX = " + idx + " ";
+		} else if(idx.equals("3")) { // 일식
+			sql += " WHERE COOK_IDX = " + idx + " ";
+		} else if(idx.equals("4")) { // 양식
+			sql += " WHERE COOK_IDX = " + idx + " ";
+		} else if(idx.equals("5")) { // 전체보기
+		} else if(idx.equals("6")) { // 내글보기
+			sql += " WHERE NO = " + no + " ";
+		}
+		
+		sql += " ORDER BY MIL_NO DESC LIMIT ?, 3 ";
 		
 		List<Blog> list = new ArrayList<Blog>();
 		Connection conn = null;
@@ -27,7 +41,6 @@ public class BlogDao {
 			conn = DBConn.getConn();
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, start);
-			ps.setInt(2, end);
 			rs = ps.executeQuery();
 			System.out.println(sql);
 			
@@ -263,14 +276,30 @@ public class BlogDao {
 		return flag;
 	}
 	
-	// 페이징
-	public int getBlogCount(){
+	// 페이징에 쓸 개수 
+	public int getBlogCount(String idx, String no){
 		int count = 0;
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		String sql = " SELECT COUNT(*) FROM RECIPE "; 
 		
+		if(idx.equals("1")) { // 한식
+			sql += " WHERE COOK_IDX = " + idx + " ";
+		} else if(idx.equals("2")) { // 중식
+			sql += " WHERE COOK_IDX = " + idx + " ";
+		} else if(idx.equals("3")) { // 일식
+			sql += " WHERE COOK_IDX = " + idx + " ";
+		} else if(idx.equals("4")) { // 양식
+			sql += " WHERE COOK_IDX = " + idx + " ";
+		} else if(idx.equals("5")) { // 전체보기
+		} else if(idx.equals("6")) { // 내글보기
+			if(no == null || no.equals("")) {
+				//sql += " WHERE NO = 1 "; // 테스트용
+			} else {
+				sql += " WHERE NO = " + no + " ";
+			}
+		}
 		try {
 			conn = DBConn.getConn();
 			ps = conn.prepareStatement(sql);

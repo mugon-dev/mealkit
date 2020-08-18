@@ -49,22 +49,6 @@
 										<i class="ti-angle-right"></i>
 									</a>
 								</li>
-<!-- 								<li class="page-item"> -->
-<!-- 									<a href="#" class="page-link" aria-label="Previous"> -->
-<!-- 										<i class="ti-angle-left"></i> -->
-<!-- 									</a> -->
-<!-- 								</li> -->
-<!-- 								<li class="page-item"> -->
-<!-- 									<a href="#" class="page-link">1</a> -->
-<!-- 								</li> -->
-<!-- 								<li class="page-item active"> -->
-<!-- 									<a href="#" class="page-link">2</a> -->
-<!-- 								</li> -->
-<!-- 								<li class="page-item"> -->
-<!-- 									<a href="#" class="page-link" aria-label="Next"> -->
-<!-- 										<i class="ti-angle-right"></i> -->
-<!-- 									</a> -->
-<!-- 								</li> -->
 							</ul>
 						</nav>
 					</div>
@@ -72,28 +56,30 @@
 				
 				<!-- 우측 바 메뉴 시작-->
 				<div class="col-lg-4">
-					<button id="btnBlogDetailWrite" class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn" type="button">글쓰기</button><br>
+<%-- 					<c:if test="${not empty session_no }"> --%>
+						<button type="button" id="btnBlogDetailWrite"  class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn" >글쓰기</button><br>
+<%-- 					</c:if> --%>
 					<div class="blog_right_sidebar">
 						<aside class="single_sidebar_widget post_category_widget">
 							<h4 class="widget_title">Category</h4>
 							<ul class="list cat-list">
 								<li>
-									<a href="#" class="d-flex"><p>전체보기</p></a>
+									<a href="blogForm.do?idx=5&no=${session_no }" class="d-flex"><p>전체보기</p></a>
 								</li>
 								<li>
-									<a href="#" class="d-flex"><p>내글보기</p></a>
+									<a href="blogForm.do?idx=6&no=${session_no }" class="d-flex"><p>내글보기</p></a>
 								</li>
 								<li>
-									<a href="#" class="d-flex"><p>한식</p></a>
+									<a href="blogForm.do?idx=1&no=${session_no }" class="d-flex"><p>한식</p></a>
 								</li>
 								<li>
-									<a href="#" class="d-flex"><p>중식</p></a>
+									<a href="blogForm.do?idx=2&no=${session_no }" class="d-flex"><p>중식</p></a>
 								</li>
 								<li>
-									<a href="#" class="d-flex"><p>양식</p></a>
+									<a href="blogForm.do?idx=3&no=${session_no }" class="d-flex"><p>일식</p></a>
 								</li>
 								<li>
-									<a href="#" class="d-flex"><p>일식</p></a>
+									<a href="blogForm.do?idx=4&no=${session_no }" class="d-flex"><p>양식</p></a>
 								</li>
 							</ul>
 						</aside>
@@ -104,7 +90,7 @@
 	</section>
 
 	<script type="text/javascript">
-		$("btnBlogDetailWrite").on('click', function(){
+		$("#btnBlogDetailWrite").on('click', function(){
 			location.href = "blogDetailForm.do";
 		});
 	</script>
