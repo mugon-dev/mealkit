@@ -1,22 +1,10 @@
 package dao;
 
-import java.io.File;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import vo.Material;
 
@@ -88,10 +76,12 @@ public class MaterialDao {
 	}
 	
 	public boolean insert(Material material) {
+		System.out.println("insert 호출");
+		System.out.println(material.toString());
 		boolean flag = false;
 		Connection conn = null;
 		PreparedStatement ps = null;
-		String sql= "insert into mat(mat_no, mat_idx, mat_nm, mat_price, mat_unit,mat_image) VALUES (?, ?, ?, ?, ?,?)";
+		String sql= "insert into mat(mat_no, mat_idx, mat_nm, mat_price, mat_unit, mat_image) VALUES (?, ?, ?, ?, ?, ?)";
 		try {
 			conn=DBConn.getConn();
 			ps=conn.prepareStatement(sql);

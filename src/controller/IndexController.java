@@ -104,6 +104,8 @@ public class IndexController extends HttpServlet {
 		} else if (action.equals("/shop.do")) {
 
 		} else if (action.equals("/matForm.do")) { // 재료 등록 modal
+			List<Material> list = MaterialDao.getInstance().selectAll();
+			request.setAttribute("list", list);
 			request.getRequestDispatcher("main/mat.jsp").forward(request, response);
 		} else if (action.equals("/mat.do")) { // 재료 등록 , 사진업로드, hsahmap으로 수정
 			//Map<String, String> materialMap = MaterialDao.getInstance().upload(request, response,FILE_REPO);
@@ -216,6 +218,16 @@ public class IndexController extends HttpServlet {
     		request.setAttribute("recipe", recipe);
     		request.getRequestDispatcher("main/product.jsp").forward(request, response);
     	} else if(action.equals("/cartForm.do")) {
+    		int test=Integer.parseInt(request.getParameter("count"));
+    		int[] mat=new int[test];
+    		for(int i=0;i<test;i++) {
+    			int temp=i+1;
+    			Material material=MaterialDao.getInstance().selectOne(request.getParameter("material"+temp));
+    			mat[i]=Integer.parseInt(request.getParameter("mat"+temp));
+    			System.out.println(mat[i]);
+    			System.out.println(material);
+    		}
+    		System.out.println(test);
     		request.getRequestDispatcher("main/cart.jsp").forward(request, response);
     	} else if(action.equals("/blogForm.do")) {
     		String strPage = request.getParameter("pageNum");
