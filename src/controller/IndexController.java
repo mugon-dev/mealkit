@@ -104,6 +104,8 @@ public class IndexController extends HttpServlet {
 		} else if (action.equals("/shop.do")) {
 
 		} else if (action.equals("/matForm.do")) { // 재료 등록 modal
+			List<Material> list = MaterialDao.getInstance().selectAll();
+			request.setAttribute("list", list);
 			request.getRequestDispatcher("main/mat.jsp").forward(request, response);
 		} else if (action.equals("/mat.do")) { // 재료 등록 , 사진업로드, hsahmap으로 수정
 			//Map<String, String> materialMap = MaterialDao.getInstance().upload(request, response,FILE_REPO);
