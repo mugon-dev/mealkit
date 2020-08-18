@@ -16,6 +16,7 @@ public class DBConn {
 			Context envContext  = (Context)initContext.lookup("java:/comp/env");
 			DataSource ds = (DataSource)envContext.lookup("jdbc/mealkit_db");
 			conn = ds.getConnection();
+			System.out.println("DB연결성공");
 		}catch(Exception e) {
 			e.getStackTrace();
 		}
