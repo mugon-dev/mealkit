@@ -50,32 +50,49 @@
 													</c:when>
 
 												</c:choose>
+												
 												<tr>
 													<td align="right" width=30%>${material.mat_nm }</td>
 													<td align="center" width=40%>
 														<div class="product_count d-inline-block">
-															<span id="decrement"
+															<span id="decrement${count }"
 																class="product_count_item inumber-decrement"> <i
-																class="ti-minus"></i></span> <input id="mat1"
+																class="ti-minus"></i></span> <input id="mat${count }" name="mat${count }"
 																class="product_count_item input-number" type="text"
 																value="${num }" min="0" max="10"> <span
-																id="increment"
+																id="increment${count }"
 																class="product_count_item number-increment"> <i
 																class="ti-plus"></i>
 															</span>
 														</div>
+														<input type="hidden" name="material${count }" value="${material.mat_no }"/>
 													</td>
 													<td align="left" width=30%>단위(g)</td>
 												</tr>
 											</c:forEach>
+											
 
 											<tr>
-												<td colspan="3">
-													<div class="add_to_cart">
-														<button type="submit" value="add to cart" class="btn_3">add
-															to cart</button>
-													</div>
-												</td>
+												<c:if test="${not empty session_no }">
+													<td colspan="3">
+														<div class="add_to_cart">
+															<button type="submit" value="add to cart" class="btn_3">add
+																to cart</button>
+															<input type="hidden" name="count" value="${count }"/>
+															<input type="hidden" name="no" value="${session_no }"/>
+															
+														</div>
+													</td>
+												</c:if>
+												<c:if test="${empty session_no }">
+													<td colspan="3">
+														<div class="add_to_cart">
+															<button type="button" id="login" value="add to cart" class="btn_3">로그인
+															</button>
+															
+														</div>
+													</td>
+												</c:if>
 											</tr>
 										</tbody>
 									</table>
@@ -146,7 +163,7 @@
 	<!-- subscribe part end -->
 </main>
 <script type="text/javascript">
-	$('#increment').on('click', function() {
+	$('#increment1').on('click', function() {
 		var value = $('#mat1').val();
 		var min = 0;
 		var max = 10;
@@ -159,7 +176,7 @@
 		}
 
 	});
-	$('#decrement').on('click', function() {
+	$('#decrement1').on('click', function() {
 		var value = $('#mat1').val();
 		var min = 0;
 		var max = 10;
@@ -218,6 +235,9 @@
 		} else {
 			alert("최소값입니다.");
 		}
+	});
+	$('#login').on('click',function(){
+		location.href="loginForm.do";
 	});
 </script>
 <%@ include file="../include/footer.jsp"%>

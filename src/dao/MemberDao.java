@@ -19,7 +19,7 @@ public class MemberDao {
 		boolean flag=false;
 		Connection conn=null;
 		PreparedStatement ps=null;
-		String sql="insert into member(title, content, image, cookIdx, cookType, matNo1, matQty1, matNo2, matQty2, matNo3, matQty3, matEtc, plate, hour, level, no) values(?,?,?,?,?)";
+		String sql="insert into member(id,pw,name,addr,tel) values(?,?,?,?,?)";
 		try {
 			conn=DBConn.getConn();
 			ps=conn.prepareStatement(sql);
@@ -167,5 +167,34 @@ public class MemberDao {
 		}
 		return flag;
 	}//수정완료
+	
+	public int getMemberNo(String id) {
+		int no = 0;
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs=null;
+		String sql="select no from member where id=?";
+		try {
+			conn= DBConn.getConn();
+			ps = conn.prepareStatement(sql);
+			ps.setString(1,id);
+			rs=ps.executeQuery();
+			if(rs.next()) {
+				no=rs.getInt("no");
+				System.out.println("session_no 획득");
+			}else {
+				System.out.println("세션 획득 실패");
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			try {
+				DBConn.close(conn, ps,rs);
+			} catch (Exception e) {
+				e.getStackTrace();
+			}
+		}
+		return no;
+	}
 
 }

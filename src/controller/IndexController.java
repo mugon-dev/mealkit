@@ -63,12 +63,14 @@ public class IndexController extends HttpServlet {
 			request.getRequestDispatcher("main/login.jsp").forward(request, response);
 		} else if (action.equals("/login.do")) { // 로그인
 			String id = request.getParameter("id");
-			String pw = request.getParameter("pw");
+			String pw = request.getParameter("pw");		
 			int n = MemberDao.getInstance().login(id, pw);
+			int no = MemberDao.getInstance().getMemberNo(id);
 			if (n == 1) {
 //    			session 생성
 				HttpSession session = request.getSession();
 				session.setAttribute("session_id", id);
+				session.setAttribute("session_no", no);
 				out.print("<script>alert('로그인성공');location.href='main.do';</script>");
 			} else if (n == 0) {
 				out.print("password error");
@@ -130,6 +132,7 @@ public class IndexController extends HttpServlet {
     	}  else if (action.equals("/logout.do")) { // 로그아웃 header의 ajax 스크립트
 			HttpSession session = request.getSession();
 			session.removeAttribute("session_id");
+			session.removeAttribute("session_no");
 			out.print("success");
 		} else if (action.equals("/myPageForm.do")) { // myPage 이동
 			request.getRequestDispatcher("main/myPage.jsp").forward(request, response);
@@ -221,62 +224,37 @@ public class IndexController extends HttpServlet {
     		request.setAttribute("recipe", recipe);
     		request.getRequestDispatcher("main/product.jsp").forward(request, response);
     	} else if(action.equals("/cartForm.do")) {
+    		int test=Integer.parseInt(request.getParameter("count"));
+    		int[] mat=new int[test];
+    		for(int i=0;i<test;i++) {
+    			int temp=i+1;
+    			Material material=MaterialDao.getInstance().selectOne(request.getParameter("material"+temp));
+    			mat[i]=Integer.parseInt(request.getParameter("mat"+temp));
+    			System.out.println(mat[i]);
+    			System.out.println(material);
+    		}
+    		System.out.println(test);
     		request.getRequestDispatcher("main/cart.jsp").forward(request, response);
     	} else if(action.equals("/blogForm.do")) {
-//			BlogDao blogDao = BlogDao.getInstance();
-//			List<Blog> list = blogDao.selectAll();
-//			request.setAttribute("list", list);
-//			for (int i = 0; i < list.size(); i++) {
-//				System.out.println(list.get(i));
-//			}
-//			request.getRequestDispatcher("main/blog.jsp").forward(request, response);
-
-    		BlogDao blogDao = BlogDao.getInstance();
     		String strPage = request.getParameter("pageNum");
-    		String idx = request.getParameter("idx");
-    		int no = 1;
-    		/*if(request.getParameter("no") == null) {
-    			System.out.println("로그인 하지 않은 사용자 블로그 접근");
-    			no = 1;
-    			//out.print("<script>alert('로그인한 사용자만 이용가능합니다. '); location.href='login.do';</script>"); // 왜 안됨? 
-    		} else {
-    			no = Integer.parseInt(request.getParameter("no"));
-    			System.out.println("로그인한 회원번호: " + no);
-    		}*/
     		
-			int pageNum = 1;
-			if(strPage != null) {
-				pageNum = Integer.parseInt(strPage);
-			}
-			int totalCount = blogDao.getBlogCount();
-			PageMaker pageM = new PageMaker(pageNum, totalCount);
-			
-			List<Blog> list = blogDao.selectAll(pageM.getStart(), pageM.getEnd());
-			
-    		request.setAttribute("list", list);
-    		for(int i=0;i<list.size();i++) {
-    			System.out.println(list.get(i));
-    		}
-    		request.getRequestDispatcher("main/blog.jsp").forward(request, response);
+    		System.out.println("================== blogForm.do ==================");
+    		System.out.println("------ strPage: " + strPage);
     		
-    	} else if(action.equals("/blog.do")) { 
-    		String strPage = request.getParameter("pageNum");
-    		String idx = request.getParameter("idx");
-			int no = Integer.parseInt(request.getParameter("no"));
-			int pageNum = 1;
+    		int pageNum = 1;
 			if(strPage != null) {
 				pageNum = Integer.parseInt(strPage);
 			}
 			BlogDao blogDao = BlogDao.getInstance();
 			int totalCount = blogDao.getBlogCount();
 			PageMaker pageM = new PageMaker(pageNum, totalCount);
-			
 			List<Blog> list = blogDao.selectAll(pageM.getStart(), pageM.getEnd());
 			request.setAttribute("pageM", pageM);
 			request.setAttribute("list", list);
-			request.getRequestDispatcher("main/blog.jsp").forward(request, response);
-    	
-		} else if (action.equals("/blogDetailForm.do")) {
+    		System.out.println("------ list: " + list);
+    		
+    		request.getRequestDispatcher("main/blog.jsp").forward(request, response);
+    	} else if (action.equals("/blogDetailForm.do")) {
 			request.getRequestDispatcher("main/blogDetail.jsp").forward(request, response);
 		} else if (action.equals("/blogDetail.do")) { 
 //			int milNo = Integer.parseInt(request.getParameter("mil_no"));
@@ -314,7 +292,7 @@ public class IndexController extends HttpServlet {
 					matNo3, matEtc, plate,  hour, level));
 			
 			if(flag) {
-				out.print("<script>alert('새 글을 추가했습니다.'); location.href='blog.do';</script>");
+				out.print("<script>alert('새 글을 추가했습니다.'); location.href='blogDetail.do';</script>");
 			} else {
 				out.print("<script>alert('새 글 추가 실패했습니다.'); location.href='blogForm.do';</script>");
 			}
