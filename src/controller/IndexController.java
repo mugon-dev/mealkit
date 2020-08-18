@@ -216,6 +216,16 @@ public class IndexController extends HttpServlet {
     		request.setAttribute("recipe", recipe);
     		request.getRequestDispatcher("main/product.jsp").forward(request, response);
     	} else if(action.equals("/cartForm.do")) {
+    		int test=Integer.parseInt(request.getParameter("count"));
+    		int[] mat=new int[test];
+    		for(int i=0;i<test;i++) {
+    			int temp=i+1;
+    			Material material=MaterialDao.getInstance().selectOne(request.getParameter("material"+temp));
+    			mat[i]=Integer.parseInt(request.getParameter("mat"+temp));
+    			System.out.println(mat[i]);
+    			System.out.println(material);
+    		}
+    		System.out.println(test);
     		request.getRequestDispatcher("main/cart.jsp").forward(request, response);
     	} else if(action.equals("/blogForm.do")) {
 //			BlogDao blogDao = BlogDao.getInstance();
