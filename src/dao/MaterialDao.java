@@ -45,8 +45,38 @@ public class MaterialDao {
 		return list;
 	}
 	//idx로 선택
+	
+	public List<Material> selectList(String idx){
+		List<Material> list=new ArrayList<Material>();
+		Connection conn=null;
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		String sql="select * from mat where mat_idx=?";
+		try {
+			conn=DBConn.getConn();
+			ps=conn.prepareStatement(sql);
+			ps.setString(1, idx);
+			rs=ps.executeQuery();
+			while(rs.next()) {
+				Material material=new Material();
+				material.setMat_no(rs.getString("mat_no"));
+				material.setMat_idx(rs.getString("mat_idx"));
+				material.setMat_nm(rs.getString("mat_nm"));
+				material.setMat_price(rs.getInt("mat_price"));
+				material.setMat_unit(rs.getInt("mat_unit"));
+				material.setMat_image(rs.getString("mat_image"));
+				System.out.println(material);
+				list.add(material);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBConn.close(conn, ps, rs);
+		}
+		return list;
+	}
 	public Material selectOne(String idx){
-		Material material=null;
+		Material material=new Material();
 		Connection conn=null;
 		PreparedStatement ps=null;
 		ResultSet rs=null;
