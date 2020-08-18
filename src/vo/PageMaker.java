@@ -1,7 +1,7 @@
 package vo;
 
 public class PageMaker {
-	private int pageSize = 5; 
+	private int pageSize = 3; 
 	private int startPage;  
 	private int endPage; 
 	private int currentPage = 1; 
@@ -21,10 +21,13 @@ public class PageMaker {
 		endPage = (int)(Math.ceil(currentPage/(double)pageSize)) * pageSize;
 		startPage = (endPage - pageSize) + 1;
 		
-		int totalPage = (int)(Math.ceil(totalCount/(double)pageSize));
+		System.out.println("start: " + start + " || end: " + end + " || startPage: " + startPage + " || endPage: " + endPage);
+		
+		int totalPage = (int)(Math.ceil(totalCount / (double)pageSize));
 		if(endPage > totalPage) {
 			endPage = totalPage; 
 		}
+		System.out.println("totalPage: " + totalPage);
 		
 		prev = startPage == 1 ? false : true; 
 		next = endPage == totalPage ? false : true;
@@ -57,6 +60,4 @@ public class PageMaker {
 	public boolean isNext() {
 		return next;
 	}
-	
-	
 }
