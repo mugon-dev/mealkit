@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="../include/header.jsp"%>
+<script type="text/javascript">
+$("#nav-meat-tab").on("click",function(){
+	location.href="matForm.do?mat_idx=10";
+});
+</script>
 <section class="popular-items latest-padding">
 	<div class="container">
 		<div class="row product-btn ">
@@ -11,16 +16,22 @@
 					<div class="nav nav-tabs" id="nav-tab" role="tablist">
 						<a class="nav-item nav-link active" id="nav-whole-tab"
 							data-toggle="tab" href="#nav-whole" role="tab"
-							aria-controls="nav-whole" aria-selected="true">전체</a> <a
+							aria-controls="nav-whole" aria-selected="true">전체</a> 
+							
+														
+							<a 
 							class="nav-item nav-link" id="nav-meat-tab" data-toggle="tab"
 							href="#nav-meat" role="tab" aria-controls="nav-meat"
-							aria-selected="false">육류</a> <a class="nav-item nav-link"
-							id="nav-chinese-tab" data-toggle="tab" href="#nav-chinese"
-							role="tab" aria-controls="nav-chinese" aria-selected="false">채소</a>
+							aria-selected="false">육류</a> 							
+						
+							
+							<a class="nav-item nav-link"
+							id="nav-vegetable-tab" data-toggle="tab" href="#nav-vegetable"
+							role="tab" aria-controls="nav-vegetable" aria-selected="false">채소</a>
 
-						<a class="nav-item nav-link" id="nav-japanese-tab"
-							data-toggle="tab" href="#nav-japanese" role="tab"
-							aria-controls="nav-japanese" aria-selected="false">소스</a>
+						<a class="nav-item nav-link" id="nav-sauce-tab" data-toggle="tab"
+							href="#nav-sauce" role="tab" aria-controls="nav-sauce"
+							aria-selected="false">소스</a>
 					</div>
 				</nav>
 			</div>
@@ -75,19 +86,84 @@
 					</c:forEach>
 				</div>
 			</div>
-			<nav class="blog-pagination justify-content-center d-flex">
-				<ul class="pagination">
-					<li class="page-item"><a href="#" class="page-link"
-						aria-label="Previous"> <i class="ti-angle-left"></i>
-					</a></li>
-					<li class="page-item"><a href="#" class="page-link">1</a></li>
-					<li class="page-item active"><a href="#" class="page-link">2</a>
-					</li>
-					<li class="page-item"><a href="#" class="page-link"
-						aria-label="Next"> <i class="ti-angle-right"></i>
-					</a></li>
-				</ul>
-			</nav>
+			<div class="tab-pane fade" id="nav-meat" role="tabpanel"
+				aria-labelledby="nav-meat-tab">
+				<h4>고기</h4>
+				<div class="row">
+					<c:forEach items="${list }" var="mat">
+						<div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
+							<div class="single-popular-items mb-50 text-center">
+								<div class="popular-img">
+									<img src="assets/img/gallery/popular1.png" alt="">
+									<div class="img-cap">
+										<span>Add to cart</span>
+									</div>
+									<div class="favorit-items">
+										<span class="flaticon-heart"></span>
+									</div>
+								</div>
+								<div class="popular-caption">
+									<h3>
+										<a href="product_details.html">${mat.mat_nm }</a>
+									</h3>
+								</div>
+							</div>
+						</div>
+					</c:forEach>
+				</div>
+			</div>
+			<div class="tab-pane fade" id="nav-vegetable" role="tabpanel"
+				aria-labelledby="nav-vegetable-tab">
+				<h4>채소</h4>
+				<div class="row">
+					<c:forEach items="${list }" var="mat">
+						<div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
+							<div class="single-popular-items mb-50 text-center">
+								<div class="popular-img">
+									<img src="assets/img/gallery/popular1.png" alt="">
+									<div class="img-cap">
+										<span>Add to cart</span>
+									</div>
+									<div class="favorit-items">
+										<span class="flaticon-heart"></span>
+									</div>
+								</div>
+								<div class="popular-caption">
+									<h3>
+										<a href="product_details.html">${mat.mat_nm }</a>
+									</h3>
+								</div>
+							</div>
+						</div>
+					</c:forEach>
+				</div>
+			</div>
+			<div class="tab-pane fade" id="nav-sauce" role="tabpanel"
+				aria-labelledby="nav-sauce-tab">
+				<h4>소스</h4>
+				<div class="row">
+					<c:forEach items="${list }" var="mat">
+						<div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
+							<div class="single-popular-items mb-50 text-center">
+								<div class="popular-img">
+									<img src="assets/img/gallery/popular1.png" alt="">
+									<div class="img-cap">
+										<span>Add to cart</span>
+									</div>
+									<div class="favorit-items">
+										<span class="flaticon-heart"></span>
+									</div>
+								</div>
+								<div class="popular-caption">
+									<h3>
+										<a href="product_details.html">${mat.mat_nm }</a>
+									</h3>
+								</div>
+							</div>
+						</div>
+					</c:forEach>
+				</div>
+			</div>
 		</div>
 	</div>
 </section>

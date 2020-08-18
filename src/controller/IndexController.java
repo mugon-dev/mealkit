@@ -109,6 +109,7 @@ public class IndexController extends HttpServlet {
 			List<Material> list = MaterialDao.getInstance().selectAll();
 			request.setAttribute("list", list);
 			String idx = request.getParameter("mat_idx");
+			System.out.println(idx);
 			List<Material> select = MaterialDao.getInstance().selectList(idx);
 			request.setAttribute("select", select);
 			request.getRequestDispatcher("main/mat.jsp").forward(request, response);
