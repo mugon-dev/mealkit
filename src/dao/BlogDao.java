@@ -1,7 +1,5 @@
 package dao;
-/*
- * 2020.08.05 
- */
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -239,7 +237,7 @@ public class BlogDao {
 		return flag;
 	}
 	
-	// 조회수
+	// 블로그 글 조회수
 	public boolean updateReadCount(int milNo) {
 		boolean flag=false;
 		String sql = " UPDATE RECIPE SET READ_COUNT = READ_COUNT+1 WHERE MIL_NO = ? ";
@@ -265,7 +263,7 @@ public class BlogDao {
 		return flag;
 	}
 	
-	//페이징
+	// 페이징
 	public int getBlogCount(){
 		int count = 0;
 		Connection conn = null;

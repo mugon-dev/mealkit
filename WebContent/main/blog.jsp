@@ -12,7 +12,12 @@
 	 						<c:forEach items="${list }" var="blog" > 
 								<article class="blog_item">
 									<div class="blog_item_img">
-										<img class="card-img rounded-0" src="images/${blog.image }" >
+										<c:if test="${not empty blog.image}" >
+											<img class="card-img rounded-0" src="images/${blog.image }" >
+										</c:if>
+										<c:if test="${empty blog.image}" >
+											<img class="card-img rounded-0" src="images/noImage.png" >
+										</c:if>
 									</div>
 				
 									<div class="blog_details">
@@ -28,23 +33,38 @@
 	 						</c:forEach> 
 						</form>
 						<nav class="blog-pagination justify-content-center d-flex">
+							<!-- 페이징 시작  -->
 							<ul class="pagination">
-								<li class="page-item">
-									<a href="#" class="page-link" aria-label="Previous">
-										<i class="ti-angle-left"></i>
+								<li class='page-item <c:out value="${pageM.prev == true ? '' : 'disabled' }"></c:out>'>
+									<a href="blogForm.do?pageNum=${pageM.startPage - pageM.pageSize }" class="page-link" aria-label="Previous">
+										<i class="ti-angle-left"></i> 
 									</a>
 								</li>
-								<li class="page-item">
-									<a href="#" class="page-link">1</a>
-								</li>
-								<li class="page-item active">
-									<a href="#" class="page-link">2</a>
-								</li>
-								<li class="page-item">
-									<a href="#" class="page-link" aria-label="Next">
+								<c:forEach var="i" begin="${pageM.startPage }" end="${pageM.endPage }">
+									<li class='page-item <c:out value="${pageM.currentPage == i ? 'active' : '' }"></c:out>'>
+										<a href="blogForm.do?pageNum=${i }" class="page-link" >${i }</a></li>
+								</c:forEach>
+								<li class='page-item <c:out value="${pageM.next == true ? '' : 'disabled' }"></c:out>'>
+									<a href="blogForm.do?pageNum=${pageM.endPage+1 }" class="page-link" aria-label="Next">
 										<i class="ti-angle-right"></i>
 									</a>
 								</li>
+<!-- 								<li class="page-item"> -->
+<!-- 									<a href="#" class="page-link" aria-label="Previous"> -->
+<!-- 										<i class="ti-angle-left"></i> -->
+<!-- 									</a> -->
+<!-- 								</li> -->
+<!-- 								<li class="page-item"> -->
+<!-- 									<a href="#" class="page-link">1</a> -->
+<!-- 								</li> -->
+<!-- 								<li class="page-item active"> -->
+<!-- 									<a href="#" class="page-link">2</a> -->
+<!-- 								</li> -->
+<!-- 								<li class="page-item"> -->
+<!-- 									<a href="#" class="page-link" aria-label="Next"> -->
+<!-- 										<i class="ti-angle-right"></i> -->
+<!-- 									</a> -->
+<!-- 								</li> -->
 							</ul>
 						</nav>
 					</div>
@@ -67,18 +87,18 @@
 									<a href="#" class="d-flex"><p>한식</p></a>
 								</li>
 								<li>
-									<a href="#" class="d-flex"><p>일식</p></a>
+									<a href="#" class="d-flex"><p>중식</p></a>
 								</li>
 								<li>
 									<a href="#" class="d-flex"><p>양식</p></a>
 								</li>
 								<li>
-									<a href="#" class="d-flex"><p>중식</p></a>
+									<a href="#" class="d-flex"><p>일식</p></a>
 								</li>
 							</ul>
 						</aside>
 					</div>
-				</div>
+				</div> <!-- 우측 바 메뉴 끝 -->
 			</div>
 		</div>
 	</section>
