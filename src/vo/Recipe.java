@@ -8,8 +8,8 @@ public class Recipe {
 	private String title;
 	private String content;
 	private String image;
-	private int readcount;
-	private int replycount;
+	private int read_count;
+	private int reply_count;
 	private String cook_idx;
 	private String cook_type;
 	private String mat_no1;
@@ -31,7 +31,7 @@ public class Recipe {
 	@Override
 	public String toString() {
 		return "Recipe [mil_no=" + mil_no + ", rec_idx=" + rec_idx + ", title=" + title + ", content=" + content
-				+ ", image=" + image + ", readcount=" + readcount + ", replycount=" + replycount + ", cook_idx="
+				+ ", image=" + image + ", readcount=" + read_count + ", replycount=" + reply_count + ", cook_idx="
 				+ cook_idx + ", cook_type=" + cook_type + ", mat_no1=" + mat_no1 + ", mat_qty1=" + mat_qty1
 				+ ", mat_no2=" + mat_no2 + ", mat_qty2=" + mat_qty2 + ", mat_no3=" + mat_no3 + ", mat_qty3=" + mat_qty3
 				+ ", mat_etc=" + mat_etc + ", no=" + no + ", rgst_dt=" + rgst_dt + ", plate=" + plate + ", hour=" + hour
@@ -64,17 +64,17 @@ public class Recipe {
 	public void setImage(String image) {
 		this.image = image;
 	}
-	public int getReadcount() {
-		return readcount;
+	public int getRead_count() {
+		return read_count;
 	}
-	public void setReadcount(int readcount) {
-		this.readcount = readcount;
+	public void setRead_count(int read_count) {
+		this.read_count = read_count;
 	}
-	public int getReplycount() {
-		return replycount;
+	public int getReply_count() {
+		return reply_count;
 	}
-	public void setReplycount(int replycount) {
-		this.replycount = replycount;
+	public void setReply_count(int reply_count) {
+		this.reply_count = reply_count;
 	}
 	public String getCook_idx() {
 		return cook_idx;

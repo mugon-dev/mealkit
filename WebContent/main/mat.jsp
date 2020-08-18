@@ -291,28 +291,36 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action="#" method="post" enctype="multipart/form-data">
+        <form action="mat.do" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="recipient-name" class="col-form-label">mat_no</label>
+            <input type="text" class="form-control" id="mat_no" name="mat_no">
+          </div>
+        <div class="form-group">
+            <label for="recipient-name" class="col-form-label">mat_idx</label>
+            <input type="text" class="form-control" id="mat_idx" name="mat_idx">
+          </div>
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">재료명</label>
-            <input type="text" class="form-control" id="recipient-name">
+            <input type="text" class="form-control" id="mat_nm" name="mat_nm">
           </div>
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">단위</label>
-            <input type="text" class="form-control" id="recipient-name">
+            <input type="text" class="form-control" id="mat_unit" name="mat_unit">
           </div>
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">가격</label>
-            <input type="text" class="form-control" id="recipient-name">
+            <input type="text" class="form-control" id="mat_price" name="mat_price">
           </div>
           <div class="form-group">
             <label for="message-text" class="col-form-label">사진등록</label>
             <input type=file id="filename" name="filename" class="form-control">
           </div>
-        </form>
-      </div>
-      <div class="modal-footer">
+          <div class="modal-footer">
         <button type="button" class="btn_3" data-dismiss="modal" style="padding:10px;">닫기</button>
-        <button type="button" class="btn_3" style="padding:10px;">등록</button>
+        <button type="submit" class="btn_3" style="padding:10px;">등록</button>
+      </div>
+        </form>
       </div>
     </div>
   </div>

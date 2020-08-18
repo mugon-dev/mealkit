@@ -26,48 +26,58 @@
 						<p>${recipe.content }</p>
 						<form action="cartForm.do" method="post">
 							<div class="card_area">
-								<div class="container" style="width:800px">
+								<div class="container" style="width: 800px">
 									<table class="table">
-										<tr>
-											<td align="right" width=30%>돼지고기</td>
-											<td align="center" width=40%>
-												<div class="product_count d-inline-block">
-													<span id="decrement"
-														class="product_count_item inumber-decrement"> <i
-														class="ti-minus"></i></span> <input id="mat1"
-														class="product_count_item input-number" type="text"
-														value=${recipe.mat_qty1 } min="0" max="10"> <span
-														id="increment" class="product_count_item number-increment">
-														<i class="ti-plus"></i>
-													</span>
-												</div>
-											</td>
-											<td align="left" width=30%>단위(g)</td>
-										</tr>
-										<tr>
-											<td align="right">돼지고기</td>
-											<td align="center">
-												<div class="product_count d-inline-block">
-													<span id="decrement"
-														class="product_count_item inumber-decrement"> <i
-														class="ti-minus"></i></span> <input id="mat1"
-														class="product_count_item input-number" type="text"
-														value=${recipe.mat_qty1 } min="0" max="10"> <span
-														id="increment" class="product_count_item number-increment">
-														<i class="ti-plus"></i>
-													</span>
-												</div>
-											</td>
-											<td align="left" width=100px>단위(g)</td>
-										</tr>
-										<tr>
-											<td colspan="3">
-												<div class="add_to_cart">
-													<button type="submit" value="add to cart" class="btn_3">add
-														to cart</button>
-												</div>
-											</td>
-										</tr>
+										<thead>
+											<tr>
+												<td align="right"><b>재료명</b></td>
+												<td><b>수량</b></td>
+												<td align="left"><b>단위</b></td>
+										</thead>
+										<tbody>
+											<c:forEach items="${matList }" var="material"
+												varStatus="loop">
+												<c:set var="count" value="${loop.count }" />
+												<c:choose>
+													<c:when test="${loop.count==1 }">
+														<c:set var="num" value="${recipe.mat_qty1 }" />
+													</c:when>
+													<c:when test="${loop.count==2 }">
+														<c:set var="num" value="${recipe.mat_qty2 }" />
+													</c:when>
+													<c:when test="${loop.count==3 }">
+														<c:set var="num" value="${recipe.mat_qty3 }" />
+													</c:when>
+
+												</c:choose>
+												<tr>
+													<td align="right" width=30%>${material.mat_nm }</td>
+													<td align="center" width=40%>
+														<div class="product_count d-inline-block">
+															<span id="decrement"
+																class="product_count_item inumber-decrement"> <i
+																class="ti-minus"></i></span> <input id="mat1"
+																class="product_count_item input-number" type="text"
+																value="${num }" min="0" max="10"> <span
+																id="increment"
+																class="product_count_item number-increment"> <i
+																class="ti-plus"></i>
+															</span>
+														</div>
+													</td>
+													<td align="left" width=30%>단위(g)</td>
+												</tr>
+											</c:forEach>
+
+											<tr>
+												<td colspan="3">
+													<div class="add_to_cart">
+														<button type="submit" value="add to cart" class="btn_3">add
+															to cart</button>
+													</div>
+												</td>
+											</tr>
+										</tbody>
 									</table>
 								</div>
 							</div>

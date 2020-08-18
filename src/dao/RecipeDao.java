@@ -31,8 +31,8 @@ public class RecipeDao {
 				recipe.setTitle(rs.getString("title"));
 				recipe.setContent(rs.getString("content"));
 				recipe.setImage(rs.getString("image"));
-				recipe.setReadcount(rs.getInt("readcount"));
-				recipe.setReplycount(rs.getInt("replycount"));
+				recipe.setRead_count(rs.getInt("read_count"));
+				recipe.setReply_count(rs.getInt("reply_count"));
 				recipe.setCook_idx(rs.getString("cook_idx"));
 				recipe.setCook_type(rs.getString("cook_type"));
 				recipe.setMat_no1(rs.getString("mat_no1"));
@@ -75,8 +75,8 @@ public class RecipeDao {
 				recipe.setTitle(rs.getString("title"));
 				recipe.setContent(rs.getString("content"));
 				recipe.setImage(rs.getString("image"));
-				recipe.setReadcount(rs.getInt("readcount"));
-				recipe.setReplycount(rs.getInt("replycount"));
+				recipe.setRead_count(rs.getInt("read_count"));
+				recipe.setReply_count(rs.getInt("reply_count"));
 				recipe.setCook_idx(rs.getString("cook_idx"));
 				recipe.setCook_type(rs.getString("cook_type"));
 				recipe.setMat_no1(rs.getString("mat_no1"));
