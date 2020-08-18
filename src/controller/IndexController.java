@@ -63,12 +63,14 @@ public class IndexController extends HttpServlet {
 			request.getRequestDispatcher("main/login.jsp").forward(request, response);
 		} else if (action.equals("/login.do")) { // 로그인
 			String id = request.getParameter("id");
-			String pw = request.getParameter("pw");
+			String pw = request.getParameter("pw");		
 			int n = MemberDao.getInstance().login(id, pw);
+			int no = MemberDao.getInstance().getMemberNo(id);
 			if (n == 1) {
 //    			session 생성
 				HttpSession session = request.getSession();
 				session.setAttribute("session_id", id);
+				session.setAttribute("session_no", no);
 				out.print("<script>alert('로그인성공');location.href='main.do';</script>");
 			} else if (n == 0) {
 				out.print("password error");
@@ -127,6 +129,7 @@ public class IndexController extends HttpServlet {
     	}  else if (action.equals("/logout.do")) { // 로그아웃 header의 ajax 스크립트
 			HttpSession session = request.getSession();
 			session.removeAttribute("session_id");
+			session.removeAttribute("session_no");
 			out.print("success");
 		} else if (action.equals("/myPageForm.do")) { // myPage 이동
 			request.getRequestDispatcher("main/myPage.jsp").forward(request, response);

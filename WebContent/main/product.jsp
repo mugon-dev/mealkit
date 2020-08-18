@@ -73,14 +73,26 @@
 											
 
 											<tr>
-												<td colspan="3">
-													<div class="add_to_cart">
-														<button type="submit" value="add to cart" class="btn_3">add
-															to cart</button>
-														<input type="hidden" name="count" value="${count }"/>
-														
-													</div>
-												</td>
+												<c:if test="${not empty session_no }">
+													<td colspan="3">
+														<div class="add_to_cart">
+															<button type="submit" value="add to cart" class="btn_3">add
+																to cart</button>
+															<input type="hidden" name="count" value="${count }"/>
+															<input type="hidden" name="no" value="${session_no }"/>
+															
+														</div>
+													</td>
+												</c:if>
+												<c:if test="${empty session_no }">
+													<td colspan="3">
+														<div class="add_to_cart">
+															<button type="button" id="login" value="add to cart" class="btn_3">로그인
+															</button>
+															
+														</div>
+													</td>
+												</c:if>
 											</tr>
 										</tbody>
 									</table>
@@ -223,6 +235,9 @@
 		} else {
 			alert("최소값입니다.");
 		}
+	});
+	$('#login').on('click',function(){
+		location.href="loginForm.do";
 	});
 </script>
 <%@ include file="../include/footer.jsp"%>

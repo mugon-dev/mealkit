@@ -89,6 +89,14 @@ public class OrderDao {
 			ps=conn.prepareStatement(sql);
 			ps.setInt(1, no);
 			ps.setString(2, mat_no);
+			int n=ps.executeUpdate();
+			if(n==1) {
+				flag=true;
+				System.out.println("재료 삭제 성공");
+			}else {
+				System.out.println("재료 삭제 실패");
+				
+			}
 		}catch(Exception ex) {
 			ex.printStackTrace();
 		}finally {
