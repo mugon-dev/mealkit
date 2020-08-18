@@ -72,7 +72,7 @@
 				
 				<!-- 우측 바 메뉴 시작-->
 				<div class="col-lg-4">
-					<button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn" type="submit">글쓰기</button><br>
+					<button id="btnBlogDetailWrite" class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn" type="button">글쓰기</button><br>
 					<div class="blog_right_sidebar">
 						<aside class="single_sidebar_widget post_category_widget">
 							<h4 class="widget_title">Category</h4>
@@ -103,4 +103,9 @@
 		</div>
 	</section>
 
+	<script type="text/javascript">
+		$("btnBlogDetailWrite").on('click', function(){
+			location.href = "blogDetailForm.do";
+		});
+	</script>
 <%@ include file="../include/footer.jsp"%>

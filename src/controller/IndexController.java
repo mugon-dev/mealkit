@@ -257,16 +257,6 @@ public class IndexController extends HttpServlet {
     	} else if (action.equals("/blogDetailForm.do")) {
 			request.getRequestDispatcher("main/blogDetail.jsp").forward(request, response);
 		} else if (action.equals("/blogDetail.do")) { 
-//			int milNo = Integer.parseInt(request.getParameter("mil_no"));
-//			boolean flag = BlogDao.getInstance().updateReadCount(milNo);
-//			Blog blog = BlogDao.getInstance().selectOne(milNo);
-//			List<Reply> replyList = ReplyDao.getInstance().selectReply(milNo);
-//			if(blog != null && flag == true) {
-//				request.setAttribute("replyList", replyList);
-//				request.setAttribute("blog", blog);
-//				request.getRequestDispatcher("main/blogDetail.jsp").forward(request, response);
-
-				
 			Map<String, String> recipeMap = upload(request, response);
 			
 			int matQty1 = Integer.parseInt(recipeMap.get("matQty1"));
