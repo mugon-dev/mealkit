@@ -90,7 +90,7 @@ $("#nav-meat-tab").on("click",function(){
 				aria-labelledby="nav-meat-tab">
 				<h4>고기</h4>
 				<div class="row">
-					<c:forEach items="${list }" var="mat">
+					<c:forEach items="${selectMeat }" var="mat">
 						<div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
 							<div class="single-popular-items mb-50 text-center">
 								<div class="popular-img">
@@ -116,7 +116,7 @@ $("#nav-meat-tab").on("click",function(){
 				aria-labelledby="nav-vegetable-tab">
 				<h4>채소</h4>
 				<div class="row">
-					<c:forEach items="${list }" var="mat">
+					<c:forEach items="${selectVeg }" var="mat">
 						<div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
 							<div class="single-popular-items mb-50 text-center">
 								<div class="popular-img">
@@ -142,7 +142,7 @@ $("#nav-meat-tab").on("click",function(){
 				aria-labelledby="nav-sauce-tab">
 				<h4>소스</h4>
 				<div class="row">
-					<c:forEach items="${list }" var="mat">
+					<c:forEach items="${selectSau }" var="mat">
 						<div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
 							<div class="single-popular-items mb-50 text-center">
 								<div class="popular-img">

@@ -107,11 +107,13 @@ public class IndexController extends HttpServlet {
 
 		} else if (action.equals("/matForm.do")) { // 재료 등록 modal
 			List<Material> list = MaterialDao.getInstance().selectAll();
+			List<Material> selectMeat = MaterialDao.getInstance().selectList("10");
+			List<Material> selectVeg = MaterialDao.getInstance().selectList("20");
+			List<Material> selectSau = MaterialDao.getInstance().selectList("30");
 			request.setAttribute("list", list);
-			String idx = request.getParameter("mat_idx");
-			System.out.println(idx);
-			List<Material> select = MaterialDao.getInstance().selectList(idx);
-			request.setAttribute("select", select);
+			request.setAttribute("selectMeat", selectMeat);
+			request.setAttribute("selectVeg", selectVeg);
+			request.setAttribute("selectSau", selectSau);
 			request.getRequestDispatcher("main/mat.jsp").forward(request, response);
 		} else if (action.equals("/mat.do")) { // 재료 등록 , 사진업로드, hsahmap으로 수정
 			//Map<String, String> materialMap = MaterialDao.getInstance().upload(request, response,FILE_REPO);
