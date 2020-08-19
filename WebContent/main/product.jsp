@@ -79,6 +79,7 @@
 															<button type="submit" value="add to cart" class="btn_3">add
 																to cart</button>
 															<input type="hidden" name="count" value="${count }"/>
+															<input type="hidden" name="session_id" value="${session_id }"/>
 															<input type="hidden" name="no" value="${session_no }"/>
 															
 														</div>
@@ -87,7 +88,7 @@
 												<c:if test="${empty session_no }">
 													<td colspan="3">
 														<div class="add_to_cart">
-															<button type="button" id="login" value="add to cart" class="btn_3">로그인
+															<button type="button" id="login" value="${recipe.mil_no }" class="btn_3">로그인
 															</button>
 															
 														</div>
@@ -98,42 +99,7 @@
 									</table>
 								</div>
 							</div>
-							<%--     <div class="product_count_area text-center">
-	                            <p>메인 재료 || ${recipe.mat_no1}<!-- 메인재료 이름 --></p>
-	                            <div class="product_count d-inline-block">
-	                                <span id="decrement" class="product_count_item inumber-decrement"> <i class="ti-minus"></i></span>
-	                                <input id="mat1" class="product_count_item input-number" type="text" value=${recipe.mat_qty1 } min="0" max="10">
-	                                <span id="increment" class="product_count_item number-increment"> <i class="ti-plus"></i></span>
-	                            </div>
-	                        </div>
-	                        <c:if test="${null ne recipe.mat_no2 }">
-		                        <div class="product_count_area text-center">
-		                            <p>서브재료 || ${recipe.mat_no2}<!-- 메인재료 이름 --></p>
-		                            <div class="product_count d-inline-block">
-		                                <span id="decrement2" class="product_count_item inumber-decrement"> <i class="ti-minus"></i></span>
-		                                <input id="mat2" class="product_count_item input-number" type="text" value=${recipe.mat_qty2 } min="0" max="10">
-		                                
-		                                <span id="increment2" class="product_count_item"> <i class="ti-plus"></i></span>
-		                            </div>
-		                        </div>
-	                        </c:if>
-	                        <c:if test="${null ne recipe.mat_no3 }">
-		                        <div class="product_count_area text-center">
-		                            <p>메인 재료 || ${recipe.mat_no3}<!-- 메인재료 이름 --></p>
-		                            <div class="product_count d-inline-block">
-		                                <span id="decrement3" class="product_count_item inumber-decrement"> <i class="ti-minus"></i></span>
-		                                <input id="mat3" class="product_count_item input-number" type="text" value=${recipe.mat_qty3 } min="0" max="10">
-		                                
-		                                <span id="increment3" class="product_count_item"> <i class="ti-plus"></i></span>
-		                            </div>
-		                        </div>
-	                        </c:if>
-	                     
-	                        
-	                    	<div class="add_to_cart">
-	                       		<button type="submit" value="add to cart" class="btn_3">add to cart</button>
-	                    	</div>
-	                    </div> --%>
+							
 						</form>
 					</div>
 				</div>
@@ -237,7 +203,8 @@
 		}
 	});
 	$('#login').on('click',function(){
-		location.href="loginForm.do";
+		var value=$('#login').val();
+		location.href="loginForm.do?no="+value;
 	});
 </script>
 <%@ include file="../include/footer.jsp"%>

@@ -60,10 +60,13 @@ public class IndexController extends HttpServlet {
 		if (action.equals("/main.do")) {
 			request.getRequestDispatcher("main/home.jsp").forward(request, response);
 		} else if (action.equals("/loginForm.do")) {
+			String mil_no= request.getParameter("no");
+			request.setAttribute("mil_no", mil_no);
 			request.getRequestDispatcher("main/login.jsp").forward(request, response);
 		} else if (action.equals("/login.do")) { // 로그인
 			String id = request.getParameter("id");
-			String pw = request.getParameter("pw");		
+			String pw = request.getParameter("pw");	
+			String mil_no = request.getParameter("mil_no");
 			int n = MemberDao.getInstance().login(id, pw);
 			int no = MemberDao.getInstance().getMemberNo(id);
 			if (n == 1) {
@@ -71,7 +74,15 @@ public class IndexController extends HttpServlet {
 				HttpSession session = request.getSession();
 				session.setAttribute("session_id", id);
 				session.setAttribute("session_no", no);
-				out.print("<script>alert('로그인성공');location.href='main.do';</script>");
+				System.out.println(mil_no);
+				System.out.println("sdlkjsldf");
+				
+				if(mil_no!="") {
+					out.print("<script>alert('로그인성공');location.href='product.do?no="+mil_no+"';</script>");
+				}else {
+					out.print("<script>alert('로그인성공');location.href='main.do';</script>");
+				}
+				
 			} else if (n == 0) {
 				out.print("password error");
 			} else {
@@ -228,6 +239,8 @@ public class IndexController extends HttpServlet {
     		request.getRequestDispatcher("main/product.jsp").forward(request, response);
     	} else if(action.equals("/cartForm.do")) {
     		int test=Integer.parseInt(request.getParameter("count"));
+    		String id=request.getParameter("session_id");
+    		int no=MemberDao.getInstance().getMemberNo(id);
     		int[] mat=new int[test];
     		for(int i=0;i<test;i++) {
     			int temp=i+1;
@@ -240,6 +253,12 @@ public class IndexController extends HttpServlet {
     		request.getRequestDispatcher("main/cart.jsp").forward(request, response);
     	} else if(action.equals("/blogForm.do")) {
     		String strPage = request.getParameter("pageNum");
+    		String idx = request.getParameter("idx");
+    		String no = request.getParameter("no");
+    		if(idx == null || no == null) { 
+    			idx = "5";
+    			no = "";
+    		} 
     		
     		System.out.println("================== blogForm.do ==================");
     		System.out.println("------ strPage: " + strPage);
@@ -249,27 +268,19 @@ public class IndexController extends HttpServlet {
 				pageNum = Integer.parseInt(strPage);
 			}
 			BlogDao blogDao = BlogDao.getInstance();
-			int totalCount = blogDao.getBlogCount();
+			int totalCount = blogDao.getBlogCount(idx, no);
 			PageMaker pageM = new PageMaker(pageNum, totalCount);
-			List<Blog> list = blogDao.selectAll(pageM.getStart(), pageM.getEnd());
+			List<Blog> list = blogDao.selectAll(pageM.getStart(), pageM.getEnd(), idx, no);
 			request.setAttribute("pageM", pageM);
-			request.setAttribute("list", list);
+			request.setAttribute("list", list); 
     		System.out.println("------ list: " + list);
     		
     		request.getRequestDispatcher("main/blog.jsp").forward(request, response);
-    	} else if (action.equals("/blogDetailForm.do")) {
+    	} else if(action.equals("/blogDetailForm.do")) {
+    		System.out.println("================== blogDetailForm.do ==================");
 			request.getRequestDispatcher("main/blogDetail.jsp").forward(request, response);
-		} else if (action.equals("/blogDetail.do")) { 
-//			int milNo = Integer.parseInt(request.getParameter("mil_no"));
-//			boolean flag = BlogDao.getInstance().updateReadCount(milNo);
-//			Blog blog = BlogDao.getInstance().selectOne(milNo);
-//			List<Reply> replyList = ReplyDao.getInstance().selectReply(milNo);
-//			if(blog != null && flag == true) {
-//				request.setAttribute("replyList", replyList);
-//				request.setAttribute("blog", blog);
-//				request.getRequestDispatcher("main/blogDetail.jsp").forward(request, response);
-
-				
+		} else if(action.equals("/blogDetail.do")) { 
+    		System.out.println("================== blogDetail.do ==================");
 			Map<String, String> recipeMap = upload(request, response);
 			
 			int matQty1 = Integer.parseInt(recipeMap.get("matQty1"));
@@ -299,8 +310,12 @@ public class IndexController extends HttpServlet {
 			} else {
 				out.print("<script>alert('새 글 추가 실패했습니다.'); location.href='blogForm.do';</script>");
 			}
-
     	}
+	}
+
+	private int nvl(int parseInt, int i) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	// 파일 업로드

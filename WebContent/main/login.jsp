@@ -36,6 +36,7 @@
                                 <h3>Welcome Back ! <br>
                                     Please Sign in now</h3>
                                 <form class="row contact_form" action="login.do" method="post" novalidate="novalidate">
+                                	<input type="hidden" name="mil_no" value="${mil_no }"/>
                                     <div class="col-md-12 form-group p_star">
                                         <input type="text" class="form-control" id="id" name="id" 
                                             placeholder="Email">
