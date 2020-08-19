@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,14 +22,14 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import dao.BlogDao;
 import dao.MaterialDao;
 import dao.MemberDao;
+import dao.OrderDao;
 import dao.RecipeDao;
-import dao.ReplyDao;
 import vo.Blog;
 import vo.Material;
 import vo.Member;
+import vo.Order;
 import vo.PageMaker;
 import vo.Recipe;
-import vo.Reply;
 
 /**
  * Servlet implementation class IndexController
@@ -238,6 +237,8 @@ public class IndexController extends HttpServlet {
     		request.setAttribute("recipe", recipe);
     		request.getRequestDispatcher("main/product.jsp").forward(request, response);
     	} else if(action.equals("/cartForm.do")) {
+    		List<Order> listOrder=new ArrayList<Order>();
+    		Order order=null;
     		int test=Integer.parseInt(request.getParameter("count"));
     		String id=request.getParameter("session_id");
     		int no=MemberDao.getInstance().getMemberNo(id);
@@ -246,10 +247,25 @@ public class IndexController extends HttpServlet {
     			int temp=i+1;
     			Material material=MaterialDao.getInstance().selectOne(request.getParameter("material"+temp));
     			mat[i]=Integer.parseInt(request.getParameter("mat"+temp));
-    			System.out.println(mat[i]);
-    			System.out.println(material);
+    			order=new Order(no,material.getMat_no(),mat[i],material.getMat_unit());
+    			boolean b=OrderDao.getInstance().insert(order);
+    			if(b==true) {
+    				System.out.println("카트 입력 성공");
+    			}else {
+    				System.out.println("카트 입력 실패");
+    			}
+//    			
+//    			System.out.println(mat[i]);
+//    			System.out.println(material);
     		}
-    		System.out.println(test);
+    		listOrder=OrderDao.getInstance().selectOrder(no);
+    		request.setAttribute("listOrder", listOrder);
+    		
+    		//test orderList
+    		for(int i=0; i<listOrder.size();i++) {
+    			System.out.println(listOrder.get(i).toString());
+    		}
+    		
     		request.getRequestDispatcher("main/cart.jsp").forward(request, response);
     	} else if(action.equals("/blogForm.do")) {
     		String strPage = request.getParameter("pageNum");

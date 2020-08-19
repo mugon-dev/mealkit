@@ -18,7 +18,7 @@ public class OrderDao {
 		boolean flag=false;
 		Connection conn=null;
 		PreparedStatement ps=null;
-		String sql="insert into ord('no','mat_no','mat_qty','mat_unt') values(?,?,?,?)";
+		String sql="insert into ord(no,mat_no,mat_qty,mat_unt) values(?,?,?,?)";
 		try {
 			conn=DBConn.getConn();
 			ps=conn.prepareStatement(sql);
@@ -60,6 +60,7 @@ public class OrderDao {
 			rs=ps.executeQuery();
 			while(rs.next()) {
 				order=new Order();
+				order.setOrder_no(rs.getInt("oder_no"));
 				order.setNo(rs.getInt("no"));
 				order.setMat_no(rs.getString("mat_no"));
 				order.setMat_qty(rs.getInt("mat_qty"));

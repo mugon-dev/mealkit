@@ -36,6 +36,7 @@
 							</div>
 							<div class="input-field">
 								<div class="input-select">
+								<!-- 여기서 재료 리스트 받아서 forEach로 입력 -->
 									<select name="type2" data-trigger=""
 										name="choices-single-defaul">
 										<option value="pork">돼지</option>
