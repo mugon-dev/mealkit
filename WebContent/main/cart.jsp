@@ -31,8 +31,13 @@
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach items="${oderList }" var="order" varStatus="loop">
-								<c:set var="count" value="${loop.count }"/>	
+							<c:set var="sum" value="0"/>
+							<c:forEach items="${listOrder }" var="order" varStatus="loop">
+								<c:set var="count" value="${loop.count }"/>
+								<c:set var="price" value="${order.price }"/>
+								<c:set var="qty" value="${order.mat_qty }"/>
+								<c:set var="total" value="${price * qty}"/>	
+								<c:set var="sum" value="${sum + total }"/>
 								<tr>
 									<td>
 										<div class="media">
@@ -40,52 +45,27 @@
 												<img src="assets/img/gallery/card1.png" alt="" />
 											</div>
 											<div class="media-body">
-												<p>Minimalistic shop for multipurpose use</p>
+												<p>${order.mat_nm }</p>
 											</div>
 										</div>
 									</td>
 									<td>
-										<h5>$360.00</h5>
+										<h5 id="price${count }">${order.price }</h5>
 									</td>
 									<td>
 										<div class="product_count">
 											<span class="input-number-decrement"> <i
-												class="ti-minus"></i></span> <input class="input-number" type="text"
-												value="1" min="0" max="10"> <span
-												class="input-number-increment"> <i class="ti-plus"></i></span>
+												class="ti-minus" id="decrement${count }"></i></span> <input class="input-number" type="text"
+												id="mat${count }" value="${order.mat_qty }" min="0" max="10"> <span
+												class="input-number-increment"> <i class="ti-plus" id="increment${count }"></i></span>
 										</div>
 									</td>
 									<td>
-										<h5>$720.00</h5>
+										<h5 id="total${count }">${total }</h5>
 									</td>
 								</tr>
 							</c:forEach>
-							<tr>
-								<td>
-									<div class="media">
-										<div class="d-flex">
-											<img src="assets/img/gallery/card2.png" alt="" />
-										</div>
-										<div class="media-body">
-											<p>Minimalistic shop for multipurpose use</p>
-										</div>
-									</div>
-								</td>
-								<td>
-									<h5>$360.00</h5>
-								</td>
-								<td>
-									<div class="product_count">
-										<span class="input-number-decrement"> <i
-											class="ti-minus"></i></span> <input class="input-number" type="text"
-											value="1" min="0" max="10"> <span
-											class="input-number-increment"> <i class="ti-plus"></i></span>
-									</div>
-								</td>
-								<td>
-									<h5>$720.00</h5>
-								</td>
-							</tr>
+							
 							<tr class="bottom_button">
 								<td><a class="btn_1" href="#">Update Cart</a></td>
 								<td></td>
@@ -103,7 +83,7 @@
 									<h5>Subtotal</h5>
 								</td>
 								<td>
-									<h5>$2160.00</h5>
+									<h5 id="sum">${sum }</h5>
 								</td>
 							</tr>
 							<tr class="shipping_area">
@@ -159,6 +139,48 @@
 	</section>
 	<!--================End Cart Area =================-->
 </main>
->
+<script type="text/javascript">
+	for(let i=1;i<10;i++){
+		$('#increment'+i).on('click', function() {
+			var value = $('#mat'+i).val();
+			var price = $('#price'+i).html();
+			var total = $('#total'+i).html();
+			var sum = $('#sum').html();
+			var min = 0;
+			var max = 10;
+			parseInt(value);
+			value++;
+			if (value <= max) {
+				$('#mat'+i).val(value);
+				total=parseInt(total)+parseInt(price);
+				sum=parseInt(sum)+parseInt(price);
+				$('#total'+i).html(total);
+				$('#sum').html(sum);
+			} else {
+				alert("최대수량 초과");
+			}
+	
+		});
+		$('#decrement'+i).on('click', function() {
+			var value = $('#mat'+i).val();
+			var price = $('#price'+i).html();
+			var total = $('#total'+i).html();
+			var sum = $('#sum').html();
+			var min = 0;
+			var max = 10;
+			parseInt(value);
+			value--;
+			if (value >= min) {
+				$('#mat'+i).val(value);
+				total=parseInt(total)-parseInt(price);
+				sum=parseInt(sum)-parseInt(price);
+				$('#total'+i).html(total);
+				$('#sum').html(sum);
+			} else {
+				alert("최소값입니다.");
+			}
+		});
+	}
+</script>
 
 <%@ include file="../include/footer.jsp"%>

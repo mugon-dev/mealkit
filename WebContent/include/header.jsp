@@ -123,8 +123,15 @@ cursor: pointer !important;
 										</c:otherwise>
 									</c:choose></li>
 								
-								<li><a href="cart.html"><span
+								<c:if test="${empty session_id }">
+								
+								<li><a href="loginForm.do"><span
 										class="flaticon-shopping-cart"></span></a></li>
+								</c:if>
+								<c:if test="${not empty session_id }">
+								<li><a href="cartForm.do?id=${session_id }"><span
+										class="flaticon-shopping-cart"></span></a></li>
+								</c:if>
 							</ul>
 						</div>
 					</div>

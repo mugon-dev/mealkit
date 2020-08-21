@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import vo.Order;
+import vo.OrderPrice;
 
 public class OrderDao {
 	private OrderDao() {};
@@ -47,27 +48,29 @@ public class OrderDao {
 		
 		return flag;
 	}
-	public List<Order> selectOrder(int no){
-		List<Order> list=new ArrayList<Order>();
-		Order order=null;
+	public List<OrderPrice> selectOrder(int no){
+		List<OrderPrice> list=new ArrayList<OrderPrice>();
+		OrderPrice ord_p=null;
 		Connection conn=null;
 		PreparedStatement ps=null;
 		ResultSet rs=null;
-		String sql="select * from ord where no=?";
+		String sql="select * from ord,mat where ord.mat_no=mat.mat_no and no=?";
 		try {
 			conn=DBConn.getConn();
 			ps=conn.prepareStatement(sql);
 			ps.setInt(1, no);
 			rs=ps.executeQuery();
 			while(rs.next()) {
-				order=new Order();
-				order.setOrder_no(rs.getInt("oder_no"));
-				order.setNo(rs.getInt("no"));
-				order.setMat_no(rs.getInt("mat_no"));
-				order.setMat_nm(rs.getString("mat_nm"));
-				order.setMat_qty(rs.getInt("mat_qty"));
-				order.setMat_unt(rs.getInt("mat_unt"));
-				list.add(order);
+				ord_p=new OrderPrice();
+				ord_p.setOrder_no(rs.getInt("ord_no"));
+				ord_p.setNo(rs.getInt("no"));
+				ord_p.setMat_no(rs.getInt("mat_no"));
+				ord_p.setMat_nm(rs.getString("mat_nm"));
+				ord_p.setMat_qty(rs.getInt("mat_qty"));
+				ord_p.setMat_unt(rs.getInt("mat_unt"));
+				ord_p.setPrice(rs.getInt("mat_price"));
+				//가격
+				list.add(ord_p);
 			}
 			
 			

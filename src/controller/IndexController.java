@@ -28,6 +28,7 @@ import vo.Blog;
 import vo.Material;
 import vo.Member;
 import vo.Order;
+import vo.OrderPrice;
 import vo.PageMaker;
 import vo.Recipe;
 
@@ -236,8 +237,8 @@ public class IndexController extends HttpServlet {
     		request.setAttribute("matList", matList);
     		request.setAttribute("recipe", recipe);
     		request.getRequestDispatcher("main/product.jsp").forward(request, response);
-    	} else if(action.equals("/cartForm.do")) {
-    		List<Order> listOrder=new ArrayList<Order>();
+    	} else if(action.equals("/cart.do")) {
+    		List<OrderPrice> listOrder=new ArrayList<OrderPrice>();
     		Order order=null;
     		int count=Integer.parseInt(request.getParameter("count"));
     		String id=request.getParameter("session_id");
@@ -258,16 +259,17 @@ public class IndexController extends HttpServlet {
 //    			System.out.println(mat[i]);
 //    			System.out.println(material);
     		}
+    		out.print("<script>alert('장바구니 입력 성공. 장바구니로 이동합니다.'); location.href='cartForm.do?id="+id+"';</script>");
+    	}else if(action.equals("/cartForm.do")) {
+    		List<OrderPrice> listOrder=new ArrayList<OrderPrice>();
+    		String id=request.getParameter("id");
+    		int no=MemberDao.getInstance().getMemberNo(id);
     		listOrder=OrderDao.getInstance().selectOrder(no);
-    		request.setAttribute("listOrder", listOrder);
-    		
-    		//test orderList
-    		for(int i=0; i<listOrder.size();i++) {
-    			System.out.println(listOrder.get(i).toString());
-    		}
-    		
+    		request.setAttribute("listOrder", listOrder);   		
     		request.getRequestDispatcher("main/cart.jsp").forward(request, response);
-    	} else if(action.equals("/blogForm.do")) {
+    	}
+    	
+    	else if(action.equals("/blogForm.do")) {
     		String strPage = request.getParameter("pageNum");
     		String idx = request.getParameter("idx");
     		String no = request.getParameter("no");

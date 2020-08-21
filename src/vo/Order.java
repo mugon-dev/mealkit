@@ -26,6 +26,11 @@ public class Order {
 	public int getMat_no() {
 		return mat_no;
 	}
+	@Override
+	public String toString() {
+		return "Order [order_no=" + order_no + ", no=" + no + ", mat_no=" + mat_no + ", mat_nm=" + mat_nm + ", mat_qty="
+				+ mat_qty + ", mat_unt=" + mat_unt + ", rgst_dt=" + rgst_dt + "]";
+	}
 	public void setMat_no(int mat_no) {
 		this.mat_no = mat_no;
 	}

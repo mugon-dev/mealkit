@@ -141,6 +141,29 @@ public class MaterialDao {
 		}
 		return flag;
 	}
+	public int getPrice(int mat_no){
+		int price = 0;
+		Connection conn=null;
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		String sql="select mat_price from mat where mat_no=?";
+		try {
+			conn=DBConn.getConn();
+			ps=conn.prepareStatement(sql);
+			ps.setInt(1, mat_no);
+			rs=ps.executeQuery();
+			while(rs.next()) {
+				price=rs.getInt("mat_price");
+				
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBConn.close(conn, ps, rs);
+		}
+		
+		return price;
+	}
 	//업데이트 idx로 검색 가격,단위,사진만 가능
 	public boolean update(Material material) {
 		boolean flag = false;
