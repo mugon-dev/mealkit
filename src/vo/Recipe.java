@@ -12,11 +12,11 @@ public class Recipe {
 	private int reply_count;
 	private String cook_idx;
 	private String cook_type;
-	private String mat_no1;
+	private int mat_no1;
 	private int mat_qty1;
-	private String mat_no2;
+	private int mat_no2;
 	private int mat_qty2;
-	private String mat_no3;
+	private int mat_no3;
 	private int mat_qty3;
 	private String mat_etc;
 	private int no;
@@ -88,10 +88,10 @@ public class Recipe {
 	public void setCook_type(String cook_type) {
 		this.cook_type = cook_type;
 	}
-	public String getMat_no1() {
+	public int getMat_no1() {
 		return mat_no1;
 	}
-	public void setMat_no1(String mat_no1) {
+	public void setMat_no1(int mat_no1) {
 		this.mat_no1 = mat_no1;
 	}
 	public int getMat_qty1() {
@@ -100,10 +100,10 @@ public class Recipe {
 	public void setMat_qty1(int mat_qty1) {
 		this.mat_qty1 = mat_qty1;
 	}
-	public String getMat_no2() {
+	public int getMat_no2() {
 		return mat_no2;
 	}
-	public void setMat_no2(String mat_no2) {
+	public void setMat_no2(int mat_no2) {
 		this.mat_no2 = mat_no2;
 	}
 	public int getMat_qty2() {
@@ -112,10 +112,10 @@ public class Recipe {
 	public void setMat_qty2(int mat_qty2) {
 		this.mat_qty2 = mat_qty2;
 	}
-	public String getMat_no3() {
+	public int getMat_no3() {
 		return mat_no3;
 	}
-	public void setMat_no3(String mat_no3) {
+	public void setMat_no3(int mat_no3) {
 		this.mat_no3 = mat_no3;
 	}
 	public int getMat_qty3() {

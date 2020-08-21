@@ -3,7 +3,7 @@ package vo;
 import java.util.Date;
 
 public class Material {
-	private String mat_no;
+	private int mat_no;
 	private String mat_idx;
 	private String mat_nm;
 	private int mat_price;
@@ -13,7 +13,7 @@ public class Material {
 	public Material() {
 		// TODO Auto-generated constructor stub
 	}
-	public Material(String mat_no, String mat_idx, String mat_nm, int mat_price, int mat_unit, String mat_image
+	public Material(int mat_no, String mat_idx, String mat_nm, int mat_price, int mat_unit, String mat_image
 			) {
 		super();
 		this.mat_no = mat_no;
@@ -23,7 +23,7 @@ public class Material {
 		this.mat_unit = mat_unit;
 		this.mat_image = mat_image;		
 	}
-	public Material(String mat_no, String mat_idx, String mat_nm, int mat_price, int mat_unit, String mat_image,
+	public Material(int mat_no, String mat_idx, String mat_nm, int mat_price, int mat_unit, String mat_image,
 			Date rgst_dt) {
 		super();
 		this.mat_no = mat_no;
@@ -34,10 +34,10 @@ public class Material {
 		this.mat_image = mat_image;
 		this.rgst_dt = rgst_dt;
 	}
-	public String getMat_no() {
+	public int getMat_no() {
 		return mat_no;
 	}
-	public void setMat_no(String mat_no) {
+	public void setMat_no(int mat_no) {
 		this.mat_no = mat_no;
 	}
 	public String getMat_idx() {

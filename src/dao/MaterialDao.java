@@ -27,7 +27,7 @@ public class MaterialDao {
 			rs=ps.executeQuery();
 			while(rs.next()) {
 				Material material=new Material();
-				material.setMat_no(rs.getString("mat_no"));
+				material.setMat_no(rs.getInt("mat_no"));
 				material.setMat_idx(rs.getString("mat_idx"));
 				material.setMat_nm(rs.getString("mat_nm"));
 				material.setMat_price(rs.getInt("mat_price"));
@@ -59,7 +59,7 @@ public class MaterialDao {
 			rs=ps.executeQuery();
 			while(rs.next()) {
 				Material material=new Material();
-				material.setMat_no(rs.getString("mat_no"));
+				material.setMat_no(rs.getInt("mat_no"));
 				material.setMat_idx(rs.getString("mat_idx"));
 				material.setMat_nm(rs.getString("mat_nm"));
 				material.setMat_price(rs.getInt("mat_price"));
@@ -75,20 +75,20 @@ public class MaterialDao {
 		}
 		return list;
 	}
-	public Material selectOne(String idx){
+	public Material selectOne(int mat_no){
 		Material material=new Material();
 		Connection conn=null;
 		PreparedStatement ps=null;
 		ResultSet rs=null;
-		String sql="select * from mat where mat_idx=?";
+		String sql="select * from mat where mat_no=?";
 		try {
 			conn=DBConn.getConn();
 			ps=conn.prepareStatement(sql);
-			ps.setString(1, idx);
+			ps.setInt(1, mat_no);
 			rs=ps.executeQuery();
 			while(rs.next()) {
 				material=new Material();
-				material.setMat_no(rs.getString("mat_no"));
+				material.setMat_no(rs.getInt("mat_no"));
 				material.setMat_idx(rs.getString("mat_idx"));
 				material.setMat_nm(rs.getString("mat_nm"));
 				material.setMat_price(rs.getInt("mat_price"));
@@ -115,9 +115,9 @@ public class MaterialDao {
 		try {
 			conn=DBConn.getConn();
 			ps=conn.prepareStatement(sql);
-			ps.setNString(1, material.getMat_no());
-			ps.setNString(2, material.getMat_idx());
-			ps.setNString(3, material.getMat_nm());
+			ps.setInt(1, material.getMat_no());
+			ps.setString(2, material.getMat_idx());
+			ps.setString(3, material.getMat_nm());
 			ps.setInt(4, material.getMat_price());
 			ps.setInt(5, material.getMat_unit());
 			ps.setNString(6, material.getMat_image());

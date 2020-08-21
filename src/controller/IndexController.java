@@ -129,7 +129,7 @@ public class IndexController extends HttpServlet {
 			//Map<String, String> materialMap = MaterialDao.getInstance().upload(request, response,FILE_REPO);
 			Map<String, String> materialMap = upload(request, response);
 
-			String mat_no = materialMap.get("mat_no");
+			int mat_no = Integer.parseInt(materialMap.get("mat_no"));
 			String mat_idx = materialMap.get("mat_idx");
 			String mat_nm = materialMap.get("mat_nm");
 			int mat_price = Integer.parseInt(materialMap.get("mat_price"));
@@ -181,7 +181,7 @@ public class IndexController extends HttpServlet {
 			//Map<String, String> materialMap = MaterialDao.getInstance().upload(request, response,FILE_REPO);
 			Map<String, String> materialMap = upload(request, response);
 
-			String mat_no = materialMap.get("mat_no");
+			int mat_no = Integer.parseInt(materialMap.get("mat_no"));
 			String mat_idx = materialMap.get("mat_idx");
 			String mat_nm = materialMap.get("mat_nm");
 			int mat_price = Integer.parseInt(materialMap.get("mat_price"));
@@ -221,11 +221,11 @@ public class IndexController extends HttpServlet {
     		
     		Material mat=MaterialDao.getInstance().selectOne(recipe.getMat_no1());
     		matList.add(mat);
-    		if(recipe.getMat_no2()!=null) {
+    		if(recipe.getMat_no2()!=0) {
     			mat=MaterialDao.getInstance().selectOne(recipe.getMat_no2());
         		matList.add(mat);
     		}
-    		if(recipe.getMat_no3()!=null) {
+    		if(recipe.getMat_no3()!=0) {
     			mat=MaterialDao.getInstance().selectOne(recipe.getMat_no3());
         		matList.add(mat);
     		}
@@ -239,15 +239,15 @@ public class IndexController extends HttpServlet {
     	} else if(action.equals("/cartForm.do")) {
     		List<Order> listOrder=new ArrayList<Order>();
     		Order order=null;
-    		int test=Integer.parseInt(request.getParameter("count"));
+    		int count=Integer.parseInt(request.getParameter("count"));
     		String id=request.getParameter("session_id");
     		int no=MemberDao.getInstance().getMemberNo(id);
-    		int[] mat=new int[test];
-    		for(int i=0;i<test;i++) {
+    		int[] mat=new int[count];
+    		for(int i=0;i<count;i++) {
     			int temp=i+1;
-    			Material material=MaterialDao.getInstance().selectOne(request.getParameter("material"+temp));
+    			Material material=MaterialDao.getInstance().selectOne(Integer.parseInt(request.getParameter("material"+temp)));
     			mat[i]=Integer.parseInt(request.getParameter("mat"+temp));
-    			order=new Order(no,material.getMat_no(),mat[i],material.getMat_unit());
+    			order=new Order(no,material.getMat_no(),material.getMat_nm(),mat[i],material.getMat_unit());
     			boolean b=OrderDao.getInstance().insert(order);
     			if(b==true) {
     				System.out.println("카트 입력 성공");

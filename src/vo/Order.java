@@ -5,10 +5,12 @@ import java.util.Date;
 public class Order {
 	private int order_no;
 	private int no;
-	private String mat_no;
+	private int mat_no;
+	private String mat_nm;
 	private int mat_qty;
 	private int mat_unt;
 	private Date rgst_dt;
+
 	public int getOrder_no() {
 		return order_no;
 	}
@@ -21,11 +23,18 @@ public class Order {
 	public void setNo(int no) {
 		this.no = no;
 	}
-	public String getMat_no() {
+	public int getMat_no() {
 		return mat_no;
 	}
-	public void setMat_no(String mat_no) {
+	public void setMat_no(int mat_no) {
 		this.mat_no = mat_no;
+	}
+	
+	public String getMat_nm() {
+		return mat_nm;
+	}
+	public void setMat_nm(String mat_nm) {
+		this.mat_nm = mat_nm;
 	}
 	public int getMat_qty() {
 		return mat_qty;
@@ -45,29 +54,20 @@ public class Order {
 	public void setRgst_dt(Date rgst_dt) {
 		this.rgst_dt = rgst_dt;
 	}
-	public Order(int order_no, int no, String mat_no, int mat_qty, int mat_unt) {
-		super();
-		this.order_no = order_no;
-		this.no = no;
-		this.mat_no = mat_no;
-		this.mat_qty = mat_qty;
-		this.mat_unt = mat_unt;
-	}
-	public Order(int no, String mat_no, int mat_qty, int mat_unt) {
-		super();
-		this.no = no;
-		this.mat_no = mat_no;
-		this.mat_qty = mat_qty;
-		this.mat_unt = mat_unt;
-	}
+	
 	public Order() {
 		super();
 	}
-	@Override
-	public String toString() {
-		return "Order [order_no=" + order_no + ", no=" + no + ", mat_no=" + mat_no + ", mat_qty=" + mat_qty
-				+ ", mat_unt=" + mat_unt + ", rgst_dt=" + rgst_dt + "]";
+	public Order(int no, int mat_no, String mat_nm, int mat_qty, int mat_unt) {
+		super();
+		this.no = no;
+		this.mat_no = mat_no;
+		this.mat_nm = mat_nm;
+		this.mat_qty = mat_qty;
+		this.mat_unt = mat_unt;
 	}
+	
+	
 	
 	
 }

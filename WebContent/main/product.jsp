@@ -156,54 +156,7 @@
 			}
 		});
 	}
-/* 	$('#increment2').on('click', function() {
-		var value = $('#mat2').val();
-		var min = 0;
-		var max = 10;
-		parseInt(value);
-		value++;
-		if (value <= max) {
-			$('#mat2').val(value);
-		} else {
-			alert("최대수량 초과");
-		}
-	});
-	$('#decrement2').on('click', function() {
-		var value = $('#mat2').val();
-		var min = 0;
-		var max = 10;
-		parseInt(value);
-		value--;
-		if (value >= min) {
-			$('#mat2').val(value);
-		} else {
-			alert("최소값입니다.");
-		}
-	});
-	$('#increment3').on('click', function() {
-		var value = $('#mat3').val();
-		var min = 0;
-		var max = 10;
-		parseInt(value);
-		value++;
-		if (value <= max) {
-			$('#mat3').val(value);
-		} else {
-			alert("최대수량 초과");
-		}
-	});
-	$('#decrement3').on('click', function() {
-		var value = $('#mat3').val();
-		var min = 0;
-		var max = 10;
-		parseInt(value);
-		value--;
-		if (value >= min) {
-			$('#mat3').val(value);
-		} else {
-			alert("최소값입니다.");
-		}
-	}); */
+
 	$('#login').on('click',function(){
 		var value=$('#login').val();
 		location.href="loginForm.do?no="+value;
