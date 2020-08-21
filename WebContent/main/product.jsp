@@ -129,32 +129,34 @@
 	<!-- subscribe part end -->
 </main>
 <script type="text/javascript">
-	$('#increment1').on('click', function() {
-		var value = $('#mat1').val();
-		var min = 0;
-		var max = 10;
-		parseInt(value);
-		value++;
-		if (value <= max) {
-			$('#mat1').val(value);
-		} else {
-			alert("최대수량 초과");
-		}
-
-	});
-	$('#decrement1').on('click', function() {
-		var value = $('#mat1').val();
-		var min = 0;
-		var max = 10;
-		parseInt(value);
-		value--;
-		if (value >= min) {
-			$('#mat1').val(value);
-		} else {
-			alert("최소값입니다.");
-		}
-	});
-	$('#increment2').on('click', function() {
+	for(let i=1;i<4;i++){
+		$('#increment'+i).on('click', function() {
+			var value = $('#mat'+i).val();
+			var min = 0;
+			var max = 10;
+			parseInt(value);
+			value++;
+			if (value <= max) {
+				$('#mat'+i).val(value);
+			} else {
+				alert("최대수량 초과");
+			}
+	
+		});
+		$('#decrement'+i).on('click', function() {
+			var value = $('#mat'+i).val();
+			var min = 0;
+			var max = 10;
+			parseInt(value);
+			value--;
+			if (value >= min) {
+				$('#mat'+i).val(value);
+			} else {
+				alert("최소값입니다.");
+			}
+		});
+	}
+/* 	$('#increment2').on('click', function() {
 		var value = $('#mat2').val();
 		var min = 0;
 		var max = 10;
@@ -201,7 +203,7 @@
 		} else {
 			alert("최소값입니다.");
 		}
-	});
+	}); */
 	$('#login').on('click',function(){
 		var value=$('#login').val();
 		location.href="loginForm.do?no="+value;
