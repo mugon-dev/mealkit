@@ -58,6 +58,9 @@ public class IndexController extends HttpServlet {
 		String contextPath = request.getContextPath();
 		String action = requestURI.substring(contextPath.length());
 		if (action.equals("/main.do")) {
+			List<Material> list=new ArrayList<Material>();
+			list=MaterialDao.getInstance().selectMain();
+			request.setAttribute("list", list);
 			request.getRequestDispatcher("main/home.jsp").forward(request, response);
 		} else if (action.equals("/loginForm.do")) {
 			String mil_no= request.getParameter("no");
@@ -200,19 +203,16 @@ public class IndexController extends HttpServlet {
 			session.removeAttribute("session_id");
 			out.print("success");
 		} else if(action.equals("/search.do")) {
+			//음식 타입 재료 조리방법 get
     		String type1=request.getParameter("type1");
-    		String type2=request.getParameter("type2");
+    		int type2=Integer.parseInt(request.getParameter("type2"));
     		String type3=request.getParameter("type3");
-    		//List<Dish> list=new ArrayList<Dish>();
-    		//list=DishDao.getInstance().selectSearch(type1, type2, type3);
-    		request.setAttribute("type1", type1);
-    		request.setAttribute("type2", type2);
-    		request.setAttribute("type3", type3);
-    		List<Recipe> list1=new ArrayList<Recipe>();
-    		list1=RecipeDao.getInstance().selectAll();
-    		request.setAttribute("list", list1);
     		
-    		//request.setAttribute("list", list);
+    		//레시피 셀렉트
+    		List<Recipe> list1=new ArrayList<Recipe>();
+    		list1=RecipeDao.getInstance().selectList(type1,type2,type3);
+    		request.setAttribute("list", list1);
+
 
     		request.getRequestDispatcher("main/search.jsp").forward(request, response);
     	} else if(action.equals("/product.do")) {

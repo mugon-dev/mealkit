@@ -19,7 +19,7 @@ public class OrderDao {
 		boolean flag=false;
 		Connection conn=null;
 		PreparedStatement ps=null;
-		String sql="insert into ord(no,mat_no,mat_nm,mat_qty,mat_unt) values(?,?,?,?,?)";
+		String sql="insert into ord(no,mat_no,mat_nm,mat_qty,mat_unit) values(?,?,?,?,?)";
 		try {
 			conn=DBConn.getConn();
 			ps=conn.prepareStatement(sql);
@@ -27,7 +27,7 @@ public class OrderDao {
 			ps.setInt(2, order.getMat_no());
 			ps.setString(3, order.getMat_nm());
 			ps.setInt(4, order.getMat_qty());
-			ps.setInt(5, order.getMat_unt());
+			ps.setInt(5, order.getMat_unit());
 			int n=ps.executeUpdate();
 			if(n==1) {
 				flag=true;
@@ -67,7 +67,7 @@ public class OrderDao {
 				ord_p.setMat_no(rs.getInt("mat_no"));
 				ord_p.setMat_nm(rs.getString("mat_nm"));
 				ord_p.setMat_qty(rs.getInt("mat_qty"));
-				ord_p.setMat_unt(rs.getInt("mat_unt"));
+				ord_p.setMat_unt(rs.getInt("mat_unit"));
 				ord_p.setPrice(rs.getInt("mat_price"));
 				//가격
 				list.add(ord_p);

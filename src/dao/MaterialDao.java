@@ -227,6 +227,35 @@ public class MaterialDao {
 		}
 		return flag;
 	}
+	public List<Material> selectMain(){
+		List<Material> list=new ArrayList<Material>();
+		Material material=new Material();
+		Connection conn=null;
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		String sql="select * from mat where mat_idx=10";
+		try {
+			conn=DBConn.getConn();
+			ps=conn.prepareStatement(sql);
+			rs=ps.executeQuery();
+			while(rs.next()) {
+				material=new Material();
+				material.setMat_no(rs.getInt("mat_no"));
+				material.setMat_idx(rs.getString("mat_idx"));
+				material.setMat_nm(rs.getString("mat_nm"));
+				material.setMat_price(rs.getInt("mat_price"));
+				material.setMat_unit(rs.getInt("mat_unit"));
+				material.setMat_image(rs.getString("mat_image"));
+				list.add(material);
+				
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBConn.close(conn, ps, rs);
+		}
+		return list;
+	}
 	// 파일 업로드 
 	  	
 	

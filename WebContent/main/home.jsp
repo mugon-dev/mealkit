@@ -27,10 +27,10 @@
 								<div class="input-select">
 									<select name="type1" data-trigger=""
 										name="choices-single-defaul">
-										<option value="korean">한식</option>
-										<option value="chinese">중식</option>
-										<option value="japanese">일식</option>
-										<option value="western">양식</option>
+										<option value="1">한식</option>
+										<option value="2">중식</option>
+										<option value="3">일식</option>
+										<option value="4">양식</option>
 									</select>
 								</div>
 							</div>
@@ -39,9 +39,9 @@
 								<!-- 여기서 재료 리스트 받아서 forEach로 입력 -->
 									<select name="type2" data-trigger=""
 										name="choices-single-defaul">
-										<option value="pork">돼지</option>
-										<option value="beef">소</option>
-										<option value="chicken">닭</option>
+										<c:forEach items="${list }" var="list">
+										<option value="${list.mat_no }">${list.mat_nm }</option>
+										</c:forEach>
 									</select>
 
 								</div>
@@ -50,9 +50,11 @@
 								<div class="input-select">
 									<select name="type3" data-trigger=""
 										name="choices-single-defaul">
-										<option value="boiled">찜</option>
-										<option value="grilled">구이</option>
-										<option value="raw">생식</option>
+										<option value="1">구이</option>
+										<option value="2">찜</option>
+										<option value="3">탕</option>
+										<option value="4">생식</option>
+										<option value="5">기타</option>
 									</select>
 								</div>
 							</div>

@@ -8,7 +8,7 @@ public class Order {
 	private int mat_no;
 	private String mat_nm;
 	private int mat_qty;
-	private int mat_unt;
+	private int mat_unit;
 	private Date rgst_dt;
 
 	public int getOrder_no() {
@@ -29,7 +29,7 @@ public class Order {
 	@Override
 	public String toString() {
 		return "Order [order_no=" + order_no + ", no=" + no + ", mat_no=" + mat_no + ", mat_nm=" + mat_nm + ", mat_qty="
-				+ mat_qty + ", mat_unt=" + mat_unt + ", rgst_dt=" + rgst_dt + "]";
+				+ mat_qty + ", mat_unt=" + mat_unit + ", rgst_dt=" + rgst_dt + "]";
 	}
 	public void setMat_no(int mat_no) {
 		this.mat_no = mat_no;
@@ -47,11 +47,11 @@ public class Order {
 	public void setMat_qty(int mat_qty) {
 		this.mat_qty = mat_qty;
 	}
-	public int getMat_unt() {
-		return mat_unt;
+	public int getMat_unit() {
+		return mat_unit;
 	}
-	public void setMat_unt(int mat_unt) {
-		this.mat_unt = mat_unt;
+	public void setMat_unt(int mat_unit) {
+		this.mat_unit = mat_unit;
 	}
 	public Date getRgst_dt() {
 		return rgst_dt;
@@ -69,7 +69,7 @@ public class Order {
 		this.mat_no = mat_no;
 		this.mat_nm = mat_nm;
 		this.mat_qty = mat_qty;
-		this.mat_unt = mat_unt;
+		this.mat_unit = mat_unt;
 	}
 	
 	

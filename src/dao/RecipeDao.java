@@ -14,15 +14,22 @@ public class RecipeDao {
 	public static RecipeDao getInstance() {
 		return instance;
 	}
-	public List<Recipe> selectAll(){
+	public List<Recipe> selectList(String cook_idx, int mat_no1, String cook_type){
 		List<Recipe> list=new ArrayList<Recipe>();
 		Connection conn=null;
 		PreparedStatement ps=null;
 		ResultSet rs=null;
+		//original
+		//String sql="select * from recipe where cook_idx=? && mat_no1=? && cook_type=?";
+		
+		//temp
 		String sql="select * from recipe";
 		try {
 			conn=DBConn.getConn();
 			ps=conn.prepareStatement(sql);
+			ps.setString(1, cook_idx);
+			ps.setInt(2, mat_no1);
+			ps.setString(3, cook_type);
 			rs=ps.executeQuery();
 			while(rs.next()) {
 				Recipe recipe=new Recipe();
