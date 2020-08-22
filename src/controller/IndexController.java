@@ -116,6 +116,12 @@ public class IndexController extends HttpServlet {
 				out.print("usable");
 			}
 		} else if (action.equals("/shopForm.do")) {
+			List<Material> list=new ArrayList<Material>();
+			list=MaterialDao.getInstance().selectMain();
+			request.setAttribute("list", list);
+			List<Recipe> listRecipe=new ArrayList<Recipe>();
+			listRecipe=RecipeDao.getInstance().selectAll();
+			request.setAttribute("recipe", listRecipe);
 			request.getRequestDispatcher("main/shop.jsp").forward(request, response);
 		} else if (action.equals("/shop.do")) {
 
