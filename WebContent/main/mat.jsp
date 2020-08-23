@@ -64,11 +64,13 @@ $("#nav-meat-tab").on("click",function(){
 				aria-labelledby="nav-whole-tab">
 				<h4>전체</h4>
 				<div class="row">
-					<c:forEach items="${list }" var="mat">
+					<%-- <c:forEach items="${list }" var="mat"> --%>
 						<div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
 							<div class="single-popular-items mb-50 text-center">
 								<div class="popular-img">
+									<a href="matDetail.do?${mat.mat_no }">
 									<img src="assets/img/gallery/popular1.png" alt="">
+									</a>
 									<div class="img-cap">
 										<span>Add to cart</span>
 									</div>
@@ -83,7 +85,7 @@ $("#nav-meat-tab").on("click",function(){
 								</div>
 							</div>
 						</div>
-					</c:forEach>
+					<%-- </c:forEach> --%>
 				</div>
 			</div>
 			<div class="tab-pane fade" id="nav-meat" role="tabpanel"
