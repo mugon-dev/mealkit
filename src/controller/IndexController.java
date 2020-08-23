@@ -293,7 +293,6 @@ public class IndexController extends HttpServlet {
     			Material material=MaterialDao.getInstance().selectOne(Integer.parseInt(request.getParameter("material"+temp)));
     			mat[i]=Integer.parseInt(request.getParameter("mat"+temp));
     			order=new Order(no,material.getMat_no(),material.getMat_nm(),mat[i],material.getMat_unit());
-    			System.out.println("여기가 입력된 값:"+order.toString());
     			boolean b=OrderDao.getInstance().insert(order);
     			if(b==true) {
     				System.out.println("카트 입력 성공");
@@ -312,6 +311,17 @@ public class IndexController extends HttpServlet {
     		listOrder=OrderDao.getInstance().selectOrder(no);
     		request.setAttribute("listOrder", listOrder);   		
     		request.getRequestDispatcher("main/cart.jsp").forward(request, response);
+    	}else if (action.equals("/purchase.do")) {
+    		int count=Integer.parseInt(request.getParameter("count"));
+    		int[] ord_no=new int[count];
+    		int[] ord_qty=new int[count];
+    		for(int i=0;i<count;i++) {
+    			int temp=i+1;
+    			ord_no[i]=Integer.parseInt(request.getParameter("ord_"+temp));
+    			ord_qty[i]=Integer.parseInt(request.getParameter("qty_"+temp));
+    			boolean f=OrderDao.getInstance().update(ord_no[i],ord_qty[i]);
+    		}
+    		request.getRequestDispatcher("main/shop.jsp").forward(request, response);
     	}
     	
     	else if(action.equals("/blogForm.do")) {
