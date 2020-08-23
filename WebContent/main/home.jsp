@@ -123,13 +123,13 @@
 				<div class="row">
 					<div class="col-xl-6 col-lg-4 col-md-6 col-sm-6">
 						<div class="single-gallery mb-30">
-							<div class="gallery-img big-img" onclick="location.href='product.do?no=${recipe2[0].mil_no }';"
+							<div class="gallery-img big-img" onclick="location.href='blogDetail.do?milNo=${recipe2[0].mil_no }';"
 								style="background-image: url(images/${recipe2[0].image }); cursor: pointer;"></div>
 						</div>
 					</div>
 					<div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
 						<div class="single-gallery mb-30">
-							<div class="gallery-img big-img" onclick="location.href='product.do?no=${recipe2[1].mil_no }';"
+							<div class="gallery-img big-img" onclick="location.href='blogDetail.do?milNo=${recipe2[1].mil_no }';"
 								style="background-image: url(images/${recipe2[1].image }); cursor: pointer;"></div>
 						</div>
 					</div>
@@ -137,13 +137,13 @@
 						<div class="row">
 							<div class="col-xl-12 col-lg-12 col-md-6 col-sm-6">
 								<div class="single-gallery mb-30">
-									<div class="gallery-img small-img" onclick="location.href='product.do?no=${recipe2[2].mil_no }';"
+									<div class="gallery-img small-img" onclick="location.href='blogDetail.do?milNo=${recipe2[2].mil_no }';"
 										style="background-image: url(images/${recipe2[2].image }); cursor: pointer;"></div>
 								</div>
 							</div>
 							<div class="col-xl-12 col-lg-12 col-md-6 col-sm-6">
 								<div class="single-gallery mb-30">
-									<div class="gallery-img small-img" onclick="location.href='product.do?no=${recipe2[3].mil_no }';"
+									<div class="gallery-img small-img" onclick="location.href='blogDetail.do?milNo=${recipe2[3].mil_no }';"
 										style="background-image: url(images/${recipe2[3].image }); cursor: pointer;"></div>
 								</div>
 							</div>
