@@ -56,7 +56,7 @@ public class OrderDao {
 		Connection conn=null;
 		PreparedStatement ps=null;
 		ResultSet rs=null;
-		String sql="select * from ord,mat where ord.mat_no=mat.mat_no and no=?";
+		String sql="select * from ord,mat where ord.mat_no=mat.mat_no and no=? and ord_flag=0";
 		try {
 			conn=DBConn.getConn();
 			ps=conn.prepareStatement(sql);

@@ -326,7 +326,7 @@ public class IndexController extends HttpServlet {
     			ord_qty[i]=Integer.parseInt(request.getParameter("qty_"+temp));
     			boolean f=OrderDao.getInstance().update(ord_no[i],ord_qty[i]);
     		}
-    		request.getRequestDispatcher("main/shop.jsp").forward(request, response);
+    		request.getRequestDispatcher("main/main.jsp").forward(request, response);
     	}
     	
 //============================================================================================================================================//		
