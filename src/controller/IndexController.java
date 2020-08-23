@@ -61,6 +61,9 @@ public class IndexController extends HttpServlet {
 			List<Material> list=new ArrayList<Material>();
 			list=MaterialDao.getInstance().selectMain();
 			request.setAttribute("list", list);
+			List<Recipe> recipe = new ArrayList<Recipe>();
+			recipe = RecipeDao.getInstance().selectLatest();
+			request.setAttribute("recipe", recipe);
 			request.getRequestDispatcher("main/home.jsp").forward(request, response);
 		} else if (action.equals("/loginForm.do")) {
 			String mil_no= request.getParameter("no");
