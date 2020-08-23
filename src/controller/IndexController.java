@@ -136,9 +136,7 @@ public class IndexController extends HttpServlet {
 			request.setAttribute("selectSau", selectSau);
 			request.getRequestDispatcher("main/mat.jsp").forward(request, response);
 		} else if (action.equals("/mat.do")) { // 재료 등록 , 사진업로드, hsahmap으로 수정
-			//Map<String, String> materialMap = MaterialDao.getInstance().upload(request, response,FILE_REPO);
 			Map<String, String> materialMap = upload(request, response);
-
 			int mat_no = Integer.parseInt(materialMap.get("mat_no"));
 			String mat_idx = materialMap.get("mat_idx");
 			String mat_nm = materialMap.get("mat_nm");
