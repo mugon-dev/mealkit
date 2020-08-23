@@ -89,47 +89,22 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
-					<%-- <c:forEach> --%>
-					<div class="single-new-pro mb-30 text-center">
-						<div class="product-img">
-							<img src="assets/img/gallery/new_product1.png" alt="" />
-						</div>
-						<div class="product-caption">
-							<h3>
-								<a href="product_details.html">Thermo Ball Etip Gloves</a>
-							</h3>
-							<span>$ 45,743</span>
-						</div>
-					</div>
-					<%-- </c:forEach> 패러럴로 구현--%>
-				</div>
+			<c:forEach items="${recipe }" var="recipe">
 				<div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
 					<div class="single-new-pro mb-30 text-center">
 						<div class="product-img">
-							<img src="assets/img/gallery/new_product2.png" alt="" />
+						<a href="product.do?no=${recipe.mil_no }">
+							<img src="images/${recipe.image }" alt="" />
+							</a>
 						</div>
 						<div class="product-caption">
 							<h3>
-								<a href="product_details.html">Thermo Ball Etip Gloves</a>
+								<a href="product.do?no=${recipe.mil_no }">${recipe.title }</a>
 							</h3>
-							<span>$ 45,743</span>
 						</div>
 					</div>
 				</div>
-				<div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
-					<div class="single-new-pro mb-30 text-center">
-						<div class="product-img">
-							<img src="assets/img/gallery/new_product3.png" alt="" />
-						</div>
-						<div class="product-caption">
-							<h3>
-								<a href="product_details.html">Thermo Ball Etip Gloves</a>
-							</h3>
-							<span>$ 45,743</span>
-						</div>
-					</div>
-				</div>
+				</c:forEach>
 			</div>
 		</div>
 	</section>
