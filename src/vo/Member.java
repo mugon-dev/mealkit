@@ -10,6 +10,12 @@ public class Member {
 	public Member() {
 		// TODO Auto-generated constructor stub
 	}
+	public Member( String name, String addr, String tel) {
+		super();
+		this.name = name;
+		this.addr = addr;
+		this.tel = tel;
+	}
 	public Member(String id, String pw, String name, String addr, String tel) {
 		super();
 		this.id = id;

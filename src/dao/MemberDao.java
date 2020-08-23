@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import vo.Material;
 import vo.Member;
 
 public class MemberDao {
@@ -13,6 +14,32 @@ public class MemberDao {
 
 	public static MemberDao getInstance() {
 		return instance;
+	}
+	
+	public Member selectOne(int mat_no){
+		Member member=new Member();
+		Connection conn=null;
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		String sql="select * from mat where mat_no=?";
+		try {
+			conn=DBConn.getConn();
+			ps=conn.prepareStatement(sql);
+			ps.setInt(1, mat_no);
+			rs=ps.executeQuery();
+			while(rs.next()) {
+				member=new Member();
+				member.setName(rs.getString("name"));
+				member.setAddr(rs.getString("addr"));
+				member.setTel(rs.getString("tel"));
+				System.out.println(member);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBConn.close(conn, ps, rs);
+		}
+		return member;
 	}
 	
 	public boolean insert(Member member){
@@ -114,13 +141,13 @@ public class MemberDao {
 		boolean flag=false;
 		Connection conn = null;
 		PreparedStatement ps = null;
-		String sql = "update member set pw=?, name=? where id=?";
+		String sql = "update member set pw=?, name=? where no=?";
 		try {
 			conn = DBConn.getConn();
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, member.getPw());
 			ps.setString(2, member.getName());
-			ps.setString(3, member.getId());
+			ps.setInt(3, member.getNo());
 			int n=ps.executeUpdate();
 			if(n==1) {
 				flag=true;
@@ -140,15 +167,15 @@ public class MemberDao {
 		return flag;
 	}//수정완료
 	
-	public boolean delete(String id) {
+	public boolean delete(int no) {
 		boolean flag=false;
 		Connection conn = null;
 		PreparedStatement ps = null;
-		String sql = "delete from member where id=?";
+		String sql = "delete from member where no=?";
 		try {
 			conn = DBConn.getConn();
 			ps = conn.prepareStatement(sql);
-			ps.setString(1, id);
+			ps.setInt(1, no);
 			int n=ps.executeUpdate();
 			if(n==1) {
 				flag=true;
