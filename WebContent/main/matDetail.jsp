@@ -4,6 +4,23 @@
 
 <main>
 	<!--================Single Product Area =================-->
+	<%-- <c:choose>
+					<c:when test="${session_id == 'admin' }"> --%>
+				<div class="dropdown show" style="color: black;">
+					<div class="dropdown-toggle" data-toggle="dropdown"
+						aria-haspopup="true" aria-expanded="false">관리자 메뉴</div>
+					<div class="dropdown-menu">
+						<a class="dropdown-item" data-toggle="modal"
+							data-target="#igdMoal" data-whatever="@mdo">재료 수정</a>
+					</div>
+					<div class="dropdown-menu">
+						<a class="dropdown-item" href="matDelete.do?mat_no=${mat.mat_no }">삭제</a>
+					</div>
+
+				</div>
+
+				<%-- </c:when>
+					</c:choose> --%>
 	<div class="product_image_area">
 		<div class="container">
 			<div class="row justify-content-center">
@@ -22,8 +39,7 @@
 				</div>
 				<div class="col-lg-12">
 					<div class="single_product_text text-center">
-						<h3>${recipe.title }</h3>
-						<p>${recipe.content }</p>
+						<h3>${mat.mat_nm }</h3>
 						<form action="cart.do" method="post">
 							<div class="card_area">
 								<div class="container" style="width: 800px">

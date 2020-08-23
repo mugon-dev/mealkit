@@ -91,11 +91,11 @@ public class IndexController extends HttpServlet {
 			} else {
 				out.print("id error");
 			}
-		} else if (action.equals("/readPerson.do")) { //session_no 받아오기
+		} else if (action.equals("/readPerson.do")) { //session_no 받아오기 //id 수정필요
 			int no = Integer.parseInt(request.getParameter("no"));
 			Member member = MemberDao.getInstance().selectOne(no);
 			request.setAttribute("member", member);
-			request.getRequestDispatcher("include/header.jsp").forward(request, response);
+			request.getRequestDispatcher("main/main.jsp").forward(request, response);
 		} else if (action.equals("/memberDelete.do")) { //member.no 받아와서 삭제
 			int no = Integer.parseInt(request.getParameter("no"));
 			boolean flag = MemberDao.getInstance().delete(no);
@@ -174,7 +174,15 @@ public class IndexController extends HttpServlet {
 			} else {
 				out.print("<script>alert('새 글 추가 실패했습니다.'); location.href='matForm.do';</script>");
 			}
-    	}  else if (action.equals("/logout.do")) { // 로그아웃 header의 ajax 스크립트
+    	}else if (action.equals("/matDelete.do")) { //mat.no 받아와서 삭제
+			String no = request.getParameter("mat_no");
+			boolean flag = MaterialDao.getInstance().delete(no);
+			if(flag) {
+				out.print("<script>alert('삭제 성공');location.href='matForm.do';</script>");
+			}else {
+				out.print("<script>alert('삭제 실패');location.href='matForm.do';</script>");
+			}
+		}else if (action.equals("/logout.do")) { // 로그아웃 header의 ajax 스크립트
 			HttpSession session = request.getSession();
 			session.removeAttribute("session_id");
 			session.removeAttribute("session_no");
@@ -236,7 +244,7 @@ public class IndexController extends HttpServlet {
 			request.setAttribute("mat", matOne);
 			request.getRequestDispatcher("main/matDetail.jsp").forward(request, response);
 			}else {
-				out.print("<script>alert('게시글 조회 실패');location.href='list.do';</script>");
+				out.print("<script>alert('게시글 조회 실패');location.href='matForm.do';</script>");
 			}
 		} else if(action.equals("/search.do")) {
 			//음식 타입 재료 조리방법 get

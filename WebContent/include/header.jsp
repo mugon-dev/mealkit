@@ -206,6 +206,12 @@
 				}
 			});
 		});
+		function modalPopup(){
+			var url = "readPerson.do?id=${session_no }";
+			$("#idMoal > .modal-dialog").load(url, function(){
+				$("#idMoal").modal("show");
+			});
+		}
 		$("#btnDelete").on('click',function(){
 			location.href="memberDelete.do?no=${member.no}";
 		});
