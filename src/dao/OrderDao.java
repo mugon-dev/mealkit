@@ -21,6 +21,8 @@ public class OrderDao {
 		PreparedStatement ps=null;
 		String sql="insert into ord(no,mat_no,mat_nm,mat_qty,mat_unit) values(?,?,?,?,?)";
 		try {
+			System.out.println("여기는 orderDao Insert:"+order.getMat_nm());
+			System.out.println("sdlkfjsdf");
 			conn=DBConn.getConn();
 			ps=conn.prepareStatement(sql);
 			ps.setInt(1, order.getNo());
@@ -101,6 +103,35 @@ public class OrderDao {
 				System.out.println("재료 삭제 성공");
 			}else {
 				System.out.println("재료 삭제 실패");
+				
+			}
+		}catch(Exception ex) {
+			ex.printStackTrace();
+		}finally {
+			try {
+				DBConn.close(conn, ps);
+			}catch(Exception e) {
+				e.getStackTrace();
+			}
+		}
+		return flag;
+	}
+	public boolean update(int ord_no, int ord_qty) {
+		boolean flag=false;
+		Connection conn=null;
+		PreparedStatement ps=null;
+		String sql="update ord set mat_qty=?, ord_flag=1 where ord_no=?";
+		try {
+			conn=DBConn.getConn();
+			ps=conn.prepareStatement(sql);
+			ps.setInt(1, ord_qty);
+			ps.setInt(2, ord_no);
+			int n=ps.executeUpdate();
+			if(n==1) {
+				flag=true;
+				System.out.println("주문 업데이트 성공");
+			}else {
+				System.out.println("주문 업데이트 실패");
 				
 			}
 		}catch(Exception ex) {

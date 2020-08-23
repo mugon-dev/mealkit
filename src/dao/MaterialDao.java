@@ -198,7 +198,7 @@ public class MaterialDao {
 		return flag;
 	}
 	//idx로 삭제
-	public boolean delete(String idx) {
+	public boolean delete(String no) {
 		boolean flag = false;
 		Connection conn = null;
 		PreparedStatement ps = null;
@@ -206,7 +206,7 @@ public class MaterialDao {
 		try {
 			conn=DBConn.getConn();
 			ps=conn.prepareStatement(sql);
-			ps.setNString(1, idx);
+			ps.setNString(1, no);
 			int n=ps.executeUpdate();
 			if(n==1) {
 				flag=true;

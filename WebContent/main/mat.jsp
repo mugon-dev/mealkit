@@ -68,7 +68,9 @@ $("#nav-meat-tab").on("click",function(){
 						<div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
 							<div class="single-popular-items mb-50 text-center">
 								<div class="popular-img">
+									<a href="matDetail.do?no=${mat.mat_no }">
 									<img src="assets/img/gallery/popular1.png" alt="">
+									</a>
 									<div class="img-cap">
 										<span>Add to cart</span>
 									</div>
@@ -94,7 +96,9 @@ $("#nav-meat-tab").on("click",function(){
 						<div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
 							<div class="single-popular-items mb-50 text-center">
 								<div class="popular-img">
+									<a href="matDetail.do?no=${mat.mat_no }">
 									<img src="assets/img/gallery/popular1.png" alt="">
+									</a>
 									<div class="img-cap">
 										<span>Add to cart</span>
 									</div>
@@ -120,7 +124,9 @@ $("#nav-meat-tab").on("click",function(){
 						<div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
 							<div class="single-popular-items mb-50 text-center">
 								<div class="popular-img">
+									<a href="matDetail.do?no=${mat.mat_no }">
 									<img src="assets/img/gallery/popular1.png" alt="">
+									</a>
 									<div class="img-cap">
 										<span>Add to cart</span>
 									</div>
@@ -146,7 +152,9 @@ $("#nav-meat-tab").on("click",function(){
 						<div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
 							<div class="single-popular-items mb-50 text-center">
 								<div class="popular-img">
+									<a href="matDetail.do?no=${mat.mat_no }">
 									<img src="assets/img/gallery/popular1.png" alt="">
+									</a>
 									<div class="img-cap">
 										<span>Add to cart</span>
 									</div>

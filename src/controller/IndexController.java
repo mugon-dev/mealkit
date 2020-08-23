@@ -63,6 +63,9 @@ public class IndexController extends HttpServlet {
 			List<Material> list=new ArrayList<Material>();
 			list=MaterialDao.getInstance().selectMain();
 			request.setAttribute("list", list);
+			List<Recipe> recipe = new ArrayList<Recipe>();
+			recipe = RecipeDao.getInstance().selectLatest();
+			request.setAttribute("recipe", recipe);
 			request.getRequestDispatcher("main/home.jsp").forward(request, response);
 		} else if (action.equals("/loginForm.do")) {
 			String mil_no= request.getParameter("no");
@@ -92,7 +95,31 @@ public class IndexController extends HttpServlet {
 				out.print("password error");
 			} else {
 				out.print("id error");
-			} // myPageForm.do
+			}
+		} else if (action.equals("/readPerson.do")) { //session_no 받아오기 //id 수정필요
+			int no = Integer.parseInt(request.getParameter("no"));
+			Member member = MemberDao.getInstance().selectOne(no);
+			request.setAttribute("member", member);
+			request.getRequestDispatcher("main/main.jsp").forward(request, response);
+		} else if (action.equals("/memberDelete.do")) { //member.no 받아와서 삭제
+			int no = Integer.parseInt(request.getParameter("no"));
+			boolean flag = MemberDao.getInstance().delete(no);
+			if(flag) {
+				out.print("<script>alert('삭제 성공');location.href='main.do';</script>");
+			}else {
+				out.print("<script>alert('삭제 실패');location.href='main.do';</script>");
+			}
+		} else if (action.equals("/memberUpdate.do")) { //session_no 받아오기
+			int no = Integer.parseInt(request.getParameter("no"));
+			String name = request.getParameter("name");
+			String addr = request.getParameter("addr");
+			String tel = request.getParameter("tel");
+			boolean flag = MemberDao.getInstance().update(new Member(name, addr, tel));
+			if (flag) {
+				out.print("<script>alert('회원 수정 성공');location.href='main.do';</script>");
+			} else {
+				out.print("<script>alert('회원 수정 실패');location.href='main.do';</script>");
+			}
 		} else if (action.equals("/myPageForm.do")) { // myPage 이동
 			request.getRequestDispatcher("main/myPage.jsp").forward(request, response);
 		} else if (action.equals("/registerForm.do")) {
@@ -138,9 +165,7 @@ public class IndexController extends HttpServlet {
 			request.setAttribute("selectSau", selectSau);
 			request.getRequestDispatcher("main/mat.jsp").forward(request, response);
 		} else if (action.equals("/mat.do")) { // 재료 등록 , 사진업로드, hsahmap으로 수정
-			//Map<String, String> materialMap = MaterialDao.getInstance().upload(request, response,FILE_REPO);
 			Map<String, String> materialMap = upload(request, response);
-
 			int mat_no = Integer.parseInt(materialMap.get("mat_no"));
 			String mat_idx = materialMap.get("mat_idx");
 			String mat_nm = materialMap.get("mat_nm");
@@ -154,7 +179,15 @@ public class IndexController extends HttpServlet {
 			} else {
 				out.print("<script>alert('새 글 추가 실패했습니다.'); location.href='matForm.do';</script>");
 			}
-    	}  else if (action.equals("/logout.do")) { // 로그아웃 header의 ajax 스크립트
+    	}else if (action.equals("/matDelete.do")) { //mat.no 받아와서 삭제
+			String no = request.getParameter("mat_no");
+			boolean flag = MaterialDao.getInstance().delete(no);
+			if(flag) {
+				out.print("<script>alert('삭제 성공');location.href='matForm.do';</script>");
+			}else {
+				out.print("<script>alert('삭제 실패');location.href='matDetail.do';</script>");
+			}
+		}else if (action.equals("/logout.do")) { // 로그아웃 header의 ajax 스크립트
 			HttpSession session = request.getSession();
 			session.removeAttribute("session_id");
 			session.removeAttribute("session_no");
@@ -183,7 +216,11 @@ public class IndexController extends HttpServlet {
 			} else {
 				out.print("usable");
 			}
-		} else if (action.equals("/shopForm.do")) {
+		} else if (action.equals("/logout.do")) { // 로그아웃 header의 ajax 스크립트
+			HttpSession session = request.getSession();
+			session.removeAttribute("session_id");
+			out.print("success");
+		}else if (action.equals("/shopForm.do")) {
 			request.getRequestDispatcher("main/shop.jsp").forward(request, response);
 		} else if (action.equals("/shop.do")) {
 
@@ -192,7 +229,6 @@ public class IndexController extends HttpServlet {
 		} else if (action.equals("/mat.do")) { // 재료 등록 , 사진업로드, hsahmap으로 수정
 			//Map<String, String> materialMap = MaterialDao.getInstance().upload(request, response,FILE_REPO);
 			Map<String, String> materialMap = upload(request, response);
-
 			int mat_no = Integer.parseInt(materialMap.get("mat_no"));
 			String mat_idx = materialMap.get("mat_idx");
 			String mat_nm = materialMap.get("mat_nm");
@@ -206,10 +242,15 @@ public class IndexController extends HttpServlet {
 			} else {
 				out.print("<script>alert('새 글 추가 실패했습니다.'); location.href='matForm.do';</script>");
 			}
-		} else if (action.equals("/logout.do")) { // 로그아웃 header의 ajax 스크립트
-			HttpSession session = request.getSession();
-			session.removeAttribute("session_id");
-			out.print("success");
+		} else if (action.equals("/matDetail.do")) { // mat상세페이지
+			int no=Integer.parseInt(request.getParameter("no"));
+			Material matOne = MaterialDao.getInstance().selectOne(no);
+			if(matOne != null) {
+			request.setAttribute("mat", matOne);
+			request.getRequestDispatcher("main/matDetail.jsp").forward(request, response);
+			}else {
+				out.print("<script>alert('게시글 조회 실패');location.href='matForm.do';</script>");
+			}
 		} else if(action.equals("/search.do")) {
 			//음식 타입 재료 조리방법 get
     		String type1=request.getParameter("type1");
@@ -275,6 +316,17 @@ public class IndexController extends HttpServlet {
     		listOrder=OrderDao.getInstance().selectOrder(no);
     		request.setAttribute("listOrder", listOrder);   		
     		request.getRequestDispatcher("main/cart.jsp").forward(request, response);
+    	}else if (action.equals("/purchase.do")) {
+    		int count=Integer.parseInt(request.getParameter("count"));
+    		int[] ord_no=new int[count];
+    		int[] ord_qty=new int[count];
+    		for(int i=0;i<count;i++) {
+    			int temp=i+1;
+    			ord_no[i]=Integer.parseInt(request.getParameter("ord_"+temp));
+    			ord_qty[i]=Integer.parseInt(request.getParameter("qty_"+temp));
+    			boolean f=OrderDao.getInstance().update(ord_no[i],ord_qty[i]);
+    		}
+    		request.getRequestDispatcher("main/shop.jsp").forward(request, response);
     	}
     	
 //============================================================================================================================================//		
@@ -420,45 +472,6 @@ public class IndexController extends HttpServlet {
 		}
 		return recipeMap;
 	}
-	//mat 업로드
-	public Map<String, String> matUpload(HttpServletRequest request, HttpServletResponse response,String FILE_REPO) throws ServletException, IOException {
-  		Map<String, String> matetrialMap = new HashMap<String, String>();
-  		String encoding = "UTF-8";
-  		File currentDirPath = new File(FILE_REPO);
-  		DiskFileItemFactory factory = new DiskFileItemFactory();
-  		factory.setRepository(currentDirPath);
-  		factory.setSizeThreshold(1024*1024*5); //5GB
-  		factory.setDefaultCharset(encoding); //파일올라올때 인코딩
-  		ServletFileUpload upload = new ServletFileUpload(factory);
-  		try {
-  			List<FileItem> items = upload.parseRequest(request);
-  			for(int i = 0 ; i < items.size() ; i++) {
-  				FileItem item = (FileItem)items.get(i);
-  				if(item.isFormField()) {
-  					System.out.println(item.getFieldName() + ":" + item.getString());
-  					matetrialMap.put(item.getFieldName(), item.getString());
-  				} else {
-  					System.out.println("파라미터명: " + item.getFieldName());
-  					System.out.println("파일명: " + item.getName());
-  					System.out.println("파일의 크기: " + item.getSize());
-  					
-  					if(item.getSize() > 0) {
-  						int idx = item.getName().lastIndexOf("\\"); //윈도우시스템
-  						if(idx == -1) {
-  							idx = item.getName().lastIndexOf("/"); //리눅스시스템 파일 마지막 부분 
-  						}
-  						String fileName = item.getName().substring(idx + 1);
-  						File uploadFile = new File(currentDirPath + "\\" + fileName);
-  						matetrialMap.put(item.getFieldName(), fileName);
-  						item.write(uploadFile);
-  					}
-  				}
-  			}
-  		} catch (Exception e) {
-  			e.printStackTrace();
-  		}
-  		return matetrialMap;
-  	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
