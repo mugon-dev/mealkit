@@ -71,27 +71,10 @@
 											<li><a href="shopForm.do"> Mealkit list</a></li>
 											<li><a href="matForm.do"> Material Details</a></li>
 										</ul></li>
-									<li><a href="about.html">about</a></li>
-									<li class="hot"><a href="#">Latest</a>
-										<ul class="submenu">
-											<li><a href="shopForm.do"> Product list</a></li>
-											<li><a href="product_details.html"> Product Details</a>
-											</li>
-										</ul></li>
 									<li><a href="blogForm.do">Blog</a>
 										<ul class="submenu">
 											<li><a href="blogForm.do">Blog</a></li>
-											<li><a href="blogDetailForm.do">Blog Details</a></li>
 										</ul></li>
-									<li><a href="#">Pages</a>
-										<ul class="submenu">
-											<li><a href="login.html">Login</a></li>
-											<li><a href="cart.html">Cart</a></li>
-											<li><a href="elements.html">Element</a></li>
-											<li><a href="confirmation.html">Confirmation</a></li>
-											<li><a href="checkout.html">Product Checkout</a></li>
-										</ul></li>
-									<li><a href="contact.html">Contact</a></li>
 								</ul>
 							</nav>
 						</div>
@@ -116,8 +99,9 @@
 												<div class="dropdown-menu">
 													<a class="dropdown-item" href="MyPageForm.do">MyPage</a> <a
 														class="dropdown-item" data-toggle="modal"
-														data-target="#idMoal" data-whatever="@mdo" id="temp" href='javascript:void(0);' onclick="modalPopup()" >내 정보 수정</a> <a
-														class="dropdown-item" href="#" id="logout">로그아웃</a>
+														data-target="#idMoal" data-whatever="@mdo" id="temp"
+														href='javascript:void(0);' onclick="modalPopup()">내
+														정보 수정</a> <a class="dropdown-item" href="#" id="logout">로그아웃</a>
 												</div>
 											</div>
 										<</c:otherwise>
@@ -157,18 +141,19 @@
 					<div class="modal-body">
 						<form action="mat.do" method="post">
 							<div class="form-group">
-								<label for="recipient-name" class="col-form-label">이름</label>
-								<input type="text" class="form-control" id="name"
-									name="name" value="${member.name }">
+								<label for="recipient-name" class="col-form-label">이름</label> <input
+									type="text" class="form-control" id="name" name="name"
+									value="${member.name }">
 							</div>
 							<div class="form-group">
-								<label for="recipient-name" class="col-form-label">주소</label>
-								<input type="text" class="form-control" id="addr"
-									name="addr" value="${member.addr }">
+								<label for="recipient-name" class="col-form-label">주소</label> <input
+									type="text" class="form-control" id="addr" name="addr"
+									value="${member.addr }">
 							</div>
 							<div class="form-group">
-								<label for="recipient-name" class="col-form-label">전화번호</label> <input
-									type="text" class="form-control" id="tel" name="tel" value="${member.tel }">
+								<label for="recipient-name" class="col-form-label">전화번호</label>
+								<input type="text" class="form-control" id="tel" name="tel"
+									value="${member.tel }">
 							</div>
 							<div class="modal-footer">
 								<button type="button" class="btn_3" data-dismiss="modal"
@@ -206,16 +191,16 @@
 				}
 			});
 		});
-		function modalPopup(){
+		function modalPopup() {
 			var url = "readPerson.do?id=${session_no }";
-			$("#idMoal > .modal-dialog").load(url, function(){
+			$("#idMoal > .modal-dialog").load(url, function() {
 				$("#idMoal").modal("show");
 			});
 		}
-		$("#btnDelete").on('click',function(){
-			location.href="memberDelete.do?no=${member.no}";
+		$("#btnDelete").on('click', function() {
+			location.href = "memberDelete.do?no=${member.no}";
 		});
-		$("#btnDelete").on('click',function(){
-			location.href="memberUpdate.do?no=${member.no}";
+		$("#btnDelete").on('click', function() {
+			location.href = "memberUpdate.do?no=${member.no}";
 		});
 	</script>

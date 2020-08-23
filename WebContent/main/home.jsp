@@ -89,17 +89,17 @@
 				</div>
 			</div>
 			<div class="row">
-			<c:forEach items="${recipe }" var="recipe">
+			<c:forEach items="${recipe1 }" var="recipe1">
 				<div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
 					<div class="single-new-pro mb-30 text-center">
 						<div class="product-img">
-						<a href="product.do?no=${recipe.mil_no }">
-							<img src="images/${recipe.image }" alt="" />
+						<a href="product.do?no=${recipe1.mil_no }">
+							<img src="images/${recipe1.image }" alt="" />
 							</a>
 						</div>
 						<div class="product-caption">
 							<h3>
-								<a href="product.do?no=${recipe.mil_no }">${recipe.title }</a>
+								<a href="product.do?no=${recipe1.mil_no }">${recipe1.title }</a>
 							</h3>
 						</div>
 					</div>
@@ -123,28 +123,56 @@
 				<div class="row">
 					<div class="col-xl-6 col-lg-4 col-md-6 col-sm-6">
 						<div class="single-gallery mb-30">
-							<div class="gallery-img big-img"
-								style="background-image: url(assets/img/gallery/gallery1.png);"></div>
+<<<<<<< HEAD
+							<div class="gallery-img big-img" Onclick="location.href='blogDetail.do?milNo=${recipe2[0].mil_no }';"
+								style="background-image: url(images/${recipe2[0].image }); cursor: pointer;"></div>
+=======
+						<div OnClick="location.href='blogDetail.do?milNo=${recipe2[0].mil_no }';" style="cursor:pointer;">
+							<div class="gallery-img big-img" 
+								style="background-image: url(images/${recipe2[0].image });"></div>
+								</div>
+>>>>>>> 4a084cd6c2c06c709aa79d6776a70ff9b3df7ce6
 						</div>
 					</div>
 					<div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
 						<div class="single-gallery mb-30">
-							<div class="gallery-img big-img"
-								style="background-image: url(assets/img/gallery/gallery2.png);"></div>
+<<<<<<< HEAD
+							<div class="gallery-img big-img" Onclick="location.href='blogDetail.do?milNo=${recipe2[1].mil_no }';"
+								style="background-image: url(images/${recipe2[1].image }); cursor: pointer;"></div>
+=======
+						<div OnClick="location.href='blogDetail.do?milNo=${recipe2[1].mil_no }';" style="cursor:pointer;">
+							<div class="gallery-img big-img" 
+								style="background-image: url(images/${recipe2[1].image });"></div>
+								</div>
+>>>>>>> 4a084cd6c2c06c709aa79d6776a70ff9b3df7ce6
 						</div>
 					</div>
 					<div class="col-xl-3 col-lg-4 col-md-12">
 						<div class="row">
 							<div class="col-xl-12 col-lg-12 col-md-6 col-sm-6">
 								<div class="single-gallery mb-30">
-									<div class="gallery-img small-img"
-										style="background-image: url(assets/img/gallery/gallery3.png);"></div>
+<<<<<<< HEAD
+									<div class="gallery-img small-img" Onclick="location.href='blogDetail.do?milNo=${recipe2[2].mil_no }';"
+										style="background-image: url(images/${recipe2[2].image }); cursor: pointer;"></div>
+=======
+								<div OnClick="location.href='blogDetail.do?milNo=${recipe2[2].mil_no }';" style="cursor:pointer;">
+									<div class="gallery-img small-img" 
+										style="background-image: url(images/${recipe2[2].image });"></div>
+										</div>
+>>>>>>> 4a084cd6c2c06c709aa79d6776a70ff9b3df7ce6
 								</div>
 							</div>
 							<div class="col-xl-12 col-lg-12 col-md-6 col-sm-6">
 								<div class="single-gallery mb-30">
-									<div class="gallery-img small-img"
-										style="background-image: url(assets/img/gallery/gallery4.png);"></div>
+<<<<<<< HEAD
+									<div class="gallery-img small-img" Onclick="location.href='blogDetail.do?milNo=${recipe2[3].mil_no }';"
+										style="background-image: url(images/${recipe2[3].image }); cursor: pointer;"></div>
+=======
+								<div OnClick="location.href='blogDetail.do?milNo=${recipe2[0].mil_no }';" style="cursor:pointer;">
+									<div class="gallery-img small-img" 
+										style="background-image: url(images/${recipe2[3].image }); "></div>
+										</div>
+>>>>>>> 4a084cd6c2c06c709aa79d6776a70ff9b3df7ce6
 								</div>
 							</div>
 						</div>
