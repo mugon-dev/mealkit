@@ -10,14 +10,9 @@
 				<div class="col-lg-8">
 					<div class="product_img_slide owl-carousel">
 						<div class="single_product_img">
-							<img src="assets/img/gallery/aaa.jpg" alt="#" class="img-fluid">
+							<img src="images/${recipe.image }" alt="#" class="img-fluid">
 						</div>
-						<div class="single_product_img">
-							<img src="assets/img/gallery/bbb.jpg" alt="#" class="img-fluid">
-						</div>
-						<div class="single_product_img">
-							<img src="assets/img/gallery/ccc.jpg" alt="#" class="img-fluid">
-						</div>
+						
 					</div>
 				</div>
 				<div class="col-lg-12">
