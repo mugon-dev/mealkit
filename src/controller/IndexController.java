@@ -63,9 +63,14 @@ public class IndexController extends HttpServlet {
 			List<Material> list=new ArrayList<Material>();
 			list=MaterialDao.getInstance().selectMain();
 			request.setAttribute("list", list);
-			List<Recipe> recipe = new ArrayList<Recipe>();
-			recipe = RecipeDao.getInstance().selectLatest();
-			request.setAttribute("recipe", recipe);
+			List<Recipe> recipe1 = new ArrayList<Recipe>();
+			List<Recipe> recipe2 = new ArrayList<Recipe>();
+			String idx1 = "1";
+			String idx2 = "2";
+			recipe1 = RecipeDao.getInstance().selectLatest(idx1);
+			recipe2 = RecipeDao.getInstance().selectLatest(idx2);
+			request.setAttribute("recipe1", recipe1);
+			request.setAttribute("recipe2", recipe2);
 			request.getRequestDispatcher("main/home.jsp").forward(request, response);
 		} else if (action.equals("/loginForm.do")) {
 			String mil_no= request.getParameter("no");
@@ -437,7 +442,7 @@ public class IndexController extends HttpServlet {
 	private Map<String, String> upload(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Map<String, String> recipeMap = new HashMap<String, String>();
 		String encoding = "UTF-8";
-		File currentDirPath = new File("D:\\src\\teamwork\\mealkit\\WebContent");
+		File currentDirPath = new File("D:\\src\\teamwork\\mealkit\\WebContent\\images");
 		DiskFileItemFactory factory = new DiskFileItemFactory();
 		factory.setRepository(currentDirPath);
 		factory.setSizeThreshold(1024 * 1024 * 5); // 5GB

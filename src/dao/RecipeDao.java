@@ -109,15 +109,16 @@ public class RecipeDao {
 		}
 		return list;
 	}
-	public List<Recipe> selectLatest(){
+	public List<Recipe> selectLatest(String idx){
 		List<Recipe> list=new ArrayList<Recipe>();
 		Connection conn=null;
 		PreparedStatement ps=null;
 		ResultSet rs=null;
-		String sql="select * from recipe order by rgst_dt limit 3";
+		String sql="select * from recipe where=? order by rgst_dt limit 4";
 		try {
 			conn=DBConn.getConn();
 			ps=conn.prepareStatement(sql);
+			ps.setString(1, idx);
 			rs=ps.executeQuery();
 			while(rs.next()) {
 				Recipe recipe=new Recipe();
