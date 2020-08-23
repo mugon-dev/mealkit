@@ -21,6 +21,8 @@ public class OrderDao {
 		PreparedStatement ps=null;
 		String sql="insert into ord(no,mat_no,mat_nm,mat_qty,mat_unit) values(?,?,?,?,?)";
 		try {
+			System.out.println("여기는 orderDao Insert:"+order.getMat_nm());
+			System.out.println("sdlkfjsdf");
 			conn=DBConn.getConn();
 			ps=conn.prepareStatement(sql);
 			ps.setInt(1, order.getNo());

@@ -263,6 +263,7 @@ public class IndexController extends HttpServlet {
     			Material material=MaterialDao.getInstance().selectOne(Integer.parseInt(request.getParameter("material"+temp)));
     			mat[i]=Integer.parseInt(request.getParameter("mat"+temp));
     			order=new Order(no,material.getMat_no(),material.getMat_nm(),mat[i],material.getMat_unit());
+    			System.out.println("여기가 입력된 값:"+order.toString());
     			boolean b=OrderDao.getInstance().insert(order);
     			if(b==true) {
     				System.out.println("카트 입력 성공");

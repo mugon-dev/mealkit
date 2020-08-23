@@ -37,11 +37,11 @@
 										<tbody>
 	
 												<tr>
-													<td align="right" width=30%>${matOne.mat_nm }</td> <!-- 재료명 -->
+													<td align="right" width=30%>${mat.mat_nm }</td> <!-- 재료명 -->
 													<td align="center" width=40%>
 														<div class="product_count d-inline-block">
 															<span id="decrement" class="product_count_item inumber-decrement"> 
-															<i class="ti-minus"></i></span> <input id="mat_count" name="mat_count"
+															<i class="ti-minus"></i></span> <input id="mat_count" name="mat1"
 																class="product_count_item input-number" type="text"
 																value="1" min="0" max="10"> <span
 																id="increment"
@@ -49,9 +49,10 @@
 																class="ti-plus"></i>
 															</span>
 														</div>
-														<input type="hidden" name="material" value="${material.mat_no }"/>
+														<input type="hidden" name="material1" value="${mat.mat_no }"/>
+														<input type="hidden" name="count" value="1"/>
 													</td>
-													<td align="left" width=30%>${matOne.mat_unit }</td> <!-- 단위 -->
+													<td align="left" width=30%>${mat.mat_unit }</td> <!-- 단위 -->
 												</tr>
 											
 											
@@ -71,7 +72,7 @@
 												<c:if test="${empty session_no }"> <!--로그인 안되어있을때 add cart  -->
 													<td colspan="3">
 														<div class="add_to_cart">
-															<button type="button" id="login" value="${matOne.mat_no }" class="btn_3">로그인
+															<button type="button" id="login" value="${mat.mat_no }" class="btn_3">로그인
 															</button>
 															
 														</div>
@@ -112,7 +113,6 @@
 	<!-- subscribe part end -->
 </main>
 <script type="text/javascript">
-	for(let i=1;i<4;i++){
 		$('#increment').on('click', function() {
 			var value = $('#mat_count').val();
 			var min = 0;
@@ -138,7 +138,6 @@
 				alert("최소값입니다.");
 			}
 		});
-	}
 
 	$('#login').on('click',function(){
 		var value=$('#login').val();
