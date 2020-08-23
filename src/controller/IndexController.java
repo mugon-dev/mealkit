@@ -205,7 +205,7 @@ public class IndexController extends HttpServlet {
 			} else {
 				out.print("<script>alert('새 글 추가 실패했습니다.'); location.href='matForm.do';</script>");
 			}
-		} else if (action.equals("/matDetailForm.do")) { // mat상세페이지
+		} else if (action.equals("/matDetail.do")) { // mat상세페이지
 			int no=Integer.parseInt(request.getParameter("no"));
 			Material matOne = MaterialDao.getInstance().selectOne(no);
 			if(matOne != null) {
