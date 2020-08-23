@@ -10,7 +10,7 @@
 						<div class="login_part_text_iner">
 							<img src="images/${blog.image }" width="450" height="300">
 							<p></p><p></p><br>
-							<h2>${blog.title }</h2>
+							<h2>No.${blog.milNo } ${blog.title }</h2>
 						</div>
 					</div>
 				</div>
@@ -254,13 +254,14 @@
 							<div class="col-md-12 from-froup p_star" >
 								<div class="row">
 									<div class="col-md-4 form-group">
-										<button type="button" id="btnInsert" class="btn_3">구매</button>
+										<button type="button" id="btnCart" name="btnCart" class="btn_3">구매</button>
 									</div>
 									<div class="col-md-4 form-group">
-										<button type="button" id="btnUpdate" class="btn_3">수정</button>
+										<button type="button" id="btnUpdate" name="btnUpdate" class="btn_3">수정</button>
 									</div>
 									<div class="col-md-4 form-group">
-										<button type="button" id="btnDelete" class="btn_3">삭제</button>
+										<input type="hidden" name="milNo" id="milNo" value="${blog.milNo } ">
+										<button type="button" id="btnDelete" name="btnDelete" class="btn_3" onclick="location.href='deleteBlog.do?milNo=${blog.milNo }'">삭제</button>
 									</div>
 								</div>
 							</div>
@@ -334,7 +335,35 @@
 </section>
 
 <script type="text/javascript">
-
+// 	$("#btnUpdate").on('click', function(){
+// 		alert('sdfsdf');
+// 		location.href="updateBlog.do";
+// 	});
+// 	$("#btnDelete").on('click', function(){
+// 		alert('sdfsdf');
+// 		location.href="deleteBlog.do";
+// 	});
+	
+	
+// 	$("#btnDelete").on('click', function() {
+// 		$.ajax({
+// 			type : "post",
+// 			url : "deleteBlog.do",
+// 			data : {
+// 				"milNo" :$("#milNo").val()
+// 			},
+// 			async : false,
+// 			dataType : "text",
+// 			success : function(data, textStatus) {
+// 					alert("삭제 성공");
+// 			},
+// 			error : function(data, textStatus) {
+// 				alert("error");
+// 			},
+// 			complete : function(data, textStatus) {
+// 			}
+// 		});
+// 	});
 </script>
 
 <%@ include file="../include/footer.jsp"%>

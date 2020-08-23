@@ -394,26 +394,26 @@ public class IndexController extends HttpServlet {
 		} else if(action.equals("/blogWrite.do")) { 
 			System.out.println("================== blogWrite.do ==================");
 			
-			Map<String, String> recipeMap = upload(request, response);
+			Map<String, String> blogMap = upload(request, response);
 			
-			int matQty1 = Integer.parseInt(recipeMap.get("matQty1"));
+			int matQty1 = Integer.parseInt(blogMap.get("matQty1"));
 			System.out.println(matQty1);
-			int matQty2 = Integer.parseInt(recipeMap.get("matQty2"));
-			int matQty3 = Integer.parseInt(recipeMap.get("matQty3")); 
-			int no = Integer.parseInt(recipeMap.get("no"));
-			String recIdx = recipeMap.get("recIdx");
-			String title = recipeMap.get("title");
-			String content  = recipeMap.get("content");
-			String image = recipeMap.get("filename");
-			String cookIdx = recipeMap.get("cookIdx");
-			String cookType = recipeMap.get("cookType");
-			String matNo1 = recipeMap.get("matNo1");
-			String matNo2 = recipeMap.get("matNo2");
-			String matNo3 = recipeMap.get("matNo3");
-			String matEtc = recipeMap.get("matEtc");
-			String plate = recipeMap.get("plate");
-			String hour = recipeMap.get("hour");
-			String level = recipeMap.get("level");
+			int matQty2 = Integer.parseInt(blogMap.get("matQty2"));
+			int matQty3 = Integer.parseInt(blogMap.get("matQty3")); 
+			int no = Integer.parseInt(blogMap.get("no"));
+			String recIdx = blogMap.get("recIdx");
+			String title = blogMap.get("title");
+			String content  = blogMap.get("content");
+			String image = blogMap.get("filename");
+			String cookIdx = blogMap.get("cookIdx");
+			String cookType = blogMap.get("cookType");
+			String matNo1 = blogMap.get("matNo1");
+			String matNo2 = blogMap.get("matNo2");
+			String matNo3 = blogMap.get("matNo3");
+			String matEtc = blogMap.get("matEtc");
+			String plate = blogMap.get("plate");
+			String hour = blogMap.get("hour");
+			String level = blogMap.get("level");
 			
 			boolean flag = BlogDao.getInstance().insert(new Blog(matQty1, matQty2, matQty3,
 					no, recIdx, title, content, image, cookIdx, cookType, matNo1, matNo2,
@@ -424,8 +424,35 @@ public class IndexController extends HttpServlet {
 			} else {
 				out.print("<script>alert('새 글 추가 실패했습니다.'); location.href='blogForm.do';</script>");
 			}
-    		
-    	}
+    	} else if(action.equals("/deleteBlog.do")) {
+    		System.out.println("================== delete.do ==================");
+			int milNo = Integer.parseInt(request.getParameter("milNo"));
+			boolean flag = BlogDao.getInstance().delete(milNo);
+			String pageNum = request.getParameter("pageNum");
+			if(flag) {
+				out.print("<script>alert('글을 삭제했습니다.'); location.href='blogForm.do';</script>");
+			} else {
+				out.print("<script>alert('글삭제를 실패했습니다.'); location.href='blogDetail.do?milNo=" + milNo + "&pageNum=" + pageNum + "';</script>");
+			}
+		} else if(action.equals("/updateBlog.do")) {
+			Map<String, String> blogMap = upload(request, response);
+			int milNo = Integer.parseInt(blogMap.get("milNo"));
+			String title = blogMap.get("title");
+			String content = blogMap.get("content");
+			String writer = blogMap.get("writer");
+			String image = blogMap.get("filename");
+			String pageNum = blogMap.get("pageNum");
+			if(image == null) {
+				image = blogMap.get("noImage.png");
+			}
+			//boolean flag = BlogDao.getInstance().update(new Blog(milNo, title, content, writer, image));
+			
+//			if(flag) {
+//				out.print("<script>alert('글을 수정했습니다.'); location.href='list.do?pageNum=" + pageNum + "';</script>");
+//			} else {
+//				out.print("<script>alert('글수정을 실패했습니다.'); location.href='updateForm.do?milNo=" + milNo + "&pageNum=" + pageNum + "';</script>");
+//			}
+		}
 	}
 
 	private int nvl(int parseInt, int i) {
