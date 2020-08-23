@@ -28,7 +28,11 @@ public class BlogDao {
 			sql += " WHERE COOK_IDX = " + idx + " ";
 		} else if(idx.equals("5")) { // 전체보기
 		} else if(idx.equals("6")) { // 내글보기
-			sql += " WHERE NO = " + no + " ";
+			if(no != null) {
+				sql += " WHERE NO = 1 ";
+			} else {
+				sql += " WHERE NO = " + no + " ";
+			}
 		}
 		
 		sql += " ORDER BY MIL_NO DESC LIMIT ?, 3 ";
@@ -93,7 +97,7 @@ public class BlogDao {
 		try {
 			conn = DBConn.getConn();
 			ps = conn.prepareStatement(sql);
-			System.out.println(sql);
+			System.out.println(blog.toString());
 			
 			ps.setInt(1, blog.getMatQty1());
 			ps.setInt(2, blog.getMatQty2());
@@ -113,8 +117,8 @@ public class BlogDao {
 			ps.setNString(16, blog.getHour());
 			ps.setNString(17, blog.getLevel());
 			
-			System.out.println(sql);
 			int n = ps.executeUpdate();
+			System.out.println(sql);
 			
 			if(n == 1) {
 				flag = true;

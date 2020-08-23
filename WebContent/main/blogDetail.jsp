@@ -4,103 +4,265 @@
 <section class="login_part section_padding ">
 	<div class="container">
 		<div class="row align-items-center">
-			<form class="row contact_form" action="blogDetailForm.do" method="post" > 
+			<form class="row contact_form" action="blogDetail.do" method="post" enctype="multipart/form-data" > 
 				<div class="col-lg-6 col-md-6">
-					<div class="login_part_text text-center">
+					<div class="login_part_text text-center" >
 						<div class="login_part_text_iner">
-							<h2>New to our Shop?</h2>
-							<p>There are advances being made in science and technology
-								everyday, and a good example of this is the</p>
-							<a href="blogDetailForm.do" class="btn_3">파일 업로드</a>
+							<img src="images/${blog.image }" width="450" height="300">
+							<p></p><p></p><br>
+							<h2>${blog.title }</h2>
 						</div>
 					</div>
 				</div>
 				<div class="col-lg-6 col-md-6">
 					<div class="login_part_form">
 						<div class="login_part_form_iner">
-							<h3>
-								당신만의 ! <br> 레시피를 등록해보세요!
-							</h3>
 							<div class="col-md-12 form-group p_star" >
-								<input type="text" class="form-control" id="title" name="title" placeholder="제목" >
-							</div>
-							<div class="col-md-12 form-group p_star" >
-								<input type="text" class="form-control" id="title" name="title" placeholder="요리소개" >
-							</div>
-							<div class="col-md-12 form-group p_star" >
-								카테고리
-								<select name="type2" data-trigger="" name="choices-single-defaul">
-									<option value="pork">돼지</option>
-									<option value="beef">소</option>
-									<option value="chicken">닭</option>
-								</select>
-								<select name="type3" data-trigger="" name="choices-single-defaul">
-									<option value="boiled">찜</option>
-									<option value="grilled">구이</option>
-									<option value="raw">생식</option>
-								</select>
-								<select name="type1" data-trigger="" name="choices-single-defaul">
-									<option value="korean">한식</option>
-									<option value="chinese">중식</option>
-									<option value="japanese">일식</option>
-									<option value="western">양식</option>
-								</select>
-							</div>
-							<div class="col-md-12 form-group p_star" >
-								요리정보
-								<select name="type2" data-trigger="" name="choices-single-defaul">
-									<option value="1">1~2인</option>
-									<option value="2">3~4인</option>
-									<option value="3">5~10인</option>
-								</select>
-								<select name="type3" data-trigger="" name="choices-single-defaul">
-									<option value="1">1시간 이하</option>
-									<option value="2">1시간 이상</option>
-									<option value="3">2이간 이하</option>
-								</select>
-								<select name="type1" data-trigger="" name="choices-single-defaul">
-									<option value="1">상</option>
-									<option value="2">중</option>
-									<option value="3">하</option>
-								</select>
-							</div>
-							<!--
-							<div class="col-md-8 form-group"  style="width:90%;">
-								<div class="input-select">
-									
-									
-								</div>
-								<div class="input-select">
-									
-								</div>
-								<div class="input-select">
-									
+								<div class="row">
+									제목: &nbsp;<input type="text" id="title" class="form-control" value="${blog.title }" >
 								</div>
 							</div>
-							-->
+							<div class="col-md-12 form-group p_star" >
+								<div class="row">
+									음식 종류: &nbsp;&nbsp;
+									<select name="type1" data-trigger="" name="choices-single-defaul">
+										<c:choose>
+											<c:when test="${blog.cookIdx == 1 }"> 
+												<option value="1" selected>한식</option>
+												<option value="2">중식</option>
+												<option value="3">일식</option>
+												<option value="4">양식</option>
+											</c:when>
+											<c:when test="${blog.cookIdx == 2 }"> 
+												<option value="1">한식</option>
+												<option value="2" selected>중식</option>
+												<option value="3">일식</option>
+												<option value="4">양식</option>
+											</c:when>
+											<c:when test="${blog.cookIdx == 3 }"> 
+												<option value="1">한식</option>
+												<option value="2">중식</option>
+												<option value="3" selected>일식</option>
+												<option value="4">양식</option>
+											</c:when>
+											<c:when test="${blog.cookIdx == 4 }"> 
+												<option value="1">한식</option>
+												<option value="2">중식</option>
+												<option value="3">일식</option>
+												<option value="4" selected>양식</option>
+											</c:when>
+										</c:choose>
+									</select>
+									&nbsp;&nbsp; 조리 방식: &nbsp;&nbsp;
+									<select name="type1" data-trigger="" name="choices-single-defaul">
+										<c:choose>
+											<c:when test="${blog.cookType == 1 }"> 
+												<option value="1" selected>구이</option>
+												<option value="2">찜</option>
+												<option value="3">탕</option>
+												<option value="4">생식</option>
+												<option value="5">기타</option>
+											</c:when>
+											<c:when test="${blog.cookType == 2 }"> 
+												<option value="1">구이</option>
+												<option value="2" selected>찜</option>
+												<option value="3">탕</option>
+												<option value="4">생식</option>
+												<option value="5">기타</option>
+											</c:when>
+											<c:when test="${blog.cookType == 3 }"> 
+												<option value="1">구이</option>
+												<option value="2">찜</option>
+												<option value="3" selected>탕</option>
+												<option value="4">생식</option>
+												<option value="5">기타</option>
+											</c:when>
+											<c:when test="${blog.cookType == 4 }"> 
+												<option value="1">구이</option>
+												<option value="2">찜</option>
+												<option value="3">탕</option>
+												<option value="4" selected>생식</option>
+												<option value="5">기타</option>
+											</c:when>
+											<c:when test="${blog.cookType == 5 }"> 
+												<option value="1">구이</option>
+												<option value="2">찜</option>
+												<option value="3">탕</option>
+												<option value="4">생식</option>
+												<option value="5" selected>기타</option>
+											</c:when>
+										</c:choose>
+									</select>
+								</div>
+							</div>
+							<div class="col-md-12 form-group p_star" >
+								<div class="row">
+									인원 수: &nbsp;&nbsp;
+									<select name="type1" data-trigger="" name="choices-single-defaul">
+										<c:choose>
+											<c:when test="${blog.plate == 1 }"> 
+												<option value="1" selected>1~2인</option>
+												<option value="2">3~4인</option>
+												<option value="3">5인 이상</option>
+											</c:when>
+											<c:when test="${blog.plate == 2 }"> 
+												<option value="1">1~2인</option>
+												<option value="2" selected>3~4인</option>
+												<option value="3">5인 이상</option>
+											</c:when>
+											<c:when test="${blog.plate == 3 }"> 
+												<option value="1">1~2인</option>
+												<option value="2">3~4인</option>
+												<option value="3" selected>5인 이상</option>
+											</c:when>
+										</c:choose>
+									</select>
+									&nbsp;&nbsp; 조리시간: &nbsp;&nbsp;
+									<select name="type1" data-trigger="" name="choices-single-defaul">
+										<c:choose>
+											<c:when test="${blog.hour == 1 }"> 
+												<option value="1" selected>1시간 이하</option>
+												<option value="2">2시간 이하</option>
+												<option value="3">2시간 이상</option>
+											</c:when>
+											<c:when test="${blog.hour == 2 }"> 
+												<option value="1">1시간 이하</option>
+												<option value="2" selected>2시간 이하</option>
+												<option value="3">2시간 이상</option>
+											</c:when>
+											<c:when test="${blog.hour == 3 }"> 
+												<option value="1">1시간 이하</option>
+												<option value="2">2시간 이하</option>
+												<option value="3" selected>2시간 이상</option>
+											</c:when>
+										</c:choose>
+									</select>
+								</div>
+							</div>
+							
 							<div class="col-md-12 form-group p_star">
-								<input type="password" class="form-control" id="pw" name="pw" placeholder="재료" >
+								<div class="row">
+									난이도: &nbsp;&nbsp;
+									<select name="type1" data-trigger="" name="choices-single-defaul">
+										<c:choose>
+											<c:when test="${blog.level == 1 }"> 
+												<option value="1" selected>상</option>
+												<option value="2">중</option>
+												<option value="3">하</option>
+											</c:when>
+											<c:when test="${blog.level == 2 }"> 
+												<option value="1">상</option>
+												<option value="2" selected>중</option>
+												<option value="3">하</option>
+											</c:when>
+											<c:when test="${blog.level == 3 }"> 
+												<option value="1">상</option>
+												<option value="2">중</option>
+												<option value="3" selected>하</option>
+											</c:when>
+										</c:choose>
+									</select>
+								</div>
 							</div>
 							<div class="col-md-12 form-group p_star">
-								<input type="text" class="form-control" id="name" name="name" placeholder="UserName" >
+								<div class="row">
+									<div class="col-md-3 form-group">
+										재료1:
+									</div>
+									<div class="col-md-3 form-group">
+										<div class="input-select">
+											<!-- 여기서 재료 리스트 받아서 forEach로 입력 -->
+											<select name="type2" data-trigger="" name="choices-single-defaul">
+												<c:forEach items="${list }" var="list">
+												<c:if test="${list.mat_no==blog.matNo1 }">
+													<option value="${list.mat_no }" selected>${list.mat_nm }</option>
+												</c:if>
+												<c:if test="${list.mat_no!=blog.matNo1 }">
+													<option value="${list.mat_no }">${list.mat_nm }</option>
+												</c:if>
+												</c:forEach>
+											</select>
+										</div>
+									</div>
+									<div class="col-md-3 form-group">
+										수량1: 
+									</div> 
+									<div class="col-md-3 form-group">
+										<input type="text" id="matEtc" value="${blog.matQty1 }" class="form-control">
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-3 form-group">
+										재료2: 
+									</div>
+									<div class="col-md-3 form-group">
+										<div class="input-select">
+											<!-- 여기서 재료 리스트 받아서 forEach로 입력 -->
+											<select name="type2" data-trigger="" name="choices-single-defaul">
+												<c:forEach items="${list }" var="list">
+												<c:if test="${list.mat_no==blog.matNo2 }">
+													<option value="${list.mat_no }" selected>${list.mat_nm }</option>
+												</c:if>
+												<c:if test="${list.mat_no!=blog.matNo2 }">
+													<option value="${list.mat_no }">${list.mat_nm }</option>
+												</c:if>
+												</c:forEach>
+											</select>
+										</div>
+									</div>
+									<div class="col-md-3 form-group">
+										수량2:
+									</div> 
+									<div class="col-md-3 form-group">
+										<input type="text" id="matEtc" value="${blog.matQty2 }" class="form-control">
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-3 form-group">
+										재료3:
+									</div>
+									<div class="col-md-3 form-group">
+										<div class="input-select">
+											<!-- 여기서 재료 리스트 받아서 forEach로 입력 -->
+											<select name="type2" data-trigger="" name="choices-single-defaul">
+												<c:forEach items="${list }" var="list">
+												<c:if test="${list.mat_no==blog.matNo3 }">
+													<option value="${list.mat_no }" selected>${list.mat_nm }</option>
+												</c:if>
+												<c:if test="${list.mat_no!=blog.matNo3 }">
+													<option value="${list.mat_no }">${list.mat_nm }</option>
+												</c:if>
+												</c:forEach>
+											</select>
+										</div>
+									</div>
+									<div class="col-md-3 form-group">
+										수량3: 
+									</div> 
+									<div class="col-md-3 form-group">
+										<input type="text" id="matEtc" value="${blog.matQty3 }" class="form-control">
+									</div>
+								</div>
 							</div>
 							<div class="col-md-12 form-group p_star">
-								<input type="text" class="form-control" id="mail" name="mail" placeholder="E-mail" >
+								기타 재료: <input type="text" id="matEtc" value="${blog.matEtc }" class="form-control">
 							</div>
 							<div class="col-md-12 form-group p_star">
-								<input type="text" class="form-control" id="addr" name="addr" placeholder="Address" >
+								내용: <textarea type="text" class="form-control" id="content" rows="5"> ${blog.content } </textarea>
 							</div>
-							<div class="col-md-12 form-group p_star">
-								<input type="text" class="form-control" id="tel" name="tel" placeholder="Tel" >
-							</div>
-							<div class="col-md-4 form-group">
-								<button type="submit" id="btnInsert" class="btn_3">등록</button>
-							</div>
-							<div class="col-md-4 form-group">
-								<button type="button" id="btnUpdate" class="btn_3">수정</button>
-							</div>
-							<div class="col-md-4 form-group">
-								<button type="button" id="btnDelete" class="btn_3">삭제</button>
+							
+							<div class="col-md-12 from-froup p_star" >
+								<div class="row">
+									<div class="col-md-4 form-group">
+										<button type="button" id="btnInsert" class="btn_3">구매</button>
+									</div>
+									<div class="col-md-4 form-group">
+										<button type="button" id="btnUpdate" class="btn_3">수정</button>
+									</div>
+									<div class="col-md-4 form-group">
+										<button type="button" id="btnDelete" class="btn_3">삭제</button>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
