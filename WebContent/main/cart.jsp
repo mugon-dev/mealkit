@@ -63,7 +63,7 @@
 												id="mat${count }" name="qty_${count }" value="${order.mat_qty }" min="0" max="10"> <span
 												class="input-number-increment"> <i class="ti-plus" id="increment${count }"></i></span>
 										</div>
-										<input type="hidden" name="ord_${count }" value="${order.ord_no }"/>
+										<input type="hidden" name="ord_${count }" value="${order.order_no }"/>
 										
 									</td>
 									<td>

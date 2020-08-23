@@ -442,7 +442,7 @@ public class IndexController extends HttpServlet {
 	private Map<String, String> upload(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Map<String, String> recipeMap = new HashMap<String, String>();
 		String encoding = "UTF-8";
-		File currentDirPath = new File("D:\\src\\teamwork\\mealkit\\WebContent");
+		File currentDirPath = new File("D:\\src\\teamwork\\mealkit\\WebContent\\images");
 		DiskFileItemFactory factory = new DiskFileItemFactory();
 		factory.setRepository(currentDirPath);
 		factory.setSizeThreshold(1024 * 1024 * 5); // 5GB
