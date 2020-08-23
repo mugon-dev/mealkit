@@ -114,7 +114,7 @@ public class RecipeDao {
 		Connection conn=null;
 		PreparedStatement ps=null;
 		ResultSet rs=null;
-		String sql="select * from recipe where=? order by rgst_dt limit 4";
+		String sql="select * from recipe where rec_idx=? order by rgst_dt limit 4";
 		try {
 			conn=DBConn.getConn();
 			ps=conn.prepareStatement(sql);
