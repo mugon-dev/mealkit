@@ -103,7 +103,7 @@
 										<span class="flaticon-search"></span>
 									</div>
 								</li>
-								<li><<c:choose>
+								<li><c:choose>
 										<c:when test="${empty session_id }">
 											<a href="loginForm.do"><span class="flaticon-user"></span></a>
 										</c:when>
