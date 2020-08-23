@@ -20,8 +20,8 @@
 										</c:if>
 									</div>
 				
-									<div class="blog_details">
-										<a class="d-inline-block" href="blogDetailForm.do">
+									<div class="blog_details"> 
+										<a class="d-inline-block" href="blogDetail.do?milNo=${blog.milNo }">
 											<h2> No.${blog.milNo } ${blog.title } </h2>
 										</a><br> ${blog.content } </p>
 										<ul class="blog-info-link">
@@ -66,9 +66,11 @@
 								<li>
 									<a href="blogForm.do?idx=5&no=${session_no }" class="d-flex"><p>전체보기</p></a>
 								</li>
-								<li>
-									<a href="blogForm.do?idx=6&no=${session_no }" class="d-flex"><p>내글보기</p></a>
-								</li>
+<%--								<c:if test="${not empty session_no }">  --%>
+									<li>
+										<a href="blogForm.do?idx=6&no=${session_no }" class="d-flex"><p>내글보기</p></a>
+									</li>
+<%--								</c:if>  --%>
 								<li>
 									<a href="blogForm.do?idx=1&no=${session_no }" class="d-flex"><p>한식</p></a>
 								</li>
@@ -91,7 +93,7 @@
 
 	<script type="text/javascript">
 		$("#btnBlogDetailWrite").on('click', function(){
-			location.href = "blogDetailForm.do";
+			location.href = "blogWriteForm.do";
 		});
 	</script>
 <%@ include file="../include/footer.jsp"%>

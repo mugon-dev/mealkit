@@ -116,7 +116,7 @@
 												<div class="dropdown-menu">
 													<a class="dropdown-item" href="MyPageForm.do">MyPage</a> <a
 														class="dropdown-item" data-toggle="modal"
-														data-target="#idMoal" data-whatever="@mdo" href="readPerson.do?no=${session_no }">내 정보 수정</a> <a
+														data-target="#idMoal" data-whatever="@mdo" id="temp" href='javascript:void(0);' onclick="modalPopup()" >내 정보 수정</a> <a
 														class="dropdown-item" href="#" id="logout">로그아웃</a>
 												</div>
 											</div>

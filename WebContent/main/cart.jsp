@@ -20,6 +20,7 @@
 	<section class="cart_area section_padding">
 		<div class="container">
 			<div class="cart_inner">
+			<form action="purchase.do" method="post">
 				<div class="table-responsive">
 					<table class="table">
 						<thead>
@@ -31,13 +32,16 @@
 							</tr>
 						</thead>
 						<tbody>
+							
 							<c:set var="sum" value="0"/>
 							<c:forEach items="${listOrder }" var="order" varStatus="loop">
+								
 								<c:set var="count" value="${loop.count }"/>
 								<c:set var="price" value="${order.price }"/>
 								<c:set var="qty" value="${order.mat_qty }"/>
 								<c:set var="total" value="${price * qty}"/>	
 								<c:set var="sum" value="${sum + total }"/>
+								
 								<tr>
 									<td>
 										<div class="media">
@@ -56,9 +60,11 @@
 										<div class="product_count">
 											<span class="input-number-decrement"> <i
 												class="ti-minus" id="decrement${count }"></i></span> <input class="input-number" type="text"
-												id="mat${count }" value="${order.mat_qty }" min="0" max="10"> <span
+												id="mat${count }" name="qty_${count }" value="${order.mat_qty }" min="0" max="10"> <span
 												class="input-number-increment"> <i class="ti-plus" id="increment${count }"></i></span>
 										</div>
+										<input type="hidden" name="ord_${count }" value="${order.ord_no }"/>
+										
 									</td>
 									<td>
 										<h5 id="total${count }">${total }</h5>
@@ -130,10 +136,15 @@
 						</tbody>
 					</table>
 					<div class="checkout_btn_inner float-right">
-						<a class="btn_1" href="#">Continue Shopping</a> <a
-							class="btn_1 checkout_btn_1" href="#">Proceed to checkout</a>
+						<a class="btn_1" href="#">Continue Shopping</a> 
+						<input type="hidden" name="count" value="${count }"/>
+						<button type="submit" class="btn_1 checkout_btn_1">구매하기</button>
+						<!-- <a
+							class="btn_1 checkout_btn_1" href="#">Proceed to checkout</a> -->
+							
 					</div>
 				</div>
+				</form>
 			</div>
 		</div>
 	</section>

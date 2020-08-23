@@ -24,6 +24,7 @@ import dao.MaterialDao;
 import dao.MemberDao;
 import dao.OrderDao;
 import dao.RecipeDao;
+import dao.ReplyDao;
 import vo.Blog;
 import vo.Material;
 import vo.Member;
@@ -31,6 +32,7 @@ import vo.Order;
 import vo.OrderPrice;
 import vo.PageMaker;
 import vo.Recipe;
+import vo.Reply;
 
 /**
  * Servlet implementation class IndexController
@@ -296,7 +298,6 @@ public class IndexController extends HttpServlet {
     			Material material=MaterialDao.getInstance().selectOne(Integer.parseInt(request.getParameter("material"+temp)));
     			mat[i]=Integer.parseInt(request.getParameter("mat"+temp));
     			order=new Order(no,material.getMat_no(),material.getMat_nm(),mat[i],material.getMat_unit());
-    			System.out.println("여기가 입력된 값:"+order.toString());
     			boolean b=OrderDao.getInstance().insert(order);
     			if(b==true) {
     				System.out.println("카트 입력 성공");
@@ -315,8 +316,20 @@ public class IndexController extends HttpServlet {
     		listOrder=OrderDao.getInstance().selectOrder(no);
     		request.setAttribute("listOrder", listOrder);   		
     		request.getRequestDispatcher("main/cart.jsp").forward(request, response);
+    	}else if (action.equals("/purchase.do")) {
+    		int count=Integer.parseInt(request.getParameter("count"));
+    		int[] ord_no=new int[count];
+    		int[] ord_qty=new int[count];
+    		for(int i=0;i<count;i++) {
+    			int temp=i+1;
+    			ord_no[i]=Integer.parseInt(request.getParameter("ord_"+temp));
+    			ord_qty[i]=Integer.parseInt(request.getParameter("qty_"+temp));
+    			boolean f=OrderDao.getInstance().update(ord_no[i],ord_qty[i]);
+    		}
+    		request.getRequestDispatcher("main/shop.jsp").forward(request, response);
     	}
     	
+//============================================================================================================================================//		
     	else if(action.equals("/blogForm.do")) {
     		String strPage = request.getParameter("pageNum");
     		String idx = request.getParameter("idx");
@@ -344,19 +357,54 @@ public class IndexController extends HttpServlet {
     		request.getRequestDispatcher("main/blog.jsp").forward(request, response);
     	} else if(action.equals("/blogDetailForm.do")) {
     		System.out.println("================== blogDetailForm.do ==================");
+    		
+    		List<Material> list=new ArrayList<Material>();
+			list=MaterialDao.getInstance().selectMain();
+			request.setAttribute("list", list);
+			
 			request.getRequestDispatcher("main/blogDetail.jsp").forward(request, response);
 		} else if(action.equals("/blogDetail.do")) { 
-    		System.out.println("================== blogDetail.do ==================");
+			System.out.println("================== blogDetail.do ==================");
+			
+			List<Material> list=new ArrayList<Material>();
+			list=MaterialDao.getInstance().selectMain();
+			request.setAttribute("list", list);
+			
+    		int milNo = Integer.parseInt(request.getParameter("milNo"));
+    		System.out.println(milNo);
+    		Blog blog = BlogDao.getInstance().selectOne(milNo);
+    		boolean flag = BlogDao.getInstance().updateReadCount(milNo);
+			List<Reply> replyList = ReplyDao.getInstance().selectReply(milNo);
+    		if(blog != null && flag == true) {
+    			request.setAttribute("replyList", replyList);
+    			request.setAttribute("blog", blog);
+    			request.getRequestDispatcher("main/blogDetail.jsp").forward(request, response);
+    		} else {
+				out.print("<script>alert('게시글 조회 실패.'); location.href='blogForm.do';</script>");
+			}
+			
+    	} else if(action.equals("/blogWriteForm.do")) {
+    		System.out.println("================== blogWriteForm.do ==================");
+    		
+			List<Material> list=new ArrayList<Material>();
+			list=MaterialDao.getInstance().selectMain();
+			request.setAttribute("list", list);
+			
+			request.getRequestDispatcher("main/blogWrite.jsp").forward(request, response);
+		} else if(action.equals("/blogWrite.do")) { 
+			System.out.println("================== blogWrite.do ==================");
+			
 			Map<String, String> recipeMap = upload(request, response);
 			
 			int matQty1 = Integer.parseInt(recipeMap.get("matQty1"));
+			System.out.println(matQty1);
 			int matQty2 = Integer.parseInt(recipeMap.get("matQty2"));
 			int matQty3 = Integer.parseInt(recipeMap.get("matQty3")); 
 			int no = Integer.parseInt(recipeMap.get("no"));
 			String recIdx = recipeMap.get("recIdx");
 			String title = recipeMap.get("title");
 			String content  = recipeMap.get("content");
-			String image = recipeMap.get("image");
+			String image = recipeMap.get("filename");
 			String cookIdx = recipeMap.get("cookIdx");
 			String cookType = recipeMap.get("cookType");
 			String matNo1 = recipeMap.get("matNo1");
@@ -372,10 +420,11 @@ public class IndexController extends HttpServlet {
 					matNo3, matEtc, plate,  hour, level));
 			
 			if(flag) {
-				out.print("<script>alert('새 글을 추가했습니다.'); location.href='blogDetail.do';</script>");
+				out.print("<script>alert('새 글을 추가했습니다.'); location.href='blogForm.do';</script>");
 			} else {
 				out.print("<script>alert('새 글 추가 실패했습니다.'); location.href='blogForm.do';</script>");
 			}
+    		
     	}
 	}
 
@@ -388,7 +437,7 @@ public class IndexController extends HttpServlet {
 	private Map<String, String> upload(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Map<String, String> recipeMap = new HashMap<String, String>();
 		String encoding = "UTF-8";
-		File currentDirPath = new File(FILE_REPO);
+		File currentDirPath = new File("D:\\src\\teamwork\\mealkit\\WebContent");
 		DiskFileItemFactory factory = new DiskFileItemFactory();
 		factory.setRepository(currentDirPath);
 		factory.setSizeThreshold(1024 * 1024 * 5); // 5GB
@@ -398,7 +447,7 @@ public class IndexController extends HttpServlet {
 			List<FileItem> items = upload.parseRequest(request);
 			for (int i = 0; i < items.size(); i++) {
 				FileItem item = (FileItem) items.get(i);
-				if (item.isFormField()) {
+				if(item.isFormField()) {
 					System.out.println(item.getFieldName() + ":" + item.getString());
 					recipeMap.put(item.getFieldName(), item.getString());
 				} else {
@@ -406,7 +455,7 @@ public class IndexController extends HttpServlet {
 					System.out.println("파일명: " + item.getName());
 					System.out.println("파일의 크기: " + item.getSize());
 
-					if (item.getSize() > 0) {
+					if(item.getSize() > 0) {
 						int idx = item.getName().lastIndexOf("\\"); // 윈도우시스템
 						if (idx == -1) {
 							idx = item.getName().lastIndexOf("/"); // 리눅스시스템 파일 마지막 부분
@@ -418,7 +467,7 @@ public class IndexController extends HttpServlet {
 					}
 				}
 			}
-		} catch (Exception e) {
+		} catch(Exception e) {
 			e.printStackTrace();
 		}
 		return recipeMap;
