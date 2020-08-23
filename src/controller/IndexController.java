@@ -90,7 +90,31 @@ public class IndexController extends HttpServlet {
 				out.print("password error");
 			} else {
 				out.print("id error");
-			} // myPageForm.do
+			}
+		} else if (action.equals("/readPerson.do")) { //session_no 받아오기
+			int no = Integer.parseInt(request.getParameter("no"));
+			Member member = MemberDao.getInstance().selectOne(no);
+			request.setAttribute("member", member);
+			request.getRequestDispatcher("include/header.jsp").forward(request, response);
+		} else if (action.equals("/memberDelete.do")) { //member.no 받아와서 삭제
+			int no = Integer.parseInt(request.getParameter("no"));
+			boolean flag = MemberDao.getInstance().delete(no);
+			if(flag) {
+				out.print("<script>alert('삭제 성공');location.href='main.do';</script>");
+			}else {
+				out.print("<script>alert('삭제 실패');location.href='main.do';</script>");
+			}
+		} else if (action.equals("/memberUpdate.do")) { //session_no 받아오기
+			int no = Integer.parseInt(request.getParameter("no"));
+			String name = request.getParameter("name");
+			String addr = request.getParameter("addr");
+			String tel = request.getParameter("tel");
+			boolean flag = MemberDao.getInstance().update(new Member(name, addr, tel));
+			if (flag) {
+				out.print("<script>alert('회원 수정 성공');location.href='main.do';</script>");
+			} else {
+				out.print("<script>alert('회원 수정 실패');location.href='main.do';</script>");
+			}
 		} else if (action.equals("/myPageForm.do")) { // myPage 이동
 			request.getRequestDispatcher("main/myPage.jsp").forward(request, response);
 		} else if (action.equals("/registerForm.do")) {
@@ -214,8 +238,6 @@ public class IndexController extends HttpServlet {
 			}else {
 				out.print("<script>alert('게시글 조회 실패');location.href='list.do';</script>");
 			}
-			
-			
 		} else if(action.equals("/search.do")) {
 			//음식 타입 재료 조리방법 get
     		String type1=request.getParameter("type1");
