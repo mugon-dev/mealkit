@@ -180,7 +180,7 @@ public class IndexController extends HttpServlet {
 			if(flag) {
 				out.print("<script>alert('삭제 성공');location.href='matForm.do';</script>");
 			}else {
-				out.print("<script>alert('삭제 실패');location.href='matForm.do';</script>");
+				out.print("<script>alert('삭제 실패');location.href='matDetail.do';</script>");
 			}
 		}else if (action.equals("/logout.do")) { // 로그아웃 header의 ajax 스크립트
 			HttpSession session = request.getSession();
