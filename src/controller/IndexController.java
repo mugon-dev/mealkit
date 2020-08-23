@@ -181,7 +181,11 @@ public class IndexController extends HttpServlet {
 			} else {
 				out.print("usable");
 			}
-		} else if (action.equals("/shopForm.do")) {
+		} else if (action.equals("/logout.do")) { // 로그아웃 header의 ajax 스크립트
+			HttpSession session = request.getSession();
+			session.removeAttribute("session_id");
+			out.print("success");
+		}else if (action.equals("/shopForm.do")) {
 			request.getRequestDispatcher("main/shop.jsp").forward(request, response);
 		} else if (action.equals("/shop.do")) {
 
@@ -190,7 +194,6 @@ public class IndexController extends HttpServlet {
 		} else if (action.equals("/mat.do")) { // 재료 등록 , 사진업로드, hsahmap으로 수정
 			//Map<String, String> materialMap = MaterialDao.getInstance().upload(request, response,FILE_REPO);
 			Map<String, String> materialMap = upload(request, response);
-
 			int mat_no = Integer.parseInt(materialMap.get("mat_no"));
 			String mat_idx = materialMap.get("mat_idx");
 			String mat_nm = materialMap.get("mat_nm");
@@ -204,10 +207,17 @@ public class IndexController extends HttpServlet {
 			} else {
 				out.print("<script>alert('새 글 추가 실패했습니다.'); location.href='matForm.do';</script>");
 			}
-		} else if (action.equals("/logout.do")) { // 로그아웃 header의 ajax 스크립트
-			HttpSession session = request.getSession();
-			session.removeAttribute("session_id");
-			out.print("success");
+		} else if (action.equals("/matDetailForm.do")) { // mat상세페이지
+			int no=Integer.parseInt(request.getParameter("no"));
+			Material matOne = MaterialDao.getInstance().selectOne(no);
+			if(matOne != null) {
+			request.setAttribute("mat", matOne);
+			request.getRequestDispatcher("main/matDetail.jsp").forward(request, response);
+			}else {
+				out.print("<script>alert('게시글 조회 실패');location.href='list.do';</script>");
+			}
+			
+			
 		} else if(action.equals("/search.do")) {
 			//음식 타입 재료 조리방법 get
     		String type1=request.getParameter("type1");
@@ -381,45 +391,6 @@ public class IndexController extends HttpServlet {
 		}
 		return recipeMap;
 	}
-	//mat 업로드
-	public Map<String, String> matUpload(HttpServletRequest request, HttpServletResponse response,String FILE_REPO) throws ServletException, IOException {
-  		Map<String, String> matetrialMap = new HashMap<String, String>();
-  		String encoding = "UTF-8";
-  		File currentDirPath = new File(FILE_REPO);
-  		DiskFileItemFactory factory = new DiskFileItemFactory();
-  		factory.setRepository(currentDirPath);
-  		factory.setSizeThreshold(1024*1024*5); //5GB
-  		factory.setDefaultCharset(encoding); //파일올라올때 인코딩
-  		ServletFileUpload upload = new ServletFileUpload(factory);
-  		try {
-  			List<FileItem> items = upload.parseRequest(request);
-  			for(int i = 0 ; i < items.size() ; i++) {
-  				FileItem item = (FileItem)items.get(i);
-  				if(item.isFormField()) {
-  					System.out.println(item.getFieldName() + ":" + item.getString());
-  					matetrialMap.put(item.getFieldName(), item.getString());
-  				} else {
-  					System.out.println("파라미터명: " + item.getFieldName());
-  					System.out.println("파일명: " + item.getName());
-  					System.out.println("파일의 크기: " + item.getSize());
-  					
-  					if(item.getSize() > 0) {
-  						int idx = item.getName().lastIndexOf("\\"); //윈도우시스템
-  						if(idx == -1) {
-  							idx = item.getName().lastIndexOf("/"); //리눅스시스템 파일 마지막 부분 
-  						}
-  						String fileName = item.getName().substring(idx + 1);
-  						File uploadFile = new File(currentDirPath + "\\" + fileName);
-  						matetrialMap.put(item.getFieldName(), fileName);
-  						item.write(uploadFile);
-  					}
-  				}
-  			}
-  		} catch (Exception e) {
-  			e.printStackTrace();
-  		}
-  		return matetrialMap;
-  	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
