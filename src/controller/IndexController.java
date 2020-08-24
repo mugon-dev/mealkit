@@ -97,9 +97,9 @@ public class IndexController extends HttpServlet {
 					out.print("<script>alert('로그인성공');location.href='main.do';</script>");
 				}
 			} else if (n == 0) {
-				out.print("password error");
+				out.print("<script>alert('비밀번호 틀림');location.href='loginForm.do';</script>");
 			} else {
-				out.print("id error");
+				out.print("<script>alert('아이디 틀림');location.href='loginForm.do';</script>");
 			}
 		} else if (action.equals("/readPerson.do")) { //session_no 받아오기 //id 수정필요
 			int no = Integer.parseInt(request.getParameter("no"));
