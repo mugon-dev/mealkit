@@ -8,12 +8,9 @@
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-lg-8">
-					<div class="product_img_slide owl-carousel">
 						<div class="single_product_img">
 							<img src="images/${recipe.image }" alt="#" class="img-fluid">
 						</div>
-						
-					</div>
 				</div>
 				<div class="col-lg-12">
 					<div class="single_product_text text-center">

@@ -2,6 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="../include/header.jsp"%>
 
+
+
 <main>
 	<!--? slider Area Start -->
 	<div class="container">
@@ -89,7 +91,7 @@
 				</div>
 			</div>
 			<div class="row">
-			<c:forEach items="${recipe1 }" var="recipe1">
+			<c:forEach items="${recipe1 }" var="recipe1" begin="0" end="2">
 				<div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
 					<div class="single-new-pro mb-30 text-center">
 						<div class="product-img">
@@ -114,7 +116,7 @@
 		<div class="row">
 			<div class="col-xl-12">
 				<div class="section-tittle mb-70">
-					<h2>추천 레시피</h2>
+					<h2>신규 레시피</h2>
 				</div>
 			</div>
 		</div>
@@ -122,36 +124,34 @@
 			<div class="container-fluid p-0 fix">
 				<div class="row">
 					<div class="col-xl-6 col-lg-4 col-md-6 col-sm-6">
+					<div OnClick="location.href='blogDetail.do?milNo=${recipe2[0].mil_no }';" style="cursor:pointer;">
 						<div class="single-gallery mb-30">
-						<div OnClick="location.href='blogDetail.do?milNo=${recipe2[0].mil_no }';" style="cursor:pointer;">
 							<div class="gallery-img big-img" 
 								style="background-image: url(images/${recipe2[0].image });"></div>
-								</div>
+						</div>
 						</div>
 					</div>
 					<div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
+					<div OnClick="location.href='blogDetail.do?milNo=${recipe2[1].mil_no }';" style="cursor:pointer;">
 						<div class="single-gallery mb-30">
-						<a href="blogDetail.do?milNo=${recipe2[1].mil_no }"><span class="gallery-img big-img" >
-							<img src="images/${recipe2[1].image }"/></span></a>
-						<%-- <div OnClick="location.href='blogDetail.do?milNo=${recipe2[1].mil_no }';" style="cursor:pointer;">
 							<div class="gallery-img big-img" 
 								style="background-image: url(images/${recipe2[1].image });"></div>
-								</div> --%>
+								</div>
 						</div>
 					</div>
 					<div class="col-xl-3 col-lg-4 col-md-12">
 						<div class="row">
 							<div class="col-xl-12 col-lg-12 col-md-6 col-sm-6">
+							<div OnClick="location.href='blogDetail.do?milNo=${recipe2[2].mil_no }';" style="cursor:pointer;">
 								<div class="single-gallery mb-30">
-								<div OnClick="location.href='blogDetail.do?milNo=${recipe2[2].mil_no }';" style="cursor:pointer;">
 									<div class="gallery-img small-img" 
 										style="background-image: url(images/${recipe2[2].image });"></div>
 										</div>
 								</div>
 							</div>
 							<div class="col-xl-12 col-lg-12 col-md-6 col-sm-6">
+							<div OnClick="location.href='blogDetail.do?milNo=${recipe2[3].mil_no }';" style="cursor:pointer;">
 								<div class="single-gallery mb-30">
-								<div OnClick="location.href='blogDetail.do?milNo=${recipe2[0].mil_no }';" style="cursor:pointer;">
 									<div class="gallery-img small-img" 
 										style="background-image: url(images/${recipe2[3].image }); "></div>
 										</div>
@@ -194,6 +194,7 @@
 			deleteAll[i].click();
 		}
 	});
+	
 </script>
 
 <%@ include file="../include/footer.jsp"%>

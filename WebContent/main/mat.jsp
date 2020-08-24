@@ -2,74 +2,60 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="../include/header.jsp"%>
 <script type="text/javascript">
-$("#nav-meat-tab").on("click",function(){
-	location.href="matForm.do?mat_idx=10";
-});
+	$("#nav-meat-tab").on("click", function() {
+		location.href = "matForm.do?mat_idx=10";
+	});
 </script>
 <section class="popular-items latest-padding">
 	<div class="container">
-		<div class="row product-btn ">
-			<div
-				class="properties__button justify-content-between mb-40 col-lg-5">
-				<!--Nav Button  -->
-				<nav>
-					<div class="nav nav-tabs" id="nav-tab" role="tablist">
-						<a class="nav-item nav-link active" id="nav-whole-tab"
-							data-toggle="tab" href="#nav-whole" role="tab"
-							aria-controls="nav-whole" aria-selected="true">전체</a> 
-							
-														
-							<a 
-							class="nav-item nav-link" id="nav-meat-tab" data-toggle="tab"
-							href="#nav-meat" role="tab" aria-controls="nav-meat"
-							aria-selected="false">육류</a> 							
-						
-							
-							<a class="nav-item nav-link"
-							id="nav-vegetable-tab" data-toggle="tab" href="#nav-vegetable"
-							role="tab" aria-controls="nav-vegetable" aria-selected="false">채소</a>
+	<nav class="navbar navbar-expand-lg navbar-light bg-white">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
-						<a class="nav-item nav-link" id="nav-sauce-tab" data-toggle="tab"
-							href="#nav-sauce" role="tab" aria-controls="nav-sauce"
-							aria-selected="false">소스</a>
-					</div>
-				</nav>
-			</div>
-			<div class="col-lg-4"></div>
-			<!-- Header Right -->
-			<div class="col-lg-3">
-				<%-- <c:choose>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <li class="nav-item">
+        <a class="nav-link" href="matForm.do?idx=0">전체</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="matForm.do?idx=10">메인</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="matForm.do?idx=20">서브</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="matForm.do?idx=30">소스</a>
+      </li>
+      <%-- <c:choose>
 					<c:when test="${session_id == 'admin' }"> --%>
-				<div class="dropdown show" style="color: black;">
-					<div class="dropdown-toggle" data-toggle="dropdown"
-						aria-haspopup="true" aria-expanded="false">관리자 메뉴</div>
-					<div class="dropdown-menu">
-						<a class="dropdown-item" data-toggle="modal"
-							data-target="#igdMoal" data-whatever="@mdo">재료 등록</a>
-					</div>
-
-				</div>
-
-				<%-- </c:when>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          관리자 메뉴
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" data-toggle="modal" data-target="#igdMoal" data-whatever="@mdo">등록</a>
+        </div>
+      </li>
+      <%-- </c:when>
 					</c:choose> --%>
-			</div>
-
-			<!--End Nav Button  -->
-		</div>
+    </ul>
+    
+  </div>
+</nav>
 	</div>
 	<div class="container">
 		<!-- 전체 -->
 		<div class="tab-content" id="nav-tabContent">
 			<div class="tab-pane fade show active" id="nav-whole" role="tabpanel"
 				aria-labelledby="nav-whole-tab">
-				<h4>전체</h4>
 				<div class="row">
 					<c:forEach items="${list }" var="mat">
 						<div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
 							<div class="single-popular-items mb-50 text-center">
 								<div class="popular-img">
-									<a href="matDetail.do?no=${mat.mat_no }">
-									<img src="assets/img/gallery/popular1.png" alt="">
+									<a href="matDetail.do?no=${mat.mat_no }"> <img
+										src="assets/img/gallery/popular1.png" alt="">
 									</a>
 									<div class="img-cap">
 										<span>Add to cart</span>
@@ -88,91 +74,30 @@ $("#nav-meat-tab").on("click",function(){
 					</c:forEach>
 				</div>
 			</div>
-			<div class="tab-pane fade" id="nav-meat" role="tabpanel"
-				aria-labelledby="nav-meat-tab">
-				<h4>고기</h4>
-				<div class="row">
-					<c:forEach items="${selectMeat }" var="mat">
-						<div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
-							<div class="single-popular-items mb-50 text-center">
-								<div class="popular-img">
-									<a href="matDetail.do?no=${mat.mat_no }">
-									<img src="assets/img/gallery/popular1.png" alt="">
-									</a>
-									<div class="img-cap">
-										<span>Add to cart</span>
-									</div>
-									<div class="favorit-items">
-										<span class="flaticon-heart"></span>
-									</div>
-								</div>
-								<div class="popular-caption">
-									<h3>
-										<a href="product_details.html">${mat.mat_nm }</a>
-									</h3>
-								</div>
-							</div>
-						</div>
-					</c:forEach>
-				</div>
-			</div>
-			<div class="tab-pane fade" id="nav-vegetable" role="tabpanel"
-				aria-labelledby="nav-vegetable-tab">
-				<h4>채소</h4>
-				<div class="row">
-					<c:forEach items="${selectVeg }" var="mat">
-						<div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
-							<div class="single-popular-items mb-50 text-center">
-								<div class="popular-img">
-									<a href="matDetail.do?no=${mat.mat_no }">
-									<img src="assets/img/gallery/popular1.png" alt="">
-									</a>
-									<div class="img-cap">
-										<span>Add to cart</span>
-									</div>
-									<div class="favorit-items">
-										<span class="flaticon-heart"></span>
-									</div>
-								</div>
-								<div class="popular-caption">
-									<h3>
-										<a href="product_details.html">${mat.mat_nm }</a>
-									</h3>
-								</div>
-							</div>
-						</div>
-					</c:forEach>
-				</div>
-			</div>
-			<div class="tab-pane fade" id="nav-sauce" role="tabpanel"
-				aria-labelledby="nav-sauce-tab">
-				<h4>소스</h4>
-				<div class="row">
-					<c:forEach items="${selectSau }" var="mat">
-						<div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
-							<div class="single-popular-items mb-50 text-center">
-								<div class="popular-img">
-									<a href="matDetail.do?no=${mat.mat_no }">
-									<img src="assets/img/gallery/popular1.png" alt="">
-									</a>
-									<div class="img-cap">
-										<span>Add to cart</span>
-									</div>
-									<div class="favorit-items">
-										<span class="flaticon-heart"></span>
-									</div>
-								</div>
-								<div class="popular-caption">
-									<h3>
-										<a href="product_details.html">${mat.mat_nm }</a>
-									</h3>
-								</div>
-							</div>
-						</div>
-					</c:forEach>
-				</div>
-			</div>
+
 		</div>
+		<nav class="blog-pagination justify-content-center d-flex">
+			<!-- 페이징 시작  -->
+			<ul class="pagination">
+				<li class='page-item <c:out value="${pageM.prev == true ? ' ' : 'disabled' }"></c:out>'>
+					<a href="matForm.do?pageNum=${pageM.startPage - pageM.pageSize }"
+					class="page-link" aria-label="Previous"> <i class="ti-angle-left"></i>
+				</a>
+				</li>
+				<c:forEach var="i" begin="${pageM.startPage }" end="${pageM.endPage }">
+					<li
+						class='page-item <c:out value="${pageM.currentPage == i ? 'active' : ' ' }"></c:out>'>
+						<a href="matForm.do?pageNum=${i }" class="page-link">${i }</a>
+					</li>
+				</c:forEach>
+				<li
+					class='page-item <c:out value="${pageM.next == true ? ' ' : 'disabled' }"></c:out>'>
+					<a href="matForm.do?pageNum=${pageM.endPage+1 }" class="page-link"
+					aria-label="Next"> <i class="ti-angle-right"></i>
+				</a>
+				</li>
+			</ul>
+		</nav>
 	</div>
 </section>
 <!-- Latest Products End -->
@@ -222,11 +147,7 @@ $("#nav-meat-tab").on("click",function(){
 			<div class="modal-body">
 				<form action="mat.do" method="post" enctype="multipart/form-data">
 					<div class="form-group">
-						<label for="recipient-name" class="col-form-label">mat_no</label>
-						<input type="text" class="form-control" id="mat_no" name="mat_no">
-					</div>
-					<div class="form-group">
-						<label for="recipient-name" class="col-form-label">mat_idx</label>
+						<label for="recipient-name" class="col-form-label">mat_idx(메인:10,서브:20,소스:30)</label>
 						<input type="text" class="form-control" id="mat_idx"
 							name="mat_idx">
 					</div>

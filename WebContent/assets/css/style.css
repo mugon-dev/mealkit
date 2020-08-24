@@ -3096,7 +3096,7 @@ input:hover, input:focus {
 }
 
 .mobile_menu .slicknav_menu .slicknav_btn {
-	top: -25px
+	top: -43px
 }
 
 .mobile_menu .slicknav_menu .slicknav_btn .slicknav_icon-bar {
@@ -7896,7 +7896,7 @@ b, sup, sub, u, del {
 
 @media ( max-width : 991px) {
 	.product_image_area {
-		margin-top: -150px !important
+		margin-top: 150px !important
 	}
 }
 
