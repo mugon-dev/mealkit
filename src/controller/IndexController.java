@@ -3,6 +3,7 @@ package controller;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -402,7 +403,6 @@ public class IndexController extends HttpServlet {
 			Map<String, String> blogMap = upload(request, response);
 			
 			int matQty1 = Integer.parseInt(blogMap.get("matQty1"));
-			System.out.println(matQty1);
 			int matQty2 = Integer.parseInt(blogMap.get("matQty2"));
 			int matQty3 = Integer.parseInt(blogMap.get("matQty3")); 
 			int no = Integer.parseInt(blogMap.get("no"));
@@ -430,7 +430,7 @@ public class IndexController extends HttpServlet {
 				out.print("<script>alert('새 글 추가 실패했습니다.'); location.href='blogForm.do';</script>");
 			}
     	} else if(action.equals("/deleteBlog.do")) {
-    		System.out.println("================== delete.do ==================");
+    		System.out.println("================== deleteBlog.do ==================");
 			int milNo = Integer.parseInt(request.getParameter("milNo"));
 			boolean flag = BlogDao.getInstance().delete(milNo);
 			String pageNum = request.getParameter("pageNum");
@@ -440,23 +440,42 @@ public class IndexController extends HttpServlet {
 				out.print("<script>alert('글삭제를 실패했습니다.'); location.href='blogDetail.do?milNo=" + milNo + "&pageNum=" + pageNum + "';</script>");
 			}
 		} else if(action.equals("/updateBlog.do")) {
+    		System.out.println("================== updateBlog.do ==================");
 			Map<String, String> blogMap = upload(request, response);
 			int milNo = Integer.parseInt(blogMap.get("milNo"));
 			String title = blogMap.get("title");
 			String content = blogMap.get("content");
-			String writer = blogMap.get("writer");
-			String image = blogMap.get("filename");
-			String pageNum = blogMap.get("pageNum");
+			String cookIdx = blogMap.get("cookIdx");
+			String cookType = blogMap.get("cookType");
+			String plate = blogMap.get("plate");
+			String hour = blogMap.get("hour");
+			String level = blogMap.get("level");
+			String recIdx = blogMap.get("recIdx");
+			String matEtc = blogMap.get("matEtc");
+			String matNo1 = blogMap.get("matNo1");
+			String matNo2 = blogMap.get("matNo2");
+			String matNo3 = blogMap.get("matNo3");
+			int matQty1 = Integer.parseInt(blogMap.get("matQty1"));
+			int matQty2 = Integer.parseInt(blogMap.get("matQty2"));
+			int matQty3 = Integer.parseInt(blogMap.get("matQty3"));
+			String image = blogMap.get("image");
 			if(image == null) {
 				image = blogMap.get("noImage.png");
 			}
-			//boolean flag = BlogDao.getInstance().update(new Blog(milNo, title, content, writer, image));
 			
-//			if(flag) {
-//				out.print("<script>alert('글을 수정했습니다.'); location.href='list.do?pageNum=" + pageNum + "';</script>");
-//			} else {
-//				out.print("<script>alert('글수정을 실패했습니다.'); location.href='updateForm.do?milNo=" + milNo + "&pageNum=" + pageNum + "';</script>");
-//			}
+			System.out.println(blogMap.toString());
+			String sql = " UPDATE RECIPE SET MAT_QTY1=?, MAT_QTY2=?, MAT_QTY3=?, NO=?, REC_IDX=?, TITLE=?, CONTENT=?, "
+					+ " IMAGE=?, COOK_IDX=?, COOK_TYPE=?, MAT_NO1=?, MAT_NO2=?, MAT_NO3=?, MAT_ETC=?, PLATE=?, HOUR=?, LEVEL=? "
+					+ " WHERE MIL_NO = ? ";
+			
+			boolean flag = BlogDao.getInstance().updateBlog(new Blog(matQty1, matQty2, matQty3, recIdx, title, content, 
+					image, cookIdx, cookType, matNo1, matNo2, matNo3, matEtc, plate, hour, level, milNo));
+			
+			if(flag) {
+				out.print("<script>alert('글을 수정했습니다.'); location.href='blogDetail.do?milNo=" + milNo + "';</script>");
+			} else {
+				out.print("<script>alert('글수정을 실패했습니다.'); location.href='blogDetail.do?milNo=" + milNo + "';</script>");
+			}
 		}
 	}
 

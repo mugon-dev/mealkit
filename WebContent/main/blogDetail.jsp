@@ -4,7 +4,9 @@
 <section class="login_part section_padding ">
 	<div class="container">
 		<div class="row align-items-center">
-			<form class="row contact_form" action="blogDetail.do" method="post" enctype="multipart/form-data" > 
+			<form class="row contact_form" name="form" method="post" enctype="multipart/form-data" > 
+				<input type="hidden" name="milNo" value="${blog.milNo }" />
+				<input type="hidden" name="image" value="${blog.image }" />
 				<div class="col-lg-6 col-md-6">
 					<div class="login_part_text text-center" >
 						<div class="login_part_text_iner">
@@ -19,13 +21,13 @@
 						<div class="login_part_form_iner">
 							<div class="col-md-12 form-group p_star" >
 								<div class="row">
-									제목: &nbsp;<input type="text" id="title" class="form-control" value="${blog.title }" >
+									제목: &nbsp;<input type="text" id="title" name="title" class="form-control" value="${blog.title }" >
 								</div>
 							</div>
 							<div class="col-md-12 form-group p_star" >
 								<div class="row">
 									음식 종류: &nbsp;&nbsp;
-									<select name="type1" data-trigger="" name="choices-single-defaul">
+									<select name="cookIdx" data-trigger="" name="choices-single-defaul">
 										<c:choose>
 											<c:when test="${blog.cookIdx == 1 }"> 
 												<option value="1" selected>한식</option>
@@ -54,7 +56,7 @@
 										</c:choose>
 									</select>
 									&nbsp;&nbsp; 조리 방식: &nbsp;&nbsp;
-									<select name="type1" data-trigger="" name="choices-single-defaul">
+									<select name="cookType" data-trigger="" name="choices-single-defaul">
 										<c:choose>
 											<c:when test="${blog.cookType == 1 }"> 
 												<option value="1" selected>구이</option>
@@ -98,7 +100,7 @@
 							<div class="col-md-12 form-group p_star" >
 								<div class="row">
 									인원 수: &nbsp;&nbsp;
-									<select name="type1" data-trigger="" name="choices-single-defaul">
+									<select name="plate" data-trigger="" name="choices-single-defaul">
 										<c:choose>
 											<c:when test="${blog.plate == 1 }"> 
 												<option value="1" selected>1~2인</option>
@@ -118,7 +120,7 @@
 										</c:choose>
 									</select>
 									&nbsp;&nbsp; 조리시간: &nbsp;&nbsp;
-									<select name="type1" data-trigger="" name="choices-single-defaul">
+									<select name="hour" data-trigger="" name="choices-single-defaul">
 										<c:choose>
 											<c:when test="${blog.hour == 1 }"> 
 												<option value="1" selected>1시간 이하</option>
@@ -143,7 +145,7 @@
 							<div class="col-md-12 form-group p_star">
 								<div class="row">
 									난이도: &nbsp;&nbsp;
-									<select name="type1" data-trigger="" name="choices-single-defaul">
+									<select name="level" data-trigger="" name="choices-single-defaul">
 										<c:choose>
 											<c:when test="${blog.level == 1 }"> 
 												<option value="1" selected>상</option>
@@ -172,7 +174,8 @@
 									<div class="col-md-3 form-group">
 										<div class="input-select">
 											<!-- 여기서 재료 리스트 받아서 forEach로 입력 -->
-											<select name="type2" data-trigger="" name="choices-single-defaul">
+											<select name="matNo1" data-trigger="" name="choices-single-defaul">
+												<option selected value="0" > 선택1 </option>
 												<c:forEach items="${list }" var="list">
 												<c:if test="${list.mat_no==blog.matNo1 }">
 													<option value="${list.mat_no }" selected>${list.mat_nm }</option>
@@ -188,7 +191,7 @@
 										수량1: 
 									</div> 
 									<div class="col-md-3 form-group">
-										<input type="text" id="matEtc" value="${blog.matQty1 }" class="form-control">
+										<input type="text" id="matQty1" name="matQty1" value="${blog.matQty1 }" class="form-control">
 									</div>
 								</div>
 								<div class="row">
@@ -198,9 +201,10 @@
 									<div class="col-md-3 form-group">
 										<div class="input-select">
 											<!-- 여기서 재료 리스트 받아서 forEach로 입력 -->
-											<select name="type2" data-trigger="" name="choices-single-defaul">
+											<select name="matNo2" data-trigger="" name="choices-single-defaul">
+												<option selected value="0" > 선택2 </option>
 												<c:forEach items="${list }" var="list">
-												<c:if test="${list.mat_no==blog.matNo2 }">
+												<c:if test="${list.mat_no == blog.matNo2 }">
 													<option value="${list.mat_no }" selected>${list.mat_nm }</option>
 												</c:if>
 												<c:if test="${list.mat_no!=blog.matNo2 }">
@@ -214,7 +218,7 @@
 										수량2:
 									</div> 
 									<div class="col-md-3 form-group">
-										<input type="text" id="matEtc" value="${blog.matQty2 }" class="form-control">
+										<input type="text" id="matQty2" name="matQty2" value="${blog.matQty2 }" class="form-control">
 									</div>
 								</div>
 								<div class="row">
@@ -224,7 +228,8 @@
 									<div class="col-md-3 form-group">
 										<div class="input-select">
 											<!-- 여기서 재료 리스트 받아서 forEach로 입력 -->
-											<select name="type2" data-trigger="" name="choices-single-defaul">
+											<select name="matNo3" data-trigger="" name="choices-single-defaul">
+												<option selected value="0" > 선택3 </option>
 												<c:forEach items="${list }" var="list">
 												<c:if test="${list.mat_no==blog.matNo3 }">
 													<option value="${list.mat_no }" selected>${list.mat_nm }</option>
@@ -240,27 +245,27 @@
 										수량3: 
 									</div> 
 									<div class="col-md-3 form-group">
-										<input type="text" id="matEtc" value="${blog.matQty3 }" class="form-control">
+										<input type="text" id="matQty3" name="matQty3" value="${blog.matQty3 }" class="form-control">
 									</div>
 								</div>
 							</div>
 							<div class="col-md-12 form-group p_star">
-								기타 재료: <input type="text" id="matEtc" value="${blog.matEtc }" class="form-control">
+								기타 재료: <input type="text" id="matEtc" name="matEtc" value="${blog.matEtc }" class="form-control">
 							</div>
 							<div class="col-md-12 form-group p_star">
-								내용: <textarea type="text" class="form-control" id="content" rows="5"> ${blog.content } </textarea>
+								내용: <textarea type="text" class="form-control" name="content" id="content" rows="5"> ${blog.content } </textarea>
 							</div>
 							
 							<div class="col-md-12 from-froup p_star" >
 								<div class="row">
 									<div class="col-md-4 form-group">
-										<button type="button" id="btnCart" name="btnCart" class="btn_3">구매</button>
+										<button type="submit" id="btnCart" name="btnCart" class="btn_3" onclick="javascript: form.action='card.do?test=1'">구매</button>
 									</div>
 									<div class="col-md-4 form-group">
-										<button type="button" id="btnUpdate" name="btnUpdate" class="btn_3">수정</button>
+										<button type="submit" id="btnUpdate" name="btnUpdate" class="btn_3" onclick="javascript: form.action='updateBlog.do'">수정</button>
 									</div>
 									<div class="col-md-4 form-group">
-										<input type="hidden" name="milNo" id="milNo" value="${blog.milNo } ">
+<%-- 										<input type="hidden" name="milNo" id="milNo" value="${blog.milNo } "> --%>
 										<button type="button" id="btnDelete" name="btnDelete" class="btn_3" onclick="location.href='deleteBlog.do?milNo=${blog.milNo }'">삭제</button>
 									</div>
 								</div>
@@ -333,37 +338,7 @@
 		</div>
 	</div>
 </section>
-
 <script type="text/javascript">
-// 	$("#btnUpdate").on('click', function(){
-// 		alert('sdfsdf');
-// 		location.href="updateBlog.do";
-// 	});
-// 	$("#btnDelete").on('click', function(){
-// 		alert('sdfsdf');
-// 		location.href="deleteBlog.do";
-// 	});
-	
-	
-// 	$("#btnDelete").on('click', function() {
-// 		$.ajax({
-// 			type : "post",
-// 			url : "deleteBlog.do",
-// 			data : {
-// 				"milNo" :$("#milNo").val()
-// 			},
-// 			async : false,
-// 			dataType : "text",
-// 			success : function(data, textStatus) {
-// 					alert("삭제 성공");
-// 			},
-// 			error : function(data, textStatus) {
-// 				alert("error");
-// 			},
-// 			complete : function(data, textStatus) {
-// 			}
-// 		});
-// 	});
-</script>
 
+</script>
 <%@ include file="../include/footer.jsp"%>

@@ -34,6 +34,27 @@ public class Blog {
 		this.level = level;
 	}
 
+	public Blog(int matQty1, int matQty2, int matQty3, String recIdx, String title, String content, String image, String cookIdx, 
+			String cookType, String matNo1, String matNo2, String matNo3, String matEtc, String plate, String hour, String level, int milNo) {
+		super();
+		this.matQty1 = matQty1;
+		this.matQty2 = matQty2;
+		this.matQty3 = matQty3;
+		this.recIdx = recIdx;
+		this.title = title;
+		this.content = content;
+		this.image = image;
+		this.cookIdx = cookIdx;
+		this.cookType = cookType;
+		this.matNo1 = matNo1;
+		this.matNo2 = matNo2;
+		this.matNo3 = matNo3;
+		this.matEtc = matEtc;
+		this.plate = plate;
+		this.hour = hour;
+		this.level = level;
+		this.milNo = milNo;
+	}
 	public Blog(int milNo, int readCount, int replyCount, int matQty1, int matQty2, int matQty3, int no, String recIdx,
 			String title, String content, String image, String cookIdx, String cookType, String matNo1, String matNo2,
 			String matNo3, String matEtc, String plate, String hour, String level, Date rgstDt) {
