@@ -89,7 +89,7 @@
 				</div>
 			</div>
 			<div class="row">
-			<c:forEach items="${recipe1 }" var="recipe1">
+			<c:forEach items="${recipe1 }" var="recipe1" begin="0" end="2">
 				<div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
 					<div class="single-new-pro mb-30 text-center">
 						<div class="product-img">
@@ -114,7 +114,7 @@
 		<div class="row">
 			<div class="col-xl-12">
 				<div class="section-tittle mb-70">
-					<h2>추천 레시피</h2>
+					<h2>신규 레시피</h2>
 				</div>
 			</div>
 		</div>

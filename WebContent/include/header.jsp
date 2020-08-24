@@ -97,14 +97,12 @@
 													data-toggle="dropdown" aria-haspopup="true"
 													aria-expanded="false">(${session_id})</div>
 												<div class="dropdown-menu">
-													<a class="dropdown-item" href="MyPageForm.do">MyPage</a> <a
-														class="dropdown-item" data-toggle="modal"
-														data-target="#idMoal" data-whatever="@mdo" id="temp"
-														href='javascript:void(0);' onclick="modalPopup()">내
-														정보 수정</a> <a class="dropdown-item" href="#" id="logout">로그아웃</a>
+													<a class="dropdown-item" href="blogForm.do?idx=6&no=${session_no }">내 글보기</a> 
+													<a  onclick="modalPopup()">내 정보 수정</a> 
+													<a class="dropdown-item" href="#" id="logout">로그아웃</a>
 												</div>
 											</div>
-										<</c:otherwise>
+										</c:otherwise>
 									</c:choose></li>
 
 								<c:if test="${empty session_id }">
