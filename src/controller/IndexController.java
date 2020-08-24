@@ -291,13 +291,18 @@ public class IndexController extends HttpServlet {
     		int[] mat=null;
 			String[] mat_no=null;
 			String test =request.getParameter("test");
+			String test1= request.getParameter("matNo2");
+			String test2= request.getParameter("milNo");
+			System.out.println(test1);
+			System.out.println(test2);
 			System.out.println(test);
     		if(test.equals("1")) {
+    			
     			count=1;
-    			if(!request.getParameter("").equals("0")) {
+    			if(!request.getParameter("matNo2").equals("0")) {
     				count++;
     			}
-    			if(!request.getParameter("").equals("0")) {
+    			if(!request.getParameter("matNo3").equals("0")) {
     				count++;
     			}
     			mat=new int[count];
@@ -463,6 +468,8 @@ public class IndexController extends HttpServlet {
 			}
 		} else if(action.equals("/updateBlog.do")) {
     		System.out.println("================== updateBlog.do ==================");
+    		String test=request.getParameter("milNo");
+    		System.out.println(test+"sdlfksjdlkfj=============================================");
 			Map<String, String> blogMap = upload(request, response);
 			int milNo = Integer.parseInt(blogMap.get("milNo"));
 			String title = blogMap.get("title");

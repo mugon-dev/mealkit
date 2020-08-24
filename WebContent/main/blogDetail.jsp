@@ -4,7 +4,7 @@
 <section class="login_part section_padding ">
 	<div class="container">
 		<div class="row align-items-center">
-			<form class="row contact_form" name="form" method="post" enctype="multipart/form-data" > 
+			<form class="row contact_form" name="form" method="post"  > 
 				<input type="hidden" name="milNo" value="${blog.milNo }" />
 				<input type="hidden" name="image" value="${blog.image }" />
 				<input type="hidden" name="test" value="1" />
@@ -260,10 +260,10 @@
 							<div class="col-md-12 from-froup p_star" >
 								<div class="row">
 									<div class="col-md-4 form-group">
-										<button type="submit" id="btnCart" name="btnCart" class="btn_3" onclick="javascript: form.action='cart.do?test=1'">구매</button>
+										<button type="submit" id="btnCart" name="btnCart" class="btn_3" onclick="javascript: form.action='cart.do'">구매</button>
 									</div>
 									<div class="col-md-4 form-group">
-										<button type="submit" id="btnUpdate" name="btnUpdate" class="btn_3" onclick="javascript: form.action='updateBlog.do'">수정</button>
+										<button type="submit" id="btnUpdate" name="btnUpdate" class="btn_3" onclick="javascript: form.action='updateBlog.do';form.enctype='multipart/form-data'">수정</button>
 									</div>
 									<div class="col-md-4 form-group">
 <%-- 										<input type="hidden" name="milNo" id="milNo" value="${blog.milNo } "> --%>
