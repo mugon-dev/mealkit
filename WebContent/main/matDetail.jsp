@@ -14,11 +14,8 @@
 					<div class="dropdown-menu">
 						<a class="dropdown-item" data-toggle="modal"
 							data-target="#igdMoal" data-whatever="@mdo">재료 수정</a>
-					</div>
-					<div class="dropdown-menu">
 						<a class="dropdown-item" href="matDelete.do?mat_no=${mat.mat_no }">삭제</a>
 					</div>
-
 				</div>
 
 				<%-- </c:when>
@@ -26,17 +23,9 @@
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-lg-8">
-					<div class="product_img_slide owl-carousel">
 						<div class="single_product_img">
-							<img src="assets/img/gallery/aaa.jpg" alt="#" class="img-fluid">
+							<img src="images/${recipe.image }" alt="#" class="img-fluid">
 						</div>
-						<div class="single_product_img">
-							<img src="assets/img/gallery/bbb.jpg" alt="#" class="img-fluid">
-						</div>
-						<div class="single_product_img">
-							<img src="assets/img/gallery/ccc.jpg" alt="#" class="img-fluid">
-						</div>
-					</div>
 				</div>
 				<div class="col-lg-12">
 					<div class="single_product_text text-center">
