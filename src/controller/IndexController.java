@@ -59,6 +59,7 @@ public class IndexController extends HttpServlet {
 		String requestURI = request.getRequestURI();
 		String contextPath = request.getContextPath();
 		String action = requestURI.substring(contextPath.length());
+		/*==============================================================메인 home 시작=============================================================*/
 		if (action.equals("/main.do")) {
 			List<Material> list=new ArrayList<Material>();
 			list=MaterialDao.getInstance().selectMain();
@@ -72,6 +73,7 @@ public class IndexController extends HttpServlet {
 			request.setAttribute("recipe1", recipe1);
 			request.setAttribute("recipe2", recipe2);
 			request.getRequestDispatcher("main/home.jsp").forward(request, response);
+		/*==============================================================로그인,회원관리 시작=============================================================*/
 		} else if (action.equals("/loginForm.do")) {
 			String mil_no= request.getParameter("no");
 			request.setAttribute("mil_no", mil_no);
@@ -89,13 +91,11 @@ public class IndexController extends HttpServlet {
 				session.setAttribute("session_no", no);
 				System.out.println(mil_no);
 				System.out.println("sdlkjsldf");
-				
 				if(mil_no!="") {
 					out.print("<script>alert('로그인성공');location.href='product.do?no="+mil_no+"';</script>");
 				}else {
 					out.print("<script>alert('로그인성공');location.href='main.do';</script>");
 				}
-				
 			} else if (n == 0) {
 				out.print("password error");
 			} else {
@@ -149,16 +149,13 @@ public class IndexController extends HttpServlet {
 			} else {
 				out.print("usable");
 			}
-		} else if (action.equals("/shopForm.do")) {
-			List<Material> list=new ArrayList<Material>();
-			list=MaterialDao.getInstance().selectMain();
-			request.setAttribute("list", list);
-			List<Recipe> listRecipe=new ArrayList<Recipe>();
-			listRecipe=RecipeDao.getInstance().selectAll();
-			request.setAttribute("recipe", listRecipe);
-			request.getRequestDispatcher("main/shop.jsp").forward(request, response);
-		} else if (action.equals("/shop.do")) {
-
+		}else if (action.equals("/logout.do")) { // 로그아웃 header의 ajax 스크립트
+			HttpSession session = request.getSession();
+			session.removeAttribute("session_id");
+			session.removeAttribute("session_no");
+			out.print("success");
+		/*==============================================================로그인,회원관리 끝=============================================================*/		
+		/*==============================================================mat 시작=============================================================*/
 		} else if (action.equals("/matForm.do")) { // 재료 등록 modal
 			List<Material> list = MaterialDao.getInstance().selectAll();
 			List<Material> selectMeat = MaterialDao.getInstance().selectList("10");
@@ -192,61 +189,6 @@ public class IndexController extends HttpServlet {
 			}else {
 				out.print("<script>alert('삭제 실패');location.href='matDetail.do';</script>");
 			}
-		}else if (action.equals("/logout.do")) { // 로그아웃 header의 ajax 스크립트
-			HttpSession session = request.getSession();
-			session.removeAttribute("session_id");
-			session.removeAttribute("session_no");
-			out.print("success");
-		} else if (action.equals("/myPageForm.do")) { // myPage 이동
-			request.getRequestDispatcher("main/myPage.jsp").forward(request, response);
-		} else if (action.equals("/registerForm.do")) {
-			request.getRequestDispatcher("main/register.jsp").forward(request, response);
-		} else if (action.equals("/register.do")) { // 회원가입
-			String id = request.getParameter("id");
-			String pw = request.getParameter("pw");
-			String name = request.getParameter("name");
-			String addr = request.getParameter("addr");
-			String tel = request.getParameter("tel");
-			boolean flag = MemberDao.getInstance().insert(new Member(id, pw, name, addr, tel));
-			if (flag) {
-				out.print("<script>alert('회원가입성공');location.href='main.do';</script>");
-			} else {
-				out.print("<script>alert('회원가입실패');location.href='registerForm.do';</script>");
-			}
-		} else if (action.equals("/overappedId.do")) { // 아이디 중복확인
-			String id = request.getParameter("id");
-			boolean flag = MemberDao.getInstance().overappedId(id);
-			if (flag) {
-				out.print("not usable");
-			} else {
-				out.print("usable");
-			}
-		} else if (action.equals("/logout.do")) { // 로그아웃 header의 ajax 스크립트
-			HttpSession session = request.getSession();
-			session.removeAttribute("session_id");
-			out.print("success");
-		}else if (action.equals("/shopForm.do")) {
-			request.getRequestDispatcher("main/shop.jsp").forward(request, response);
-		} else if (action.equals("/shop.do")) {
-
-		} else if (action.equals("/matForm.do")) { // 재료 등록 modal
-			request.getRequestDispatcher("main/mat.jsp").forward(request, response);
-		} else if (action.equals("/mat.do")) { // 재료 등록 , 사진업로드, hsahmap으로 수정
-			//Map<String, String> materialMap = MaterialDao.getInstance().upload(request, response,FILE_REPO);
-			Map<String, String> materialMap = upload(request, response);
-			int mat_no = Integer.parseInt(materialMap.get("mat_no"));
-			String mat_idx = materialMap.get("mat_idx");
-			String mat_nm = materialMap.get("mat_nm");
-			int mat_price = Integer.parseInt(materialMap.get("mat_price"));
-			int mat_unit = Integer.parseInt(materialMap.get("mat_unit"));
-			String mat_image = materialMap.get("filename");
-			System.out.println(materialMap.toString());
-			boolean flag = MaterialDao.getInstance().insert(new Material(mat_no, mat_idx, mat_nm, mat_price, mat_unit, mat_image));
-			if (flag) {
-				out.print("<script>alert('새 글을 추가했습니다.'); location.href='matForm.do';</script>");
-			} else {
-				out.print("<script>alert('새 글 추가 실패했습니다.'); location.href='matForm.do';</script>");
-			}
 		} else if (action.equals("/matDetail.do")) { // mat상세페이지
 			int no=Integer.parseInt(request.getParameter("no"));
 			Material matOne = MaterialDao.getInstance().selectOne(no);
@@ -256,6 +198,17 @@ public class IndexController extends HttpServlet {
 			}else {
 				out.print("<script>alert('게시글 조회 실패');location.href='matForm.do';</script>");
 			}
+		/*==============================================================mat 끝=============================================================*/
+		/*==============================================================shop 시작=============================================================*/
+		} else if (action.equals("/shopForm.do")) {
+			List<Material> list=new ArrayList<Material>();
+			list=MaterialDao.getInstance().selectMain();
+			request.setAttribute("list", list);
+			List<Recipe> listRecipe=new ArrayList<Recipe>();
+			listRecipe=RecipeDao.getInstance().selectAll();
+			request.setAttribute("recipe", listRecipe);
+			request.getRequestDispatcher("main/shop.jsp").forward(request, response);
+		} else if (action.equals("/shop.do")) {
 		} else if(action.equals("/search.do")) {
 			//음식 타입 재료 조리방법 get
     		String type1=request.getParameter("type1");

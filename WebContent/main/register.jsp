@@ -53,7 +53,6 @@
 									 placeholder="Tel">
 							</div>
 							<div class="col-md-12 form-group">
-
 								<button type="submit" id="btnJoin" class="btn_3">등록</button>
 							</div>
 						</form>
@@ -94,7 +93,6 @@ function validate(){
 	}
 	return true;
 }
-
 	$("#btnOverappedId").on('click', function() {
 		$.ajax({
 			type : "post",
