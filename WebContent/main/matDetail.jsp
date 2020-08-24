@@ -4,9 +4,11 @@
 
 <main>
 	<!--================Single Product Area =================-->
+	
+	<div class="product_image_area">
 	<%-- <c:choose>
 					<c:when test="${session_id == 'admin' }"> --%>
-				<div class="dropdown show" style="color: black;">
+				<div class="dropdown show" style="color: black; float: right; margin-right: 100px;">
 					<div class="dropdown-toggle" data-toggle="dropdown"
 						aria-haspopup="true" aria-expanded="false">관리자 메뉴</div>
 					<div class="dropdown-menu">
@@ -21,7 +23,6 @@
 
 				<%-- </c:when>
 					</c:choose> --%>
-	<div class="product_image_area">
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-lg-8">
