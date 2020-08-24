@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import vo.Blog;
 import vo.Material;
 
 public class MaterialDao {
@@ -14,7 +15,78 @@ public class MaterialDao {
 	public static MaterialDao getInstance() {
 		return instance;
 	}
-	
+	//페이징용
+	public List<Material> selectAll(int start, int end, String idx){
+		String sql = " SELECT * FROM MAT ";
+		if(idx.equals("10")) { // 메인
+			sql += " WHERE MAT_IDX = " + idx + " ";
+		} else if(idx.equals("20")) { // 서브
+			sql += " WHERE MAT_IDX = " + idx + " ";
+		} else if(idx.equals("30")) { // 소스
+			sql += " WHERE MAT_IDX = " + idx + " ";
+		} else if(idx.equals("0")){ // 전체보기
+		} 
+		sql += " ORDER BY MAT_NO DESC LIMIT ?, 6 ";
+		
+		List<Material> list = new ArrayList<Material>();
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			conn = DBConn.getConn();
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, start);
+			rs = ps.executeQuery();
+			System.out.println(sql);			
+			while (rs.next()) {
+				Material material=new Material();
+				material.setMat_no(rs.getInt("mat_no"));
+				material.setMat_idx(rs.getString("mat_idx"));
+				material.setMat_nm(rs.getString("mat_nm"));
+				material.setMat_price(rs.getInt("mat_price"));
+				material.setMat_unit(rs.getInt("mat_unit"));
+				material.setMat_image(rs.getString("mat_image"));
+				System.out.println(material);
+				list.add(material);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBConn.close(conn, ps, rs);
+		}
+		return list;
+	}
+	// 페이징에 쓸 개수 
+		public static int getMatCount(String idx){
+			int count = 0;
+			Connection conn = null;
+			PreparedStatement ps = null;
+			ResultSet rs = null;
+			String sql = " SELECT COUNT(*) FROM MAT "; 
+			
+			if(idx.equals("10")) { // 메인
+				sql += " WHERE MAT_IDX = " + idx + " ";
+			} else if(idx.equals("20")) { // 서브
+				sql += " WHERE MAT_IDX = " + idx + " ";
+			} else if(idx.equals("30")) { // 소스
+				sql += " WHERE MAT_IDX = " + idx + " ";
+			} else if(idx.equals("0")) { // 전체보기
+			}
+			try {
+				conn = DBConn.getConn();
+				ps = conn.prepareStatement(sql);
+				System.out.println(sql);
+				rs = ps.executeQuery();
+				if(rs.next()){
+					count = rs.getInt(1);
+				}
+			} catch(Exception e) {
+				e.printStackTrace();
+			} finally {
+				DBConn.close(conn, ps, rs);
+			}
+			return count;
+		}
 	public List<Material> selectAll(){
 		List<Material> list=new ArrayList<Material>();
 		Connection conn=null;
