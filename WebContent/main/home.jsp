@@ -2,6 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="../include/header.jsp"%>
 
+
+
 <main>
 	<!--? slider Area Start -->
 	<div class="container">
@@ -192,6 +194,7 @@
 			deleteAll[i].click();
 		}
 	});
+	
 </script>
 
 <%@ include file="../include/footer.jsp"%>

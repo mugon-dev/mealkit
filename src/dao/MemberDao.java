@@ -16,16 +16,16 @@ public class MemberDao {
 		return instance;
 	}
 	
-	public Member selectOne(int mat_no){
+	public Member selectOne(int no){
 		Member member=new Member();
 		Connection conn=null;
 		PreparedStatement ps=null;
 		ResultSet rs=null;
-		String sql="select * from mat where mat_no=?";
+		String sql="select * from member where no=?";
 		try {
 			conn=DBConn.getConn();
 			ps=conn.prepareStatement(sql);
-			ps.setInt(1, mat_no);
+			ps.setInt(1, no);
 			rs=ps.executeQuery();
 			while(rs.next()) {
 				member=new Member();

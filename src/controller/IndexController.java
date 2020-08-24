@@ -90,7 +90,6 @@ public class IndexController extends HttpServlet {
 				session.setAttribute("session_id", id);
 				session.setAttribute("session_no", no);
 				System.out.println(mil_no);
-				System.out.println("sdlkjsldf");
 				if(mil_no!="") {
 					out.print("<script>alert('로그인성공');location.href='product.do?no="+mil_no+"';</script>");
 				}else {
@@ -103,9 +102,11 @@ public class IndexController extends HttpServlet {
 			}
 		} else if (action.equals("/readPerson.do")) { //session_no 받아오기 //id 수정필요
 			int no = Integer.parseInt(request.getParameter("no"));
+			System.out.println("readperson"+no);
 			Member member = MemberDao.getInstance().selectOne(no);
+			System.out.println(member.toString());
 			request.setAttribute("member", member);
-			request.getRequestDispatcher("main/main.jsp").forward(request, response);
+			request.getRequestDispatcher("include/header.jsp").forward(request, response);
 		} else if (action.equals("/memberDelete.do")) { //member.no 받아와서 삭제
 			int no = Integer.parseInt(request.getParameter("no"));
 			boolean flag = MemberDao.getInstance().delete(no);
@@ -157,15 +158,25 @@ public class IndexController extends HttpServlet {
 		/*==============================================================로그인,회원관리 끝=============================================================*/		
 		/*==============================================================mat 시작=============================================================*/
 		} else if (action.equals("/matForm.do")) { // 재료 등록 modal
-			List<Material> list = MaterialDao.getInstance().selectAll();
-			List<Material> selectMeat = MaterialDao.getInstance().selectList("10");
-			List<Material> selectVeg = MaterialDao.getInstance().selectList("20");
-			List<Material> selectSau = MaterialDao.getInstance().selectList("30");
+			
+			String strPage = request.getParameter("pageNum");
+			String idx = request.getParameter("idx");
+			int pageNum = 1;
+			if(idx==null) {
+				idx="0";
+			}
+			if(strPage != null) {
+				pageNum = Integer.parseInt(strPage);
+			}
+			System.out.println("================== matForm.do ==================");
+    		System.out.println("------ strPage: " + strPage);
+			int totalCount = MaterialDao.getMatCount(idx);
+			PageMaker pageM = new PageMaker(pageNum, totalCount);
+			List<Material> list = MaterialDao.getInstance().selectAll(pageM.getStart(), pageM.getEnd(), idx);
 			request.setAttribute("list", list);
-			request.setAttribute("selectMeat", selectMeat);
-			request.setAttribute("selectVeg", selectVeg);
-			request.setAttribute("selectSau", selectSau);
+			request.setAttribute("pageM", pageM);
 			request.getRequestDispatcher("main/mat.jsp").forward(request, response);
+			
 		} else if (action.equals("/mat.do")) { // 재료 등록 , 사진업로드, hsahmap으로 수정
 			Map<String, String> materialMap = upload(request, response);
 			int mat_no = Integer.parseInt(materialMap.get("mat_no"));
