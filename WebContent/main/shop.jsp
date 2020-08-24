@@ -14,9 +14,25 @@
 							aria-selected="true">전체</a>
 
 						<c:forEach var="type1" begin="1" end="4" varStatus="loop">
+							<c:choose>
+								<c:when test="${loop.count==1 }">
+									<c:set var="cook_idx" value="한식"/>
+								</c:when>
+								<c:when test="${loop.count==2 }">
+									<c:set var="cook_idx" value="중식"/>
+								</c:when>
+								<c:when test="${loop.count==3 }">
+									<c:set var="cook_idx" value="일식"/>
+								</c:when>
+								<c:when test="${loop.count==4 }">
+									<c:set var="cook_idx" value="양식"/>
+								</c:when>
+								<c:otherwise>
+								</c:otherwise>
+							</c:choose>
 							<a class="nav-item nav-link" id="nav-tab${loop.count }"
 								data-toggle="tab" href="#type1_${loop.count }" role="tab"
-								aria-controls="nav${loop.count }" aria-selected="false">${loop.count }</a>
+								aria-controls="nav${loop.count }" aria-selected="false">${cook_idx }</a>
 						</c:forEach>
 
 					</div>

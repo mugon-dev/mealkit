@@ -256,6 +256,27 @@ public class MaterialDao {
 		}
 		return list;
 	}
+	public String selectName(int mat_no1) {
+		String mat_nm=null;
+		Connection conn=null;
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		String sql="select mat_nm from mat where mat_no=?";
+		try {
+			conn=DBConn.getConn();
+			ps=conn.prepareStatement(sql);
+			ps.setInt(1, mat_no1);
+			rs=ps.executeQuery();
+			if(rs.next()) {
+				mat_nm=rs.getString("mat_nm");
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBConn.close(conn, ps, rs);
+		}
+		return mat_nm;
+	}
 	// 파일 업로드 
 	  	
 	

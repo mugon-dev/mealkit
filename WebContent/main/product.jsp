@@ -16,7 +16,7 @@
 					<div class="single_product_text text-center">
 						<h3>${recipe.title }</h3>
 						<p>${recipe.content }</p>
-						<form action="cart.do" method="post">
+						<form action="cart.do?test=2" method="post">
 							<div class="card_area">
 								<div class="container" style="width: 800px">
 									<table class="table">

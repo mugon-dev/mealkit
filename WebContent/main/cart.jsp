@@ -92,7 +92,7 @@
 									<h5 id="sum">${sum }</h5>
 								</td>
 							</tr>
-							<tr class="shipping_area">
+							<!-- <tr class="shipping_area">
 								<td></td>
 								<td></td>
 								<td>
@@ -132,7 +132,7 @@
 											Details</a>
 									</div>
 								</td>
-							</tr>
+							</tr> -->
 						</tbody>
 					</table>
 					<div class="checkout_btn_inner float-right">

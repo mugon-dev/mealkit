@@ -10,7 +10,17 @@ public class Order {
 	private int mat_qty;
 	private int mat_unit;
 	private Date rgst_dt;
+	private String ord_flag;
 
+	public String getOrd_flag() {
+		return ord_flag;
+	}
+	public void setOrd_flag(String ord_flag) {
+		this.ord_flag = ord_flag;
+	}
+	public void setMat_unit(int mat_unit) {
+		this.mat_unit = mat_unit;
+	}
 	public int getOrder_no() {
 		return order_no;
 	}

@@ -214,11 +214,40 @@ public class IndexController extends HttpServlet {
     		String type1=request.getParameter("type1");
     		int type2=Integer.parseInt(request.getParameter("type2"));
     		String type3=request.getParameter("type3");
+    		String type=null;
+    		if(type1.equals("1")) {
+    			type="한식";
+    		}else if(type1.equals("2")) {
+    			type="중식";
+    		}else if(type1.equals("3")) {
+    			type="일식";
+    		}else if(type1.equals("4")) {
+    			type="양식";
+    		}
+    		request.setAttribute("type", type);
+    		String mainMat=MaterialDao.getInstance().selectName(type2);
+    		request.setAttribute("mainMat", mainMat);
     		
+    		String method=null;
+    		if(type3.equals("1")) {
+    			method="구이";
+    		}else if(type3.equals("2")) {
+    			method="찜";
+    		}else if(type3.equals("3")) {
+    			method="탕";
+    		}else if(type3.equals("4")) {
+    			method="생식";
+    		}else if(type3.equals("5")) {
+    			method="기타";
+    		}
+    		request.setAttribute("method", method); 		
     		//레시피 셀렉트
     		List<Recipe> list1=new ArrayList<Recipe>();
-    		list1=RecipeDao.getInstance().selectList(type1,type2,type3);
-    		request.setAttribute("list", list1);
+    		List<Recipe> list2=new ArrayList<Recipe>();
+    		list1=RecipeDao.getInstance().selectList(type1,type2,type3,"1");
+    		request.setAttribute("list1", list1);
+    		list2=RecipeDao.getInstance().selectList(type1,type2,type3,"2");
+    		request.setAttribute("list2", list2);
 
 
     		request.getRequestDispatcher("main/search.jsp").forward(request, response);
@@ -245,16 +274,44 @@ public class IndexController extends HttpServlet {
     		request.setAttribute("recipe", recipe);
     		request.getRequestDispatcher("main/product.jsp").forward(request, response);
     	} else if(action.equals("/cart.do")) {
-    		List<OrderPrice> listOrder=new ArrayList<OrderPrice>();
     		Order order=null;
-    		int count=Integer.parseInt(request.getParameter("count"));
+    		int count=0;
+    		int[] mat=null;
+			String[] mat_no=null;
+			String test =request.getParameter("test");
+			System.out.println(test);
+    		if(test.equals("1")) {
+    			count=1;
+    			if(!request.getParameter("").equals("0")) {
+    				count++;
+    			}
+    			if(!request.getParameter("").equals("0")) {
+    				count++;
+    			}
+    			mat=new int[count];
+    			mat_no=new String[count];
+    			for(int i=0; i<count;i++) {
+    				int temp=i+1;
+    				mat[i]=Integer.parseInt(request.getParameter("matNo"+temp));
+    				mat_no[i]=request.getParameter("matQty"+temp);
+    			}
+    			
+    		}else if(test.equals("2")){
+    			count=Integer.parseInt(request.getParameter("count"));
+    			mat=new int[count];
+    			mat_no=new String[count];
+    			for(int i=0;i<count;i++) {
+    				int temp=i+1;
+    				mat[i]=Integer.parseInt(request.getParameter("mat"+temp));
+    				mat_no[i]=request.getParameter("material"+temp);
+    			}
+    		}else {
+    			System.out.println("sldkfjslkdfj");
+    		}
     		String id=request.getParameter("session_id");
     		int no=MemberDao.getInstance().getMemberNo(id);
-    		int[] mat=new int[count];
     		for(int i=0;i<count;i++) {
-    			int temp=i+1;
-    			Material material=MaterialDao.getInstance().selectOne(Integer.parseInt(request.getParameter("material"+temp)));
-    			mat[i]=Integer.parseInt(request.getParameter("mat"+temp));
+    			Material material=MaterialDao.getInstance().selectOne(Integer.parseInt(mat_no[i]));
     			order=new Order(no,material.getMat_no(),material.getMat_nm(),mat[i],material.getMat_unit());
     			boolean b=OrderDao.getInstance().insert(order);
     			if(b==true) {
@@ -284,7 +341,8 @@ public class IndexController extends HttpServlet {
     			ord_qty[i]=Integer.parseInt(request.getParameter("qty_"+temp));
     			boolean f=OrderDao.getInstance().update(ord_no[i],ord_qty[i]);
     		}
-    		request.getRequestDispatcher("main/main.jsp").forward(request, response);
+    		//request.getRequestDispatcher("main/home.jsp").forward(request, response);
+    		out.print("<script>location.href='main.do'</script>");
     	}
     	
 //============================================================================================================================================//		
