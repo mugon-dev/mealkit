@@ -3,6 +3,7 @@
 <%@ include file="../include/header.jsp"%>
 
 <main>
+
 	<!--================Single Product Area =================-->
 	
 	<div class="product_image_area">
@@ -24,7 +25,7 @@
 			<div class="row justify-content-center">
 				<div class="col-lg-8">
 						<div class="single_product_img">
-							<img src="images/${recipe.image }" alt="#" class="img-fluid">
+							<img src="images/${mat.mat_image }" alt="#" class="img-fluid">
 						</div>
 				</div>
 				<div class="col-lg-12">

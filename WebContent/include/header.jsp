@@ -126,6 +126,8 @@
 				</div>
 			</div>
 		</div>
+		<!-- Header End -->
+	</header>
 		<!-- 내 정보 수정 모달 -->
 		<div class="modal fade" id="idMoal" tabindex="-1"
 			aria-labelledby="idMoalLabel" aria-hidden="true">
@@ -167,8 +169,7 @@
 			</div>
 		</div>
 
-		<!-- Header End -->
-	</header>
+		
 
 	<script type="text/javascript">
 		$('#logout').on('click', function(event) {
