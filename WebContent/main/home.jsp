@@ -122,36 +122,34 @@
 			<div class="container-fluid p-0 fix">
 				<div class="row">
 					<div class="col-xl-6 col-lg-4 col-md-6 col-sm-6">
+					<div OnClick="location.href='blogDetail.do?milNo=${recipe2[0].mil_no }';" style="cursor:pointer;">
 						<div class="single-gallery mb-30">
-						<div OnClick="location.href='blogDetail.do?milNo=${recipe2[0].mil_no }';" style="cursor:pointer;">
 							<div class="gallery-img big-img" 
 								style="background-image: url(images/${recipe2[0].image });"></div>
-								</div>
+						</div>
 						</div>
 					</div>
 					<div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
+					<div OnClick="location.href='blogDetail.do?milNo=${recipe2[1].mil_no }';" style="cursor:pointer;">
 						<div class="single-gallery mb-30">
-						<a href="blogDetail.do?milNo=${recipe2[1].mil_no }"><span class="gallery-img big-img" >
-							<img src="images/${recipe2[1].image }"/></span></a>
-						<%-- <div OnClick="location.href='blogDetail.do?milNo=${recipe2[1].mil_no }';" style="cursor:pointer;">
 							<div class="gallery-img big-img" 
 								style="background-image: url(images/${recipe2[1].image });"></div>
-								</div> --%>
+								</div>
 						</div>
 					</div>
 					<div class="col-xl-3 col-lg-4 col-md-12">
 						<div class="row">
 							<div class="col-xl-12 col-lg-12 col-md-6 col-sm-6">
+							<div OnClick="location.href='blogDetail.do?milNo=${recipe2[2].mil_no }';" style="cursor:pointer;">
 								<div class="single-gallery mb-30">
-								<div OnClick="location.href='blogDetail.do?milNo=${recipe2[2].mil_no }';" style="cursor:pointer;">
 									<div class="gallery-img small-img" 
 										style="background-image: url(images/${recipe2[2].image });"></div>
 										</div>
 								</div>
 							</div>
 							<div class="col-xl-12 col-lg-12 col-md-6 col-sm-6">
+							<div OnClick="location.href='blogDetail.do?milNo=${recipe2[3].mil_no }';" style="cursor:pointer;">
 								<div class="single-gallery mb-30">
-								<div OnClick="location.href='blogDetail.do?milNo=${recipe2[0].mil_no }';" style="cursor:pointer;">
 									<div class="gallery-img small-img" 
 										style="background-image: url(images/${recipe2[3].image }); "></div>
 										</div>
