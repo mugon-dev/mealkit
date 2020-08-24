@@ -14,9 +14,6 @@
 					<input type="hidden" name="no" value="2">
 				</c:if>
 				
-				
-				
-				
 				<div class="col-lg-6 col-md-6">
 					<div class="login_part_text text-center" >
 						<div class="login_part_text_iner">
