@@ -28,11 +28,7 @@ public class BlogDao {
 			sql += " WHERE COOK_IDX = " + idx + " ";
 		} else if(idx.equals("5")) { // 전체보기
 		} else if(idx.equals("6")) { // 내글보기
-			if(no != null) {
-				sql += " WHERE NO = 1 ";
-			} else {
-				sql += " WHERE NO = " + no + " ";
-			}
+			sql += " WHERE NO = " + no + " ";
 		}
 		
 		sql += " ORDER BY MIL_NO DESC LIMIT ?, 3 ";
@@ -103,19 +99,19 @@ public class BlogDao {
 			ps.setInt(2, blog.getMatQty2());
 			ps.setInt(3, blog.getMatQty3());
 			ps.setInt(4,  blog.getNo());
-			ps.setNString(5, blog.getRecIdx());
-			ps.setNString(6, blog.getTitle());
-			ps.setNString(7, blog.getContent());
-			ps.setNString(8, blog.getImage());
-			ps.setNString(9, blog.getCookIdx());
-			ps.setNString(10, blog.getCookType());
-			ps.setNString(11, blog.getMatNo1());
-			ps.setNString(12, blog.getMatNo2());
-			ps.setNString(13, blog.getMatNo3());
-			ps.setNString(14, blog.getMatEtc());
-			ps.setNString(15, blog.getPlate());
-			ps.setNString(16, blog.getHour());
-			ps.setNString(17, blog.getLevel());
+			ps.setString(5, blog.getRecIdx());
+			ps.setString(6, blog.getTitle());
+			ps.setString(7, blog.getContent());
+			ps.setString(8, blog.getImage());
+			ps.setString(9, blog.getCookIdx());
+			ps.setString(10, blog.getCookType());
+			ps.setString(11, blog.getMatNo1());
+			ps.setString(12, blog.getMatNo2());
+			ps.setString(13, blog.getMatNo3());
+			ps.setString(14, blog.getMatEtc());
+			ps.setString(15, blog.getPlate());
+			ps.setString(16, blog.getHour());
+			ps.setString(17, blog.getLevel());
 			
 			int n = ps.executeUpdate();
 			System.out.println(sql);
@@ -134,7 +130,6 @@ public class BlogDao {
 		return flag;
 	}
 	
-	//
 	public Blog selectOne(int milNo) {
 		Blog blog = null;
 		Connection conn = null;
@@ -182,6 +177,7 @@ public class BlogDao {
 		}
 		return blog;
 	}
+	
 	// 글 수정
 	public boolean updateBlog(Blog blog) {
 		boolean flag=false;
@@ -255,7 +251,7 @@ public class BlogDao {
 		return flag;
 	}
 	
-	// 블로그 글 조회수
+	// 블로그 글 조회수 업데이트 
 	public boolean updateReadCount(int milNo) {
 		boolean flag=false;
 		String sql = " UPDATE RECIPE SET READ_COUNT = READ_COUNT+1 WHERE MIL_NO = ? ";
@@ -299,11 +295,7 @@ public class BlogDao {
 			sql += " WHERE COOK_IDX = " + idx + " ";
 		} else if(idx.equals("5")) { // 전체보기
 		} else if(idx.equals("6")) { // 내글보기
-			if(no == null || no.equals("")) {
-				//sql += " WHERE NO = 1 "; // 테스트용
-			} else {
-				sql += " WHERE NO = " + no + " ";
-			}
+			sql += " WHERE NO = " + no + " ";
 		}
 		try {
 			conn = DBConn.getConn();

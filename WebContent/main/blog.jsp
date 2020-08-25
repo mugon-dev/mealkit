@@ -25,7 +25,7 @@
 											<h2> No.${blog.milNo } ${blog.title } </h2>
 										</a><br> ${blog.content } </p>
 										<ul class="blog-info-link">
-											<li><a href="#"><i class="fa fa-user"></i>${blog.no }</a></li> 
+											<li><a href="#"><i class="fa fa-user"></i>${blog.readCount }</a></li> 
 											<li><a href="#"><i class="fa fa-comments"></i>${blog.replyCount }</a></li>
 										</ul>
 									</div>
@@ -56,9 +56,9 @@
 				
 				<!-- 우측 바 메뉴 시작-->
 				<div class="col-lg-4">
-<%-- 					<c:if test="${not empty session_no }"> --%>
+					<c:if test="${not empty session_no }">
 						<button type="button" id="btnBlogDetailWrite"  class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn" >글쓰기</button><br>
-<%-- 					</c:if> --%>
+					</c:if>
 					<div class="blog_right_sidebar">
 						<aside class="single_sidebar_widget post_category_widget">
 							<h4 class="widget_title">Category</h4>
@@ -66,11 +66,11 @@
 								<li>
 									<a href="blogForm.do?idx=5&no=${session_no }" class="d-flex"><p>전체보기</p></a>
 								</li>
-<%--								<c:if test="${not empty session_no }">  --%>
+								<c:if test="${not empty session_no }"> 
 									<li>
 										<a href="blogForm.do?idx=6&no=${session_no }" class="d-flex"><p>내글보기</p></a>
 									</li>
-<%--								</c:if>  --%>
+								</c:if> 
 								<li>
 									<a href="blogForm.do?idx=1&no=${session_no }" class="d-flex"><p>한식</p></a>
 								</li>
