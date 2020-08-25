@@ -17,8 +17,7 @@
 								<div class="footer-pera">
 								<p>
 									<span>COMPANY : MEAL SHARE</span> <br>
-									<span>OWNER : 정무곤 </span> <br>
-									<span>EMPLOYEE : 이현지,이태규</span> <br> 
+									<span>OWNER : 이현지,정무곤,이태규 </span> <br>
 									<span>TEL: 00-743-5255 </span> <br>
 									<span>FAX : 001-731-6893 </span> <br>
 									<span>E-MAIL : master@MEARSHARE.kr</span> <br>
