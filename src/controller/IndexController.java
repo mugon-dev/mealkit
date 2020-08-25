@@ -210,17 +210,45 @@ public class IndexController extends HttpServlet {
 			if(flag) {
 				out.print("<script>alert('삭제 성공');location.href='matForm.do';</script>");
 			}else {
-				out.print("<script>alert('삭제 실패');location.href='matDetail.do';</script>");
+				out.print("<script>alert('삭제 실패');location.href='matDetail.do?no="+no+"';</script>");
 			}
 		} else if (action.equals("/matDetail.do")) { // mat상세페이지
 			int no=Integer.parseInt(request.getParameter("no"));
 			Material matOne = MaterialDao.getInstance().selectOne(no);
 			if(matOne != null) {
+			System.out.println("matDetail"+matOne.toString());
 			request.setAttribute("mat", matOne);
 			request.getRequestDispatcher("main/matDetail.jsp").forward(request, response);
 			}else {
 				out.print("<script>alert('게시글 조회 실패');location.href='matForm.do';</script>");
 			}
+		} else if (action.equals("/readMat.do")) { //session_no 받아오기 
+			int no = Integer.parseInt(request.getParameter("matNo"));
+			System.out.println("readMat"+no);
+			Material material = MaterialDao.getInstance().selectOne(no);
+			String name = material.getMat_nm();
+			int price = material.getMat_price();
+			int unit = material.getMat_unit();
+			System.out.println(material.toString());
+	    	JSONObject matInfo = new JSONObject();
+	    	JSONObject totalObject = new JSONObject();
+	    	matInfo.put("name", name);
+	    	matInfo.put("price", price);
+	    	matInfo.put("unit", unit);
+	    	totalObject.put("materials", matInfo);
+	    	String jsonInfo = totalObject.toJSONString();
+	    	System.out.println(jsonInfo);
+	    	out.print(jsonInfo);
+		} else if (action.equals("/matUpdate.do")) { // mat 수정 
+			int no=Integer.parseInt(request.getParameter("matNo"));
+			int price=Integer.parseInt(request.getParameter("matPrice"));
+			int unit=Integer.parseInt(request.getParameter("matUnit"));
+			boolean flag = MaterialDao.getInstance().update(new Material(no,price,unit));
+			if(flag) {
+				out.print("<script>alert('수정 성공');location.href='matDetail.do?no="+no+"';</script>");
+			}else {
+				out.print("<script>alert('수정 실패');location.href='matDetail.do?no="+no+"';</script>");
+			}	    	
 		/*==============================================================mat 끝=============================================================*/
 		/*==============================================================shop 시작=============================================================*/
 		} else if (action.equals("/shopForm.do")) {

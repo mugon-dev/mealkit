@@ -236,19 +236,18 @@ public class MaterialDao {
 		
 		return price;
 	}
-	//업데이트 idx로 검색 가격,단위,사진만 가능
+	//업데이트 no로 검색 가격,단위만 가능
 	public boolean update(Material material) {
 		boolean flag = false;
 		Connection conn = null;
 		PreparedStatement ps = null;
-		String sql= "update mat set mat_price = ?, mat_unit = ?, mat_image =? where mat_idx=?";
+		String sql= "update mat set mat_price = ?, mat_unit = ? where mat_no=?";
 		try {
 			conn=DBConn.getConn();
 			ps=conn.prepareStatement(sql);
 			ps.setInt(1, material.getMat_price());
 			ps.setInt(2, material.getMat_unit());
-			ps.setNString(3, material.getMat_image());
-			ps.setNString(4, material.getMat_idx());
+			ps.setInt(3, material.getMat_no());
 			int n=ps.executeUpdate();
 			if(n==1) {
 				flag=true;
@@ -274,7 +273,7 @@ public class MaterialDao {
 		boolean flag = false;
 		Connection conn = null;
 		PreparedStatement ps = null;
-		String sql= "delete from mat where mat_idx=?";
+		String sql= "delete from mat where mat_no=?";
 		try {
 			conn=DBConn.getConn();
 			ps=conn.prepareStatement(sql);

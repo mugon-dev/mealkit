@@ -13,8 +13,7 @@
 					<div class="dropdown-toggle" data-toggle="dropdown"
 						aria-haspopup="true" aria-expanded="false">관리자 메뉴</div>
 					<div class="dropdown-menu">
-						<a class="dropdown-item" data-toggle="modal"
-							data-target="#igdMoal" data-whatever="@mdo">재료 수정</a>
+						<a class="dropdown-item" id="matUpdate">재료 수정</a>
 						<a class="dropdown-item" href="matDelete.do?mat_no=${mat.mat_no }">삭제</a>
 					</div>
 				</div>
@@ -97,6 +96,41 @@
 			</div>
 		</div>
 	</div>
+		<!-- mat 수정 모달 -->
+		<div class="modal fade" id="matMoal" tabindex="-1"
+			aria-labelledby="matMoalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="idMoalLabel">재료 정보 수정</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<form name="memberForm" method="post" action="matUpdate.do">
+							<input type="hidden" value="${mat.mat_no }" id="matNo" name="matNo"/>
+							<label for="recipient-name" class="col-form-label" id="matName"></label> 
+							<div class="form-group">
+								<label for="recipient-name" class="col-form-label" id="matPrice"></label> 
+								<input
+									type="text" class="form-control" id="matPrice" name="matPrice" placeholder="변경할 가격을 입력하세요">
+							</div>
+							<div class="form-group">
+								<label for="recipient-name" class="col-form-label" id="matUnit"> </label> <input
+									type="text" class="form-control" id="matUnit" name="matUnit" placeholder="변경할 단위을 입력하세요">
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn_3" data-dismiss="modal"
+									style="padding: 10px;">닫기</button>
+								<button type="submit" class="btn_3" style="padding: 10px;">수정</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
 	<!--================End Single Product Area =================-->
 	<!-- subscribe part here -->
 	<section class="subscribe_part section_padding">
@@ -149,6 +183,29 @@
 	$('#login').on('click',function(){
 		var value=$('#login').val();
 		location.href="loginForm.do?no="+value;
+	});
+	$("#matUpdate").on('click', function() {
+		$.ajax({
+			type:"post", // 전송 방식 GET , POST , PUT , DELETE
+			url: "readMat.do", // 전송할 경로
+			async : false,
+			data: {"matNo": ${mat.mat_no }} , // 전송할 키와 값
+			success : function(data, textStatus) {
+				var jsonInfo = JSON.parse(data);
+				$('#matName').html(jsonInfo.materials.name);
+				$('#matPrice').html(jsonInfo.materials.price);
+				$('#matUnit').html(jsonInfo.materials.unit);
+				$("#matMoal").modal("show");
+			},
+			complete : function() {
+			// 성공여부와 상관없이 ajax 완료후 작업 
+				
+			},
+			error : function(request, status, error) {
+			// 에러가 났을 경우의 작업
+				alert("error");
+			}
+		});
 	});
 </script>
 <%@ include file="../include/footer.jsp"%>

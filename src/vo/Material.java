@@ -13,6 +13,13 @@ public class Material {
 	public Material() {
 		// TODO Auto-generated constructor stub
 	}
+	public Material(int mat_no, int mat_price, int mat_unit
+			) {
+		super();
+		this.mat_no = mat_no;
+		this.mat_price = mat_price;
+		this.mat_unit = mat_unit;
+	}
 	public Material(int mat_no, String mat_idx, String mat_nm, int mat_price, int mat_unit, String mat_image
 			) {
 		super();
