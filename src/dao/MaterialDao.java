@@ -241,13 +241,14 @@ public class MaterialDao {
 		boolean flag = false;
 		Connection conn = null;
 		PreparedStatement ps = null;
-		String sql= "update mat set mat_price = ?, mat_unit = ? where mat_no=?";
+		String sql= "update mat set mat_price = ?, mat_unit = ?, mat_nm= ? where mat_no=?";
 		try {
 			conn=DBConn.getConn();
 			ps=conn.prepareStatement(sql);
 			ps.setInt(1, material.getMat_price());
 			ps.setInt(2, material.getMat_unit());
-			ps.setInt(3, material.getMat_no());
+			ps.setString(3, material.getMat_nm());
+			ps.setInt(4, material.getMat_no());
 			int n=ps.executeUpdate();
 			if(n==1) {
 				flag=true;

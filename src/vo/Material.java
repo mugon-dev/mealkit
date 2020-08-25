@@ -20,6 +20,15 @@ public class Material {
 		this.mat_price = mat_price;
 		this.mat_unit = mat_unit;
 	}
+	public Material(int mat_no,  String mat_nm, int mat_price, int mat_unit, String mat_image
+			) {
+		super();
+		this.mat_no = mat_no;
+		this.mat_nm = mat_nm;
+		this.mat_price = mat_price;
+		this.mat_unit = mat_unit;
+		this.mat_image = mat_image;		
+	}
 	public Material(int mat_no, String mat_idx, String mat_nm, int mat_price, int mat_unit, String mat_image
 			) {
 		super();

@@ -69,7 +69,7 @@
 									<li><a href="shopForm.do">shop</a>
 										<ul class="submenu">
 											<li><a href="shopForm.do"> Mealkit list</a></li>
-											<li><a href="matForm.do"> Material Details</a></li>
+											<li><a href="matForm.do"> Material List</a></li>
 										</ul></li>
 									<li><a href="blogForm.do">Blog</a>
 										<ul class="submenu">

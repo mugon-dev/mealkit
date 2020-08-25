@@ -130,9 +130,19 @@ public class IndexController extends HttpServlet {
 			}
 		} else if (action.equals("/memberUpdate.do")) { //session_no 받아오기
 			int no = Integer.parseInt(request.getParameter("no"));
+			Member member = MemberDao.getInstance().selectOne(no);
 			String name = request.getParameter("name");
+			if(name==null) {
+				name = member.getName();
+			}
 			String addr = request.getParameter("addr");
+			if(addr==null) {
+				addr = member.getAddr();
+			}
 			String tel = request.getParameter("tel");
+			if(addr==null) {
+				tel = member.getTel();
+			}
 			boolean flag = MemberDao.getInstance().update(new Member(no, name, addr, tel));
 			if (flag) {
 				out.print("<script>alert('회원 수정 성공');location.href='main.do';</script>");
@@ -241,10 +251,16 @@ public class IndexController extends HttpServlet {
 	    	System.out.println(jsonInfo);
 	    	out.print(jsonInfo);
 		} else if (action.equals("/matUpdate.do")) { // mat 수정 
-			int no=Integer.parseInt(request.getParameter("matNo"));
-			int price=Integer.parseInt(request.getParameter("matPrice"));
-			int unit=Integer.parseInt(request.getParameter("matUnit"));
-			boolean flag = MaterialDao.getInstance().update(new Material(no,price,unit));
+			Map<String, String> materialUp = upload(request, response);
+			int no=Integer.parseInt(materialUp.get("mat_no"));
+			String name = materialUp.get("mat_nm"); 
+			int price=Integer.parseInt(materialUp.get("mat_price"));
+			int unit=Integer.parseInt(materialUp.get("mat_unit"));
+			String mat_image = materialUp.get("filename"); 
+			if(mat_image == null) {
+				mat_image=materialUp.get("ex_filename");
+			}
+			boolean flag = MaterialDao.getInstance().update(new Material(no,name,price,unit,mat_image));
 			if(flag) {
 				out.print("<script>alert('수정 성공');location.href='matDetail.do?no="+no+"';</script>");
 			}else {

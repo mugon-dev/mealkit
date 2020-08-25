@@ -9,14 +9,20 @@
 					<div class="single-footer-caption mb-50">
 						<div class="single-footer-caption mb-30">
 							<!-- logo -->
-							<div class="footer-logo">
-								<a href="index.html"><img
+							<div class="footer-logo" style="margin-bottom:5px;">
+								<a href="main.do"><img
 									src="assets/img/logo/logo2_footer.png" alt="" /></a>
 							</div>
 							<div class="footer-tittle">
 								<div class="footer-pera">
-									<p>Asorem ipsum adipolor sdit amet, consectetur adipisicing
-										elitcf sed do eiusmod tem.</p>
+								<p>
+									<span>COMPANY : MEAL SHARE</span> <br>
+									<span>OWNER : 정무곤 </span> <br>
+									<span>EMPLOYEE : 이현지,이태규</span> <br> 
+									<span>TEL: 00-743-5255 </span> <br>
+									<span>FAX : 001-731-6893 </span> <br>
+									<span>E-MAIL : master@MEARSHARE.kr</span> <br>
+									</p>
 								</div>
 							</div>
 						</div>
