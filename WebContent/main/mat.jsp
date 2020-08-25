@@ -55,7 +55,7 @@
 							<div class="single-popular-items mb-50 text-center">
 								<div class="popular-img">
 									<a href="matDetail.do?no=${mat.mat_no }"> <img
-										src="assets/img/gallery/popular1.png" alt="">
+										src="images/mat/${mat.mat_image }" style="width:360px; height:250px" alt="">
 									</a>
 									<div class="img-cap">
 										<span>Add to cart</span>

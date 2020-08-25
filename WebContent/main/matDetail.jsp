@@ -25,7 +25,7 @@
 			<div class="row justify-content-center">
 				<div class="col-lg-8">
 					<div class="single_product_img">
-						<img src="images/${mat.mat_image }" alt="#" class="img-fluid">
+						<img src="images/mat/${mat.mat_image }" alt="#" style="width:360px; height:250px" class="img-fluid">
 					</div>
 				</div>
 				<div class="col-lg-12">
