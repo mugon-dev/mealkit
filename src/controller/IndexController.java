@@ -405,10 +405,13 @@ public class IndexController extends HttpServlet {
     		String strPage = request.getParameter("pageNum");
     		String idx = request.getParameter("idx");
     		String no = request.getParameter("no");
-    		if(idx == null || no == null) { 
+    		String session_id=request.getParameter("session_id");
+    		
+    		System.out.println("no" + no);
+    		if(idx == null) { 
     			idx = "5";
     			no = "";
-    		} 
+    		}
     		
     		System.out.println("================== blogForm.do ==================");
     		System.out.println("------ strPage: " + strPage);
@@ -541,19 +544,32 @@ public class IndexController extends HttpServlet {
 			int milNo = Integer.parseInt(request.getParameter("milNo"));
 			int no = Integer.parseInt(request.getParameter("no"));
 			String replys = request.getParameter("replys");
+			System.out.println(milNo + " =========== " + no + " =========== " + replys + " =========== ");
 			boolean flag = ReplyDao.getInstance().insertReply(new Reply(milNo, no, replys));
-			if(flag) {
-				out.print("success");
+			boolean updateFlag = ReplyDao.getInstance().updateBlogReplyCount(milNo);
+			if(flag == true && updateFlag == true) {
+				out.print("<script>alert('댓글을 작성했습니다.'); location.href='blogDetail.do?milNo=" + milNo + "';</script>");
 			} else {
-				out.print("error");
+				out.print("<script>alert('댓글을 작성했습니다.'); location.href='blogDetail.do?milNo=" + milNo + "';</script>");
 			}
 		} else if(action.equals("/replyDelete.do")) {
+			int milNo = Integer.parseInt(request.getParameter("milNo"));
 			int reNo = Integer.parseInt(request.getParameter("reNo"));
 			boolean flag = ReplyDao.getInstance().deleteReply(reNo);
-			if(flag) {
-				out.print("success");
+			boolean deleteFlag = ReplyDao.getInstance().deleteBlogReplyCount(milNo);
+			if(flag == true && deleteFlag == true) {
+				out.print("<script>alert('댓글을 삭제했습니다.'); location.href='blogDetail.do?milNo=" + milNo + "';</script>");
 			} else {
-				out.print("error");
+				out.print("<script>alert('댓글을 삭제했습니다.'); location.href='blogDetail.do?milNo=" + milNo + "';</script>");
+			}
+		} else if(action.equals("/replyUpdate.do" )) {
+			int milNo = Integer.parseInt(request.getParameter("milNo"));
+			int reNo = Integer.parseInt(request.getParameter("reNo"));
+			boolean flag = ReplyDao.getInstance().updateReply(reNo);
+			if(flag) {
+				out.print("<script>alert('댓글을 수정했습니다.'); location.href='blogDetail.do?milNo=" + milNo + "';</script>");
+			} else {
+				out.print("<script>alert('댓글수정을 실패했습니다.'); location.href='blogDetail.do?milNo=" + milNo + "';</script>");
 			}
 		}
 	}

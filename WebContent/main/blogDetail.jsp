@@ -276,82 +276,50 @@
 				</div>
 			</form>
 			<!-- 리플 -->
-			<div class="comments-area" id="replylist" >
-				<h4>05 Comments</h4>
-				<div class="comment-list">
-					<div class="single-comment justify-content-between d-flex">
-						<div class="user justify-content-between d-flex">
-							<div class="thumb">
-<!-- 								<img src="assets/img/comment/comment_3.png" alt=""> -->
-							</div>
-							
-							
-							
-							
-						
-							
-							
-							
-							
-							
-							<div class="desc">
-								<c:forEach items="${replyList }" var="replyList">
-									${replyList.reNo} 
-									<p class="comment" name="reply" id="reply">
-										${replyList.replys }
-	                                    
-									</p>
-									<div class="d-flex justify-content-between">
-										<div class="d-flex align-items-center">
-											<h5><a href="#">${replyList.no }</a></h5>
-											<p class="date">${replyList.rgstDt }</p>
+			<form name="form" action='replyAdd.do'> 
+				<input type="hidden" name="no" value="${session_no }"/>
+				<input type="hidden" name="milNo" value="${blog.milNo }"/>
+				<div class="comments-area" id="replylist" >
+					<h4> ${blog.replyCount } Comments</h4>
+					<div class="comment-list">
+						<div class="single-comment justify-content-between d-flex">
+							<div class="user justify-content-between d-flex">
+								<div class="thumb"> </div>
+								<div class="desc">
+									<c:forEach items="${replyList }" var="replyList">
+										<h3> ${replyList.id } </h3> 
+										<p class="comment" name="reply" id="reply"> ${replyList.replys }" </p>
+										<div class="d-flex justify-content-between">
+											<div class="d-flex align-items-center">
+												<h5><a href="#">${replyList.no }</a></h5>
+												<p class="date">${replyList.rgstDt }</p>
+											</div>
+											<div class="reply-btn">
+												<a href="replyDelete.do?reNo=${replyList.reNo }&milNo=${replyList.milNo }" class="btn-reply text-uppercase">삭제</a>
+											</div>
 										</div>
-										<div class="reply-btn">
-											<a href="#" class="btn-reply text-uppercase">reply</a>
-										</div>
-									</div>
-								</c:forEach>
+									</c:forEach>
+								</div>
 							</div>
 						</div>
+						<p><p><br>
+						<div class="col-12">
+							<div class="form-group">
+								<textarea class="form-control w-100" name="replys" id="replys" cols="30" rows="9" placeholder="Write Comment"></textarea>
+							</div>
+						</div>
+						<div class="form-group">
+							<button type="submit" id="btnReplyAdd" name="btnRelpyAdd" class="button button-contactForm btn_1 boxed-btn" onclick="javascript: form.action='replyAdd.do';">Send Message</button>
+						</div>
 					</div>
-				</div>
-			</div> <!-- comments-area 끝 --><!-- --------------------------------------------아렁니ㅏㅓㄹ다절저ㅡ리;어 -->
-                  <div class="comment-form">
-                     <h4>Leave a Reply</h4>
-                     <form class="form-contact comment_form" action="#" id="commentForm">
-                        <div class="row">
-                           <div class="col-12">
-                              <div class="form-group">
-                                 <textarea class="form-control w-100" name="comment" id="comment" cols="30" rows="9"
-                                    placeholder="Write Comment"></textarea>
-                              </div>
-                           </div>
-                           <div class="col-sm-6">
-                              <div class="form-group">
-                                 <input class="form-control" name="name" id="name" type="text" placeholder="Name">
-                              </div>
-                           </div>
-                           <div class="col-sm-6">
-                              <div class="form-group">
-                                 <input class="form-control" name="email" id="email" type="email" placeholder="Email">
-                              </div>
-                           </div>
-                           <div class="col-12">
-                              <div class="form-group">
-                                 <input class="form-control" name="website" id="website" type="text" placeholder="Website">
-                              </div>
-                           </div>
-                        </div>
-                        <div class="form-group">
-                           <button type="submit" class="button button-contactForm btn_1 boxed-btn">Send Message</button>
-                        </div>
-                     </form>
-                  </div>
-              </div> <!-- 리플 끝 -->
-			
-		</div>
+					
+				</div> 
+			</form>
+		</div> <!-- 리플 끝 -->
 	</div>
+	
 </section>
+
 <script type="text/javascript">
 
 </script>
