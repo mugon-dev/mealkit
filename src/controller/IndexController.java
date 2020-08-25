@@ -469,7 +469,6 @@ public class IndexController extends HttpServlet {
 		} else if(action.equals("/updateBlog.do")) {
     		System.out.println("================== updateBlog.do ==================");
     		String test=request.getParameter("milNo");
-    		System.out.println(test+"sdlfksjdlkfj=============================================");
 			Map<String, String> blogMap = upload(request, response);
 			int milNo = Integer.parseInt(blogMap.get("milNo"));
 			String title = blogMap.get("title");
@@ -491,11 +490,6 @@ public class IndexController extends HttpServlet {
 			if(image == null) {
 				image = blogMap.get("noImage.png");
 			}
-			
-			System.out.println(blogMap.toString());
-			String sql = " UPDATE RECIPE SET MAT_QTY1=?, MAT_QTY2=?, MAT_QTY3=?, NO=?, REC_IDX=?, TITLE=?, CONTENT=?, "
-					+ " IMAGE=?, COOK_IDX=?, COOK_TYPE=?, MAT_NO1=?, MAT_NO2=?, MAT_NO3=?, MAT_ETC=?, PLATE=?, HOUR=?, LEVEL=? "
-					+ " WHERE MIL_NO = ? ";
 			
 			boolean flag = BlogDao.getInstance().updateBlog(new Blog(matQty1, matQty2, matQty3, recIdx, title, content, 
 					image, cookIdx, cookType, matNo1, matNo2, matNo3, matEtc, plate, hour, level, milNo));
