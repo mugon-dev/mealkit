@@ -4,7 +4,7 @@
 <section class="login_part section_padding ">
 	<div class="container">
 		<div class="row align-items-center">
-			<form class="row contact_form" name="form" method="post"  > 
+			<form class="row contact_form" name="form" method="post" > 
 				<input type="hidden" name="session_id" value="${session_id }"/>
 				<input type="hidden" name="milNo" value="${blog.milNo }" />
 				<input type="hidden" name="image" value="${blog.image }" />
@@ -267,7 +267,6 @@
 										<button type="submit" id="btnUpdate" name="btnUpdate" class="btn_3" onclick="javascript: form.action='updateBlog.do';form.enctype='multipart/form-data'">수정</button>
 									</div>
 									<div class="col-md-4 form-group">
-<%-- 										<input type="hidden" name="milNo" id="milNo" value="${blog.milNo } "> --%>
 										<button type="button" id="btnDelete" name="btnDelete" class="btn_3" onclick="location.href='deleteBlog.do?milNo=${blog.milNo }'">삭제</button>
 									</div>
 								</div>
@@ -277,28 +276,41 @@
 				</div>
 			</form>
 			<!-- 리플 -->
-			<div class="comments-area">
+			<div class="comments-area" id="replylist" >
 				<h4>05 Comments</h4>
 				<div class="comment-list">
 					<div class="single-comment justify-content-between d-flex">
 						<div class="user justify-content-between d-flex">
 							<div class="thumb">
-								<img src="assets/img/comment/comment_3.png" alt="">
+<!-- 								<img src="assets/img/comment/comment_3.png" alt=""> -->
 							</div>
+							
+							
+							
+							
+						
+							
+							
+							
+							
+							
 							<div class="desc">
-								<p class="comment">
-                                    Multiply sea night grass fourth day sea lesser rule open subdue female fill which them
-                                    Blessed, give fill lesser bearing multiply sea night grass fourth day sea lesser
-								</p>
-								<div class="d-flex justify-content-between">
-									<div class="d-flex align-items-center">
-										<h5><a href="#">Emilly Blunt</a></h5>
-										<p class="date">December 4, 2017 at 3:12 pm </p>
+								<c:forEach items="${replyList }" var="replyList">
+									${replyList.reNo} 
+									<p class="comment" name="reply" id="reply">
+										${replyList.replys }
+	                                    
+									</p>
+									<div class="d-flex justify-content-between">
+										<div class="d-flex align-items-center">
+											<h5><a href="#">${replyList.no }</a></h5>
+											<p class="date">${replyList.rgstDt }</p>
+										</div>
+										<div class="reply-btn">
+											<a href="#" class="btn-reply text-uppercase">reply</a>
+										</div>
 									</div>
-									<div class="reply-btn">
-										<a href="#" class="btn-reply text-uppercase">reply</a>
-									</div>
-								</div>
+								</c:forEach>
 							</div>
 						</div>
 					</div>

@@ -4,18 +4,18 @@ import java.util.Date;
 
 public class Reply {
 	private int reNo, milNo, no;
-	private String reply;
+	private String replys;
 	private Date rgstDt;
 	
 	public Reply() {
 		super();
 	}
 
-	public Reply(int milNo, int no, String reply) {
+	public Reply(int milNo, int no, String replys) {
 		super();
 		this.milNo = milNo;
 		this.no = no;
-		this.reply = reply;
+		this.replys = replys;
 	}
 
 	public int getReNo() {
@@ -42,12 +42,12 @@ public class Reply {
 		this.no = no;
 	}
 
-	public String getReply() {
-		return reply;
+	public String getReplys() {
+		return replys;
 	}
 
-	public void setReply(String reply) {
-		this.reply = reply;
+	public void setReplys(String replys) {
+		this.replys = replys;
 	}
 
 	public Date getRgstDt() {
@@ -60,7 +60,7 @@ public class Reply {
 
 	@Override
 	public String toString() {
-		return "Reply [reNo=" + reNo + ", milNo=" + milNo + ", no=" + no + ", reply=" + reply + ", rgstDt=" + rgstDt
+		return "Reply [reNo=" + reNo + ", milNo=" + milNo + ", no=" + no + ", replys=" + replys + ", rgstDt=" + rgstDt
 				+ "]";
 	}
 }

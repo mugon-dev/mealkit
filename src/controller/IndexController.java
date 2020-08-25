@@ -397,13 +397,13 @@ public class IndexController extends HttpServlet {
 			request.getRequestDispatcher("main/blogDetail.jsp").forward(request, response);
 		} else if(action.equals("/blogDetail.do")) { 
 			System.out.println("================== blogDetail.do ==================");
-			
-			List<Material> list=new ArrayList<Material>();
+    		int milNo = Integer.parseInt(request.getParameter("milNo"));
+
+    		List<Material> list=new ArrayList<Material>();
 			list=MaterialDao.getInstance().selectMain();
 			request.setAttribute("list", list);
-			
-    		int milNo = Integer.parseInt(request.getParameter("milNo"));
-    		System.out.println(milNo);
+
+			System.out.println(milNo);
     		Blog blog = BlogDao.getInstance().selectOne(milNo);
     		boolean flag = BlogDao.getInstance().updateReadCount(milNo);
 			List<Reply> replyList = ReplyDao.getInstance().selectReply(milNo);
@@ -497,6 +497,24 @@ public class IndexController extends HttpServlet {
 				out.print("<script>alert('글을 수정했습니다.'); location.href='blogDetail.do?milNo=" + milNo + "';</script>");
 			} else {
 				out.print("<script>alert('글수정을 실패했습니다.'); location.href='blogDetail.do?milNo=" + milNo + "';</script>");
+			}
+		} else if(action.equals("/replyAdd.do")) {
+			int milNo = Integer.parseInt(request.getParameter("milNo"));
+			int no = Integer.parseInt(request.getParameter("no"));
+			String replys = request.getParameter("replys");
+			boolean flag = ReplyDao.getInstance().insertReply(new Reply(milNo, no, replys));
+			if(flag) {
+				out.print("success");
+			} else {
+				out.print("error");
+			}
+		} else if(action.equals("/replyDelete.do")) {
+			int reNo = Integer.parseInt(request.getParameter("reNo"));
+			boolean flag = ReplyDao.getInstance().deleteReply(reNo);
+			if(flag) {
+				out.print("success");
+			} else {
+				out.print("error");
 			}
 		}
 	}
