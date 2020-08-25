@@ -9,7 +9,7 @@ public class PageMaker {
 	private int end;
 	private int totalCount;  
 	private boolean prev; 
-	private boolean next;  
+	private boolean next;
 	
 	public PageMaker() {}
 	public PageMaker(int currentPage, int totalCount) { 
@@ -59,4 +59,32 @@ public class PageMaker {
 	public boolean isNext() {
 		return next;
 	}
+	public void setPageSize(int pageSize) {
+		this.pageSize = pageSize;
+	}
+	public void setStartPage(int startPage) {
+		this.startPage = startPage;
+	}
+	public void setEndPage(int endPage) {
+		this.endPage = endPage;
+	}
+	public void setCurrentPage(int currentPage) {
+		this.currentPage = currentPage;
+	}
+	public void setStart(int start) {
+		this.start = start;
+	}
+	public void setEnd(int end) {
+		this.end = end;
+	}
+	public void setTotalCount(int totalCount) {
+		this.totalCount = totalCount;
+	}
+	public void setPrev(boolean prev) {
+		this.prev = prev;
+	}
+	public void setNext(boolean next) {
+		this.next = next;
+	}
+	
 }

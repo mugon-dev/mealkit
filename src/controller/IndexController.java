@@ -195,6 +195,7 @@ public class IndexController extends HttpServlet {
     		System.out.println("------ strPage: " + strPage);
 			int totalCount = MaterialDao.getMatCount(idx);
 			PageMaker pageM = new PageMaker(pageNum, totalCount);
+			pageM.setPageSize(6);
 			List<Material> list = MaterialDao.getInstance().selectAll(pageM.getStart(), pageM.getEnd(), idx);
 			request.setAttribute("list", list);
 			request.setAttribute("pageM", pageM);

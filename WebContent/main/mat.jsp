@@ -51,6 +51,7 @@
 				aria-labelledby="nav-whole-tab">
 				<div class="row">
 					<c:forEach items="${list }" var="mat">
+					<c:set var="idx" value="${mat.mat_idx }"/>
 						<div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
 							<div class="single-popular-items mb-50 text-center">
 								<div class="popular-img">
@@ -74,7 +75,6 @@
 					</c:forEach>
 				</div>
 			</div>
-
 		</div>
 		<nav class="blog-pagination justify-content-center d-flex">
 			<!-- 페이징 시작  -->
@@ -87,7 +87,7 @@
 				<c:forEach var="i" begin="${pageM.startPage }" end="${pageM.endPage }">
 					<li
 						class='page-item <c:out value="${pageM.currentPage == i ? 'active' : ' ' }"></c:out>'>
-						<a href="matForm.do?pageNum=${i }" class="page-link">${i }</a>
+						<a href="matForm.do?pageNum=${i }&idx=${idx }" class="page-link">${i }</a>
 					</li>
 				</c:forEach>
 				<li

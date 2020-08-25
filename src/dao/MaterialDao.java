@@ -27,7 +27,7 @@ public class MaterialDao {
 		} else if(idx.equals("0")){ // 전체보기
 		} 
 		sql += " ORDER BY MAT_NO DESC LIMIT ?, 6 ";
-		
+		System.out.println("matSelect: "+sql);
 		List<Material> list = new ArrayList<Material>();
 		Connection conn = null;
 		PreparedStatement ps = null;
