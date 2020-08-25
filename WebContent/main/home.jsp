@@ -86,7 +86,7 @@
 			<div class="row">
 				<div class="col-xl-12">
 					<div class="section-tittle mb-70">
-						<h2>MD 추천</h2>
+						<h2>신규 밀키트</h2>
 					</div>
 				</div>
 			</div>

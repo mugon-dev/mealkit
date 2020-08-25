@@ -69,7 +69,7 @@
 									<li><a href="shopForm.do">shop</a>
 										<ul class="submenu">
 											<li><a href="shopForm.do"> Mealkit list</a></li>
-											<li><a href="matForm.do"> Material Details</a></li>
+											<li><a href="matForm.do"> Material List</a></li>
 										</ul></li>
 									<li><a href="blogForm.do">Blog</a>
 										<ul class="submenu">
@@ -98,7 +98,7 @@
 													aria-expanded="false">(${session_id})</div>
 												<div class="dropdown-menu">
 													<a class="dropdown-item" href="blogForm.do?idx=6&no=${session_no }">내 글보기</a> 
-													<a class="dropdown-item" id="memberUpdate" onclick="modalPopup()">내 정보 수정</a> 
+													<a class="dropdown-item" id="memberUpdate" >내 정보 수정</a> 
 													<a class="dropdown-item" href="#" id="logout">로그아웃</a>
 												</div>
 											</div>
@@ -185,8 +185,7 @@
 				complete : function(data, textStatus) {
 				}
 			});
-		});
-		function modalPopup() {			
+		});		
 			$("#memberUpdate").on('click', function() {
 				$.ajax({
 					type:"post", // 전송 방식 GET , POST , PUT , DELETE
@@ -209,9 +208,6 @@
 						alert("error");
 					}
 				});
-				
 			});
-			
-		}
 		
 	</script>

@@ -130,9 +130,19 @@ public class IndexController extends HttpServlet {
 			}
 		} else if (action.equals("/memberUpdate.do")) { //session_no 받아오기
 			int no = Integer.parseInt(request.getParameter("no"));
+			Member member = MemberDao.getInstance().selectOne(no);
 			String name = request.getParameter("name");
+			if(name==null) {
+				name = member.getName();
+			}
 			String addr = request.getParameter("addr");
+			if(addr==null) {
+				addr = member.getAddr();
+			}
 			String tel = request.getParameter("tel");
+			if(addr==null) {
+				tel = member.getTel();
+			}
 			boolean flag = MemberDao.getInstance().update(new Member(no, name, addr, tel));
 			if (flag) {
 				out.print("<script>alert('회원 수정 성공');location.href='main.do';</script>");
@@ -185,6 +195,7 @@ public class IndexController extends HttpServlet {
     		System.out.println("------ strPage: " + strPage);
 			int totalCount = MaterialDao.getMatCount(idx);
 			PageMaker pageM = new PageMaker(pageNum, totalCount);
+			pageM.setPageSize(6);
 			List<Material> list = MaterialDao.getInstance().selectAll(pageM.getStart(), pageM.getEnd(), idx);
 			request.setAttribute("list", list);
 			request.setAttribute("pageM", pageM);
@@ -211,17 +222,51 @@ public class IndexController extends HttpServlet {
 			if(flag) {
 				out.print("<script>alert('삭제 성공');location.href='matForm.do';</script>");
 			}else {
-				out.print("<script>alert('삭제 실패');location.href='matDetail.do';</script>");
+				out.print("<script>alert('삭제 실패');location.href='matDetail.do?no="+no+"';</script>");
 			}
 		} else if (action.equals("/matDetail.do")) { // mat상세페이지
 			int no=Integer.parseInt(request.getParameter("no"));
 			Material matOne = MaterialDao.getInstance().selectOne(no);
 			if(matOne != null) {
+			System.out.println("matDetail"+matOne.toString());
 			request.setAttribute("mat", matOne);
 			request.getRequestDispatcher("main/matDetail.jsp").forward(request, response);
 			}else {
 				out.print("<script>alert('게시글 조회 실패');location.href='matForm.do';</script>");
 			}
+		} else if (action.equals("/readMat.do")) { //session_no 받아오기 
+			int no = Integer.parseInt(request.getParameter("matNo"));
+			System.out.println("readMat"+no);
+			Material material = MaterialDao.getInstance().selectOne(no);
+			String name = material.getMat_nm();
+			int price = material.getMat_price();
+			int unit = material.getMat_unit();
+			System.out.println(material.toString());
+	    	JSONObject matInfo = new JSONObject();
+	    	JSONObject totalObject = new JSONObject();
+	    	matInfo.put("name", name);
+	    	matInfo.put("price", price);
+	    	matInfo.put("unit", unit);
+	    	totalObject.put("materials", matInfo);
+	    	String jsonInfo = totalObject.toJSONString();
+	    	System.out.println(jsonInfo);
+	    	out.print(jsonInfo);
+		} else if (action.equals("/matUpdate.do")) { // mat 수정 
+			Map<String, String> materialUp = upload(request, response);
+			int no=Integer.parseInt(materialUp.get("mat_no"));
+			String name = materialUp.get("mat_nm"); 
+			int price=Integer.parseInt(materialUp.get("mat_price"));
+			int unit=Integer.parseInt(materialUp.get("mat_unit"));
+			String mat_image = materialUp.get("filename"); 
+			if(mat_image == null) {
+				mat_image=materialUp.get("ex_filename");
+			}
+			boolean flag = MaterialDao.getInstance().update(new Material(no,name,price,unit,mat_image));
+			if(flag) {
+				out.print("<script>alert('수정 성공');location.href='matDetail.do?no="+no+"';</script>");
+			}else {
+				out.print("<script>alert('수정 실패');location.href='matDetail.do?no="+no+"';</script>");
+			}	    	
 		/*==============================================================mat 끝=============================================================*/
 		/*==============================================================shop 시작=============================================================*/
 		} else if (action.equals("/shopForm.do")) {
@@ -237,16 +282,6 @@ public class IndexController extends HttpServlet {
 			String mat_no1=request.getParameter("mat_no1");
 			String cook_type=request.getParameter("cook_type");
 			
-			List<IScomb> type1=new ArrayList<IScomb>();
-			type1.add(new IScomb(0,"전체"));
-			type1.add(new IScomb(1,"한식"));
-			type1.add(new IScomb(2,"중식"));
-			type1.add(new IScomb(3,"일식"));
-			type1.add(new IScomb(4,"양식"));
-			
-			request.setAttribute("type1", type1);
-			
-			System.out.println(cook_idx);
 			if(cook_idx==null) {
 				cook_idx="0";
 			}
@@ -256,12 +291,67 @@ public class IndexController extends HttpServlet {
 			if(cook_type==null) {
 				cook_type="0";
 			}
+			
+			List<IScomb> type1=new ArrayList<IScomb>();
+			type1.add(new IScomb(0,"전체"));
+			type1.add(new IScomb(1,"한식"));
+			type1.add(new IScomb(2,"중식"));
+			type1.add(new IScomb(3,"일식"));
+			type1.add(new IScomb(4,"양식"));
+			
+			List<IScomb> type3=new ArrayList<IScomb>();
+			type3.add(new IScomb(0,"전체"));
+			type3.add(new IScomb(1,"구이"));
+			type3.add(new IScomb(2,"찜"));
+			type3.add(new IScomb(3,"탕"));
+			type3.add(new IScomb(4,"생식"));
+			type3.add(new IScomb(5,"기타"));
+			
+			
+			String strPage = request.getParameter("pageNum");
+			String idx = request.getParameter("idx");
+			int pageNum = 1;
+			if(idx==null) {
+				idx="0";
+			}
+			if(strPage != null) {
+				pageNum = Integer.parseInt(strPage);
+			}
+			List<Recipe> list=new ArrayList<Recipe>();
+			list=RecipeDao.getInstance().selectShopDiv(cook_idx, mat_no1, cook_type);
+			System.out.println("================== matForm.do ==================");
+    		System.out.println("------ strPage: " + strPage);
+			int totalCount = list.size();
+			PageMaker pageM = new PageMaker(pageNum, totalCount,6);
+			List<Recipe> recipeList = RecipeDao.getInstance().selectShopDiv(pageM.getStart(), pageM.getEnd(), cook_idx, mat_no1, cook_type);
+			request.setAttribute("recipeList", recipeList);
+			request.setAttribute("pageM", pageM);
+			
+			
+			
+			
+			List<Material> type2=MaterialDao.getInstance().selectList("10");
+			
+			
+			request.setAttribute("type1", type1);
+			request.setAttribute("type2", type2);
+			request.setAttribute("type3", type3);
+			
+			System.out.println(cook_idx);
+			
+			
+			
+			
 			request.setAttribute("cook_idx", cook_idx);
 			request.setAttribute("mat_no1", mat_no1);
 			request.setAttribute("cook_type", cook_type);
+
+			request.setAttribute("recipeList", recipeList);
 			
-			List<Material> type2=MaterialDao.getInstance().selectList("10");
-			request.setAttribute("type2", type2);
+			for(int i=0;i<recipeList.size();i++) {
+				System.out.println("여기가 셀렉트"+recipeList.get(i).toString());
+			}
+			
 			request.getRequestDispatcher("main/shopDiv.jsp").forward(request, response);
 		} else if(action.equals("/search.do")) {
 			//음식 타입 재료 조리방법 get
