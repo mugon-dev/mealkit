@@ -62,7 +62,7 @@
 			<!-- 한식 -->
 			<div class="tab-pane fade show active" id="type1_0" role="tabpanel"
 				aria-labelledby="nav0">
-				<h4>MD추천</h4>
+				<div><span style="font-size:30px;color:'BLUE';">MD추천</span>&nbsp;<span style="font-size:10px;color:'GRAY'"><a href="shop.do">|+더보기|</a></span></div>
 				<div class="row">
 					<c:forEach var="recipe" items="${recipe }">
 						<c:if test="${recipe.rec_idx == 1 }">
@@ -88,7 +88,7 @@
 						</c:if>
 					</c:forEach>
 				</div>
-				<h4>커뮤니티 추천</h4>
+				<div><span style="font-size:30px;color:'BLUE';">커뮤니티 추천</span>&nbsp;<span style="font-size:10px;color:'GRAY'">|+더보기|</span></div>
 				<div class="row">
 					<c:forEach var="recipe" items="${recipe }">
 						<c:if test="${recipe.rec_idx == 2 }">
@@ -118,7 +118,7 @@
 			<c:forEach var="type1" begin="1" end="4" varStatus="loop">
 				<div class="tab-pane fade" id="type1_${loop.count }" role="tabpanel"
 					aria-labelledby="nav${loop.count }">
-					<h4>MD추천</h4>
+					<div><span style="font-size:30px;color:'BLUE';">MD추천</span>&nbsp;<span style="font-size:10px;color:'GRAY'">|+더보기|</span></div>
 					<div class="row">
 						<c:forEach var="recipe" items="${recipe }">
 							<c:if
@@ -148,7 +148,7 @@
 							</c:if>
 						</c:forEach>
 					</div>
-					<h4>커뮤니티 추천</h4>
+					<div><span style="font-size:30px;color:'BLUE';">커뮤니티 추천</span>&nbsp;<span style="font-size:10px;color:'GRAY'">|+더보기|</span></div>
 					<div class="row">
 						<c:forEach var="recipe" items="${recipe }">
 							<c:if

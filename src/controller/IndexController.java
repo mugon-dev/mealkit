@@ -221,6 +221,9 @@ public class IndexController extends HttpServlet {
 			request.setAttribute("recipe", listRecipe);
 			request.getRequestDispatcher("main/shop.jsp").forward(request, response);
 		} else if (action.equals("/shop.do")) {
+			List<Material> list=MaterialDao.getInstance().selectList("10");
+			request.setAttribute("list", list);
+			request.getRequestDispatcher("main/shopDiv.jsp").forward(request, response);
 		} else if(action.equals("/search.do")) {
 			//음식 타입 재료 조리방법 get
     		String type1=request.getParameter("type1");
@@ -291,11 +294,6 @@ public class IndexController extends HttpServlet {
     		int[] mat=null;
 			String[] mat_no=null;
 			String test =request.getParameter("test");
-			String test1= request.getParameter("matNo2");
-			String test2= request.getParameter("milNo");
-			System.out.println(test1);
-			System.out.println(test2);
-			System.out.println(test);
     		if(test.equals("1")) {
     			
     			count=1;
@@ -309,8 +307,8 @@ public class IndexController extends HttpServlet {
     			mat_no=new String[count];
     			for(int i=0; i<count;i++) {
     				int temp=i+1;
-    				mat[i]=Integer.parseInt(request.getParameter("matNo"+temp));
-    				mat_no[i]=request.getParameter("matQty"+temp);
+    				mat[i]=Integer.parseInt(request.getParameter("matQty"+temp));
+    				mat_no[i]=request.getParameter("matNo"+temp);
     			}
     			
     		}else if(test.equals("2")){
@@ -323,10 +321,11 @@ public class IndexController extends HttpServlet {
     				mat_no[i]=request.getParameter("material"+temp);
     			}
     		}else {
-    			System.out.println("sldkfjslkdfj");
+    			
     		}
-    		String id=request.getParameter("session_id");
-    		int no=MemberDao.getInstance().getMemberNo(id);
+    		String session_id=request.getParameter("session_id");
+    		int no=MemberDao.getInstance().getMemberNo(session_id);
+    		
     		for(int i=0;i<count;i++) {
     			Material material=MaterialDao.getInstance().selectOne(Integer.parseInt(mat_no[i]));
     			order=new Order(no,material.getMat_no(),material.getMat_nm(),mat[i],material.getMat_unit());
@@ -340,7 +339,7 @@ public class IndexController extends HttpServlet {
 //    			System.out.println(mat[i]);
 //    			System.out.println(material);
     		}
-    		out.print("<script>alert('장바구니 입력 성공. 장바구니로 이동합니다.'); location.href='cartForm.do?id="+id+"';</script>");
+    		out.print("<script>alert('장바구니 입력 성공. 장바구니로 이동합니다.'); location.href='cartForm.do?id="+session_id+"';</script>");
     	}else if(action.equals("/cartForm.do")) {
     		List<OrderPrice> listOrder=new ArrayList<OrderPrice>();
     		String id=request.getParameter("id");

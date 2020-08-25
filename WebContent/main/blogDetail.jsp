@@ -5,6 +5,7 @@
 	<div class="container">
 		<div class="row align-items-center">
 			<form class="row contact_form" name="form" method="post"  > 
+				<input type="hidden" name="session_id" value="${session_id }"/>
 				<input type="hidden" name="milNo" value="${blog.milNo }" />
 				<input type="hidden" name="image" value="${blog.image }" />
 				<input type="hidden" name="test" value="1" />

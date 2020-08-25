@@ -23,6 +23,10 @@ public class OrderDao {
 		try {
 			System.out.println("여기는 orderDao Insert:"+order.getMat_nm());
 			System.out.println("sdlkfjsdf");
+			System.out.println("회원번호"+order.getNo());
+			System.out.println("재료 번호"+order.getMat_no());
+			System.out.println("재료 수량"+order.getMat_qty());
+			System.out.println("재료 단위"+order.getMat_unit());
 			conn=DBConn.getConn();
 			ps=conn.prepareStatement(sql);
 			ps.setInt(1, order.getNo());
