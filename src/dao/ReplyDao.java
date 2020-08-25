@@ -32,8 +32,8 @@ public class ReplyDao {
 				Reply reply = new Reply();
 				reply.setReNo(rs.getInt("re_no"));
 				reply.setMilNo(rs.getInt("mil_no"));
-				reply.setReply(rs.getString("reply"));
-				reply.setRgstDt(rs.getTimestamp("regt_dt"));
+				reply.setReplys(rs.getString("replys"));
+				reply.setRgstDt(rs.getTimestamp("rgst_dt"));
 				reply.setNo(rs.getInt("no"));
 				list.add(reply);
 			}
@@ -50,12 +50,12 @@ public class ReplyDao {
 		boolean flag = false;
 		Connection conn = null;
 		PreparedStatement ps = null;
-		String sql = " INSERT INTO REPLY(MIL_NO, REPLY, NO) VALUES(?, ?, ?) ";
+		String sql = " INSERT INTO REPLY(MIL_NO, REPLYS, NO) VALUES(?, ?, ?) ";
 		try{
 			conn = DBConn.getConn();
-			ps = conn.prepareStatement(sql);
+			ps = conn.prepareStatement(sql); 
 			ps.setInt(1, reply.getMilNo());
-			ps.setString(2,reply.getReply());
+			ps.setString(2,reply.getReplys());
 			ps.setInt(3, reply.getNo());
 			int n = ps.executeUpdate();
 			if(n == 1) {
@@ -129,11 +129,11 @@ public class ReplyDao {
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String sql = " UPDATE REPLY SET RELPY = ? WHERE RE_NO =? ";
+		String sql = " UPDATE REPLY SET RELPYS = ? WHERE RE_NO =? ";
 		try {
 			conn = DBConn.getConn();
 			ps = conn.prepareStatement(sql);
-			ps.setString(1, rs.getString("reply"));
+			ps.setString(1, rs.getString("replys"));
 			ps.setInt(2, reNo);
 			int n = ps.executeUpdate();
 			if(n == 1) {
