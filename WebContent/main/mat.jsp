@@ -51,7 +51,6 @@
 				aria-labelledby="nav-whole-tab">
 				<div class="row">
 					<c:forEach items="${list }" var="mat">
-					<c:set var="idx" value="${mat.mat_idx }"/>
 						<div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
 							<div class="single-popular-items mb-50 text-center">
 								<div class="popular-img">
