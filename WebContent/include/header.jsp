@@ -139,7 +139,8 @@
 						</button>
 					</div>
 					<div class="modal-body">
-						<form action="mat.do" method="post">
+						<form name="memberForm" method="post" action="memberUpdate.do">
+							<input type="hidden" value="${session_no }" id="no" name="no"/>
 							<div class="form-group">
 								<label for="recipient-name" class="col-form-label" id="memberName"></label> 
 								<input
@@ -156,8 +157,8 @@
 							<div class="modal-footer">
 								<button type="button" class="btn_3" data-dismiss="modal"
 									style="padding: 10px;">닫기</button>
-								<button id="btnUpdate" class="btn_3" style="padding: 10px;">수정</button>
-								<button id="btnDelete" class="btn_3" style="padding: 10px;">탈퇴</button>
+								<button type="submit" id="btnMemUpdate" name="btnMemUpdate" class="btn_3" style="padding: 10px;">수정</button>
+								<button type="button" onclick="location.href='memberDelete.do?no=${session_no }'" id="btnMemDelete" name="btnMemDelete" class="btn_3" style="padding: 10px;">탈퇴</button>
 							</div>
 						</form>
 					</div>
@@ -212,10 +213,5 @@
 			});
 			
 		}
-		$("#btnDelete").on('click', function() {
-			location.href = "memberDelete.do?no=${member.no}";
-		});
-		$("#btnDelete").on('click', function() {
-			location.href = "memberUpdate.do?no=${member.no}";
-		});
+		
 	</script>

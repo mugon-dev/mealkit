@@ -102,7 +102,7 @@ public class IndexController extends HttpServlet {
 			} else {
 				out.print("<script>alert('아이디 틀림');location.href='loginForm.do';</script>");
 			}
-		} else if (action.equals("/readPerson.do")) { //session_no 받아오기 //id 수정필요
+		} else if (action.equals("/readPerson.do")) { //session_no 받아오기 
 			int no = Integer.parseInt(request.getParameter("no"));
 			System.out.println("readperson"+no);
 			Member member = MemberDao.getInstance().selectOne(no);
@@ -119,8 +119,6 @@ public class IndexController extends HttpServlet {
 	    	String jsonInfo = totalObject.toJSONString();
 	    	System.out.println(jsonInfo);
 	    	out.print(jsonInfo);
-			//request.setAttribute("member", member);
-			//request.getRequestDispatcher("include/header.jsp").forward(request, response);
 		} else if (action.equals("/memberDelete.do")) { //member.no 받아와서 삭제
 			int no = Integer.parseInt(request.getParameter("no"));
 			boolean flag = MemberDao.getInstance().delete(no);
@@ -134,7 +132,7 @@ public class IndexController extends HttpServlet {
 			String name = request.getParameter("name");
 			String addr = request.getParameter("addr");
 			String tel = request.getParameter("tel");
-			boolean flag = MemberDao.getInstance().update(new Member(name, addr, tel));
+			boolean flag = MemberDao.getInstance().update(new Member(no, name, addr, tel));
 			if (flag) {
 				out.print("<script>alert('회원 수정 성공');location.href='main.do';</script>");
 			} else {
