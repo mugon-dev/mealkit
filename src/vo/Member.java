@@ -16,6 +16,13 @@ public class Member {
 		this.addr = addr;
 		this.tel = tel;
 	}
+	public Member(int no, String name, String addr, String tel) {
+		super();
+		this.no = no;
+		this.name = name;
+		this.addr = addr;
+		this.tel = tel;
+	}
 	public Member(String id, String pw, String name, String addr, String tel) {
 		super();
 		this.id = id;

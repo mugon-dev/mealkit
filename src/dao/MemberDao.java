@@ -141,13 +141,15 @@ public class MemberDao {
 		boolean flag=false;
 		Connection conn = null;
 		PreparedStatement ps = null;
-		String sql = "update member set pw=?, name=? where no=?";
+		System.out.println("memberUpdate: "+member.toString());
+		String sql = "update member set tel=?, name=?, addr=? where no=?";
 		try {
 			conn = DBConn.getConn();
 			ps = conn.prepareStatement(sql);
-			ps.setString(1, member.getPw());
+			ps.setString(1, member.getTel());
 			ps.setString(2, member.getName());
-			ps.setInt(3, member.getNo());
+			ps.setString(3, member.getAddr());
+			ps.setInt(4, member.getNo());
 			int n=ps.executeUpdate();
 			if(n==1) {
 				flag=true;

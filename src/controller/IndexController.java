@@ -3,7 +3,6 @@ package controller;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -19,6 +18,8 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 import dao.BlogDao;
 import dao.MaterialDao;
@@ -27,6 +28,7 @@ import dao.OrderDao;
 import dao.RecipeDao;
 import dao.ReplyDao;
 import vo.Blog;
+import vo.IScomb;
 import vo.Material;
 import vo.Member;
 import vo.Order;
@@ -101,13 +103,23 @@ public class IndexController extends HttpServlet {
 			} else {
 				out.print("<script>alert('아이디 틀림');location.href='loginForm.do';</script>");
 			}
-		} else if (action.equals("/readPerson.do")) { //session_no 받아오기 //id 수정필요
+		} else if (action.equals("/readPerson.do")) { //session_no 받아오기 
 			int no = Integer.parseInt(request.getParameter("no"));
 			System.out.println("readperson"+no);
 			Member member = MemberDao.getInstance().selectOne(no);
+			String name = member.getName();
+			String addr = member.getAddr();
+			String tel = member.getTel();
 			System.out.println(member.toString());
-			request.setAttribute("member", member);
-			request.getRequestDispatcher("include/header.jsp").forward(request, response);
+	    	JSONObject memberInfo = new JSONObject();
+	    	JSONObject totalObject = new JSONObject();
+	    	memberInfo.put("name", name);
+	    	memberInfo.put("addr", addr);
+	    	memberInfo.put("tel", tel);
+	    	totalObject.put("members", memberInfo);
+	    	String jsonInfo = totalObject.toJSONString();
+	    	System.out.println(jsonInfo);
+	    	out.print(jsonInfo);
 		} else if (action.equals("/memberDelete.do")) { //member.no 받아와서 삭제
 			int no = Integer.parseInt(request.getParameter("no"));
 			boolean flag = MemberDao.getInstance().delete(no);
@@ -121,7 +133,7 @@ public class IndexController extends HttpServlet {
 			String name = request.getParameter("name");
 			String addr = request.getParameter("addr");
 			String tel = request.getParameter("tel");
-			boolean flag = MemberDao.getInstance().update(new Member(name, addr, tel));
+			boolean flag = MemberDao.getInstance().update(new Member(no, name, addr, tel));
 			if (flag) {
 				out.print("<script>alert('회원 수정 성공');location.href='main.do';</script>");
 			} else {
@@ -221,8 +233,35 @@ public class IndexController extends HttpServlet {
 			request.setAttribute("recipe", listRecipe);
 			request.getRequestDispatcher("main/shop.jsp").forward(request, response);
 		} else if (action.equals("/shop.do")) {
-			List<Material> list=MaterialDao.getInstance().selectList("10");
-			request.setAttribute("list", list);
+			String cook_idx=request.getParameter("cook_idx");
+			String mat_no1=request.getParameter("mat_no1");
+			String cook_type=request.getParameter("cook_type");
+			
+			List<IScomb> type1=new ArrayList<IScomb>();
+			type1.add(new IScomb(0,"전체"));
+			type1.add(new IScomb(1,"한식"));
+			type1.add(new IScomb(2,"중식"));
+			type1.add(new IScomb(3,"일식"));
+			type1.add(new IScomb(4,"양식"));
+			
+			request.setAttribute("type1", type1);
+			
+			System.out.println(cook_idx);
+			if(cook_idx==null) {
+				cook_idx="0";
+			}
+			if(mat_no1==null) {
+				mat_no1="0";
+			}
+			if(cook_type==null) {
+				cook_type="0";
+			}
+			request.setAttribute("cook_idx", cook_idx);
+			request.setAttribute("mat_no1", mat_no1);
+			request.setAttribute("cook_type", cook_type);
+			
+			List<Material> type2=MaterialDao.getInstance().selectList("10");
+			request.setAttribute("type2", type2);
 			request.getRequestDispatcher("main/shopDiv.jsp").forward(request, response);
 		} else if(action.equals("/search.do")) {
 			//음식 타입 재료 조리방법 get
