@@ -16,18 +16,18 @@
 				<span class="navbar-toggler-icon"></span>
 			</button>
 			<c:set var="cook_idx" value="${cook_idx }"/>
-			<c:set var="cook_type" value="${cook_type }"/>
 			<c:set var="mat_no1" value="${mat_no1 }"/>
+			<c:set var="cook_type" value="${cook_type }"/>
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 					<c:forEach items="${type1 }" var="type1" varStatus="loop">
-						<c:if test="${cook_idx == type1.i }">
+						<c:if test="${cook_idx==type1.i }">
 							<li class="nav-item"><a class="nav-link"
-							href="shopForm.do?cook_idx=${cook_idx }" style="color:RED"><b>${type1.str }</b></a></li>
+							href="shop.do?cook_idx=${type1.i }&mat_no1=${mat_no1 }&cook_type=${cook_type}" style="color:RED"><b>${type1.str }</b></a></li>
 						</c:if>
 						<c:if test="${cook_idx != type1.i }">
 							<li class="nav-item"><a class="nav-link"
-							href="shopForm.do?cook_idx=${cook_idx }">${type1.str }</a></li>
+							href="shop.do?cook_idx=${type1.i }&mat_no1=${mat_no1 }&cook_type=${cook_type}">${type1.str }</a></li>
 						</c:if>
 					</c:forEach>
 					<%-- <c:choose>
@@ -61,20 +61,44 @@
 				<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 					<c:if test="${mat_no1==0 }">
 						<li class="nav-item"><a class="nav-link"
-								href="shopForm.do?mat_no1=0" style="color:RED"><b>전체</b></a></li>
+								href="shop.do?cook_idx=${cook_idx }&mat_no1=0&cook_type=${cook_type }" style="color:RED"><b>전체</b></a></li>
 					</c:if>
 					<c:if test="${mat_no1!=0 }">
 						<li class="nav-item"><a class="nav-link"
-								href="shopForm.do?mat_no1='0'">전체</a></li>
+								href="shop.do?cook_idx=${cook_idx }&mat_no1=0&cook_type=${cook_type }">전체</a></li>
 					</c:if>
 					<c:forEach items="${type2 }" var="type2">
 						<c:if test="${mat_no1 == type2.mat_no }">
 						<li class="nav-item"><a class="nav-link"
-							href="shopForm.do?mat_no1=${type2.mat_no }" style="color:RED"><b>${type2.mat_nm }</b></a></li>
+							href="shop.do?cook_idx=${cook_idx }&mat_no1=${type2.mat_no }&cook_type=${cook_type }" style="color:RED"><b>${type2.mat_nm }</b></a></li>
 						</c:if>
 						<c:if test="${mat_no1 != type2.mat_no }">
 						<li class="nav-item"><a class="nav-link"
-							href="shopForm.do?mat_no1=${type2.mat_no }">${type2.mat_nm }</a></li>
+							href="shop.do?cook_idx=${cook_idx }&mat_no1=${type2.mat_no }&cook_type=${cook_type }">${type2.mat_nm }</a></li>
+						</c:if>
+					</c:forEach>
+				</ul>
+			</div>
+		</nav>
+	</div>
+	<div class="container">
+		<nav class="navbar navbar-expand-lg navbar-light bg-white">
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#navbarSupportedContent"
+				aria-controls="navbarSupportedContent" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+					<c:forEach items="${type3 }" var="type3" varStatus="loop">
+						<c:if test="${cook_type == type3.i }">
+						<li class="nav-item"><a class="nav-link"
+							href="shop.do?cook_idx=${cook_idx }&mat_no1=${mat_no1 }&cook_type=${type3.i }" style="color:RED"><b>${type3.str }</b></a></li>
+						</c:if>
+						<c:if test="${cook_type != type3.i }">
+						<li class="nav-item"><a class="nav-link"
+							href="shop.do?cook_idx=${cook_idx }&mat_no1=${mat_no1 }&cook_type=${type3.i }">${type3.str }</a></li>
 						</c:if>
 					</c:forEach>
 				</ul>
@@ -87,7 +111,7 @@
 			<div class="tab-pane fade show active" id="nav-whole" role="tabpanel"
 				aria-labelledby="nav-whole-tab">
 				<div class="row">
-					<c:forEach items="${list }" var="mat">
+					<c:forEach items="${recipeList }" var="recipeList">
 						<div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
 							<div class="single-popular-items mb-50 text-center">
 								<div class="popular-img">
@@ -103,7 +127,7 @@
 								</div>
 								<div class="popular-caption">
 									<h3>
-										<a href="product_details.html">${mat.mat_nm }</a>
+										<a href="product_details.html">${recipeList.title }</a>
 									</h3>
 								</div>
 							</div>
@@ -113,12 +137,12 @@
 			</div>
 
 		</div>
-		<nav class="blog-pagination justify-content-center d-flex">
+		 <nav class="blog-pagination justify-content-center d-flex">
 			<!-- 페이징 시작  -->
 			<ul class="pagination">
 				<li
 					class='page-item <c:out value="${pageM.prev == true ? ' ' : 'disabled' }"></c:out>'>
-					<a href="matForm.do?pageNum=${pageM.startPage - pageM.pageSize }"
+					<a href="shop.do?pageNum=${pageM.startPage - pageM.pageSize }"
 					class="page-link" aria-label="Previous"> <i
 						class="ti-angle-left"></i>
 				</a>
@@ -127,17 +151,17 @@
 					end="${pageM.endPage }">
 					<li
 						class='page-item <c:out value="${pageM.currentPage == i ? 'active' : ' ' }"></c:out>'>
-						<a href="matForm.do?pageNum=${i }" class="page-link">${i }</a>
+						<a href="shop.do?pageNum=${i }" class="page-link">${i }</a>
 					</li>
 				</c:forEach>
 				<li
 					class='page-item <c:out value="${pageM.next == true ? ' ' : 'disabled' }"></c:out>'>
-					<a href="matForm.do?pageNum=${pageM.endPage+1 }" class="page-link"
+					<a href="shop.do?pageNum=${pageM.endPage+1 }" class="page-link"
 					aria-label="Next"> <i class="ti-angle-right"></i>
 				</a>
 				</li>
 			</ul>
-		</nav>
+		</nav> 
 	</div>
 </section>
 <!-- Latest Products End -->
