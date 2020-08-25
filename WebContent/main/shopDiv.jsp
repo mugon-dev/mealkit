@@ -30,6 +30,8 @@
 							href="shop.do?cook_idx=${type1.i }&mat_no1=${mat_no1 }&cook_type=${cook_type}">${type1.str }</a></li>
 						</c:if>
 					</c:forEach>
+					
+					
 					<%-- <c:choose>
 					<c:when test="${session_id == 'admin' }"> --%>
 					<li class="nav-item dropdown"><a
@@ -38,8 +40,7 @@
 						aria-haspopup="true" aria-expanded="false"> 관리자 메뉴 </a>
 						<div class="dropdown-menu"
 							aria-labelledby="navbarDropdownMenuLink">
-							<a class="dropdown-item" data-toggle="modal"
-								data-target="#igdMoal" data-whatever="@mdo">등록</a>
+							<a class="dropdown-item" href="blogWriteForm.do">등록</a>
 						</div></li>
 					<%-- </c:when>
 					</c:choose> --%>
@@ -115,8 +116,8 @@
 						<div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
 							<div class="single-popular-items mb-50 text-center">
 								<div class="popular-img">
-									<a href="matDetail.do?no=${mat.mat_no }"> <img
-										src="assets/img/gallery/popular1.png" alt="">
+									<a href="product.do?no=${recipeList.mil_no }"> <img
+										src="images/${recipeList.image }" style="width:360px; height:250px" alt="">
 									</a>
 									<div class="img-cap">
 										<span>Add to cart</span>
@@ -127,7 +128,7 @@
 								</div>
 								<div class="popular-caption">
 									<h3>
-										<a href="product_details.html">${recipeList.title }</a>
+										<a href="product.do?no=${recipeList.mil_no }">${recipeList.title }</a>
 									</h3>
 								</div>
 							</div>

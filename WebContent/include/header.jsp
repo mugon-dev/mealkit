@@ -66,9 +66,9 @@
 							<nav>
 								<ul id="navigation">
 									<li><a href="main.do">Home</a></li>
-									<li><a href="shopForm.do">shop</a>
+									<li><a href="shop.do">shop</a>
 										<ul class="submenu">
-											<li><a href="shopForm.do"> Mealkit list</a></li>
+											<li><a href="shop.do"> Mealkit list</a></li>
 											<li><a href="matForm.do"> Material List</a></li>
 										</ul></li>
 									<li><a href="blogForm.do">Blog</a>

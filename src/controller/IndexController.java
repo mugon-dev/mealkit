@@ -291,7 +291,6 @@ public class IndexController extends HttpServlet {
 			if(cook_type==null) {
 				cook_type="0";
 			}
-			
 			List<IScomb> type1=new ArrayList<IScomb>();
 			type1.add(new IScomb(0,"전체"));
 			type1.add(new IScomb(1,"한식"));
@@ -355,45 +354,36 @@ public class IndexController extends HttpServlet {
 			request.getRequestDispatcher("main/shopDiv.jsp").forward(request, response);
 		} else if(action.equals("/search.do")) {
 			//음식 타입 재료 조리방법 get
-    		String type1=request.getParameter("type1");
-    		int type2=Integer.parseInt(request.getParameter("type2"));
-    		String type3=request.getParameter("type3");
-    		String type=null;
-    		if(type1.equals("1")) {
-    			type="한식";
-    		}else if(type1.equals("2")) {
-    			type="중식";
-    		}else if(type1.equals("3")) {
-    			type="일식";
-    		}else if(type1.equals("4")) {
-    			type="양식";
-    		}
-    		request.setAttribute("type", type);
-    		String mainMat=MaterialDao.getInstance().selectName(type2);
-    		request.setAttribute("mainMat", mainMat);
-    		
-    		String method=null;
-    		if(type3.equals("1")) {
-    			method="구이";
-    		}else if(type3.equals("2")) {
-    			method="찜";
-    		}else if(type3.equals("3")) {
-    			method="탕";
-    		}else if(type3.equals("4")) {
-    			method="생식";
-    		}else if(type3.equals("5")) {
-    			method="기타";
-    		}
-    		request.setAttribute("method", method); 		
-    		//레시피 셀렉트
-    		List<Recipe> list1=new ArrayList<Recipe>();
-    		List<Recipe> list2=new ArrayList<Recipe>();
-    		list1=RecipeDao.getInstance().selectList(type1,type2,type3,"1");
-    		request.setAttribute("list1", list1);
-    		list2=RecipeDao.getInstance().selectList(type1,type2,type3,"2");
-    		request.setAttribute("list2", list2);
-
-
+			String cook_idx=request.getParameter("cook_idx");
+			String mat_no1=request.getParameter("mat_no1");
+			String cook_type=request.getParameter("cook_type");
+			
+			if(cook_idx==null) {
+				cook_idx="0";
+			}
+			if(mat_no1==null) {
+				mat_no1="0";
+			}
+			if(cook_type==null) {
+				cook_type="0";
+			}
+			
+			
+			List<Recipe> list_MD=new ArrayList<Recipe>();
+			list_MD=RecipeDao.getInstance().selectShopDiv(cook_idx, mat_no1, cook_type,"1");
+			request.setAttribute("list_MD", list_MD);
+			
+			List<Recipe> list_COMM=new ArrayList<Recipe>();
+			list_COMM=RecipeDao.getInstance().selectShopDiv(cook_idx, mat_no1, cook_type,"2");
+			request.setAttribute("list_COMM", list_COMM);
+			
+			request.setAttribute("cook_idx", cook_idx);
+			request.setAttribute("mat_no1", mat_no1);
+			request.setAttribute("cook_type", cook_type);
+			System.out.println("cook_idx : "+cook_idx);
+			System.out.println("mat_no1 : "+mat_no1);
+			System.out.println("cook_type : "+cook_type);
+			
     		request.getRequestDispatcher("main/search.jsp").forward(request, response);
     	} else if(action.equals("/product.do")) {
     		List<Material> matList=new ArrayList<Material>();

@@ -3,42 +3,26 @@
 <%@ include file="../include/header.jsp"%>
 <section class="popular-items latest-padding">
 	<div class="container">
-		<div class="row product-btn justify-content-between mb-40">
-			<div class="properties__button">
-				<!--Nav Button  -->
-				<nav>
-					<div class="nav nav-tabs" id="nav-tab" role="tablist">
-						<div class="nav-item nav-link active" id="nav-korean-tab"
-							data-toggle="tab" role="tab"
-							aria-controls="nav-korean" aria-selected="true"><b>${type } </b></div> <div
-							class="nav-item nav-link" id="nav-chinese-tab" data-toggle="tab"
-							role="tab" aria-controls="nav-chinese"
-							aria-selected="false"><b>${mainMat } </b></div> <div class="nav-item nav-link"
-							id="nav-japanese-tab" data-toggle="tab" 
-							role="tab" aria-controls="nav-japanese" aria-selected="false"><b>${method }</b></div>
-						
-					</div>
-				</nav>
-				<!--End Nav Button  -->
-			</div>
-			<!-- Grid and List view -->
-			<div class="grid-list-view"></div>
-
-		</div>
+		
 
 
 		<div class="tab-content" id="nav-tabContent">
 			<!-- 한식 -->
 			<div class="tab-pane fade show active" id="nav-korean"
 				role="tabpanel" aria-labelledby="nav-korean-tab">
-				<h4>MD추천</h4>
+				<div>
+					<span style="font-size:30px;color:'BLUE';">MD추천</span>&nbsp;
+					<a href="shop.do?cook_idx=${cook_idx }&mat_no1=${mat_no1 }&cook_type=${cook_type }" class="badge badge-secondary">|+더보기|</a>
+				</div>
+				
 
 				<div class="row">
-					<c:forEach var="recipe1" items="${list1 }">
+					<c:forEach var="recipe1" items="${list_MD }">
 						<div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
 							<div class="single-popular-items mb-50 text-center">
 								<div class="popular-img" >
-									<img src="images/${recipe1.image }" alt="" style="width:360px; height:250px">
+									<a href="product.do?no=${recipe1.mil_no }">
+									<img src="images/${recipe1.image }" alt="" style="width:360px; height:250px"></a>
 									<div class="img-cap">
 										<span>Add to cart</span>
 									</div>
@@ -57,9 +41,11 @@
 					</c:forEach>
 				</div>
 
-				<h4>커뮤니티 추천</h4>
+				<div>
+					<span style="font-size:30px;color:'BLUE';">커뮤니티추천</span>&nbsp;
+					<a href="shop.do?cook_idx=${cook_idx }&mat_no1=${mat_no1 }&cook_type=${cook_type }" class="badge badge-secondary">|+더보기|</a>
 				<div class="row">
-					<c:forEach var="recipe2" items="${list2 }">
+					<c:forEach var="recipe2" items="${list_COMM }">
 						<div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
 							<div class="single-popular-items mb-50 text-center">
 								<div class="popular-img" >
@@ -86,6 +72,7 @@
 			</div>
 			
 		</div>
+	</div>
 	</div>
 
 	<!-- End Nav Card -->
