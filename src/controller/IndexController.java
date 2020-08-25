@@ -194,9 +194,10 @@ public class IndexController extends HttpServlet {
 			System.out.println("================== matForm.do ==================");
     		System.out.println("------ strPage: " + strPage);
 			int totalCount = MaterialDao.getMatCount(idx);
-			PageMaker pageM = new PageMaker(pageNum, totalCount);
+			PageMaker pageM = new PageMaker(pageNum, totalCount,6);
 			pageM.setPageSize(6);
 			List<Material> list = MaterialDao.getInstance().selectAll(pageM.getStart(), pageM.getEnd(), idx);
+			request.setAttribute("idx", idx);
 			request.setAttribute("list", list);
 			request.setAttribute("pageM", pageM);
 			request.getRequestDispatcher("main/mat.jsp").forward(request, response);
