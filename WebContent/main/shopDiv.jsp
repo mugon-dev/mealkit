@@ -15,19 +15,21 @@
 				aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
-
+			<c:set var="cook_idx" value="${cook_idx }"/>
+			<c:set var="cook_type" value="${cook_type }"/>
+			<c:set var="mat_no1" value="${mat_no1 }"/>
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-					<li class="nav-item"><a class="nav-link"
-						href="shopForm.do?cook_idx=0">전체</a></li>
-					<li class="nav-item"><a class="nav-link"
-						href="shopForm.do?cook_idx=1">한식</a></li>
-					<li class="nav-item"><a class="nav-link"
-						href="shopForm.do?cook_idx=2">중식</a></li>
-					<li class="nav-item"><a class="nav-link"
-						href="shopForm.do?cook_idx=3">일식</a></li>
-					<li class="nav-item"><a class="nav-link"
-						href="shopForm.do?cook_idx=4">양식</a></li>
+					<c:forEach items="${type1 }" var="type1" varStatus="loop">
+						<c:if test="${cook_idx == type1.i }">
+							<li class="nav-item"><a class="nav-link"
+							href="shopForm.do?cook_idx=${cook_idx }" style="color:RED"><b>${type1.str }</b></a></li>
+						</c:if>
+						<c:if test="${cook_idx != type1.i }">
+							<li class="nav-item"><a class="nav-link"
+							href="shopForm.do?cook_idx=${cook_idx }">${type1.str }</a></li>
+						</c:if>
+					</c:forEach>
 					<%-- <c:choose>
 					<c:when test="${session_id == 'admin' }"> --%>
 					<li class="nav-item dropdown"><a
@@ -57,11 +59,23 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-					<li class="nav-item"><a class="nav-link"
-							href="shopForm.do?mat_no1=0">전체</a></li>
-					<c:forEach items="${list }" var="list">
+					<c:if test="${mat_no1==0 }">
 						<li class="nav-item"><a class="nav-link"
-							href="shopForm.do?mat_no1=${list.mat_no }">${list.mat_nm }</a></li>
+								href="shopForm.do?mat_no1=0" style="color:RED"><b>전체</b></a></li>
+					</c:if>
+					<c:if test="${mat_no1!=0 }">
+						<li class="nav-item"><a class="nav-link"
+								href="shopForm.do?mat_no1='0'">전체</a></li>
+					</c:if>
+					<c:forEach items="${type2 }" var="type2">
+						<c:if test="${mat_no1 == type2.mat_no }">
+						<li class="nav-item"><a class="nav-link"
+							href="shopForm.do?mat_no1=${type2.mat_no }" style="color:RED"><b>${type2.mat_nm }</b></a></li>
+						</c:if>
+						<c:if test="${mat_no1 != type2.mat_no }">
+						<li class="nav-item"><a class="nav-link"
+							href="shopForm.do?mat_no1=${type2.mat_no }">${type2.mat_nm }</a></li>
+						</c:if>
 					</c:forEach>
 				</ul>
 			</div>

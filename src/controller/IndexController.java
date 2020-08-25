@@ -28,6 +28,7 @@ import dao.OrderDao;
 import dao.RecipeDao;
 import dao.ReplyDao;
 import vo.Blog;
+import vo.IScomb;
 import vo.Material;
 import vo.Member;
 import vo.Order;
@@ -232,8 +233,35 @@ public class IndexController extends HttpServlet {
 			request.setAttribute("recipe", listRecipe);
 			request.getRequestDispatcher("main/shop.jsp").forward(request, response);
 		} else if (action.equals("/shop.do")) {
-			List<Material> list=MaterialDao.getInstance().selectList("10");
-			request.setAttribute("list", list);
+			String cook_idx=request.getParameter("cook_idx");
+			String mat_no1=request.getParameter("mat_no1");
+			String cook_type=request.getParameter("cook_type");
+			
+			List<IScomb> type1=new ArrayList<IScomb>();
+			type1.add(new IScomb(0,"전체"));
+			type1.add(new IScomb(1,"한식"));
+			type1.add(new IScomb(2,"중식"));
+			type1.add(new IScomb(3,"일식"));
+			type1.add(new IScomb(4,"양식"));
+			
+			request.setAttribute("type1", type1);
+			
+			System.out.println(cook_idx);
+			if(cook_idx==null) {
+				cook_idx="0";
+			}
+			if(mat_no1==null) {
+				mat_no1="0";
+			}
+			if(cook_type==null) {
+				cook_type="0";
+			}
+			request.setAttribute("cook_idx", cook_idx);
+			request.setAttribute("mat_no1", mat_no1);
+			request.setAttribute("cook_type", cook_type);
+			
+			List<Material> type2=MaterialDao.getInstance().selectList("10");
+			request.setAttribute("type2", type2);
 			request.getRequestDispatcher("main/shopDiv.jsp").forward(request, response);
 		} else if(action.equals("/search.do")) {
 			//음식 타입 재료 조리방법 get
