@@ -31,6 +31,26 @@ public class PageMaker {
 		prev = startPage == 1 ? false : true; 
 		next = endPage == totalPage ? false : true;
 	}
+	public PageMaker(int currentPage, int totalCount, int pageSize) { 
+		this.currentPage = currentPage;
+		this.totalCount = totalCount;
+		this.pageSize = pageSize;
+		
+		start = (currentPage - 1) * pageSize;
+		end = start + (pageSize - 1); 
+		endPage = (int)(Math.ceil(currentPage / (double)pageSize)) * pageSize;
+		startPage = (endPage - pageSize) + 1;
+		int totalPage = (int)(Math.ceil(totalCount / (double)pageSize));
+		if(endPage > totalPage) {
+			endPage = totalPage; 
+		}
+		
+		System.out.println("start: " + start + " || end: " + end + " || startPage: " + startPage  
+							+ " || endPage: " + endPage + " || totalPage: " + totalPage);
+		
+		prev = startPage == 1 ? false : true; 
+		next = endPage == totalPage ? false : true;
+	}
 	
 	public int getPageSize() {
 		return pageSize;

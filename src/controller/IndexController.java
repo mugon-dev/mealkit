@@ -322,7 +322,7 @@ public class IndexController extends HttpServlet {
 			System.out.println("================== matForm.do ==================");
     		System.out.println("------ strPage: " + strPage);
 			int totalCount = list.size();
-			PageMaker pageM = new PageMaker(pageNum, totalCount);
+			PageMaker pageM = new PageMaker(pageNum, totalCount,6);
 			List<Recipe> recipeList = RecipeDao.getInstance().selectShopDiv(pageM.getStart(), pageM.getEnd(), cook_idx, mat_no1, cook_type);
 			request.setAttribute("recipeList", recipeList);
 			request.setAttribute("pageM", pageM);
