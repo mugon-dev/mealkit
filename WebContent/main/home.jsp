@@ -27,8 +27,9 @@
 						<div class="row">
 							<div class="input-field">
 								<div class="input-select">
-									<select name="type1" data-trigger=""
+									<select name="cook_idx" data-trigger=""
 										name="choices-single-defaul">
+										<option value="0">전체</option>
 										<option value="1">한식</option>
 										<option value="2">중식</option>
 										<option value="3">일식</option>
@@ -39,8 +40,9 @@
 							<div class="input-field">
 								<div class="input-select">
 								<!-- 여기서 재료 리스트 받아서 forEach로 입력 -->
-									<select name="type2" data-trigger=""
+									<select name="mat_no1" data-trigger=""
 										name="choices-single-defaul">
+										<option value="0">전체</option>
 										<c:forEach items="${list }" var="list">
 										<option value="${list.mat_no }">${list.mat_nm }</option>
 										</c:forEach>
@@ -50,8 +52,9 @@
 							</div>
 							<div class="input-field">
 								<div class="input-select">
-									<select name="type3" data-trigger=""
+									<select name="cook_type" data-trigger=""
 										name="choices-single-defaul">
+										<option value="0">전체</option>
 										<option value="1">구이</option>
 										<option value="2">찜</option>
 										<option value="3">탕</option>
