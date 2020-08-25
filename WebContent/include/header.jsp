@@ -98,7 +98,7 @@
 													aria-expanded="false">(${session_id})</div>
 												<div class="dropdown-menu">
 													<a class="dropdown-item" href="blogForm.do?idx=6&no=${session_no }">내 글보기</a> 
-													<a class="dropdown-item" onclick="modalPopup()">내 정보 수정</a> 
+													<a class="dropdown-item" id="memberUpdate" onclick="modalPopup()">내 정보 수정</a> 
 													<a class="dropdown-item" href="#" id="logout">로그아웃</a>
 												</div>
 											</div>
@@ -141,19 +141,17 @@
 					<div class="modal-body">
 						<form action="mat.do" method="post">
 							<div class="form-group">
-								<label for="recipient-name" class="col-form-label">이름</label> <input
-									type="text" class="form-control" id="name" name="name"
-									value="${member.name }">
+								<label for="recipient-name" class="col-form-label" id="memberName"></label> 
+								<input
+									type="text" class="form-control" id="name" name="name">
 							</div>
 							<div class="form-group">
-								<label for="recipient-name" class="col-form-label">주소</label> <input
-									type="text" class="form-control" id="addr" name="addr"
-									value="${member.addr }">
+								<label for="recipient-name" class="col-form-label" id="memberAddr"> </label> <input
+									type="text" class="form-control" id="addr" name="addr">
 							</div>
 							<div class="form-group">
-								<label for="recipient-name" class="col-form-label">전화번호</label>
-								<input type="text" class="form-control" id="tel" name="tel"
-									value="${member.tel }">
+								<label for="recipient-name" class="col-form-label" id="memberTel"></label>
+								<input type="text" class="form-control" id="tel" name="tel">
 							</div>
 							<div class="modal-footer">
 								<button type="button" class="btn_3" data-dismiss="modal"
@@ -187,12 +185,32 @@
 				}
 			});
 		});
-		function modalPopup() {
-			var url = "readPerson.do?no="+${session_no };
-			$("#idMoal > .modal-dialog").load(url, function() {
-				$("#idMoal").modal("show");
+		function modalPopup() {			
+			$("#memberUpdate").on('click', function() {
+				$.ajax({
+					type:"post", // 전송 방식 GET , POST , PUT , DELETE
+					url: "readPerson.do", // 전송할 경로
+					async : false,
+					data: {"no": ${session_no }} , // 전송할 키와 값
+					success : function(data, textStatus) {
+						var jsonInfo = JSON.parse(data);
+						$('#memberName').html(jsonInfo.members.name);
+						$('#memberAddr').html(jsonInfo.members.addr);
+						$('#memberTel').html(jsonInfo.members.tel);
+						$("#idMoal").modal("show");
+					},
+					complete : function() {
+					// 성공여부와 상관없이 ajax 완료후 작업 
+						
+					},
+					error : function(request, status, error) {
+					// 에러가 났을 경우의 작업
+						alert("error");
+					}
+				});
 				
 			});
+			
 		}
 		$("#btnDelete").on('click', function() {
 			location.href = "memberDelete.do?no=${member.no}";
