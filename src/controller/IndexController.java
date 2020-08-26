@@ -569,6 +569,7 @@ public class IndexController extends HttpServlet {
 			String hour = blogMap.get("hour");
 			String level = blogMap.get("level");
 			
+			System.out.println(recIdx);
 			boolean flag = BlogDao.getInstance().insert(new Blog(matQty1, matQty2, matQty3,
 					no, recIdx, title, content, image, cookIdx, cookType, matNo1, matNo2,
 					matNo3, matEtc, plate,  hour, level));

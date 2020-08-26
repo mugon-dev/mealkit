@@ -7,12 +7,11 @@
 			<form class="row contact_form" action="blogWrite.do" method="post" enctype="multipart/form-data"> 
 				<c:if test="${session_no == 1}" >
 					<input type="hidden" name="recIdx" value="1">
-					<input type="hidden" name="no" value="1">
 				</c:if>
 				<c:if test="${session_no != 1}" >
 					<input type="hidden" name="recIdx" value="2">
-					<input type="hidden" name="no" value="2">
 				</c:if>
+				<input type="hidden" name="no" value="${session_no }" >
 				
 				<div class="col-lg-6 col-md-6">
 					<div class="login_part_text text-center" >
