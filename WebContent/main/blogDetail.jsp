@@ -14,7 +14,7 @@
 						<div class="login_part_text_iner">
 							<img src="images/${blog.image }" width="450" height="300">
 							<p></p><p></p><br>
-							<h2>No.${blog.milNo } ${blog.title }</h2>
+							<h2>No.${blog.milNo } ${blog.id }님의 레시피 <br>${blog.title }</h2>
 						</div>
 					</div>
 				</div>
@@ -276,7 +276,8 @@
 				</div>
 			</form>
 			<!-- 리플 -->
-			<form name="form" action='replyAdd.do'> 
+			
+			<form name="form" action='replyAdd.do' > 
 				<input type="hidden" name="no" value="${session_no }"/>
 				<input type="hidden" name="milNo" value="${blog.milNo }"/>
 				<div class="comments-area" id="replylist" >
@@ -303,16 +304,15 @@
 							</div>
 						</div>
 						<p><p><br>
-						<div class="col-12">
+						<div class="col-12"><!-- 리플입력폼 -->
 							<div class="form-group">
 								<textarea class="form-control w-100" name="replys" id="replys" cols="30" rows="9" placeholder="Write Comment"></textarea>
 							</div>
 						</div>
 						<div class="form-group">
 							<button type="submit" id="btnReplyAdd" name="btnRelpyAdd" class="button button-contactForm btn_1 boxed-btn" onclick="javascript: form.action='replyAdd.do';">Send Message</button>
-						</div>
+						</div><!-- 리플입력폼 끝-->
 					</div>
-					
 				</div> 
 			</form>
 		</div> <!-- 리플 끝 -->

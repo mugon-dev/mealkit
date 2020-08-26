@@ -85,7 +85,7 @@
 									</div>
 									
 									<div class="col-md-3 form-group">
-										<div class="input-select">
+										<div class="input-select" >
 											<select name="matNo1" data-trigger="" >
 												<option selected disabled value="0" > 선택1 </option>
 												<c:forEach items="${list }" var="list">

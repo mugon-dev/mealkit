@@ -6,6 +6,7 @@ public class Blog {
 	private int milNo, readCount, replyCount, matQty1, matQty2, matQty3, no;
 	private String recIdx, title, content, image, cookIdx, cookType, matNo1, matNo2, matNo3, matEtc,  plate, hour, level;
 	private Date rgstDt;
+	private String id;
 	
 	public Blog() {
 		super();
@@ -57,7 +58,7 @@ public class Blog {
 	}
 	public Blog(int milNo, int readCount, int replyCount, int matQty1, int matQty2, int matQty3, int no, String recIdx,
 			String title, String content, String image, String cookIdx, String cookType, String matNo1, String matNo2,
-			String matNo3, String matEtc, String plate, String hour, String level, Date rgstDt) {
+			String matNo3, String matEtc, String plate, String hour, String level, Date rgstDt, String id) {
 		super();
 		this.milNo = milNo;
 		this.readCount = readCount;
@@ -250,6 +251,14 @@ public class Blog {
 		this.rgstDt = rgstDt;
 	}
 
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
 	@Override
 	public String toString() {
 		return "Blog [milNo=" + milNo + ", readCount=" + readCount + ", replyCount=" + replyCount + ", matQty1="
@@ -257,16 +266,6 @@ public class Blog {
 				+ ", title=" + title + ", content=" + content + ", image=" + image + ", cookIdx=" + cookIdx
 				+ ", cookType=" + cookType + ", matNo1=" + matNo1 + ", matNo2=" + matNo2 + ", matNo3=" + matNo3
 				+ ", matEtc=" + matEtc + ", plate=" + plate + ", hour=" + hour + ", level=" + level + ", rgstDt="
-				+ rgstDt + ", getMilNo()=" + getMilNo() + ", getReadCount()=" + getReadCount() + ", getReplyCount()="
-				+ getReplyCount() + ", getMatQty1()=" + getMatQty1() + ", getMatQty2()=" + getMatQty2()
-				+ ", getMatQty3()=" + getMatQty3() + ", getNo()=" + getNo() + ", getRecIdx()=" + getRecIdx()
-				+ ", getTitle()=" + getTitle() + ", getContent()=" + getContent() + ", getImage()=" + getImage()
-				+ ", getCookIdx()=" + getCookIdx() + ", getCookType()=" + getCookType() + ", getMatNo1()=" + getMatNo1()
-				+ ", getMatNo2()=" + getMatNo2() + ", getMatNo3()=" + getMatNo3() + ", getMatEtc()=" + getMatEtc()
-				+ ", getPlate()=" + getPlate() + ", getHour()=" + getHour() + ", getLevel()=" + getLevel()
-				+ ", getRgstDt()=" + getRgstDt() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
-				+ ", toString()=" + super.toString() + "]";
+				+ rgstDt + ", id=" + id + "]";
 	}
-	
-
 }

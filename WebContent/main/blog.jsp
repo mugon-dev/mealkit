@@ -22,7 +22,8 @@
 				
 									<div class="blog_details"> 
 										<a class="d-inline-block" href="blogDetail.do?milNo=${blog.milNo }">
-											<h2> No.${blog.milNo } ${blog.title } </h2>
+											<h2> No.${blog.milNo }${blog.title } </h2>
+											작성자: ${blog.id } <br>
 										</a><br> ${blog.content } </p>
 										<ul class="blog-info-link">
 											<li><a href="#"><i class="fa fa-user"></i>${blog.readCount }</a></li> 

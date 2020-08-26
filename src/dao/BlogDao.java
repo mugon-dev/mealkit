@@ -17,21 +17,21 @@ public class BlogDao {
 	}
 	
 	public List<Blog> selectAll(int start, int end, String idx, String no){
-		String sql = " SELECT * FROM RECIPE ";
+		String sql = " SELECT R.*, M.ID FROM RECIPE R, MEMBER M WHERE R.NO = M.NO ";
 		if(idx.equals("1")) { // 한식
-			sql += " WHERE COOK_IDX = " + idx + " ";
+			sql += " AND COOK_IDX = " + idx + " ";
 		} else if(idx.equals("2")) { // 중식
-			sql += " WHERE COOK_IDX = " + idx + " ";
+			sql += " AND COOK_IDX = " + idx + " ";
 		} else if(idx.equals("3")) { // 일식
-			sql += " WHERE COOK_IDX = " + idx + " ";
+			sql += " AND COOK_IDX = " + idx + " ";
 		} else if(idx.equals("4")) { // 양식
-			sql += " WHERE COOK_IDX = " + idx + " ";
+			sql += " AND COOK_IDX = " + idx + " ";
 		} else if(idx.equals("5")) { // 전체보기
 		} else if(idx.equals("6")) { // 내글보기
-			sql += " WHERE NO = " + no + " ";
+			sql += " AND NO = " + no + " ";
 		}
 		
-		sql += " ORDER BY MIL_NO DESC LIMIT ?, 3 ";
+		sql += " ORDER BY R.MIL_NO DESC LIMIT ?, 3 ";
 		
 		List<Blog> list = new ArrayList<Blog>();
 		Connection conn = null;
@@ -66,8 +66,9 @@ public class BlogDao {
 				blog.setNo(rs.getInt("no"));
 				blog.setRgstDt(rs.getDate("rgst_dt"));
 				blog.setPlate(rs.getString("plate"));
-				blog.setHour(rs.getNString("hour"));
-				blog.setLevel(rs.getNString("level"));
+				blog.setHour(rs.getString("hour"));
+				blog.setLevel(rs.getString("level"));
+				blog.setId(rs.getString("id"));
 				
 				System.out.println(blog);
 				
@@ -135,7 +136,7 @@ public class BlogDao {
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String sql = " SELECT * FROM RECIPE WHERE MIL_NO = ? ";
+		String sql = " SELECT R.*, M.ID FROM RECIPE R, MEMBER M WHERE R.NO = M.NO AND R.MIL_NO = ? ";
 		
 		try {
 			conn = DBConn.getConn();
@@ -145,6 +146,7 @@ public class BlogDao {
 			rs = ps.executeQuery();
 			if(rs.next()) {
 				blog = new Blog();
+				
 				blog.setMilNo(rs.getInt("mil_no"));
 				blog.setRecIdx(rs.getString("rec_idx"));
 				blog.setTitle(rs.getString("title"));
@@ -164,8 +166,9 @@ public class BlogDao {
 				blog.setNo(rs.getInt("no"));
 				blog.setRgstDt(rs.getDate("rgst_dt"));
 				blog.setPlate(rs.getString("plate"));
-				blog.setHour(rs.getNString("hour"));
-				blog.setLevel(rs.getNString("level"));
+				blog.setHour(rs.getString("hour"));
+				blog.setLevel(rs.getString("level"));
+				blog.setId(rs.getString("id"));
 				
 				System.out.println(blog);
 				
