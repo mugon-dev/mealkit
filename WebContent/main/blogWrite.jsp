@@ -109,7 +109,7 @@
 										<div class="input-select">
 											<select name="matNo2" data-trigger="" >
 												<option selected value="0" > 선택2 </option>
-												<c:forEach items="${list }" var="list">
+												<c:forEach items="${list2 }" var="list">
 													<option value="${list.mat_no }">${list.mat_nm }</option>
 												</c:forEach>
 											</select>
@@ -130,7 +130,7 @@
 										<div class="input-select">
 											<select name="matNo3" data-trigger="">
 												<option selected value="0" > 선택3 </option>
-												<c:forEach items="${list }" var="list">
+												<c:forEach items="${list3 }" var="list">
 													<option value="${list.mat_no }">${list.mat_nm }</option>
 												</c:forEach>
 											</select>

@@ -205,7 +205,7 @@
 											<!-- 여기서 재료 리스트 받아서 forEach로 입력 -->
 											<select name="matNo2" data-trigger="" name="choices-single-defaul">
 												<option selected value="0" > 선택2 </option>
-												<c:forEach items="${list }" var="list">
+												<c:forEach items="${list2 }" var="list">
 												<c:if test="${list.mat_no == blog.matNo2 }">
 													<option value="${list.mat_no }" selected>${list.mat_nm }</option>
 												</c:if>
@@ -232,7 +232,7 @@
 											<!-- 여기서 재료 리스트 받아서 forEach로 입력 -->
 											<select name="matNo3" data-trigger="" name="choices-single-defaul">
 												<option selected value="0" > 선택3 </option>
-												<c:forEach items="${list }" var="list">
+												<c:forEach items="${list3 }" var="list">
 												<c:if test="${list.mat_no==blog.matNo3 }">
 													<option value="${list.mat_no }" selected>${list.mat_nm }</option>
 												</c:if>
@@ -260,14 +260,16 @@
 							
 							<div class="col-md-12 from-froup p_star" >
 								<div class="row">
+									<c:if test="${session_no == blog.no }"> 
+										<div class="col-md-4 form-group">
+											<button type="submit" id="btnUpdate" name="btnUpdate" class="btn_3" onclick="javascript: form.action='updateBlog.do';form.enctype='multipart/form-data'">수정</button>
+										</div>
+										<div class="col-md-4 form-group">
+											<button type="button" id="btnDelete" name="btnDelete" class="btn_3" onclick="location.href='deleteBlog.do?milNo=${blog.milNo }'">삭제</button>
+										</div>
+									</c:if>
 									<div class="col-md-4 form-group">
 										<button type="submit" id="btnCart" name="btnCart" class="btn_3" onclick="javascript: form.action='cart.do'">구매</button>
-									</div>
-									<div class="col-md-4 form-group">
-										<button type="submit" id="btnUpdate" name="btnUpdate" class="btn_3" onclick="javascript: form.action='updateBlog.do';form.enctype='multipart/form-data'">수정</button>
-									</div>
-									<div class="col-md-4 form-group">
-										<button type="button" id="btnDelete" name="btnDelete" class="btn_3" onclick="location.href='deleteBlog.do?milNo=${blog.milNo }'">삭제</button>
 									</div>
 								</div>
 							</div>
