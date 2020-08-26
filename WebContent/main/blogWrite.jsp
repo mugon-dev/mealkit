@@ -84,6 +84,7 @@
 									<div class="col-md-3 form-group">
 										재료1:
 									</div>
+									
 									<div class="col-md-3 form-group">
 										<div class="input-select">
 											<select name="matNo1" data-trigger="" >
