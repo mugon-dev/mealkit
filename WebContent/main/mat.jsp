@@ -27,8 +27,8 @@
       <li class="nav-item">
         <a class="nav-link" href="matForm.do?idx=30">소스</a>
       </li>
-      <%-- <c:choose>
-					<c:when test="${session_id == 'admin' }"> --%>
+      <c:choose>
+					<c:when test="${session_id == 'admin' }">
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           관리자 메뉴
@@ -37,8 +37,8 @@
           <a class="dropdown-item" data-toggle="modal" data-target="#igdMoal" data-whatever="@mdo">등록</a>
         </div>
       </li>
-      <%-- </c:when>
-					</c:choose> --%>
+      </c:when>
+					</c:choose>
     </ul>
     
   </div>
@@ -99,39 +99,7 @@
 		</nav>
 	</div>
 </section>
-<!-- Latest Products End -->
-<!-- Latest Products End -->
-<!--? Shop Method Start-->
-<div class="shop-method-area">
-	<div class="container">
-		<div class="method-wrapper">
-			<div class="row d-flex justify-content-between">
-				<div class="col-xl-4 col-lg-4 col-md-6">
-					<div class="single-method mb-40">
-						<i class="ti-package"></i>
-						<h6>Free Shipping Method</h6>
-						<p>aorem ixpsacdolor sit ameasecur adipisicing elitsf edasd.</p>
-					</div>
-				</div>
-				<div class="col-xl-4 col-lg-4 col-md-6">
-					<div class="single-method mb-40">
-						<i class="ti-unlock"></i>
-						<h6>Secure Payment System</h6>
-						<p>aorem ixpsacdolor sit ameasecur adipisicing elitsf edasd.</p>
-					</div>
-				</div>
-				<div class="col-xl-4 col-lg-4 col-md-6">
-					<div class="single-method mb-40">
-						<i class="ti-reload"></i>
-						<h6>Secure Payment System</h6>
-						<p>aorem ixpsacdolor sit ameasecur adipisicing elitsf edasd.</p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-<!-- Shop Method End-->
+
 <div class="modal fade" id="igdMoal" tabindex="-1"
 	aria-labelledby="igdMoalLabel" aria-hidden="true">
 	<div class="modal-dialog">

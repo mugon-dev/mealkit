@@ -11,8 +11,7 @@
 				<div class="login_part_text text-center">
 					<div class="login_part_text_iner">
 						<h2>New to our Shop?</h2>
-						<p>There are advances being made in science and technology
-							everyday, and a good example of this is the</p>
+						<p>Meal Share 홈페이지에 오신것을 환영합니다.<br>로그인을 원하실 경우 아래 버튼을 클릭해 주세요</p>
 						<a href="loginForm.do" class="btn_3">Login</a>
 					</div>
 				</div>

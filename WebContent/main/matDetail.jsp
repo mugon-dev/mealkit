@@ -7,8 +7,8 @@
 	<!--================Single Product Area =================-->
 
 	<div class="product_image_area">
-		<%-- <c:choose>
-					<c:when test="${session_id == 'admin' }"> --%>
+		<c:choose>
+					<c:when test="${session_id == 'admin' }">
 		<div class="dropdown show"
 			style="color: black; float: right; margin-right: 100px;">
 			<div class="dropdown-toggle" data-toggle="dropdown"
@@ -19,8 +19,8 @@
 			</div>
 		</div>
 
-		<%-- </c:when>
-					</c:choose> --%>
+		</c:when>
+					</c:choose>
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-lg-8">
