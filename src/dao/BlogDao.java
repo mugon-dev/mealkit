@@ -184,7 +184,7 @@ public class BlogDao {
 	// 글 수정
 	public boolean updateBlog(Blog blog) {
 		boolean flag=false;
-		String sql = " UPDATE RECIPE SET MAT_QTY1=?, MAT_QTY2=?, MAT_QTY3=?, REC_IDX=?, TITLE=?, CONTENT=?, "
+		String sql = " UPDATE RECIPE SET MAT_QTY1=?, MAT_QTY2=?, MAT_QTY3=?, TITLE=?, CONTENT=?, "
 				+ " IMAGE=?, COOK_IDX=?, COOK_TYPE=?, MAT_NO1=?, MAT_NO2=?, MAT_NO3=?, MAT_ETC=?, PLATE=?, HOUR=?, LEVEL=? "
 				+ " WHERE MIL_NO = ? ";
 		Connection conn = null;
@@ -196,20 +196,19 @@ public class BlogDao {
 			ps.setInt(1, blog.getMatQty1());
 			ps.setInt(2, blog.getMatQty2());
 			ps.setInt(3, blog.getMatQty3());
-			ps.setString(4, blog.getRecIdx());
-			ps.setString(5, blog.getTitle());
-			ps.setString(6, blog.getContent());
-			ps.setString(7, blog.getImage());
-			ps.setString(8, blog.getCookIdx());
-			ps.setString(9, blog.getCookType());
-			ps.setString(10, blog.getMatNo1());
-			ps.setString(11, blog.getMatNo2());
-			ps.setString(12, blog.getMatNo3());
-			ps.setString(13, blog.getMatEtc());
-			ps.setString(14, blog.getPlate());
-			ps.setString(15, blog.getHour());
-			ps.setString(16, blog.getLevel());
-			ps.setInt(17,  blog.getMilNo());
+			ps.setString(4, blog.getTitle());
+			ps.setString(5, blog.getContent());
+			ps.setString(6, blog.getImage());
+			ps.setString(7, blog.getCookIdx());
+			ps.setString(8, blog.getCookType());
+			ps.setString(9, blog.getMatNo1());
+			ps.setString(10, blog.getMatNo2());
+			ps.setString(11, blog.getMatNo3());
+			ps.setString(12, blog.getMatEtc());
+			ps.setString(13, blog.getPlate());
+			ps.setString(14, blog.getHour());
+			ps.setString(15, blog.getLevel());
+			ps.setInt(16, blog.getMilNo());
 			
 			System.out.println(sql);
 			int n=ps.executeUpdate();
