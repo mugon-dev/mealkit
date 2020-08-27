@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../include/header.jsp"%>
 
-<section class="login_part section_padding ">
+<section class="login_part section_padding" >
 	<div class="container" >
 		<div class="row align-items-center">
 			<form class="row contact_form" name="form" method="post" > 
+				
 				<input type="hidden" name="session_id" value="${session_id }"/>
 				<input type="hidden" name="milNo" value="${blog.milNo }" />
 				<input type="hidden" name="image" value="${blog.image }" />
@@ -29,7 +30,7 @@
 							<div class="col-md-12 form-group p_star" >
 								<div class="row">
 									음식 종류: &nbsp;&nbsp;
-									<select name="cookIdx" data-trigger="" name="choices-single-defaul">
+									<select name="cookIdx" data-trigger="" name="choices-single-defaul" >
 										<c:choose>
 											<c:when test="${blog.cookIdx == 1 }"> 
 												<option value="1" selected>한식</option>
@@ -255,7 +256,13 @@
 								기타 재료: <input type="text" id="matEtc" name="matEtc" value="${blog.matEtc }" class="form-control">
 							</div>
 							<div class="col-md-12 form-group p_star">
-								내용: <textarea type="text" class="form-control" name="content" id="content" rows="5"> ${blog.content } </textarea>
+								<c:if test="${session_no != blog.no }">
+									내용: <textarea type="text" class="form-control" name="content" id="content" rows="5" disabled="disabled"> ${blog.content } </textarea>
+								</c:if>
+								<c:if test="${session_no == blog.no }">
+									내용: <textarea type="text" class="form-control" name="content" id="content" rows="5"> ${blog.content } </textarea>
+								</c:if>
+							
 							</div>
 							
 							<div class="col-md-12 from-froup p_star" >
@@ -297,9 +304,11 @@
 												<h5><a href="#">${replyList.no }</a></h5>
 												<p class="date">${replyList.rgstDt }</p>
 											</div>
-											<div class="reply-btn">
-												<a href="replyDelete.do?reNo=${replyList.reNo }&milNo=${replyList.milNo }" class="btn-reply text-uppercase">삭제</a>
-											</div>
+											<c:if test="${session_no == blog.no }"> 
+												<div class="reply-btn">
+													<a href="replyDelete.do?reNo=${replyList.reNo }&milNo=${replyList.milNo }" class="btn-reply text-uppercase">삭제</a>
+												</div>
+											</c:if>
 										</div>
 									</c:forEach>
 								</div>
@@ -322,7 +331,11 @@
 	
 </section>
 
-<script type="text/javascript">
+<c:if test="${session_no != blog.no }">
+	<script type="text/javascript">
+		$("input:text").attr("disabled", "true");
+		$("select").attr("disabled", "true");
+	</script>
+</c:if>
 
-</script>
 <%@ include file="../include/footer.jsp"%>
