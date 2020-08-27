@@ -31,7 +31,9 @@ public class OrderDao {
 			ps=conn.prepareStatement(sql);
 			ps.setInt(1, order.getNo());
 			ps.setInt(2, order.getMat_no());
-			ps.setString(3, order.getMat_nm());
+			System.out.println("여기는 orderDao Insert try 내부1 : "+order.getMat_nm());
+			ps.setNString(3, order.getMat_nm());
+			System.out.println("여기는 orderDao Insert try 내부2 : "+order.getMat_nm());
 			ps.setInt(4, order.getMat_qty());
 			ps.setInt(5, order.getMat_unit());
 			int n=ps.executeUpdate();

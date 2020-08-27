@@ -410,10 +410,13 @@ public class IndexController extends HttpServlet {
     		request.getRequestDispatcher("main/product.jsp").forward(request, response);
     	} else if(action.equals("/cart.do")) {
     		Order order=null;
-    		int count=0;
-    		int[] mat=null;
-			String[] mat_no=null;
-			String test =request.getParameter("test");
+    		int count=0; //재료의 수
+    		int[] mat=null; //각 재료의 개수
+			String[] mat_no=null; //각 재료의 재료 번호
+			String test =request.getParameter("test"); //구분자
+			//blog와 shop의 parameter명이 달라 통일 하기위한 if문
+			
+			//blog
     		if(test.equals("1")) {
     			
     			count=1;
@@ -431,7 +434,9 @@ public class IndexController extends HttpServlet {
     				mat_no[i]=request.getParameter("matNo"+temp);
     			}
     			
-    		}else if(test.equals("2")){
+    		}
+    		//shop
+    		else if(test.equals("2")){
     			count=Integer.parseInt(request.getParameter("count"));
     			mat=new int[count];
     			mat_no=new String[count];
@@ -455,9 +460,7 @@ public class IndexController extends HttpServlet {
     			}else {
     				System.out.println("카트 입력 실패");
     			}
-//    			
-//    			System.out.println(mat[i]);
-//    			System.out.println(material);
+
     		}
     		out.print("<script>alert('장바구니 입력 성공. 장바구니로 이동합니다.'); location.href='cartForm.do?id="+session_id+"';</script>");
     	}else if(action.equals("/cartForm.do")) {

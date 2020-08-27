@@ -96,7 +96,7 @@
 						</tbody>
 					</table>
 					<div class="checkout_btn_inner float-right">
-						<a class="btn_1" href="shop.do">Continue Shopping</a> 
+						<a class="btn_1" href="shop.do">쇼핑 계속하기</a> 
 						<input type="hidden" name="count" value="${count }"/>
 						<button type="submit" class="btn_1 checkout_btn_1">구매하기</button>
 						<!-- <a
