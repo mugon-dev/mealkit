@@ -274,10 +274,15 @@
 										<div class="col-md-4 form-group">
 											<button type="button" id="btnDelete" name="btnDelete" class="btn_3" onclick="location.href='deleteBlog.do?milNo=${blog.milNo }'">삭제</button>
 										</div>
+										<div class="col-md-4 form-group">
+											<button type="submit" id="btnCart" name="btnCart" class="btn_3" onclick="javascript: form.action='cart.do'">구매</button>
+										</div>
 									</c:if>
-									<div class="col-md-4 form-group">
-										<button type="submit" id="btnCart" name="btnCart" class="btn_3" onclick="javascript: form.action='cart.do'">구매</button>
-									</div>
+									<c:if test="${session_no != blog.no }"> 
+										<div class="col-md-12 form-group">
+											<button type="submit" id="btnCart" name="btnCart" class="btn_3" onclick="javascript: form.action='cart.do'">구매</button>
+										</div>
+									</c:if>
 								</div>
 							</div>
 						</div>
@@ -304,7 +309,7 @@
 												<h5><a href="#">${replyList.no }</a></h5>
 												<p class="date">${replyList.rgstDt }</p>
 											</div>
-											<c:if test="${session_no == blog.no }"> 
+											<c:if test="${session_no == replyList.no }">
 												<div class="reply-btn">
 													<a href="replyDelete.do?reNo=${replyList.reNo }&milNo=${replyList.milNo }" class="btn-reply text-uppercase">삭제</a>
 												</div>
