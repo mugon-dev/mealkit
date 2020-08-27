@@ -9,6 +9,7 @@
 						
 						<!-- 게시글 시작 -->
 						<form action="blog.do" method="post" enctype="multipart/form-data">
+							<input type="hidden" name="no" value="${blog.no }" />
 	 						<c:forEach items="${list }" var="blog" > 
 								<article class="blog_item">
 									<div class="blog_item_img">

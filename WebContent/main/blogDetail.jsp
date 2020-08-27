@@ -2,7 +2,7 @@
 <%@ include file="../include/header.jsp"%>
 
 <section class="login_part section_padding ">
-	<div class="container">
+	<div class="container" >
 		<div class="row align-items-center">
 			<form class="row contact_form" name="form" method="post" > 
 				<input type="hidden" name="session_id" value="${session_id }"/>
@@ -308,7 +308,7 @@
 						<p><p><br>
 						<div class="col-12"><!-- 리플입력폼 -->
 							<div class="form-group">
-								<textarea class="form-control w-100" name="replys" id="replys" cols="30" rows="9" placeholder="Write Comment"></textarea>
+								<textarea class="form-control w-100" name="replys" id="replys" cols="100%" rows="9" placeholder="Write Comment" ></textarea>
 							</div>
 						</div>
 						<div class="form-group">

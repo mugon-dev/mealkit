@@ -28,7 +28,7 @@ public class BlogDao {
 			sql += " AND COOK_IDX = " + idx + " ";
 		} else if(idx.equals("5")) { // 전체보기
 		} else if(idx.equals("6")) { // 내글보기
-			sql += " AND NO = " + no + " ";
+			sql += " AND R.NO = " + no + " ";
 		}
 		
 		sql += " ORDER BY R.MIL_NO DESC LIMIT ?, 3 ";

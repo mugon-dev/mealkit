@@ -486,7 +486,7 @@ public class IndexController extends HttpServlet {
     		String strPage = request.getParameter("pageNum");
     		String idx = request.getParameter("idx");
     		String no = request.getParameter("no");
-    		String session_id=request.getParameter("session_id");
+    		String session_id = request.getParameter("session_id");
     		
     		System.out.println("no" + no);
     		if(idx == null) { 
