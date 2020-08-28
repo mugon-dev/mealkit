@@ -294,7 +294,7 @@
 			<form name="form" action='replyAdd.do' > 
 				<input type="hidden" name="no" value="${session_no }"/>
 				<input type="hidden" name="milNo" value="${blog.milNo }"/>
-				<div class="comments-area" id="replylist" >
+				<div class="comments-area-12" id="replylist" >
 					<h4> ${blog.replyCount } Comments</h4>
 					<div class="comment-list">
 						<div class="single-comment justify-content-between d-flex">
