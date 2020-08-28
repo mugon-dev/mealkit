@@ -78,12 +78,15 @@ public class IndexController extends HttpServlet {
 			request.getRequestDispatcher("main/home.jsp").forward(request, response);
 		/*==============================================================로그인,회원관리 시작=============================================================*/
 		} else if (action.equals("/loginForm.do")) {
+			String idx=request.getParameter("idx");
 			String mil_no= request.getParameter("no");
+			request.setAttribute("idx", idx);
 			request.setAttribute("mil_no", mil_no);
 			request.getRequestDispatcher("main/login.jsp").forward(request, response);
 		} else if (action.equals("/login.do")) { // 로그인
 			String id = request.getParameter("id");
 			String pw = request.getParameter("pw");	
+			String idx= request.getParameter("idx");
 			String mil_no = request.getParameter("mil_no");
 			int n = MemberDao.getInstance().login(id, pw);
 			int no = MemberDao.getInstance().getMemberNo(id);
@@ -93,6 +96,10 @@ public class IndexController extends HttpServlet {
 				session.setAttribute("session_id", id);
 				session.setAttribute("session_no", no);
 				System.out.println(mil_no);
+				System.out.println("idx:"+idx);
+				if(idx!="") {
+					out.print("<script>alert('로그인성공');location.href='matDetail.do?no="+mil_no+"';</script>");
+				}
 				if(mil_no!="") {
 					out.print("<script>alert('로그인성공');location.href='product.do?no="+mil_no+"';</script>");
 				}else {
@@ -270,14 +277,6 @@ public class IndexController extends HttpServlet {
 			}	    	
 		/*==============================================================mat 끝=============================================================*/
 		/*==============================================================shop 시작=============================================================*/
-		} else if (action.equals("/shopForm.do")) {
-			List<Material> list=new ArrayList<Material>();
-			list=MaterialDao.getInstance().selectMain();
-			request.setAttribute("list", list);
-			List<Recipe> listRecipe=new ArrayList<Recipe>();
-			listRecipe=RecipeDao.getInstance().selectAll();
-			request.setAttribute("recipe", listRecipe);
-			request.getRequestDispatcher("main/shop.jsp").forward(request, response);
 		} else if (action.equals("/shop.do")) {
 			String cook_idx=request.getParameter("cook_idx");
 			String mat_no1=request.getParameter("mat_no1");
@@ -453,9 +452,9 @@ public class IndexController extends HttpServlet {
     		
     		for(int i=0;i<count;i++) {
     			Material material=MaterialDao.getInstance().selectOne(Integer.parseInt(mat_no[i]));
-    			order=new Order(no,material.getMat_no(),material.getMat_nm(),mat[i],material.getMat_unit());
+    			order=new Order(no,material.getMat_no(),material.getMat_nm(),material.getMat_image(),mat[i],material.getMat_unit());
     			boolean b=OrderDao.getInstance().insert(order);
-    			if(b==true) {
+    			if(b==true) { 
     				System.out.println("카트 입력 성공");
     			}else {
     				System.out.println("카트 입력 실패");

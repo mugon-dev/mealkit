@@ -199,7 +199,7 @@
 
 	$('#login').on('click',function(){
 		var value=$('#login').val();
-		location.href="loginForm.do?no="+value;
+		location.href="loginForm.do?no="+value+"&idx=mat";
 	});
 	$("#matUpdate").on('click', function() {
 		$.ajax({

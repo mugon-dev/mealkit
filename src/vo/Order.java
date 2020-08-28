@@ -8,10 +8,17 @@ public class Order {
 	private int mat_no;
 	private String mat_nm;
 	private int mat_qty;
+	private String mat_image;
 	private int mat_unit;
 	private Date rgst_dt;
 	private String ord_flag;
 
+	public String getMat_image() {
+		return mat_image;
+	}
+	public void setMat_image(String mat_image) {
+		this.mat_image = mat_image;
+	}
 	public String getOrd_flag() {
 		return ord_flag;
 	}
@@ -73,11 +80,12 @@ public class Order {
 	public Order() {
 		super();
 	}
-	public Order(int no, int mat_no, String mat_nm, int mat_qty, int mat_unt) {
+	public Order(int no, int mat_no, String mat_nm,String mat_image, int mat_qty, int mat_unt) {
 		super();
 		this.no = no;
 		this.mat_no = mat_no;
 		this.mat_nm = mat_nm;
+		this.mat_image = mat_image;
 		this.mat_qty = mat_qty;
 		this.mat_unit = mat_unt;
 	}

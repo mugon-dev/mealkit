@@ -46,7 +46,7 @@
 									<td>
 										<div class="media">
 											<div class="d-flex">
-												<img src="assets/img/gallery/card1.png" alt="" />
+												<img src="images/mat/${order.mat_image }" alt="" />
 											</div>
 											<div class="media-body">
 												<p>${order.mat_nm }</p>
