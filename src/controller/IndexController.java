@@ -97,7 +97,7 @@ public class IndexController extends HttpServlet {
 				session.setAttribute("session_no", no);
 				System.out.println(mil_no);
 				System.out.println("idx:"+idx);
-				if(idx!="") {
+				if((idx!="") || (idx==null)) {
 					out.print("<script>alert('로그인성공');location.href='matDetail.do?no="+mil_no+"';</script>");
 				}
 				if(mil_no!="") {
@@ -697,7 +697,9 @@ public class IndexController extends HttpServlet {
 	private Map<String, String> upload(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Map<String, String> recipeMap = new HashMap<String, String>();
 		String encoding = "UTF-8";
+		
 		File currentDirPath = new File("D:\\src\\teamwork\\mealkit\\WebContent\\images");
+		
 		DiskFileItemFactory factory = new DiskFileItemFactory();
 		factory.setRepository(currentDirPath);
 		factory.setSizeThreshold(1024 * 1024 * 5); // 5GB
