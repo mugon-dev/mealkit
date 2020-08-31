@@ -5,11 +5,11 @@
 	<div class="container" >
 		<div class="row align-items-center">
 			<form class="row contact_form" name="form" method="post" > 
-				
 				<input type="hidden" name="session_id" value="${session_id }"/>
 				<input type="hidden" name="milNo" value="${blog.milNo }" />
 				<input type="hidden" name="image" value="${blog.image }" />
 				<input type="hidden" name="test" value="1" />
+				
 				<div class="col-lg-6 col-md-6">
 					<div class="login_part_text text-center" >
 						<div class="login_part_text_iner">
@@ -204,7 +204,7 @@
 									<div class="col-md-3 form-group">
 										<div class="input-select">
 											<!-- 여기서 재료 리스트 받아서 forEach로 입력 -->
-											<select name="matNo2" data-trigger="" name="choices-single-defaul">
+											<select name="matNo2" data-trigger="" name="choices-single-defaul" >
 												<option selected value="0" > 선택2 </option>
 												<c:forEach items="${list2 }" var="list">
 												<c:if test="${list.mat_no == blog.matNo2 }">
@@ -231,7 +231,7 @@
 									<div class="col-md-3 form-group">
 										<div class="input-select">
 											<!-- 여기서 재료 리스트 받아서 forEach로 입력 -->
-											<select name="matNo3" data-trigger="" name="choices-single-defaul">
+											<select name="matNo3" data-trigger="" name="choices-single-defaul" >
 												<option selected value="0" > 선택3 </option>
 												<c:forEach items="${list3 }" var="list">
 												<c:if test="${list.mat_no==blog.matNo3 }">
@@ -280,7 +280,7 @@
 									</c:if>
 									<c:if test="${session_no != blog.no }"> 
 										<div class="col-md-12 form-group">
-											<button type="submit" id="btnCart" name="btnCart" class="btn_3" onclick="javascript: form.action='cart.do'">구매</button>
+											<button type="submit" id="btnCart" name="btnCart" class="btn_3" onclick="javascript: form.action='cart.do' ">구매</button>
 										</div>
 									</c:if>
 								</div>
@@ -289,8 +289,7 @@
 					</div>
 				</div>
 			</form>
-			<!-- 리플 -->
-			
+			<!-- 리플 시작 -->
 			<form name="form" action='replyAdd.do' > 
 				<input type="hidden" name="no" value="${session_no }"/>
 				<input type="hidden" name="milNo" value="${blog.milNo }"/>
@@ -320,7 +319,7 @@
 							</div>
 						</div>
 						<p><p><br>
-						<div class="col-12"><!-- 리플입력폼 -->
+						<div class="col-12"><!-- 리플입력폼 시작 -->
 							<div class="form-group">
 								<textarea class="form-control w-100" name="replys" id="replys" cols="100%" rows="9" placeholder="Write Comment" ></textarea>
 							</div>
@@ -339,7 +338,7 @@
 <c:if test="${session_no != blog.no }">
 	<script type="text/javascript">
 		$("input:text").attr("disabled", "true");
-		$("select").attr("disabled", "true");
+ 		$("select").attr("disabled", "true");
 	</script>
 </c:if>
 

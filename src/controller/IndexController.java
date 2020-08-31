@@ -480,7 +480,7 @@ public class IndexController extends HttpServlet {
     			boolean f=OrderDao.getInstance().update(ord_no[i],ord_qty[i]);
     		}
     		//request.getRequestDispatcher("main/home.jsp").forward(request, response);
-    		out.print("<script>location.href='main.do'</script>");
+    		out.print("<script>alert('구매 성공. 메인페이지로 이동합니다.');location.href='main.do'</script>");
     	}
     	
 //============================================================================================================================================//		
@@ -506,6 +506,7 @@ public class IndexController extends HttpServlet {
 			BlogDao blogDao = BlogDao.getInstance();
 			int totalCount = blogDao.getBlogCount(idx, no);
 			PageMaker pageM = new PageMaker(pageNum, totalCount);
+			System.out.println("totalCount : " + totalCount);
 			List<Blog> list = blogDao.selectAll(pageM.getStart(), pageM.getEnd(), idx, no);
 			request.setAttribute("pageM", pageM);
 			request.setAttribute("list", list); 

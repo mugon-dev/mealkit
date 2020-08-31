@@ -10,6 +10,7 @@ public class PageMaker {
 	private int totalCount;  
 	private boolean prev; 
 	private boolean next;
+	private int totalPage;
 	
 	public PageMaker() {}
 	public PageMaker(int currentPage, int totalCount) { 
@@ -20,7 +21,7 @@ public class PageMaker {
 		end = start + (pageSize - 1); 
 		endPage = (int)(Math.ceil(currentPage / (double)pageSize)) * pageSize;
 		startPage = (endPage - pageSize) + 1;
-		int totalPage = (int)(Math.ceil(totalCount / (double)pageSize));
+		totalPage = (int)(Math.ceil(totalCount / (double)pageSize));
 		if(endPage > totalPage) {
 			endPage = totalPage; 
 		}
@@ -52,6 +53,12 @@ public class PageMaker {
 		next = endPage == totalPage ? false : true;
 	}
 	
+	public int getTotalPage() {
+		return totalPage;
+	}
+	public void setTotalPage(int totalPage) {
+		this.totalPage = totalPage;
+	}
 	public int getPageSize() {
 		return pageSize;
 	}
